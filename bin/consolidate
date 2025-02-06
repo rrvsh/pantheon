@@ -11,13 +11,15 @@ if [ $# -gt 0 ]; then
   EXTENSIONS=()
   for var in $@
   do
+    # Strip the . from the given extension if user gives the extension with a period (like .md)
+    var=${var/"."/}
     EXTENSIONS+=("${var}")
   done
 else
   echo "0 arguments entered. Searching all files"
   EXTENSIONS=()
 fi
-echo ${EXTENSIONS}
+echo ${EXTENSIONS[@]}
 
 # Prepare a temporary file:
 # Create a temporary file that will hold patterns from the ".gitignore" file.
