@@ -1,65 +1,106 @@
 #!/bin/bash
 
+# Function to get the list of extensions from the arguments passed to the script
+get_extensions() {
+  # Check for input:
+  # If the user provides any arguments, store those as the list of file extensions to look for.
+  # If no arguments are given, leave extensions array empty to let the regex pattern search for everything.
+  if [ $# -gt 0 ]; then
+    EXTENSIONS=()
+    for var in $@
+    do
+      # Strip the . from the given extension if user gives the extension with a period (like .md)
+      var=${var/"."/}
+      EXTENSIONS+=("${var}")
+    done
+  else
+    EXTENSIONS=()
+  fi
+}
+
+# Function to get the current date in YYYY-MM-DD format
+get_current_date() {
+  date +%F
+}
+
+# Function to ignore files based on .gitignore
+is_ignored() {
+  local filepath="$1"
+  git check-ignore -q "$filepath"  # Returns 0 if ignored, 1 otherwise
+  return $?
+}
+
+# Function to process a single file
+process_file() {
+  local filepath="$1"
+  local header="# $filepath"
+  {
+    echo "$header"
+    echo ""  # Print a blank line
+    cat "$filepath"
+    echo ""  # Print a blank line after file content
+  } >> "$output_file"
+}
+
+# Function to traverse directories recursively
+traverse_directory() {
+  local dir="$1"
+
+  # The regex pattern starts with '.*', which searches for any matching characters
+  # '.' is a wildcard, while '*' means match as many occurrences of the preceding char
+  # '\.' escapes the '.' special char to search for the actual char
+  # () is a capturing group. The | character is an OR operator
+  # '$' indicates the preceding string should be followed by the end of line
+  if [ ${#EXTENSIONS[@]} -gt 0 ]; then
+    EXTENSIONS_PATTERN=$(printf '\\|%s' "${EXTENSIONS[@]}")
+    pattern=".*\.\($EXTENSIONS_PATTERN\)$"
+  else
+    pattern=".*$"
+  fi
+
+  # Loop through each item in the directory
+  for entry in "$dir"/*; do
+    # Check if entry exists (handles empty directories)
+    if [[ -e "$entry" ]]; then
+      if [[ -d "$entry" ]]; then
+        # Check if the directory is .git
+        if [[ "$(basename "$entry")" != ".git" ]]; then
+          # Recursively traverse the directory
+          traverse_directory "$entry"
+        fi
+      elif [[ -f "$entry" ]]; then
+        # Ignore .gitignore files and files in .gitignore
+        if [[ "$(basename "$entry")" != ".gitignore" ]] && 
+          ! is_ignored "$entry" && 
+          [[ "$entry" =~ $pattern ]]; then # Check against regex pattern
+          process_file "$entry"
+        fi
+      fi
+    fi
+  done
+}
+
+
+# Main function
+main() {
+  get_extensions
+
+  output_file="output-$(get_current_date).txt"
+
+  # Clear previous output file (if exists)
+  > "$output_file"
+
+  # Start traversing from the current directory
+  traverse_directory "."
+
+  echo "Consolidation complete! Output saved in: $output_file"
+}
+
 # Start the process.
 echo "Consolidating..."
 
-# Check for input:
-# If the user provides any arguments, store those as the list of file extensions to look for.
-# If no arguments are given, leave extensions array empty to let the regex pattern search for everything.
-if [ $# -gt 0 ]; then
-  echo "$# arguments entered"
-  EXTENSIONS=()
-  for var in $@
-  do
-    # Strip the . from the given extension if user gives the extension with a period (like .md)
-    var=${var/"."/}
-    EXTENSIONS+=("${var}")
-  done
-else
-  echo "0 arguments entered. Searching all files"
-  EXTENSIONS=()
-fi
-echo ${EXTENSIONS[@]}
-
-# Prepare a temporary file:
-# Create a temporary file that will hold patterns from the ".gitignore" file.
-
-# Read the .gitignore file:
-# If the ".gitignore" file is present, read it and pull out lines that are not comments or blank.
-# Store these patterns in the temporary file.
-
-# Create an output file:
-# Get the current date and time, and create an output file named using this timestamp.
-
-### Find files:
-
-# The regex pattern starts with '.*', which searches for any matching characters.
-# '.' is a wildcard, while '*' means match as many occurrences of the preceding char.
-# '\.' escapes the '.' special char to search for the actual char.
-# () is a capturing group. The | character is an OR operator
-# '$' indicates the preceding string should be followed by the end of line
-if [ ${#EXTENSIONS[@]} -gt 0 ]; then
-  EXTENSIONS_PATTERN=$(printf '\\|%s' "${EXTENSIONS[@]}")
-  REGEX_EXPRESSION=".*\.\($EXTENSIONS_PATTERN\)$"
-else
-  REGEX_EXPRESSION=".*$"
-fi
-echo "Regex Expression: $REGEX_EXPRESSION"
-# Look for all files in the current directory and its subdirectories,
-# excluding the ".gitignore" file itself.
-find . -regex $REGEX_EXPRESSION
-# Filter these files based on the specified extensions.
-# Exclude any files that appear to be binary.
-# Exclude any files that match patterns listed in the ".gitignore".
-
-# Process each file:
-# For each file that matches the criteria:
-# - Write a header to the output file that includes the filename.
-# - Add the content of the file to the output file.
-# - Finish with a closing code block marker.
-
-# Clean up:
-# Delete the temporary file holding the patterns from the ".gitignore".
+# Execute main function
+main
 
 # Complete the process:
 # Inform the user that the operation is complete and let them know where the consolidated output has been saved.
