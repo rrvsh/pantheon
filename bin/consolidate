@@ -7,6 +7,7 @@ echo "Consolidating..."
 # If the user provides any arguments, store those as the list of file extensions to look for.
 # If no arguments are given, set a default list of extensions such as "txt", "sh", "md", and "csv".
 
+EXTENSIONS=()
 # Prepare a temporary file:
 # Create a temporary file that will hold patterns from the ".gitignore" file.
 
@@ -17,9 +18,23 @@ echo "Consolidating..."
 # Create an output file:
 # Get the current date and time, and create an output file named using this timestamp.
 
-# Find files:
+### Find files:
+
+# The regex pattern starts with '.*', which searches for any matching characters.
+# '.' is a wildcard, while '*' means match as many occurrences of the preceding char.
+# '\.' escapes the '.' special char to search for the actual char.
+# () is a capturing group. The | character is an OR operator
+# '$' indicates the preceding string should be followed by the end of line
+if [ ${#EXTENSIONS[@]} -gt 0 ]; then
+  EXTENSIONS_PATTERN=$(printf '\\|%s' "${EXTENSIONS[@]}")
+  REGEX_EXPRESSION=".*\.\($EXTENSIONS_PATTERN\)$"
+  echo "Regex Expression: $REGEX_EXPRESSION"
+else
+  REGEX_EXPRESSION=".*$"
+fi
 # Look for all files in the current directory and its subdirectories,
 # excluding the ".gitignore" file itself.
+find . -regex $REGEX_EXPRESSION
 # Filter these files based on the specified extensions.
 # Exclude any files that appear to be binary.
 # Exclude any files that match patterns listed in the ".gitignore".
