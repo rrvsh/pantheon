@@ -51,6 +51,9 @@ traverse_directory() {
     pattern=".*$"  # Matches everything if no extensions specified
   fi
 
+  # Array of filenames to exclude from processing
+  local EXCLUDED_FILES=("LICENSE" ".gitignore")
+
   # Loop through entries in the specified directory
   for entry in "$dir"/*; do
     if [[ -e "$entry" ]]; then  # Check if the entry exists
@@ -59,9 +62,19 @@ traverse_directory() {
           traverse_directory "$entry"  # Recursive call
         fi
       elif [[ -f "$entry" ]]; then  # Process files
-        if [[ "$(basename "$entry")" != ".gitignore" ]] && 
+        # Check if the file should be excluded
+        local exclude=false
+        for excluded in "${EXCLUDED_FILES[@]}"; do
+          if [[ "$(basename "$entry")" == "$excluded" ]]; then
+            exclude=true
+            break
+          fi
+        done
+
+        # Process the file only if it's not excluded, not ignored, and matches the pattern
+        if [[ "$exclude" == false ]] && 
            ! is_ignored "$entry" && 
-           [[ "$entry" =~ $pattern ]]; then  # Check if file matches regex
+           [[ "$entry" =~ $pattern ]]; then
           process_file "$entry"  # Process the file
         fi
       fi
