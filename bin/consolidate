@@ -5,9 +5,20 @@ echo "Consolidating..."
 
 # Check for input:
 # If the user provides any arguments, store those as the list of file extensions to look for.
-# If no arguments are given, set a default list of extensions such as "txt", "sh", "md", and "csv".
+# If no arguments are given, leave extensions array empty to let the regex pattern search for everything.
+if [ $# -gt 0 ]; then
+  echo "$# arguments entered"
+  EXTENSIONS=()
+  for var in $@
+  do
+    EXTENSIONS+=("${var}")
+  done
+else
+  echo "0 arguments entered. Searching all files"
+  EXTENSIONS=()
+fi
+echo ${EXTENSIONS}
 
-EXTENSIONS=()
 # Prepare a temporary file:
 # Create a temporary file that will hold patterns from the ".gitignore" file.
 
@@ -28,10 +39,10 @@ EXTENSIONS=()
 if [ ${#EXTENSIONS[@]} -gt 0 ]; then
   EXTENSIONS_PATTERN=$(printf '\\|%s' "${EXTENSIONS[@]}")
   REGEX_EXPRESSION=".*\.\($EXTENSIONS_PATTERN\)$"
-  echo "Regex Expression: $REGEX_EXPRESSION"
 else
   REGEX_EXPRESSION=".*$"
 fi
+echo "Regex Expression: $REGEX_EXPRESSION"
 # Look for all files in the current directory and its subdirectories,
 # excluding the ".gitignore" file itself.
 find . -regex $REGEX_EXPRESSION
