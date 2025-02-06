@@ -1,107 +1,89 @@
 #!/bin/bash
 
-# Function to get the list of extensions from the arguments passed to the script
+# Functions:
+
+# Get the list of specified file extensions from script arguments
 get_extensions() {
-  # Check for input:
-  # If the user provides any arguments, store those as the list of file extensions to look for.
-  # If no arguments are given, leave extensions array empty to let the regex pattern search for everything.
   if [ $# -gt 0 ]; then
+    # Create an array for extensions
     EXTENSIONS=()
-    for var in $@
-    do
-      # Strip the . from the given extension if user gives the extension with a period (like .md)
-      var=${var/"."/}
-      EXTENSIONS+=("${var}")
+    for ext in "$@"; do
+      # Remove the leading dot if present
+      ext="${ext#.}"
+      EXTENSIONS+=("$ext")
     done
   else
-    EXTENSIONS=()
+    EXTENSIONS=()  # No extensions specified, match everything
   fi
 }
 
-# Function to get the current date in YYYY-MM-DD format
+# Get the current date in YYYY-MM-DD format
 get_current_date() {
   date +%F
 }
 
-# Function to ignore files based on .gitignore
+# Check if a file is ignored according to .gitignore
 is_ignored() {
   local filepath="$1"
   git check-ignore -q "$filepath"  # Returns 0 if ignored, 1 otherwise
-  return $?
 }
 
-# Function to process a single file
+# Process a single file: append its header and content to the output file
 process_file() {
   local filepath="$1"
-  local header="# $filepath"
   {
-    echo "$header"
-    echo ""  # Print a blank line
-    cat "$filepath"
-    echo ""  # Print a blank line after file content
+    echo "# $filepath"  # File header
+    echo ""            # Blank line
+    cat "$filepath"    # File content
+    echo ""            # Blank line after content
   } >> "$output_file"
 }
 
-# Function to traverse directories recursively
+# Recursively traverse directories to find and process files
 traverse_directory() {
   local dir="$1"
 
-  # The regex pattern starts with '.*', which searches for any matching characters
-  # '.' is a wildcard, while '*' means match as many occurrences of the preceding char
-  # '\.' escapes the '.' special char to search for the actual char
-  # () is a capturing group. The | character is an OR operator
-  # '$' indicates the preceding string should be followed by the end of line
+  # Construct regex pattern based on provided extensions
   if [ ${#EXTENSIONS[@]} -gt 0 ]; then
     EXTENSIONS_PATTERN=$(printf '\\|%s' "${EXTENSIONS[@]}")
-    pattern=".*\.\($EXTENSIONS_PATTERN\)$"
+    pattern=".*\.\($EXTENSIONS_PATTERN\)$"  # Pattern for matching specified extensions
   else
-    pattern=".*$"
+    pattern=".*$"  # Matches everything if no extensions specified
   fi
 
-  # Loop through each item in the directory
+  # Loop through entries in the specified directory
   for entry in "$dir"/*; do
-    # Check if entry exists (handles empty directories)
-    if [[ -e "$entry" ]]; then
-      if [[ -d "$entry" ]]; then
-        # Check if the directory is .git
+    if [[ -e "$entry" ]]; then  # Check if the entry exists
+      if [[ -d "$entry" ]]; then  # Process directories
         if [[ "$(basename "$entry")" != ".git" ]]; then
-          # Recursively traverse the directory
-          traverse_directory "$entry"
+          traverse_directory "$entry"  # Recursive call
         fi
-      elif [[ -f "$entry" ]]; then
-        # Ignore .gitignore files and files in .gitignore
+      elif [[ -f "$entry" ]]; then  # Process files
         if [[ "$(basename "$entry")" != ".gitignore" ]] && 
-          ! is_ignored "$entry" && 
-          [[ "$entry" =~ $pattern ]]; then # Check against regex pattern
-          process_file "$entry"
+           ! is_ignored "$entry" && 
+           [[ "$entry" =~ $pattern ]]; then  # Check if file matches regex
+          process_file "$entry"  # Process the file
         fi
       fi
     fi
   done
 }
 
-
-# Main function
+# Main function to execute the script logic
 main() {
-  get_extensions
+  get_extensions "$@"  # Pass all script arguments to get_extensions function
 
-  output_file="output-$(get_current_date).txt"
+  output_file="output-$(get_current_date).txt"  # Define the output file name
 
-  # Clear previous output file (if exists)
+  # Clear previous output file if it exists
   > "$output_file"
 
-  # Start traversing from the current directory
+  # Start the file traversal from the current directory
   traverse_directory "."
 
-  echo "Consolidation complete! Output saved in: $output_file"
+  echo "Consolidation complete! Output saved in: $output_file"  # Completion message
 }
 
-# Start the process.
+# Execution begins here
 echo "Consolidating..."
-
-# Execute main function
-main
-
-# Complete the process:
-# Inform the user that the operation is complete and let them know where the consolidated output has been saved.
-echo "Consolidation complete! See your output file at: "
+main "$@"  # Invoke main function with script arguments
