@@ -1,0 +1,2 @@
+alias consolidate_sh='find . -type f -name '\''*.sh'\'' -exec echo -e "=== Filename: {} ===\n\`\`\`bash" \; -exec cat {} \; -exec echo -e "\n\`\`\`" \; > output-$(date +"%Y%m%d%H%M%S").txt'
+alias consolidate_md='find . -type f -name '\''*.md'\'' -exec echo -e "=== Filename: {} ===\n\`\`\`markdown" \; -exec cat {} \; -exec echo -e "\n\`\`\`" \; > output-$(date +"%Y%m%d%H%M%S").txt'
