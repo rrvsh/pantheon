@@ -1,3 +1,9 @@
+# Pull the latest changes from the remote (but only once!)
+if ! [ -v REPO_INITIALISED ]; then
+  git pull --quiet && export REPO_INITIALISED=true
+  echo "dotfiles loaded!"
+fi
+
 # ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
@@ -105,5 +111,6 @@ fi
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This enables NVM
 
+
+# Path setting
 export PATH="$HOME/bin:$PATH"
-echo "Hello! .bashrc loaded."
