@@ -1,6 +1,6 @@
 # Pull the latest changes from the remote (but only once!)
 if ! [ -v REPO_INITIALISED ]; then
-  git pull --quiet && export REPO_INITIALISED=true
+  git pull origin main --quiet && export REPO_INITIALISED=true
   echo "dotfiles loaded!"
 fi
 
@@ -111,6 +111,8 @@ fi
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This enables NVM
 
+# Theming
+export PS1="\[\e[36m\]$(date +'%H:%M:%S')\[\e[32m\]$USER \[\e[35m\]\w \[\e[31m\]$ "
 
 # Path setting
 export PATH="$HOME/bin:$PATH"
