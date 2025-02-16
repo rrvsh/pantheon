@@ -1,6 +1,55 @@
-# installs stable nvim
+function display_menu {
+  echo "Select applications to install:"
+  echo "1. All of the following"
+  echo "2. Neovim (stable)"
+  echo "0. Exit"
+  echo -n "Enter your choice (0-2): "
+}
 
-wget --output-document ~/nvim.tar.gz https://github.com/neovim/neovim/releases/download/stable/nvim-linux-x86_64.tar.gz
-tar xvf ~/nvim.tar.gz > /dev/null
-mv nvim-linux-x86_64/ nvim/
-rm nvim.tar.gz
+# installs stable nvim
+function install_neovim {
+  wget --output-document ~/nvim.tar.gz https://github.com/neovim/neovim/releases/download/stable/nvim-linux-x86_64.tar.gz > /dev/null 2>&1
+  tar xvf ~/nvim.tar.gz > /dev/null
+  mv nvim-linux-x86_64 nvim
+  rm nvim.tar.gz
+}
+
+# Main Logic
+if ! command -v wget &> /dev/null; then
+  echo "Error: wget is not installed. Please install it before running this script."
+  return 1
+fi
+
+display_menu
+read choice
+
+# 1 for all
+case "$choice" in
+  1)
+    echo "Installing all apps."
+    install_neovim
+    if [ $? -eq 0 ]; then
+      echo "Installation complete."
+    else
+      echo "Installation failed."
+    fi
+    ;;
+  2)
+    echo "Installing neovim stable."
+    install_neovim
+    if [ $? -eq 0 ]; then
+      echo "Installation complete."
+    else
+      echo "Installation failed."
+    fi
+    ;;
+  0)
+    echo "Exiting..."
+    exit 0
+    ;;
+  *)
+    echo "Invalid choice. Please enter a number between 0 and 2."
+    ;;
+esac
+
+exit 0
