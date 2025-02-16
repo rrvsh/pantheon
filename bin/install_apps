@@ -1,17 +1,18 @@
 function display_menu {
   echo "Select applications to install:"
   echo "1. All of the following"
-  echo "2. Neovim (stable)"
+  echo "2. Neovim (stable, linux-x86_64)"
   echo "0. Exit"
   echo -n "Enter your choice (0-2): "
 }
 
-# installs stable nvim
+# updates stable nvim
 function install_neovim {
   wget --output-document ~/nvim.tar.gz https://github.com/neovim/neovim/releases/download/stable/nvim-linux-x86_64.tar.gz > /dev/null 2>&1
-  tar xvf ~/nvim.tar.gz > /dev/null
-  mv nvim-linux-x86_64 nvim
-  rm nvim.tar.gz
+  tar xvf ~/nvim.tar.gz -C ~/ > /dev/null 2>&1
+  rm -rf ~/nvim
+  mv ~/nvim-linux-x86_64 ~/nvim
+  rm ~/nvim.tar.gz
 }
 
 # Main Logic
