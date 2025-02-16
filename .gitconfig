@@ -7,3 +7,5 @@
 	helper = store
 [push]
 	autoSetupRemote = true
+[safe]
+	directory = /appdata
