@@ -4,7 +4,8 @@ Uses a one-byte .gitignore.
 
 Houses all the configuration files and scripts I use. If any are from external sources, attribution is in the file itself. Otherwise, they are free to use as you want.
 
-~/bin/ should have all the installed binaries.
+~/bin/ should have all the installed binaries. `install_apps` in `bin/` is a script to install all the apps that there are config files for.
 
-Neovim is installed at `~/nvim/`.
-Rust/cargo is installed at `~/.cargo/`.
+# TODO
+- Make the install script interactive so the user can choose which programs they want to install
+- Add Rust, NVM, and Tealdeer to the install script
