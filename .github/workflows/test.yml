@@ -8,5 +8,5 @@ jobs:
       - run: git init
       - run: git remote add origin https://github.com/bwfiq/dotfiles
       - run: git fetch
-      - run: git checkout -f master
+      - run: git checkout -f main
       - run: exit
