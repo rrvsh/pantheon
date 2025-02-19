@@ -1,4 +1,3 @@
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)0
 # Pull the latest changes from the remote (but only once!)
 if ! [ -v REPO_INITIALISED ]; then
   git pull origin main --quiet && export REPO_INITIALISED=true
@@ -118,11 +117,15 @@ export PATH="$HOME/nvim/bin:$PATH"
 # Theming
 export PS1="\[\e[36m\]$(date +'%H:%M:%S')\[\e[32m\]$USER \[\e[35m\]\w \[\e[31m\]$ "
 
-# Homebrew
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+# Homebrew (Linuxbrew) - Check if it exists first
+if [ -f /home/linuxbrew/.linuxbrew/bin/brew ]; then
+  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
-# thefuck
-eval $(thefuck --alias)
+  # thefuck
+  eval $(thefuck --alias)
+fi
 
-# Path setting
-export PATH="$HOME/bin:$PATH"
+# Path Setting - Make sure $HOME/bin exists and only add it once.
+if [ -d "$HOME/bin" ] && ! echo "$PATH" | grep -q "$HOME/bin"; then
+  export PATH="$HOME/bin:$PATH"
+fi

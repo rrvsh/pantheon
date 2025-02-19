@@ -9,3 +9,4 @@
 	autoSetupRemote = true
 [safe]
 	directory = /appdata
+	directory = /storage/emulated/0/Obsidian Vaults/second-brain
