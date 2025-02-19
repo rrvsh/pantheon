@@ -117,6 +117,13 @@ export PATH="$HOME/nvim/bin:$PATH"
 # Theming
 export PS1="\[\e[36m\]$(date +'%H:%M:%S')\[\e[32m\]$USER \[\e[35m\]\w \[\e[31m\]$ "
 
+# Check if Homebrew is installed
+if ! command -v brew &> /dev/null; then
+  echo "Homebrew not found. Installing..."
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"  
+  brew install gcc fastfetch tealdeer neovim thefuck
+fi
+
 # Homebrew (Linuxbrew) - Check if it exists first
 if [ -f /home/linuxbrew/.linuxbrew/bin/brew ]; then
   eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
