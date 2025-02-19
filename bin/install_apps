@@ -15,6 +15,15 @@ function install_neovim {
   rm ~/nvim.tar.gz
 }
 
+# installs 
+function install_neovim {
+  wget --output-document ~/nvim.tar.gz https://github.com/neovim/neovim/releases/download/stable/nvim-linux-x86_64.tar.gz > /dev/null 2>&1
+  tar xvf ~/nvim.tar.gz -C ~/ > /dev/null 2>&1
+  rm -rf ~/nvim
+  mv ~/nvim-linux-x86_64 ~/nvim
+  rm ~/nvim.tar.gz
+}
+
 # Main Logic
 if ! command -v wget &> /dev/null; then
   echo "Error: wget is not installed. Please install it before running this script."
@@ -27,7 +36,7 @@ read choice
 # 1 for all
 case "$choice" in
   1)
-    echo "Installing all apps."
+    echo "Installing all apps..."
     install_neovim
     if [ $? -eq 0 ]; then
       echo "Installation complete."
@@ -36,7 +45,7 @@ case "$choice" in
     fi
     ;;
   2)
-    echo "Installing neovim stable."
+    echo "Installing neovim stable..."
     install_neovim
     if [ $? -eq 0 ]; then
       echo "Installation complete."

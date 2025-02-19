@@ -9,3 +9,5 @@
 	autoSetupRemote = true
 [safe]
 	directory = /appdata
+[pull]
+	rebase = false 
