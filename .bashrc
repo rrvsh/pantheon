@@ -100,9 +100,9 @@ fi
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).
-#if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
-#    . /etc/bash_completion
-#fi
+if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
+    . /etc/bash_completion
+fi
 
 # Rust/Cargo setup
 . "$HOME/.cargo/env"
@@ -117,5 +117,15 @@ export PATH="$HOME/nvim/bin:$PATH"
 # Theming
 export PS1="\[\e[36m\]$(date +'%H:%M:%S')\[\e[32m\]$USER \[\e[35m\]\w \[\e[31m\]$ "
 
-# Path setting
-export PATH="$HOME/bin:$PATH"
+# Homebrew (Linuxbrew) - Check if it exists first
+if [ -f /home/linuxbrew/.linuxbrew/bin/brew ]; then
+  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+
+  # thefuck
+  eval $(thefuck --alias)
+fi
+
+# Path Setting - Make sure $HOME/bin exists and only add it once.
+if [ -d "$HOME/bin" ] && ! echo "$PATH" | grep -q "$HOME/bin"; then
+  export PATH="$HOME/bin:$PATH"
+fi
