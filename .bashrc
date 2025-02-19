@@ -1,3 +1,4 @@
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)0
 # Pull the latest changes from the remote (but only once!)
 if ! [ -v REPO_INITIALISED ]; then
   git pull origin main --quiet && export REPO_INITIALISED=true
@@ -100,9 +101,9 @@ fi
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).
-#if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
-#    . /etc/bash_completion
-#fi
+if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
+    . /etc/bash_completion
+fi
 
 # Rust/Cargo setup
 . "$HOME/.cargo/env"
