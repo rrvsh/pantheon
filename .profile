@@ -13,3 +13,5 @@ mesg n 2> /dev/null || true
 # NVM
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" 
+
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
