@@ -117,5 +117,11 @@ export PATH="$HOME/nvim/bin:$PATH"
 # Theming
 export PS1="\[\e[36m\]$(date +'%H:%M:%S')\[\e[32m\]$USER \[\e[35m\]\w \[\e[31m\]$ "
 
+# Homebrew
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+
+# thefuck
+eval $(thefuck --alias)
+
 # Path setting
 export PATH="$HOME/bin:$PATH"
