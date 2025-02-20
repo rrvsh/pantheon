@@ -44,4 +44,16 @@ return { -- Lua table
       }, 
     },
   },
+
+  -- nvim-treesitter
+  { 
+    "nvim-treesitter/nvim-treesitter",
+    build = ":TSUpdate",
+    version = "*",
+    lazu = false,
+    config = function()
+      require("nvim-treesitter.configs").setup({
+      })
+    end,
+  },
 }
