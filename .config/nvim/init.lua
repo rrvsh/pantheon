@@ -1,7 +1,7 @@
 -- Plugins
 require("config.lazy")
 vim.g.loaded_netrw = 1        -- Disables netrw
-vim.g.loaded_newtwPlugin = 1  -- for nvim-tree
+vim.g.loaded_netrwPlugin = 1  -- for nvim-tree
 
 -- Visual
 vim.opt.number = true -- Show line numbers
@@ -20,3 +20,4 @@ vim.opt.smartindent = false
 vim.opt.termguicolors = true -- Enable true color support in the terminal
 vim.opt.background = "dark" -- Or "light" depending on your preference
 vim.opt.signcolumn = "yes" -- Always show sign column (for diagnostics, etc.)
+vim.opt.guifont = "Terminess Mono Nerd Font:h12"

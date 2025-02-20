@@ -6,6 +6,9 @@ return { -- Lua table
     "nvim-tree/nvim-web-devicons",
   },
   config = function()
-    require("nvim-tree").setup {}
+    require("nvim-tree").setup {
+      hijack_cursor = true, -- makes cursor stick to first char
+      
+    }
   end,
 }
