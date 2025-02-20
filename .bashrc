@@ -121,3 +121,5 @@ export PS1="\[\e[36m\]$(date +'%H:%M:%S')\[\e[32m\]$USER \[\e[35m\]\w \[\e[31m\]
 if [ -d "$HOME/bin" ] && ! echo "$PATH" | grep -q "$HOME/bin"; then
   export PATH="$HOME/bin:$PATH"
 fi
+
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
