@@ -115,7 +115,7 @@ export NVM_DIR="$HOME/.nvm"
 export PATH="$HOME/nvim/bin:$PATH"
 
 # Theming
-export PS1="\[\e[36m\]$(date +'%H:%M:%S')\[\e[32m\]$USER \[\e[35m\]\w \[\e[31m\]$ "
+PS1="$GREEN\u@\h${NC}:$YELLOW\w${NC} $(git branch 2>/dev/null | sed -e '/^[^*]/ d' -e 's/* \(.*\)/\[\1\]/')"'$ '
 
 # Path Setting - Make sure $HOME/bin exists and only add it once.
 if [ -d "$HOME/bin" ] && ! echo "$PATH" | grep -q "$HOME/bin"; then
