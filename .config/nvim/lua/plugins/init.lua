@@ -8,7 +8,9 @@ return { -- Lua table
   config = function()
     require("nvim-tree").setup {
       hijack_cursor = true, -- makes cursor stick to first char
-      
+      view = {
+        side = "right",
+      },
     }
   end,
 }
