@@ -115,7 +115,17 @@ export NVM_DIR="$HOME/.nvm"
 export PATH="$HOME/nvim/bin:$PATH"
 
 # Theming
-PS1="$GREEN\u@\h${NC}:$YELLOW\w${NC} $(git branch 2>/dev/null | sed -e '/^[^*]/ d' -e 's/* \(.*\)/\[\1\]/')"'$ '
+function set_title() {
+  echo -ne "\033]0;${PWD}\007"
+}
+PROMPT_COMMAND=set_title
+
+GREEN="\[\033[0;32m\]"
+YELLOW="\[\033[0;33m\]"
+RED="\[\033[0;31m\]"
+NC="\[\033[0m\]"  # No Color
+
+PS1="$GREEN\u@\h${NC}:$YELLOW\w${NC} $(git branch 2>/dev/null | sed -e '/^[^*]/ d' -e 's/* \(.*\)/\[\1\]/')"' $ '
 
 # Path Setting - Make sure $HOME/bin exists and only add it once.
 if [ -d "$HOME/bin" ] && ! echo "$PATH" | grep -q "$HOME/bin"; then
