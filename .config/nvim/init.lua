@@ -1,5 +1,7 @@
 -- Plugins
 require("config.lazy")
+vim.g.loaded_netrw = 1        -- Disables netrw
+vim.g.loaded_newtwPlugin = 1  -- for nvim-tree
 
 -- Visual
 vim.opt.number = true -- Show line numbers
