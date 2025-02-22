@@ -105,6 +105,9 @@
     # Graphics
     cudatoolkit
     nvidia-vaapi-driver # Required for hardware acceleration on Wayland
+
+    # Terminal
+    kitty # Terminal Emulator (requirement for default Hyprland)
   ];
 
   ##############################
@@ -116,6 +119,14 @@
   # Enable the OpenSSH daemon.
   services.openssh = {
     enable = true;
+  };
+
+  programs.hyprland = {
+    enable = true;
+
+    # Use the hyprland package defined in flake.nix instead of the nixpkgs-unstable
+    # package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
+    # portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
   };
 
   # This value determines the NixOS release from which the default
