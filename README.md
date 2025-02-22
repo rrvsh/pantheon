@@ -27,6 +27,10 @@ v0.1.0 will be adequate. The milestones to reach are:
 - rice Hyprland
   - plugins for all the desktop environment stuff
 
+## Thoughts I have
+- Hyprland from flake so I'm on the bleeding edge? Scrumptious
+- Set up SSH keys from every machine to every machine ever
+
 ## Neovim Plugins
 - lazy.nvim
 - markview.nvim
