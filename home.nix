@@ -32,6 +32,12 @@
     };
   };
 
+  programs.gh = {
+    enable = true;
+  };
+
+  programs.lazygit.enable = true;
+
   #TODO add neovim option
 
   #TODO add starship
