@@ -16,6 +16,8 @@ What is currently missing:
 - Whatever else I think of
 
 v0.1.0 will be adequate. The milestones to reach are:
+- [ ] Set up SSH keys for GitHub and other machines
+- Update home-manager so I don't have to rebuild the entire system to change configs
 - Modularise the nix files
 - Set up Neovim as a worthy VS Code replacement
   - terminal in bottom pane
