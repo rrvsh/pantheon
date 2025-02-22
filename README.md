@@ -1,5 +1,14 @@
-https://drewdevault.com/2019/12/30/dotfiles.html
+Uses a [one-byte .gitignore](https://drewdevault.com/2019/12/30/dotfiles.html).
 
-Uses a one-byte .gitignore.
+Contains configuration files for NixOS. Everything is declared through [[flake.nix]] as a starting point. System-level configuration is in [[configuration.nix]] and [[hardware-configuration.nix]]. User-specific configuration is in [[home.nix]].
 
-Houses all the configuration files and scripts I use. If any are from external sources, attribution is in the file itself. Otherwise, they are free to use as you want.
+# TODO
+
+- Set up Neovim as a worthy VS Code replacement
+  - terminal in bottom pane
+  - filetree in right pane
+  - syntax highlighting
+  - ability to open two files side by side
+  - keyboard shortcuts for all the above
+- rice Hyprland
+  - plugins for all the desktop environment stuff
