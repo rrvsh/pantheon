@@ -13,10 +13,13 @@
   ###        Graphics        ###
   ##############################
   
+  # Add the nvidia driver modules to the initramfs.
+  # This is not needed for later drivers.
+  boot.kernelModules = [ "nvidia" "nvidia_modeset" "nvidia_uvm" "nvidia_drm" ];
+  boot.kernelParams = [ "nvidia_drm.modeset=1" ]; # Direct Rendering Manager
   services.xserver.videoDrivers = ["nvidia"];
   hardware = {
     graphics.enable = true;
-
     nvidia = {
       modesetting.enable = true;
       powerManagement = {
@@ -28,6 +31,11 @@
       package = config.boot.kernelPackages.nvidiaPackages.latest;
     };    
   };
+
+  environment.variables.NIXOS_OZONE_WL = "1"; # Hint to electron apps to use Wayland
+  environment.variables.LIBVA_DRIVER_NAME = "nvidia";
+  environment.variables.__GLX_VENDOR_LIBRARY_NAME = "nvidia";
+  environment.variables.NVD_BACKEND = "direct"; # Set VAAPI driver backend
   
   ##############################
   ###       Networking       ###
@@ -85,7 +93,10 @@
     gcc # TODO check if needed
     pciutils # TODO check if needed
     file # TODO check if needed
+
+    # Graphics
     cudatoolkit
+    nvidia-vaapi-driver # Required for hardware acceleration on Wayland
   ];
 
   # List services that you want to enable:
