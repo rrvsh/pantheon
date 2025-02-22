@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 
 {
   home.username = "rafiq";
@@ -35,6 +35,32 @@
     };
   };
   
+  wayland.windowManager.hyprland = {
+    enable = true;
+
+    # Set these to null to use the packages defined in the system config.
+    package = null;
+    portalPackage = null;
+
+    plugins = with pkgs.hyprlandPlugins; [
+      # borders-plus-plus
+      # inputs.hyprland-plugins.packages.${pkgs.stdenv.hostPlatform.system}.<plugin>
+      # hypr-dynamic-cursors # requires notifications set up
+    ];
+
+    settings = {
+     "$mainMod" = "SUPER"; # Sets the modifier key to Windows key
+     "$terminal" = "kitty";
+     bind = [
+       "$mainMod, Q, exec, $terminal"
+       "$mainMod, W, killactive"
+     ];
+     debug = {
+       disable_logs = false;
+     };
+    };
+  };
+
   home.stateVersion = "24.11";
   programs.home-manager.enable = true;
 }
