@@ -1,3 +1,8 @@
 #!/bin/sh
 
 git status
+
+echo "---"
+echo "Ignored files:"
+
+git check-ignore *
