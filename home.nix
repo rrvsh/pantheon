@@ -31,7 +31,7 @@
     enable = true;
     enableCompletion = true;
     shellAliases = {
-      ll = "ls -la";
+      l = "ls -l --human-readable --file-type --almost-all";
     };
   };
   
