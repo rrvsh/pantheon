@@ -16,6 +16,7 @@
     unzip
     ripgrep
     wl-clipboard
+    thefuck
   ];
   
   home.sessionVariables = {
@@ -49,6 +50,9 @@
     shellAliases = {
       l = "ls -l --human-readable --file-type --almost-all";
     };
+    bashrcExtra = ''
+      eval $(thefuck --alias)
+    '';
   };
   
   wayland.windowManager.hyprland = {
