@@ -15,6 +15,7 @@
     zip
     unzip
     ripgrep
+    wl-clipboard
   ];
   
   home.sessionVariables = {
@@ -86,6 +87,8 @@
      };
     };
   };
+
+  services.cliphist.enable = true;
 
   home.stateVersion = "24.11";
   programs.home-manager.enable = true;
