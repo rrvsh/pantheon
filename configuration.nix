@@ -77,7 +77,7 @@
   users.users.rafiq = {
     isNormalUser = true;
     description = "Mohammad Rafiq";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "podman" ];
   };
 
   ##############################
@@ -129,6 +129,16 @@
     # Use the hyprland package defined in flake.nix instead of the nixpkgs-unstable
     # package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
     # portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
+  };
+
+  virtualisation = {
+    # Enable common container config files in /etc/containers
+    containers.enable = true;
+    podman = {
+      enable = true;
+      dockerCompat = true;
+      defaultNetwork.settings.dns_enabled = true; # for compose containers to see each other
+    };
   };
 
   # This value determines the NixOS release from which the default
