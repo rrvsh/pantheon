@@ -78,7 +78,6 @@
     isNormalUser = true;
     description = "Mohammad Rafiq";
     extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [];
   };
 
   ##############################
@@ -108,6 +107,9 @@
 
     # Terminal
     kitty # Terminal Emulator (requirement for default Hyprland)
+
+    # Browser
+    firefox
   ];
 
   ##############################

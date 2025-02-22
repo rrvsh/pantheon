@@ -49,11 +49,22 @@
     ];
 
     settings = {
-     "$mainMod" = "SUPER"; # Sets the modifier key to Windows key
+     monitor = [
+       "HDMI-A-1, 3840x2160@60, 0x0, 2"
+       "DP-6, 1920x1080@60, -1920x0, 1"
+       ",  preferred, auto, 1"
+     ];
+     "$mainMod" = "SUPER"; # Windows key
+     "$mod" = "CTRL";
      "$terminal" = "kitty";
+     "$browser" = "firefox";
      bind = [
        "$mainMod, Q, exec, $terminal"
        "$mainMod, W, killactive"
+       "$mainMod, E, exec, $browser"
+     ];
+     bindm = [
+       "$mod, mouse:272, movewindow"
      ];
      debug = {
        disable_logs = false;
