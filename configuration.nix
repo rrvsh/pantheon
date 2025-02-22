@@ -10,9 +10,8 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   ##############################
-  ###       Networking       ###
+  ###        Graphics        ###
   ##############################
-
   
   services.xserver.videoDrivers = ["nvidia"];
   hardware = {
@@ -82,6 +81,11 @@
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     wget
     git
+    gnumake # TODO check if needed
+    gcc # TODO check if needed
+    pciutils # TODO check if needed
+    file # TODO check if needed
+    cudatoolkit
   ];
 
   # List services that you want to enable:
