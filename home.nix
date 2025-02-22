@@ -9,6 +9,12 @@
   #   recursive = true;
   # };
 
+  home.file."bin" = {
+    source = ./scripts;
+    recursive = true;
+    executable = true;
+  };
+
   home.packages = with pkgs; [
     fastfetch
     neovim
@@ -52,6 +58,7 @@
     };
     bashrcExtra = ''
       eval $(thefuck --alias)
+      export PATH="$PATH:$HOME/bin"      
     '';
   };
   
