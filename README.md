@@ -4,7 +4,23 @@ Contains configuration files for NixOS. Everything is declared through [flake.ni
 
 # TODO
 
+v0.1.0 will be replicating my old dotfiles setup.
+
+The milestones are:
+
+- [x] ~.gitconfig~ -> under home-manager
+- [ ] .bash_aliases
+- [ ] nvim
+  - [ ] init.lua tweaks
+  - [ ] lazy.nvim
+  - [ ] catppuccin
+  - [ ] nvim-tree
+  - [ ] nvim-treesitter (?)
+- [ ] tmux
+
 v1.0.0 will be a full replacement for my Windows desktop.
+
+- [x] Set up SSH keys for GitHub and other machines
 
 What is currently missing:
 - LLMs
@@ -15,8 +31,7 @@ What is currently missing:
 - Photo editing
 - Whatever else I think of
 
-v0.1.0 will be adequate. The milestones to reach are:
-- [ ] Set up SSH keys for GitHub and other machines
+What could be interesting:
 - Update home-manager so I don't have to rebuild the entire system to change configs
 - Modularise the nix files
 - Set up Neovim as a worthy VS Code replacement
@@ -32,9 +47,4 @@ v0.1.0 will be adequate. The milestones to reach are:
 ## Thoughts I have
 - Hyprland from flake so I'm on the bleeding edge? Scrumptious
 - Set up SSH keys from every machine to every machine ever
-
-## Neovim Plugins
-- lazy.nvim
-- markview.nvim
-- nvim-tree
 - helpview.nvim (vimdoc viewer)
