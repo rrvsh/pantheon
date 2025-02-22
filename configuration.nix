@@ -45,6 +45,10 @@
 
   networking.networkmanager.enable = true;
 
+  ##############################
+  ###         System         ###
+  ##############################
+
   # Set your time zone.
   time.timeZone = "Asia/Singapore";
 
@@ -77,6 +81,10 @@
     packages = with pkgs; [];
   };
 
+  ##############################
+  ###        Packages        ###
+  ##############################
+
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
@@ -98,6 +106,10 @@
     cudatoolkit
     nvidia-vaapi-driver # Required for hardware acceleration on Wayland
   ];
+
+  ##############################
+  ###        Services        ###
+  ##############################
 
   # List services that you want to enable:
 
