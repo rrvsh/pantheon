@@ -47,6 +47,13 @@
 
   services.tailscale.enable = true;
 
+  programs.ssh.startAgent = true;
+
+  # Enable the OpenSSH daemon.
+  services.openssh = {
+    enable = true;
+  };
+
   ##############################
   ###         System         ###
   ##############################
@@ -80,6 +87,9 @@
     isNormalUser = true;
     description = "Mohammad Rafiq";
     extraGroups = [ "networkmanager" "wheel" "podman" ];
+    openssh.authorizedKeys.keys = [
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICg/5h5yj+xIuE9ZF1Dnof0OptJNitiYc1JZlnrUtS7F mohammadrafiq567@gmail.com rafiq@iris"
+    ];
   };
 
   ##############################
@@ -119,11 +129,6 @@
   ##############################
 
   # List services that you want to enable:
-
-  # Enable the OpenSSH daemon.
-  services.openssh = {
-    enable = true;
-  };
 
   programs.hyprland = {
     enable = true;
