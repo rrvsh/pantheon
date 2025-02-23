@@ -16,12 +16,12 @@
     nixosConfigurations.nemesis = nixpkgs.lib.nixosSystem {
       specialArgs = { inherit inputs; };
       modules = [
-        ./configuration.nix
+        ./hosts/nemesis
 
  	home-manager.nixosModules.home-manager {
           home-manager.useGlobalPkgs = true;
 	  home-manager.useUserPackages = true;
-          home-manager.users.rafiq = import ./home.nix;
+          home-manager.users.rafiq = import ./users/rafiq;
         }
       ];
     };

@@ -10,7 +10,7 @@
   # };
 
   home.file."bin" = {
-    source = ./scripts;
+    source = ../../scripts;
     recursive = true;
     executable = true;
   };
