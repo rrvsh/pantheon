@@ -46,8 +46,6 @@
 
   programs.lazygit.enable = true;
 
-  #TODO add neovim option
-
   #TODO add starship
 
   programs.bash = {
@@ -100,6 +98,19 @@
   };
 
   services.cliphist.enable = true;
+
+  programs.tmux = {
+    enable = true;
+    extraConfig = ''
+      set -g default-terminal "tmux-256color"
+      set -ag terminal-overrides ",xterm-256color:RGB"
+    '';
+  };
+
+  programs.tealdeer = {
+    enable = true;
+    enableAutoUpdates = true;
+  };
 
   home.stateVersion = "24.11";
   programs.home-manager.enable = true;
