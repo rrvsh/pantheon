@@ -112,6 +112,10 @@
     enableAutoUpdates = true;
   };
 
+  programs.nvf = {
+    settings.vim.options.termguicolors = false;
+  };
+
   home.stateVersion = "24.11";
   programs.home-manager.enable = true;
 }

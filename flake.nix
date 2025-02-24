@@ -10,6 +10,8 @@
       url = "github:hyprwm/hyprland-plugins";
       inputs.hyprland.follows = "hyprland";
     };
+    nvf.url = "github:NotAShelf/nvf";
+    nvf.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = { self, nixpkgs, home-manager, ... } @ inputs: {
@@ -21,7 +23,10 @@
  	home-manager.nixosModules.home-manager {
           home-manager.useGlobalPkgs = true;
 	  home-manager.useUserPackages = true;
-          home-manager.users.rafiq = import ./users/rafiq;
+	  home-manager.users.rafiq.imports = [
+            inputs.nvf.homeManagerModules.default
+            ./users/rafiq
+          ];
         }
       ];
     };
