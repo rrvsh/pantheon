@@ -36,7 +36,8 @@
   environment.variables.LIBVA_DRIVER_NAME = "nvidia";
   environment.variables.__GLX_VENDOR_LIBRARY_NAME = "nvidia";
   environment.variables.NVD_BACKEND = "direct"; # Set VAAPI driver backend
-  
+ nixpkgs.config.cudaSupport = true; 
+ nixpkgs.config.cudaArches = [ "sm_86" ];
   ##############################
   ###       Networking       ###
   ##############################
@@ -122,6 +123,8 @@
 
     # Browser
     firefox
+
+    koboldcpp
   ];
 
   ##############################
