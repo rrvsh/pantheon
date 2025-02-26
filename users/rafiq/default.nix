@@ -8,6 +8,15 @@
     self.packages.${pkgs.stdenv.system}.nvf
     pkgs.kitty
   ];
+
+  # programs.bash = {
+  #   enable = true;
+  #   initExtra = ''
+  #     if uwsm check may-start && uwsm select; then
+  #       exec systemd-cat -t uwsm_start uwsm start default
+  #     fi
+  #   '';
+  # };
   
   programs.git = {
     enable = true;

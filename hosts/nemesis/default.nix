@@ -8,17 +8,49 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      ../../scripts/hyprland-tty-launch.nix
     ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
+  # Graphics settings are defined here
+  hardware = {
+    graphics.enable = true;
+    graphics.extraPackages = with pkgs; [
+      nvidia-vaapi-driver
+      ocl-icd
+      cudaPackages.cudatoolkit
+      # clinfo
+    ];
+    nvidia = {
+      open = true;
+      package = config.boot.kernelPackages.nvidiaPackages.stable;
+    };
+  };
+
+  services.xserver = {
+    enable = true;
+    videoDrivers = [ "nvidia" ];
+  };
+  
   # Add hyprland.cachix.org as a binary cache for Hyprland
   nix.settings = {
-    substituters = ["https://hyprland.cachix.org"];
-    trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
+    substituters = [
+      "https://hyprland.cachix.org" 
+      "https://cuda-maintainers.cachix.org" 
+      "https://nix-community.cachix.org" 
+    ];
+    trusted-public-keys = [
+      "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc=" 
+      "cuda-maintainers.cachix.org-1:0dq3bujKpuEPMCX6U4WylrUDZ9JyUG0VpVZa7CNfq5E="
+      "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+    ];
   };
+
+  # Scripts
+  services.hyprland-tty-launch.enable = true;
 
   networking.hostName = "nemesis"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -68,6 +100,7 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     firefox
+    clinfo
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
