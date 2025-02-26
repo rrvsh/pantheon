@@ -5,7 +5,8 @@
   home.homeDirectory = "/home/rafiq";
 
   home.packages = [
-     self.packages.${pkgs.stdenv.system}.nvf
+    self.packages.${pkgs.stdenv.system}.nvf
+    pkgs.kitty
   ];
   
   programs.git = {
