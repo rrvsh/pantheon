@@ -7,11 +7,15 @@
     home-manager,
     nvf,
     ...
-  } @ inputs: {
+  } @ inputs:
+  let
+    args = { inherit self inputs; };
+  in
+  {
     # System Configurations
     nixosConfigurations = {
       nemesis = nixpkgs.lib.nixosSystem {
-        specialArgs = { inherit inputs; };
+        specialArgs = args;
         modules = [ 
           ./hosts/nemesis 
           
@@ -22,15 +26,12 @@
             # Install user packages to /etc/profiles
             home-manager.useUserPackages = true;
             # Pass inputs to home-manager configurations
-            home-manager.extraSpecialArgs = { inherit inputs; };
+            home-manager.extraSpecialArgs = args;
             # Add the users
             home-manager.users.rafiq.imports = [
               ./users/rafiq
             ];
           }
-         
-          # Include NVF in the system
-          ({ pkgs, ... }: { environment.systemPackages = [ self.packages.${pkgs.stdenv.system}.nvf ]; })
         ];
       };
     };
