@@ -36,10 +36,10 @@
       };
     };
 
-    # NVF Configurations
+    # Packages
     packages.x86_64-linux.nvf = (inputs.nvf.lib.neovimConfiguration { 
       pkgs = nixpkgs.legacyPackages.x86_64-linux;
-      modules = [ ( {pkgs, ...}: {} ) ]; 
+      modules = [ ./modules/nvf.nix ]; 
     }).neovim;
   };
 
