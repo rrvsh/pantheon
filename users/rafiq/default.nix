@@ -8,30 +8,19 @@
     ../../modules/home-wm.nix # window manager configs
     ../../modules/home-editor.nix # editor specific configs
     ../../modules/home-terminal.nix # terminal emulator configs
+    ../../modules/home-utils.nix # miscellaneous utilities
   ];
+
+  # This enables using home-manager from the command line.
+  programs.home-manager.enable = true;
 
   home = {
     username = "rafiq";
     homeDirectory = "/home/rafiq";
 
-    packages = [
-      pkgs.fastfetch
-      pkgs.wl-clipboard
-    ];
+    # This defines the version home-manager
+    # was originally bulit against on this system.
+    # Do not change it.
+    stateVersion = "25.05";
   };
-  
-  programs = {
-    tealdeer = {
-      enable = true;
-      enableAutoUpdates = true;
-    };
-
-    home-manager.enable = true;
-  };
-
-  services = {
-    cliphist.enable = true;
-  };
-
-  home.stateVersion = "25.05";
 }
