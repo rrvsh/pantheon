@@ -4,6 +4,7 @@
   imports = [
     ../../modules/home-git.nix
     ../../modules/home-tmux.nix
+    ../../modules/home-sh.nix
   ];
 
   home = {
@@ -19,12 +20,6 @@
   };
   
   programs = {
-    bash = {
-      enable = true;
-      shellAliases = {
-        rebuild = "sudo nixos-rebuild switch --flake";
-      };
-    };
     tealdeer = {
       enable = true;
       enableAutoUpdates = true;
