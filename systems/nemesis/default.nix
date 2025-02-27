@@ -3,12 +3,12 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
 { inputs, config, pkgs, ... }: let
-  hyprland-pkgs = inputs.hyprland.inputs.nixpkgs.legacyPackages.${pkgs.stdenv.hostPlatform.system};
 in {
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
       ../../scripts/hyprland-tty-launch.nix
+      ../../modules/nvidia.nix # Graphics settings for Nvidia GPUs
     ];
 
   # Bootloader.
@@ -22,30 +22,6 @@ in {
       options = [ "rw" "uid=rafiq" ];
     };
 
-  # Graphics settings are defined here
-  hardware = {
-    graphics.enable = true;
-    graphics.package = hyprland-pkgs.mesa.drivers;
-    graphics.extraPackages = with pkgs; [
-      nvidia-vaapi-driver
-      ocl-icd
-      cudaPackages.cudatoolkit
-      # clinfo
-    ];
-    nvidia = {
-      open = true;
-      package = config.boot.kernelPackages.nvidiaPackages.stable;
-    };
-  };
-  environment.variables.NIXOS_OZONE_WL = "1"; # Hint to electron apps to use Wayland
-  environment.variables.LIBVA_DRIVER_NAME = "nvidia";
-  environment.variables.__GLX_VENDOR_LIBRARY_NAME = "nvidia";
-  environment.variables.NVD_BACKEND = "direct"; # Set VAAPI driver backend
-
-  services.xserver = {
-    enable = true;
-    videoDrivers = [ "nvidia" ];
-  };
   
   # Add hyprland.cachix.org as a binary cache for Hyprland
   nix.settings = {
@@ -112,7 +88,6 @@ in {
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     firefox
-    clinfo
     koboldcpp
   ];
 
