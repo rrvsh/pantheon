@@ -7,6 +7,7 @@
     ../../modules/home-sh.nix # bash and other shell specific configs
     ../../modules/home-wm.nix # window manager configs
     ../../modules/home-editor.nix # editor specific configs
+    ../../modules/home-terminal.nix # terminal emulator configs
   ];
 
   home = {
@@ -14,7 +15,6 @@
     homeDirectory = "/home/rafiq";
 
     packages = [
-      pkgs.kitty
       pkgs.fastfetch
       pkgs.wl-clipboard
     ];
