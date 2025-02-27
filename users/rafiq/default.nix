@@ -2,7 +2,8 @@
 
 {
   imports = [
-    ../../modules/tmux.nix
+    ../../modules/home-git.nix
+    ../../modules/home-tmux.nix
   ];
 
   home = {
@@ -15,23 +16,15 @@
       pkgs.fastfetch
       pkgs.wl-clipboard
     ];
-    sessionVariables = {
-      GIT_CONFIG_GLOBAL = "$HOME/.config/git/config";
-    };
   };
   
   programs = {
-    git = {
+    bash = {
       enable = true;
-      userName = "Mohammad Rafiq";
-      userEmail = "mohammadrafiq567@gmail.com";
-      extraConfig = {
-        init.defaultBranch = "prime";
-        push.autoSetupRemote = true;
-        pull.rebase = false;
+      shellAliases = {
+        rebuild = "sudo nixos-rebuild switch --flake";
       };
     };
-
     tealdeer = {
       enable = true;
       enableAutoUpdates = true;
