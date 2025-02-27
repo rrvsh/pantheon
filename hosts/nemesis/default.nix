@@ -29,6 +29,10 @@
       package = config.boot.kernelPackages.nvidiaPackages.stable;
     };
   };
+  environment.variables.NIXOS_OZONE_WL = "1"; # Hint to electron apps to use Wayland
+  environment.variables.LIBVA_DRIVER_NAME = "nvidia";
+  environment.variables.__GLX_VENDOR_LIBRARY_NAME = "nvidia";
+  environment.variables.NVD_BACKEND = "direct"; # Set VAAPI driver backend
 
   services.xserver = {
     enable = true;

@@ -24,6 +24,7 @@
     userEmail = "mohammadrafiq567@gmail.com";
     extraConfig = {
       init.defaultBranch = "prime";
+      push.autoSetupRemote = true;
     };
   };
 
