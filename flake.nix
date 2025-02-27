@@ -17,7 +17,7 @@
       nemesis = nixpkgs.lib.nixosSystem {
         specialArgs = args;
         modules = [ 
-          ./hosts/nemesis 
+          ./systems/nemesis 
           
           # Add the home-manager user
           home-manager.nixosModules.home-manager {
@@ -39,7 +39,7 @@
     # Packages
     packages.x86_64-linux.nvf = (inputs.nvf.lib.neovimConfiguration { 
       pkgs = nixpkgs.legacyPackages.x86_64-linux;
-      modules = [ ./modules/nvf.nix ]; 
+      modules = [ ./packages/nvf.nix ]; 
     }).neovim;
   };
 
