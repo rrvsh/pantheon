@@ -1,6 +1,8 @@
 { pkgs, ... }:
 
 {
+  # TODO: Move wayland-specific stuff to a wayland config
+
   home.packages = with pkgs; [
     fastfetch # system info
     wl-clipboard # provides cli copy and paste commands
