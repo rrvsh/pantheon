@@ -2,10 +2,11 @@
 
 {
   imports = [
-    ../../modules/home-git.nix
-    ../../modules/home-tmux.nix
-    ../../modules/home-sh.nix
-    ../../modules/home-wm.nix
+    ../../modules/home-git.nix # git specific configs
+    ../../modules/home-tmux.nix # tmux specific configs (might move this)
+    ../../modules/home-sh.nix # bash and other shell specific configs
+    ../../modules/home-wm.nix # window manager configs
+    ../../modules/home-editor.nix # editor specific configs
   ];
 
   home = {
@@ -13,7 +14,6 @@
     homeDirectory = "/home/rafiq";
 
     packages = [
-      self.packages.${pkgs.stdenv.system}.nvf
       pkgs.kitty
       pkgs.fastfetch
       pkgs.wl-clipboard
