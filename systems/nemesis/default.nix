@@ -15,6 +15,13 @@ in {
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
+  # Allow nemesis to access files on the windows drive.
+  fileSystems."/mnt/windows" =
+    { device = "/dev/nvme0n1p3";
+      fsType = "ntfs-3g";
+      options = [ "rw" "uid=rafiq" ];
+    };
+
   # Graphics settings are defined here
   hardware = {
     graphics.enable = true;
