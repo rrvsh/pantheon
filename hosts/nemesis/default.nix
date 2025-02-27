@@ -2,9 +2,9 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ inputs, config, pkgs, ... }:
-
-{
+{ inputs, config, pkgs, ... }: let
+  hyprland-pkgs = inputs.hyprland.inputs.nixpkgs.legacyPackages.${pkgs.stdenv.hostPlatform.system};
+in {
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
@@ -18,6 +18,7 @@
   # Graphics settings are defined here
   hardware = {
     graphics.enable = true;
+    graphics.package = hyprland-pkgs.mesa.drivers;
     graphics.extraPackages = with pkgs; [
       nvidia-vaapi-driver
       ocl-icd
@@ -120,6 +121,15 @@
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
   services.tailscale.enable = true;
+
+  programs.uwsm = {
+    enable = true;
+    waylandCompositors.hyprland = {
+      prettyName = "Hyprland";
+      comment = "Hyprland compositor managed by UWSM";
+      binPath = "/run/current-system/sw/bin/Hyprland";
+    };
+  };
 
   programs.hyprland = {
     enable = true;
