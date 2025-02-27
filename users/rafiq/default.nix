@@ -1,6 +1,10 @@
-{ self, config, pkgs, inputs, ... }:
+{ self, pkgs, ... }:
 
 {
+  imports = [
+    ../../modules/tmux.nix
+  ];
+
   home = {
     username = "rafiq";
     homeDirectory = "/home/rafiq";
@@ -33,13 +37,6 @@
       enableAutoUpdates = true;
     };
 
-    tmux = {
-      enable = true;
-      extraConfig = ''
-        set -g default-terminal "tmux-256color"
-        set -ag terminal-overrides ",xterm-256color:RGB"
-      '';
-    };
     home-manager.enable = true;
   };
 
