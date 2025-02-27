@@ -1,31 +1,46 @@
 { self, config, pkgs, inputs, ... }:
 
 {
-  home.username = "rafiq";
-  home.homeDirectory = "/home/rafiq";
+  home = {
+    username = "rafiq";
+    homeDirectory = "/home/rafiq";
 
-  home.packages = [
-    self.packages.${pkgs.stdenv.system}.nvf
-    pkgs.kitty
-  ];
-
-  # programs.bash = {
-  #   enable = true;
-  #   initExtra = ''
-  #     if uwsm check may-start && uwsm select; then
-  #       exec systemd-cat -t uwsm_start uwsm start default
-  #     fi
-  #   '';
-  # };
-  
-  programs.git = {
-    enable = true;
-    userName = "rafiq";
-    userEmail = "mohammadrafiq567@gmail.com";
-    extraConfig = {
-      init.defaultBranch = "prime";
-      push.autoSetupRemote = true;
+    packages = [
+      self.packages.${pkgs.stdenv.system}.nvf
+      pkgs.kitty
+      pkgs.fastfetch
+      pkgs.wl-clipboard
+    ];
+    sessionVariables = {
+      GIT_CONFIG_GLOBAL = "$HOME/.config/git/config";
     };
+  };
+  
+  programs = {
+    git = {
+      enable = true;
+      userName = "Mohammad Rafiq";
+      userEmail = "mohammadrafiq567@gmail.com";
+      extraConfig = {
+        init.defaultBranch = "prime";
+        push.autoSetupRemote = true;
+        pull.rebase = false;
+      };
+    };
+
+    tealdeer = {
+      enable = true;
+      enableAutoUpdates = true;
+    };
+
+    tmux = {
+      enable = true;
+      extraConfig = ''
+        set -g default-terminal "tmux-256color"
+        set -ag terminal-overrides ",xterm-256color:RGB"
+      '';
+    };
+    home-manager.enable = true;
   };
 
   wayland.windowManager.hyprland = {
@@ -50,10 +65,13 @@
         "$mainMod, E, exec, uwsm app -- $browser"
         "$mainMod, M, exec, uwsm stop"
       ];
+      debug.disable_logs = false;
     };
   };
 
+  services = {
+    cliphist.enable = true;
+  };
 
   home.stateVersion = "25.05";
-  programs.home-manager.enable = true;
 }
