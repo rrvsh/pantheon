@@ -1,63 +1,71 @@
-{ config, pkgs, inputs, ... }:
+# Edit this configuration file to define what should be installed on
+# your system.  Help is available in the configuration.nix(5) man page
+# and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{
+{ inputs, config, pkgs, ... }: let
+  hyprland-pkgs = inputs.hyprland.inputs.nixpkgs.legacyPackages.${pkgs.stdenv.hostPlatform.system};
+in {
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      ../../scripts/hyprland-tty-launch.nix
     ];
 
+  # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  ##############################
-  ###        Graphics        ###
-  ##############################
-  
-  # Add the nvidia driver modules to the initramfs.
-  # This is not needed for later drivers.
-  boot.kernelModules = [ "nvidia" "nvidia_modeset" "nvidia_uvm" "nvidia_drm" ];
-  boot.kernelParams = [ "nvidia_drm.modeset=1" ]; # Direct Rendering Manager
-  services.xserver.videoDrivers = ["nvidia"];
+  # Graphics settings are defined here
   hardware = {
     graphics.enable = true;
+    graphics.package = hyprland-pkgs.mesa.drivers;
+    graphics.extraPackages = with pkgs; [
+      nvidia-vaapi-driver
+      ocl-icd
+      cudaPackages.cudatoolkit
+      # clinfo
+    ];
     nvidia = {
-      modesetting.enable = true;
-      powerManagement = {
-        enable = false;
-	      finegrained = false;
-      };
       open = true;
-      nvidiaSettings = true;
-      package = config.boot.kernelPackages.nvidiaPackages.latest;
-    };    
+      package = config.boot.kernelPackages.nvidiaPackages.stable;
+    };
   };
-
   environment.variables.NIXOS_OZONE_WL = "1"; # Hint to electron apps to use Wayland
   environment.variables.LIBVA_DRIVER_NAME = "nvidia";
   environment.variables.__GLX_VENDOR_LIBRARY_NAME = "nvidia";
   environment.variables.NVD_BACKEND = "direct"; # Set VAAPI driver backend
- nixpkgs.config.cudaSupport = true; 
- nixpkgs.config.cudaArches = [ "sm_86" ];
-  ##############################
-  ###       Networking       ###
-  ##############################
 
-  networking.hostName = "nemesis"; # Define your hostname.
-
-  networking.networkmanager.enable = true;
-
-  services.tailscale.enable = true;
-
-  programs.ssh.startAgent = true;
-
-  # Enable the OpenSSH daemon.
-  services.openssh = {
+  services.xserver = {
     enable = true;
+    videoDrivers = [ "nvidia" ];
+  };
+  
+  # Add hyprland.cachix.org as a binary cache for Hyprland
+  nix.settings = {
+    substituters = [
+      "https://hyprland.cachix.org" 
+      "https://cuda-maintainers.cachix.org" 
+      "https://nix-community.cachix.org" 
+    ];
+    trusted-public-keys = [
+      "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc=" 
+      "cuda-maintainers.cachix.org-1:0dq3bujKpuEPMCX6U4WylrUDZ9JyUG0VpVZa7CNfq5E="
+      "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+    ];
   };
 
-  ##############################
-  ###         System         ###
-  ##############################
+  # Scripts
+  services.hyprland-tty-launch.enable = true;
+
+  networking.hostName = "nemesis"; # Define your hostname.
+  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+
+  # Configure network proxy if necessary
+  # networking.proxy.default = "http://user:password@proxy:port/";
+  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
+
+  # Enable networking
+  networking.networkmanager.enable = true;
 
   # Set your time zone.
   time.timeZone = "Asia/Singapore";
@@ -86,70 +94,63 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.rafiq = {
     isNormalUser = true;
-    description = "Mohammad Rafiq";
-    extraGroups = [ "networkmanager" "wheel" "podman" ];
-    openssh.authorizedKeys.keys = [
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICg/5h5yj+xIuE9ZF1Dnof0OptJNitiYc1JZlnrUtS7F mohammadrafiq567@gmail.com rafiq@iris"
-    ];
+    description = "rafiq";
+    extraGroups = [ "networkmanager" "wheel" ];
   };
-
-  ##############################
-  ###        Packages        ###
-  ##############################
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
-  environment.variables.EDITOR = "vim";
-
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
   environment.systemPackages = with pkgs; [
-    vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-    wget
-    git
-    gnumake # TODO check if needed
-    gcc # TODO check if needed
-    pciutils # TODO check if needed
-    file # TODO check if needed
-
-    # Graphics
-    cudatoolkit
-    nvidia-vaapi-driver # Required for hardware acceleration on Wayland
-
-    # Terminal
-    kitty # Terminal Emulator (requirement for default Hyprland)
-
-    # Browser
     firefox
-
+    clinfo
     koboldcpp
   ];
 
-  ##############################
-  ###        Services        ###
-  ##############################
+  # Some programs need SUID wrappers, can be configured further or are
+  # started in user sessions.
+  # programs.mtr.enable = true;
+  # programs.gnupg.agent = {
+  #   enable = true;
+  #   enableSSHSupport = true;
+  # };
 
   # List services that you want to enable:
 
-  programs.hyprland = {
+  # Enable the OpenSSH daemon.
+  services.openssh.enable = true;
+  services.tailscale.enable = true;
+
+  programs.uwsm = {
     enable = true;
-
-    # Use the hyprland package defined in flake.nix instead of the nixpkgs-unstable
-    # package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
-    # portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
-  };
-
-  virtualisation = {
-    # Enable common container config files in /etc/containers
-    containers.enable = true;
-    podman = {
-      enable = true;
-      dockerCompat = true;
-      defaultNetwork.settings.dns_enabled = true; # for compose containers to see each other
+    waylandCompositors.hyprland = {
+      prettyName = "Hyprland";
+      comment = "Hyprland compositor managed by UWSM";
+      binPath = "/run/current-system/sw/bin/Hyprland";
     };
   };
+
+  programs.hyprland = {
+    enable = true;
+    # Use the packages that we have defined as inputs in our flake.
+    package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
+    portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
+    # Enable sustemd integration
+    systemd.setPath.enable = true;
+    withUWSM = true;
+    # Enable compatibility with X11 apps
+    xwayland.enable = true;
+  };
+
+  services.hypridle.enable = true;
+
+  # Open ports in the firewall.
+  # networking.firewall.allowedTCPPorts = [ ... ];
+  # networking.firewall.allowedUDPPorts = [ ... ];
+  # Or disable the firewall altogether.
+  networking.firewall.enable = false;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
