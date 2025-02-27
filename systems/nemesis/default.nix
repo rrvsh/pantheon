@@ -2,16 +2,18 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ inputs, config, pkgs, ... }: let
-in {
+{ inputs, pkgs, ... }:
+
+{
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
       ../../scripts/hyprland-tty-launch.nix
       ../../modules/nvidia.nix # Graphics settings for Nvidia GPUs
+      ../../modules/networking.nix # Common networking config
     ];
 
-  # Bootloader.
+  # Bootloahttps://jira.xtremax.com/browse/GCCFMALRT-15450der.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
@@ -24,18 +26,6 @@ in {
 
   
   # Add hyprland.cachix.org as a binary cache for Hyprland
-  nix.settings = {
-    substituters = [
-      "https://hyprland.cachix.org" 
-      "https://cuda-maintainers.cachix.org" 
-      "https://nix-community.cachix.org" 
-    ];
-    trusted-public-keys = [
-      "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc=" 
-      "cuda-maintainers.cachix.org-1:0dq3bujKpuEPMCX6U4WylrUDZ9JyUG0VpVZa7CNfq5E="
-      "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-    ];
-  };
 
   # Scripts
   services.hyprland-tty-launch.enable = true;
@@ -48,7 +38,6 @@ in {
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
   # Enable networking
-  networking.networkmanager.enable = true;
 
   # Set your time zone.
   time.timeZone = "Asia/Singapore";
@@ -102,9 +91,6 @@ in {
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
-  services.openssh.enable = true;
-  services.tailscale.enable = true;
-
   programs.uwsm = {
     enable = true;
     waylandCompositors.hyprland = {
@@ -129,10 +115,8 @@ in {
   services.hypridle.enable = true;
 
   # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
-  networking.firewall.enable = false;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
