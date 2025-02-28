@@ -9,13 +9,11 @@
     ...
   } @ inputs: let
     args = {inherit self inputs;};
-  in {
-    # System Configurations
-    nixosConfigurations = {
-      nemesis = nixpkgs.lib.nixosSystem {
+    mkSystem = hostname:
+      nixpkgs.lib.nixosSystem {
         specialArgs = args;
         modules = [
-          ./systems/nemesis.nix
+          ./systems/${hostname}.nix
 
           # Add the home-manager user
           home-manager.nixosModules.home-manager
@@ -33,8 +31,14 @@
           }
         ];
       };
-    };
-
+  in {
+    # System Configurations
+    nixosConfigurations = builtins.listToAttrs [
+      {
+        name = "nemesis";
+        value = mkSystem "nemesis";
+      }
+    ];
     # Packages
     packages.x86_64-linux.nvf =
       (inputs.nvf.lib.neovimConfiguration {
