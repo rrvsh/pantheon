@@ -1,7 +1,6 @@
-{ pkgs, ... }:
-
-{
+{pkgs, ...}: {
   config.vim = {
+    # TODO: Install catppuccin
     theme.enable = true;
 
     options = {
@@ -24,12 +23,22 @@
     autopairs.nvim-autopairs.enable = true;
     binds.whichKey.enable = true;
     comments.comment-nvim.enable = true;
+    formatter.conform-nvim.enable = true;
+
+    # Filetree
+    filetree.nvimTree = {
+      enable = true;
+      # TODO:
+      # - open on right pane instead
+      # - keybind to open and close
+      # - allow me to move files around with vim bindings
+    };
 
     # Languages
     languages = {
       markdown.enable = true;
     };
-    
+
     languages.nix = {
       enable = true;
       format.enable = true;
