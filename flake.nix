@@ -17,7 +17,7 @@
       nemesis = nixpkgs.lib.nixosSystem {
         specialArgs = args;
         modules = [ 
-          ./systems/nemesis 
+          ./systems/nemesis.nix 
           
           # Add the home-manager user
           home-manager.nixosModules.home-manager {
@@ -29,7 +29,7 @@
             home-manager.extraSpecialArgs = args;
             # Add the users
             home-manager.users.rafiq.imports = [
-              ./users/rafiq
+              ./users/rafiq.nix
             ];
           }
         ];
