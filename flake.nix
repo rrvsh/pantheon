@@ -7,20 +7,19 @@
     home-manager,
     nvf,
     ...
-  } @ inputs:
-  let
-    args = { inherit self inputs; };
-  in
-  {
+  } @ inputs: let
+    args = {inherit self inputs;};
+  in {
     # System Configurations
     nixosConfigurations = {
       nemesis = nixpkgs.lib.nixosSystem {
         specialArgs = args;
-        modules = [ 
-          ./systems/nemesis.nix 
-          
+        modules = [
+          ./systems/nemesis.nix
+
           # Add the home-manager user
-          home-manager.nixosModules.home-manager {
+          home-manager.nixosModules.home-manager
+          {
             # Don't instantiate the home-manager instance of nixpkgs
             home-manager.useGlobalPkgs = true;
             # Install user packages to /etc/profiles
@@ -37,15 +36,17 @@
     };
 
     # Packages
-    packages.x86_64-linux.nvf = (inputs.nvf.lib.neovimConfiguration { 
-      pkgs = nixpkgs.legacyPackages.x86_64-linux;
-      modules = [ ./packages/nvf.nix ]; 
-    }).neovim;
+    packages.x86_64-linux.nvf =
+      (inputs.nvf.lib.neovimConfiguration {
+        pkgs = nixpkgs.legacyPackages.x86_64-linux;
+        modules = [./packages/nvf.nix];
+      })
+      .neovim;
   };
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    
+
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
