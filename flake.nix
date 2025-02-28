@@ -18,16 +18,18 @@
           # Add the home-manager user
           home-manager.nixosModules.home-manager
           {
-            # Don't instantiate the home-manager instance of nixpkgs
-            home-manager.useGlobalPkgs = true;
-            # Install user packages to /etc/profiles
-            home-manager.useUserPackages = true;
-            # Pass inputs to home-manager configurations
-            home-manager.extraSpecialArgs = args;
-            # Add the users
-            home-manager.users.rafiq.imports = [
-              ./users/rafiq.nix
-            ];
+            home-manager = {
+              # Don't instantiate the home-manager instance of nixpkgs
+              useGlobalPkgs = true;
+              # Install user packages to /etc/profiles
+              useUserPackages = true;
+              # Pass inputs to configurations
+              extraSpecialArgs = args;
+              # Add the users
+              users.rafiq.imports = [
+                ./users/rafiq.nix
+              ];
+            };
           }
         ];
       };
