@@ -1,14 +1,16 @@
-{ self, pkgs, ... }:
-
 {
+  self,
+  pkgs,
+  ...
+}: {
   imports = [
-    ../modules/home-git.nix # git specific configs
-    ../modules/home-tmux.nix # tmux specific configs (might move this)
-    ../modules/home-sh.nix # bash and other shell specific configs
-    ../modules/home-wm.nix # window manager configs
-    ../modules/home-editor.nix # editor specific configs
-    ../modules/home-terminal.nix # terminal emulator configs
-    ../modules/home-utils.nix # miscellaneous utilities
+    ./modules/git.nix # git specific configs
+    ./modules/tmux.nix # tmux specific configs (might move this)
+    ./modules/sh.nix # bash and other shell specific configs
+    ./modules/wm.nix # window manager configs
+    ./modules/editor.nix # editor specific configs
+    ./modules/terminal.nix # terminal emulator configs
+    ./modules/utils.nix # miscellaneous utilities
   ];
 
   # This enables using home-manager from the command line.
