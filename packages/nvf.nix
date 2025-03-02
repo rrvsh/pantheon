@@ -28,9 +28,15 @@
     # Filetree
     filetree.nvimTree = {
       enable = true;
+      mappings.toggle = "t";
+      setupOpts = {
+        git = {
+          enable = true;
+        };
+        hijack_cursor = true;
+        view.side = "right";
+      };
       # TODO:
-      # - open on right pane instead
-      # - keybind to open and close
       # - allow me to move files around with vim bindings
     };
 
