@@ -24,6 +24,7 @@
     binds.whichKey.enable = true;
     comments.comment-nvim.enable = true;
     formatter.conform-nvim.enable = true;
+    dashboard.alpha.enable = true;
 
     # Filetree
     filetree.nvimTree = {
