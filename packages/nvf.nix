@@ -31,7 +31,7 @@ _: {
     comments.comment-nvim.enable = true;
     formatter.conform-nvim.enable = true;
     dashboard.alpha.enable = true;
-    session.nvim-session-manager.enable = true;
+    # session.nvim-session-manager.enable = true;
 
     # Filetree
     filetree.nvimTree = {
@@ -130,8 +130,8 @@ _: {
       surround.enable = true;
     };
 
-    notes = {
-      obsidian.enable = true;
+    utility = {
+      leetcode-nvim.enable = true;
     };
   };
 }

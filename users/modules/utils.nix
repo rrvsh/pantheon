@@ -13,6 +13,11 @@
       enable = true;
       enableAutoUpdates = true;
     };
+    fzf = {
+      enable = true;
+      enableBashIntegration = true;
+      tmux.enableShellIntegration = true;
+    };
   };
 
   services = {

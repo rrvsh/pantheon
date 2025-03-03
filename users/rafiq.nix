@@ -1,8 +1,4 @@
-{
-  self,
-  pkgs,
-  ...
-}: {
+_: {
   imports = [
     ./modules/git.nix # git specific configs
     ./modules/tmux.nix # tmux specific configs (might move this)
