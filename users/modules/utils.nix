@@ -18,6 +18,10 @@
       enableBashIntegration = true;
       tmux.enableShellIntegration = true;
     };
+    yazi = {
+      enable = true;
+      enableBashIntegration = true;
+    };
   };
 
   services = {

@@ -6,6 +6,9 @@ _: {
       style = "mocha";
     };
 
+    viAlias = true;
+    vimAlias = true;
+
     options = {
       # Indentation
       expandtab = true;
@@ -134,6 +137,7 @@ _: {
       leetcode-nvim.enable = true;
       preview.glow.enable = true;
       yanky-nvim.enable = true;
+      yazi-nvim.enable = true;
     };
   };
 }
