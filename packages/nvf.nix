@@ -46,12 +46,21 @@ _: {
       # - allow me to move files around with vim bindings
     };
 
+    # Fuzzy Finding
     fzf-lua = {
       enable = true;
       profile = "default";
     };
     telescope = {
       enable = true;
+    };
+
+    # Git Integration
+    git = {
+      enable = true;
+      git-conflict.enable = true;
+      gitsigns.enable = true;
+      vim-fugitive.enable = true;
     };
 
     # Languages
