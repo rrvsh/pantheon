@@ -23,6 +23,7 @@ _: {
 
     # Built-Ins
     autocomplete.blink-cmp.enable = true;
+    autocomplete.blink-cmp.setupOpts.signature.enabled = true;
     autopairs.nvim-autopairs.enable = true;
     binds.whichKey.enable = true;
     comments.comment-nvim.enable = true;
@@ -65,31 +66,51 @@ _: {
 
     # Languages
     languages = {
+      # Global Defaults
+      enableDAP = true;
+      enableExtraDiagnostics = true;
+      enableFormat = true;
+      enableLSP = true;
+      enableTreesitter = true;
+
+      # Specific Languages
+      bash.enable = true;
+      clang.enable = true;
+      csharp.enable = true;
+      css.enable = true;
+      go.enable = true;
+      html.enable = true;
+      java.enable = true;
+      lua.enable = true;
       markdown.enable = true;
+      nix.enable = true;
       python.enable = true;
-      nix = {
-        enable = true;
-        format.enable = true;
-        lsp.enable = true;
-        treesitter.enable = true;
-        extraDiagnostics.enable = true;
-      };
+      rust.enable = true;
+      ts.enable = true;
+      # yaml.enable = true;
+
+      # Markdown
+      markdown.extensions.render-markdown-nvim.enable = true;
+
+      # Rust
+      rust.crates.enable = true;
+
+      # Typescript
+      ts.extensions.ts-error-translator.enable = true;
     };
 
-    # Lazy Loaded Plugins
-    # lazy.plugins = {
-    #   # aerial.nvim = { package = aerial.nvim; after = "print('aerial loaded')"; };
-    # };
-    # # Load Plugins after Built-Ins
-    # extraPlugins =
-    #   /*
-    #   with pkgs.vimPlugins;
-    #   */
-    #   {
-    #     #harpoon = { package = harpoon; setup = "require('harpoon').setup {}"; };
-    #   };
-    # # Add directly to init.lua
-    # # Attribute names denote the section names
-    # #luaConfigRC = { aquarium = "vim.cmd('colorscheme aquarium')"; };
+    lsp = {
+      enable = true;
+      formatOnSave = true;
+      lightbulb.enable = true;
+      # lspSignature.enable = true;
+      lspconfig.enable = true;
+      lspkind.enable = true;
+      lsplines.enable = true;
+      null-ls.enable = true;
+      nvim-docs-view.enable = true;
+      otter-nvim.enable = true;
+      trouble.enable = true;
+    };
   };
 }
