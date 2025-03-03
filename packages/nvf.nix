@@ -112,5 +112,11 @@ _: {
       otter-nvim.enable = true;
       trouble.enable = true;
     };
+
+    mini = {
+      animate.enable = true;
+      statusline.enable = true;
+      surround.enable = true;
+    };
   };
 }
