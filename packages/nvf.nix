@@ -21,6 +21,8 @@ _: {
       # signcolumn = "no";
     };
 
+    syntaxHighlighting = true;
+
     # Built-Ins
     autocomplete.blink-cmp.enable = true;
     autocomplete.blink-cmp.setupOpts.signature.enabled = true;
@@ -29,6 +31,7 @@ _: {
     comments.comment-nvim.enable = true;
     formatter.conform-nvim.enable = true;
     dashboard.alpha.enable = true;
+    session.nvim-session-manager.enable = true;
 
     # Filetree
     filetree.nvimTree = {
@@ -46,6 +49,9 @@ _: {
       # TODO:
       # - allow me to move files around with vim bindings
     };
+
+    # SyntaxHighlighting
+    treesitter.fold = true;
 
     # Fuzzy Finding
     fzf-lua = {
@@ -92,6 +98,11 @@ _: {
       # Markdown
       markdown.extensions.render-markdown-nvim.enable = true;
 
+      # Nix
+      nix.lsp.options = {
+        settings.nix.flake.autoArchive = true;
+      };
+
       # Rust
       rust.crates.enable = true;
 
@@ -114,9 +125,13 @@ _: {
     };
 
     mini = {
-      animate.enable = true;
+      # animate.enable = true;
       statusline.enable = true;
       surround.enable = true;
+    };
+
+    notes = {
+      obsidian.enable = true;
     };
   };
 }
