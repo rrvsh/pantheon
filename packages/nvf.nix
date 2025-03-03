@@ -132,6 +132,8 @@ _: {
 
     utility = {
       leetcode-nvim.enable = true;
+      preview.glow.enable = true;
+      yanky-nvim.enable = true;
     };
   };
 }
