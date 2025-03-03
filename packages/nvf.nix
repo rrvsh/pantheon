@@ -1,7 +1,10 @@
 _: {
   config.vim = {
-    # TODO: Install catppuccin
-    theme.enable = true;
+    theme = {
+      enable = true;
+      name = "catppuccin";
+      style = "mocha";
+    };
 
     options = {
       # Indentation
@@ -41,6 +44,14 @@ _: {
       };
       # TODO:
       # - allow me to move files around with vim bindings
+    };
+
+    fzf-lua = {
+      enable = true;
+      profile = "default";
+    };
+    telescope = {
+      enable = true;
     };
 
     # Languages
