@@ -139,6 +139,7 @@ _: {
       preview.glow.enable = true;
       yanky-nvim.enable = true;
       yazi-nvim.enable = true;
+      vim-wakatime.enable = true;
     };
 
     visuals = {
