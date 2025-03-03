@@ -139,5 +139,9 @@ _: {
       yanky-nvim.enable = true;
       yazi-nvim.enable = true;
     };
+
+    visuals = {
+      fidget-nvim.enable = true;
+    };
   };
 }
