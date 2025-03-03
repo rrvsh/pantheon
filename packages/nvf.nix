@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+_: {
   config.vim = {
     # TODO: Install catppuccin
     theme.enable = true;
@@ -36,6 +36,8 @@
         };
         hijack_cursor = true;
         view.side = "right";
+        disable_netrw = true;
+        hijack_netrw = true;
       };
       # TODO:
       # - allow me to move files around with vim bindings
@@ -44,26 +46,30 @@
     # Languages
     languages = {
       markdown.enable = true;
-    };
-
-    languages.nix = {
-      enable = true;
-      format.enable = true;
-      lsp.enable = true;
-      treesitter.enable = true;
-      extraDiagnostics.enable = true;
+      python.enable = true;
+      nix = {
+        enable = true;
+        format.enable = true;
+        lsp.enable = true;
+        treesitter.enable = true;
+        extraDiagnostics.enable = true;
+      };
     };
 
     # Lazy Loaded Plugins
-    lazy.plugins = {
-      # aerial.nvim = { package = aerial.nvim; after = "print('aerial loaded')"; };
-    };
-    # Load Plugins after Built-Ins
-    extraPlugins = with pkgs.vimPlugins; {
-      #harpoon = { package = harpoon; setup = "require('harpoon').setup {}"; };
-    };
-    # Add directly to init.lua
-    # Attribute names denote the section names
-    #luaConfigRC = { aquarium = "vim.cmd('colorscheme aquarium')"; };
+    # lazy.plugins = {
+    #   # aerial.nvim = { package = aerial.nvim; after = "print('aerial loaded')"; };
+    # };
+    # # Load Plugins after Built-Ins
+    # extraPlugins =
+    #   /*
+    #   with pkgs.vimPlugins;
+    #   */
+    #   {
+    #     #harpoon = { package = harpoon; setup = "require('harpoon').setup {}"; };
+    #   };
+    # # Add directly to init.lua
+    # # Attribute names denote the section names
+    # #luaConfigRC = { aquarium = "vim.cmd('colorscheme aquarium')"; };
   };
 }
