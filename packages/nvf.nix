@@ -40,6 +40,7 @@ _: {
     filetree.nvimTree = {
       enable = true;
       mappings.toggle = "t";
+      openOnSetup = false;
       setupOpts = {
         git = {
           enable = true;
