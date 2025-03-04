@@ -3,26 +3,14 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 {pkgs, ...}: {
   imports = [
-    # Include the results of the hardware scan.
     ./hw-nemesis.nix
+    ./modules/common.nix
     ./modules/networking.nix
     ./modules/locale.nix
     ./modules/systemd-boot.nix
   ];
 
   networking.hostName = "nemesis"; # Define your hostname.
-
-  users.users.rafiq = {
-    isNormalUser = true;
-    description = "rafiq";
-    extraGroups = ["networkmanager" "wheel"];
-  };
-
-  nixpkgs.config.allowUnfree = true;
-
-  environment.systemPackages = with pkgs; [
-    git
-  ];
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
