@@ -22,13 +22,6 @@
       enable = true;
       enableBashIntegration = true;
       settings = {
-        format = ''
-          [┌──](bold green) $all
-          [└─>](bold green) '';
-        character = {
-          success_symbol = "│";
-          error_symbol = "│";
-        };
       };
     };
 
