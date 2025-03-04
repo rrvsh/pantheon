@@ -5,7 +5,6 @@
     self,
     nixpkgs,
     home-manager,
-    nvf,
     ...
   } @ inputs: let
     args = {inherit self inputs;};
@@ -41,13 +40,6 @@
         value = mkSystem "nemesis";
       }
     ];
-    # Packages
-    packages.x86_64-linux.nvf =
-      (inputs.nvf.lib.neovimConfiguration {
-        pkgs = nixpkgs.legacyPackages.x86_64-linux;
-        modules = [./packages/nvf.nix];
-      })
-      .neovim;
   };
 
   inputs = {
@@ -55,9 +47,6 @@
 
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
-
-    nvf.url = "github:notashelf/nvf";
-    nvf.inputs.nixpkgs.follows = "nixpkgs";
 
     hyprland.url = "github:hyprwm/Hyprland";
   };
