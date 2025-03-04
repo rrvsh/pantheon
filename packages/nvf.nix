@@ -27,8 +27,6 @@ _: {
     syntaxHighlighting = true;
 
     # Built-Ins
-    autocomplete.blink-cmp.enable = true;
-    autocomplete.blink-cmp.setupOpts.signature.enabled = true;
     autopairs.nvim-autopairs.enable = true;
     binds.whichKey.enable = true;
     comments.comment-nvim.enable = true;
@@ -36,6 +34,14 @@ _: {
     dashboard.alpha.enable = true;
     # session.nvim-session-manager.enable = true;
 
+    # Auto-completion
+    autocomplete.blink-cmp = {
+      enable = true;
+      setupOpts = {
+        # signature = { enabled = true }
+        signature.enabled = true;
+      };
+    };
     # Filetree
     filetree.nvimTree = {
       enable = true;
@@ -121,7 +127,7 @@ _: {
       # lspSignature.enable = true;
       lspconfig.enable = true;
       lspkind.enable = true;
-      lsplines.enable = true;
+      # lsplines.enable = true;
       null-ls.enable = true;
       nvim-docs-view.enable = true;
       otter-nvim.enable = true;
