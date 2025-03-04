@@ -1,7 +1,6 @@
 _: {
   imports = [
     ./modules/git.nix # git specific configs
-    ./modules/tmux.nix # tmux specific configs (might move this)
     ./modules/sh.nix # bash and other shell specific configs
     ./modules/wm.nix # window manager configs
     ./modules/editor.nix # editor specific configs
