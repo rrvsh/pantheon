@@ -3,7 +3,7 @@ _: {
     ./modules/git.nix # git specific configs
     ./modules/sh.nix # bash and other shell specific configs
     ./modules/wm.nix # window manager configs
-    ./modules/editor.nix # editor specific configs
+    ./modules/nvim.nix # nvim specific configs
     ./modules/terminal.nix # terminal emulator configs
     ./modules/utils.nix # miscellaneous utilities
   ];

@@ -26,7 +26,7 @@
               extraSpecialArgs = args;
               # Add the users
               users.rafiq.imports = [
-                ./users/rafiq.nix
+                ./users/rafiq
               ];
             };
           }
