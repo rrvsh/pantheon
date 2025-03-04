@@ -7,11 +7,8 @@
     ./hw-nemesis.nix
     ./modules/networking.nix
     ./modules/locale.nix
+    ./modules/systemd-boot.nix
   ];
-
-  # Bootloader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
 
   networking.hostName = "nemesis"; # Define your hostname.
 
