@@ -14,7 +14,6 @@
         specialArgs = args;
         modules = [
           ./systems/${hostname}.nix
-          inputs.stylix.nixosModules.stylix
 
           # Add the home-manager user
           home-manager.nixosModules.home-manager
@@ -61,7 +60,5 @@
     nvf.inputs.nixpkgs.follows = "nixpkgs";
 
     hyprland.url = "github:hyprwm/Hyprland";
-
-    stylix.url = "github:danth/stylix";
   };
 }

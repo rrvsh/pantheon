@@ -15,22 +15,17 @@
 
   networking.hostName = "nemesis"; # Define your hostname.
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.rafiq = {
     isNormalUser = true;
     description = "rafiq";
     extraGroups = ["networkmanager" "wheel"];
   };
 
-  # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
   environment.systemPackages = with pkgs; [
     git
   ];
-
-  stylix.enable = true;
-  stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
