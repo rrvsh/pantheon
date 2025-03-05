@@ -1,11 +1,12 @@
 {
   imports = [
     ./hw-nemesis.nix
-    ./modules/common.nix
-    ./modules/systemd-boot.nix
-    ./modules/locale.nix
-    ./modules/networking.nix
-    ./modules/hyprland.nix
+    ./modules/common.nix # Common options for all systems
+    ./modules/systemd-boot.nix # Systemd-boot as bootloader
+    ./modules/locale.nix # SG locale settings
+    ./modules/networking.nix # Common networking settings
+    ./modules/hyprland.nix # Hyprland compositor
+    ./modules/nvidia.nix # Nvidia settings
   ];
 
   networking.hostName = "nemesis";
