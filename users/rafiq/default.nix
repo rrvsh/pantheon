@@ -2,9 +2,10 @@ _: {
   imports = [
     ./modules/git.nix # git specific configs
     ./modules/sh.nix # bash and other shell specific configs
-    ./modules/wm.nix # window manager configs
     ./modules/nvim.nix # nvim specific configs
     ./modules/terminal.nix # terminal emulator configs
+    ./modules/firefox.nix # firefox configs
+    ./modules/hyprland.nix # hyprland settings
     ./modules/utils.nix # miscellaneous utilities
   ];
 

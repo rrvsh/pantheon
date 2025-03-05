@@ -5,6 +5,7 @@
     ./modules/systemd-boot.nix
     ./modules/locale.nix
     ./modules/networking.nix
+    ./modules/hyprland.nix
   ];
 
   networking.hostName = "nemesis";
