@@ -8,5 +8,6 @@
       nvidia-vaapi-driver # hardware acceleration
     ];
   };
-  # FIXME: hardware.nvidia.open = ;
+  hardware.nvidia.powerManagement.enable = true;
+  hardware.nvidia.open = false;
 }
