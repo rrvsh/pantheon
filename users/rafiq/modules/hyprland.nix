@@ -51,20 +51,27 @@
 	"$mainMod, E, exec, $browser"
 	"$mainMod, M, exit"
 
-	"$mainMod, H, movefocus, l"
-	"$mainMod, L, movefocus, r"
+	# HJKL to move between windows
+	"$mainMod, H, cyclenext"
+	"$mainMod, L, cyclenext, prev"
 
+	# HJKL to move a window
 	"$mainMod_ALT, H, movewindow, l"
 	"$mainMod_ALT, J, movewindow, d"
 	"$mainMod_ALT, K, movewindow, u"
 	"$mainMod_ALT, L, movewindow, r"
-
+  
+	# HJKL to resize a window
 	"ALT_SHIFT, H, resizeactive, -10% 0"
 	"ALT_SHIFT, J, resizeactive, 0 -10%"
 	"ALT_SHIFT, K, resizeactive, 0 10%"
 	"ALT_SHIFT, L, resizeactive, 10% 0"
 
-	"$mainMod_CTRL, H, workspace, previous"
+	# H and L to move between workspaces on the current monitor including creation
+	"$mainMod_CTRL, H, workspace, r-1"
+	"$mainMod_CTRL, L, workspace, r+1"
+
+	"$mainMod, V, togglefloating"
       ];
     };
   };
