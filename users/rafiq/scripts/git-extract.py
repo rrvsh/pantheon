@@ -157,18 +157,20 @@ def is_text_file(file_path, aggressive=False):
         # Run checks and return True if any of them pass
         high_entropy_check = not has_high_entropy(file_path)
         chardet_check = check_chardet_encoding(file_path)
-        return ascii_check or high_entropy_check or chardet_chec
+        return ascii_check or high_entropy_check or chardet_check
 
 
-def get_latest_text_files_to_stdout(remote_repo_url, ignored_files=None):
+def get_latest_text_files_to_stdout(remote_repo_url=None, ignored_files=None):
     """
-    Checks out the latest commit from a remote Git repository to a temporary folder,
+    Checks out the latest commit from a remote Git repository or the current
+    working directory (if no URL is provided) to a temporary folder,
     and then prints the contents of all files identified as text files to stdout,
     prepended by their relative paths from the repository root, excluding specified
     ignored files.
 
     Args:
-        remote_repo_url: The URL of the remote Git repository.
+        remote_repo_url: The URL of the remote Git repository (optional). If None,
+                         the current working directory is assumed to be a Git repo.
         ignored_files: A list of files or directories to ignore (relative to the repo root).
     """
 
@@ -185,12 +187,26 @@ def get_latest_text_files_to_stdout(remote_repo_url, ignored_files=None):
         temp_dir = tempfile.mkdtemp()
 
         # Clone the repository, but only the latest commit (shallow clone)
-        subprocess.run(
-            ["git", "clone", "--depth", "1", remote_repo_url, temp_dir],
-            check=True,
-            capture_output=True,
-            text=True,
-        )
+        clone_command = ["git", "clone", "--depth", "1"]
+        if remote_repo_url:
+            clone_command.extend([remote_repo_url, temp_dir])
+        else:
+            # Check if the current directory is a Git repository.
+            try:
+                subprocess.run(
+                    ["git", "rev-parse", "--is-inside-work-tree"],
+                    check=True,
+                    capture_output=True,
+                    text=True,
+                    cwd=os.getcwd(),
+                )  # run in current directory
+            except subprocess.CalledProcessError:
+                raise ValueError(
+                    "No Git repository URL provided and current directory is not a Git repository."
+                )
+            clone_command.extend([os.getcwd(), temp_dir])  # clone current dir to temp
+
+        subprocess.run(clone_command, check=True, capture_output=True, text=True)
 
         # Find all files and filter for text files
         text_files = []
@@ -234,6 +250,8 @@ def get_latest_text_files_to_stdout(remote_repo_url, ignored_files=None):
 
     except subprocess.CalledProcessError as e:
         print(f"Error executing Git command: {e.stderr}")
+    except ValueError as e:
+        print(e)
     except Exception as e:
         print(f"An error occurred: {e}")
     finally:
@@ -247,7 +265,10 @@ if __name__ == "__main__":
         description="Checkout and print text files from a remote Git repository."
     )
     parser.add_argument(
-        "-r", "--repo", required=True, help="The URL of the remote Git repository."
+        "-r",
+        "--repo",
+        required=False,
+        help="The URL of the remote Git repository. If not provided, the current directory is used if it's a Git repository.",
     )
     parser.add_argument(
         "-i",
@@ -262,15 +283,15 @@ if __name__ == "__main__":
     remote_repository_url = args.repo
     ignored_files = args.ignored_files
 
-    # Verify the URL
-    if (
-        "github.com" not in remote_repository_url
-        and "gitlab.com" not in remote_repository_url
-        and "bitbucket.org" not in remote_repository_url
-    ):
-        print(
-            "Warning: This script is designed for common public repository hosting providers. Ensure the Git URL is correct."
-        )
+    # Verify the URL only if it's provided
+    if remote_repository_url:
+        if (
+            "github.com" not in remote_repository_url
+            and "gitlab.com" not in remote_repository_url
+            and "bitbucket.org" not in remote_repository_url
+        ):
+            print(
+                "Warning: This script is designed for common public repository hosting providers. Ensure the Git URL is correct."
+            )
 
     get_latest_text_files_to_stdout(remote_repository_url, ignored_files)
-
