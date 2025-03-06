@@ -34,11 +34,11 @@
 
 	resize_on_border = true;
       };
-
-      input = {
-	numlock_by_default = true;
-	follow_mouse = 2; # Click on a window to change focus
-      };
+      
+      # Programs
+      exec-once = [
+	"waybar"
+      ];
 
       # Keybinds
       "$mainMod" = "SUPER";
@@ -73,6 +73,21 @@
 
 	"$mainMod, V, togglefloating"
       ];
+
+      input = {
+	numlock_by_default = true;
+	follow_mouse = 2; # Click on a window to change focus
+      };
     };
+  };
+  programs.waybar = {
+    enable = true;
+    settings = {
+      mainBar = {
+	layer = "top";
+      };
+    };
+    style = ''
+    '';
   };
 }
