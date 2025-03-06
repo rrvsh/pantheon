@@ -31,12 +31,6 @@
       plugins = with pkgs.tmuxPlugins; [
         catppuccin
 
-        # Keybind Hints
-        tmux-which-key
-
-        # Status Line Decoration
-        tmux-powerline
-
         # Session Management between Reboots
         {
           plugin = resurrect;
