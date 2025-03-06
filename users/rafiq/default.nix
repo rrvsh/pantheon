@@ -6,6 +6,7 @@ _: {
     ./modules/terminal.nix # terminal emulator configs
     ./modules/firefox.nix # firefox configs
     ./modules/hyprland.nix # hyprland settings
+    ./modules/fonts.nix # font settings
     ./modules/utils.nix # miscellaneous utilities
   ];
 
