@@ -52,8 +52,8 @@
 	"$mainMod, M, exit"
 
 	# HJKL to move between windows
-	"$mainMod, H, cyclenext"
-	"$mainMod, L, cyclenext, prev"
+	"$mainMod, H, cyclenext, visible"
+	"$mainMod, L, cyclenext, visible prev"
 
 	# HJKL to move a window
 	"$mainMod_ALT, H, movewindow, l"
