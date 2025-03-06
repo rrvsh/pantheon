@@ -3,6 +3,6 @@
   fonts.enableDefaultPackages = true;
 
   fonts.packages = with pkgs; [
-    terminus-nerdfont
+    nerd-fonts.terminess-ttf 
   ];
 }
