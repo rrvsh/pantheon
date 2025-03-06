@@ -1,4 +1,4 @@
-_: {
+{ pkgs, ... }: {
   imports = [
     ./modules/git.nix # git specific configs
     ./modules/sh.nix # bash and other shell specific configs
@@ -8,6 +8,7 @@ _: {
     ./modules/hyprland.nix # hyprland settings
     ./modules/fonts.nix # font settings
     ./modules/utils.nix # miscellaneous utilities
+    ./scripts
   ];
 
   # This enables using home-manager from the command line.
