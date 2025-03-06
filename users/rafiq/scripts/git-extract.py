@@ -166,21 +166,30 @@ def get_latest_text_files_to_stdout(remote_repo_url=None, ignored_files=None):
     working directory (if no URL is provided) to a temporary folder,
     and then prints the contents of all files identified as text files to stdout,
     prepended by their relative paths from the repository root, excluding specified
-    ignored files.
+    ignored files.  Supports "!" to specify includes only.
 
     Args:
         remote_repo_url: The URL of the remote Git repository (optional). If None,
                          the current working directory is assumed to be a Git repo.
         ignored_files: A list of files or directories to ignore (relative to the repo root).
+                       If a list contains a value starting with "!", it means "include only".
     """
 
     temp_dir = None
     if ignored_files is None:
         ignored_files = []
 
-    # Ensure .git and .gitignore are always ignored
-    ignored_files.extend([".git", ".gitignore"])
-    ignored_files = list(set(ignored_files))  # remove duplicates
+    # Ensure .git and .gitignore are always ignored (unless include only is specified)
+    include_only = any(item.startswith("!") for item in ignored_files)
+    if not include_only:
+        ignored_files.extend([".git", ".gitignore"])
+        ignored_files = list(set(ignored_files))  # remove duplicates
+
+    # Determine if "include only" is active and extract the include paths
+    include_only = any(item.startswith("!") for item in ignored_files)
+    include_paths = [item[1:] for item in ignored_files if item.startswith("!")]
+    ignore_paths = [item for item in ignored_files if not item.startswith("!")]
+
 
     try:
         # Create a temporary directory
@@ -215,25 +224,36 @@ def get_latest_text_files_to_stdout(remote_repo_url=None, ignored_files=None):
                 file_path = os.path.join(root, file)
                 relative_path = os.path.relpath(file_path, temp_dir)
 
-                # Check if the file or any of its parent directories are ignored
-                ignore = False
-                path_components = relative_path.split(
-                    os.sep
-                )  # split based on OS-specific path separator
-                current_path = ""
-                for component in path_components:
-                    current_path = (
-                        os.path.join(current_path, component)
-                        if current_path
-                        else component
-                    )  # prevent empty first join
-                    if current_path in ignored_files:
-                        ignore = True
-                        break
+                if include_only:
+                    # Include only logic
+                    include = False
+                    for include_path in include_paths:
+                        if relative_path.startswith(include_path):
+                            include = True
+                            break
+                    if not include:
+                        continue  # Skip if not in include paths
+                else:
+                    # Ignore logic (standard ignore)
+                    ignore = False
+                    path_components = relative_path.split(
+                        os.sep
+                    )  # split based on OS-specific path separator
+                    current_path = ""
+                    for component in path_components:
+                        current_path = (
+                            os.path.join(current_path, component)
+                            if current_path
+                            else component
+                        )  # prevent empty first join
+                        if current_path in ignore_paths:
+                            ignore = True
+                            break
+                    if ignore:
+                        continue
 
-                if not ignore:
-                    if is_text_file(file_path):  # Use the is_text_file function
-                        text_files.append(file_path)
+                if is_text_file(file_path):  # Use the is_text_file function
+                    text_files.append(file_path)
 
         # Print the contents of each text file, prepended by its relative path
         for file_path in text_files:
@@ -275,7 +295,7 @@ if __name__ == "__main__":
         "--ignored-files",
         nargs="+",
         default=[],
-        help="Files or directories to ignore (space-separated).",
+        help="Files or directories to ignore (space-separated).  Use !<path> to specify include only.",
     )
 
     args = parser.parse_args()
