@@ -1,7 +1,9 @@
 { inputs, ... }: {
   imports = [ 
     inputs.nixvim.homeManagerModules.nixvim 
-    ./nixvim-plugins/nvim-tree.nix
+    ./nixvim-plugins/nvim-tree.nix # filetree
+    ./nixvim-plugins/noice.nix # custom CMDLINE
+    ./nixvim-plugins/lualine.nix # custom statusline
   ];
   programs.nixvim = {
     enable = true;
