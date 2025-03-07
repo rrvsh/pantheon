@@ -1,9 +1,10 @@
 { inputs, ... }: {
   imports = [ 
     inputs.nixvim.homeManagerModules.nixvim 
-    ./nixvim-plugins/nvim-tree.nix # filetree
-    ./nixvim-plugins/noice.nix # custom CMDLINE
-    ./nixvim-plugins/lualine.nix # custom statusline
+    ./nixvim/colorscheme-catppuccin.nix
+    ./nixvim/nvim-tree.nix # filetree
+    ./nixvim/noice.nix # custom CMDLINE
+    ./nixvim/lualine.nix # custom statusline
   ];
   programs.nixvim = {
     enable = true;
@@ -22,8 +23,5 @@
 
     clipboard.providers.wl-copy.enable = true;
 
-    colorschemes = {
-      catppuccin.enable = true;
-    };
   };
 }
