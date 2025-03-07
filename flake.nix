@@ -10,16 +10,14 @@
     args = {inherit self inputs;};
     mkSystem = hostname:
       nixpkgs.lib.nixosSystem {
-        specialArgs = args;
-        modules = [
-          ./systems/${hostname}.nix
+        specialArgs = args; modules = [ ./systems/${hostname}.nix
 
           # Add the home-manager user
           home-manager.nixosModules.home-manager
           {
             home-manager = {
               # Don't instantiate the home-manager instance of nixpkgs
-              useGlobalPkgs = true;
+              #useGlobalPkgs = true;
               # Install user packages to /etc/profiles
               useUserPackages = true;
               # Pass inputs to configurations
@@ -54,5 +52,7 @@
 
     nixvim.url = "github:nix-community/nixvim";
     nixvim.inputs.nixpkgs.follows = "nixpkgs";
+
+    stylix.url  = "github:danth/stylix";
   };
 }

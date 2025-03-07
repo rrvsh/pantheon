@@ -1,7 +1,7 @@
 { inputs, ... }: {
   imports = [ 
     inputs.nixvim.homeManagerModules.nixvim 
-    ./nixvim/colorscheme-catppuccin.nix
+    #./nixvim/colorscheme-catppuccin.nix
     ./nixvim/nvim-tree.nix # filetree
     ./nixvim/noice.nix # custom CMDLINE
     ./nixvim/lualine.nix # custom statusline

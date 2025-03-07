@@ -2,7 +2,7 @@
 {
   imports = [
     ./programs/firefox.nix
-    ./programs/font-terminess.nix
+    #./programs/font-terminess.nix
     ./programs/kitty.nix
     ./programs/hyprland.nix
     ./programs/waybar.nix
