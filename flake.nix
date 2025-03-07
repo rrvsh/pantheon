@@ -49,5 +49,7 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     hyprland.url = "github:hyprwm/Hyprland";
+
+    yazi.url = "github:sxyazi/yazi";
   };
 }
