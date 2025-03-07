@@ -17,6 +17,7 @@
       number = true;
       relativenumber = true;
       termguicolors = true;
+      wrap = false;
     };
 
     clipboard.providers.wl-copy.enable = true;
