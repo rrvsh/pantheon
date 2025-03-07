@@ -5,7 +5,8 @@
     ./programs/direnv.nix
     ./programs/fzf.nix
     ./programs/git.nix
-    ./programs/nvim.nix
+    #./programs/nvim.nix
+    ./programs/nixvim.nix
     ./programs/starship.nix
     ./programs/tealdeer.nix
     ./programs/tmux.nix

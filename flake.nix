@@ -51,5 +51,8 @@
     hyprland.url = "github:hyprwm/Hyprland";
 
     yazi.url = "github:sxyazi/yazi";
+
+    nixvim.url = "github:nix-community/nixvim";
+    nixvim.inputs.nixpkgs.follows = "nixpkgs";
   };
 }
