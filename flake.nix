@@ -10,19 +10,16 @@
     args = {inherit self inputs;};
     mkSystem = hostname:
       nixpkgs.lib.nixosSystem {
-        specialArgs = args; modules = [ ./systems/${hostname}.nix
+        specialArgs = args; 
+	modules = [ 
+	  ./systems/${hostname}.nix
 
           # Add the home-manager user
           home-manager.nixosModules.home-manager
           {
             home-manager = {
-              # Don't instantiate the home-manager instance of nixpkgs
-              #useGlobalPkgs = true;
-              # Install user packages to /etc/profiles
               useUserPackages = true;
-              # Pass inputs to configurations
               extraSpecialArgs = args;
-              # Add the users
               users.rafiq.imports = [
                 ./users/rafiq.nix
               ];

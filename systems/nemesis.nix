@@ -8,6 +8,7 @@
     ./modules/networking.nix # Common networking settings
     ./modules/hyprland.nix # Hyprland compositor
     ./modules/nvidia.nix # Nvidia settings
+    ./modules/personalisation.nix
   ];
 
   networking.hostName = "nemesis";

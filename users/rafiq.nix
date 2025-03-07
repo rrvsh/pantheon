@@ -1,6 +1,5 @@
 { pkgs, ... }: {
   imports = [
-    ./modules/personalisation.nix
     ./modules/sh.nix
     ./modules/de.nix
     ./modules/utils.nix

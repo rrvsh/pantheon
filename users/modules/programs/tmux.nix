@@ -21,7 +21,8 @@
       ];
       extraConfig = ''
         set -g default-terminal "tmux-256color"
-        set -ag terminal-overrides ",xterm-256color:RGB"
+        set -ag terminal-overrides ",tmux-256color:RGB"
+	set -as terminal-features ",tmux-256color:RGB"
       '';
     };
 }
