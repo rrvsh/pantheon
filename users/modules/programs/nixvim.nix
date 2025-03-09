@@ -13,11 +13,30 @@
     vimdiffAlias = true;
 
     opts = {
+      # Indentation
+      autoindent = true;
+      smartindent = true;
+      expandtab = true;
+      smarttab = true;
+      wrap = false;
       shiftwidth = 2;
+      tabstop = 2;
+
+      # Search
+      hlsearch = true;
+      ignorecase = true;
+      incsearch = true;
+      smartcase = true; # case-sensitive if search contains uppercase
+
+      # Visual
       number = true;
       relativenumber = true;
+      cursorline = true;
+      visualbell = true;
       termguicolors = true;
-      wrap = false;
+
+      # Input
+      backspace = "indent,eol,start";
     };
 
     clipboard.providers.wl-copy.enable = true;
