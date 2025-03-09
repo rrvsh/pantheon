@@ -24,6 +24,7 @@
       wrap = false;
       shiftwidth = 2;
       tabstop = 2;
+      foldlevel = 1000; # Open all folds by default
 
       # Search
       hlsearch = true;
