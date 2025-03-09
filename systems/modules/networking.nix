@@ -3,6 +3,10 @@
 # Anything system-specific should not be here.
 #
 {
+  imports = [
+    ./programs/tailscale.nix
+  ];
+  
   networking = {
     # Enable networkManager
     # TODO: Look into the networkManager options.
@@ -35,5 +39,4 @@
 
   # TODO: look into openssh and tailscale settings.
   services.openssh.enable = true;
-  services.tailscale.enable = true;
 }
