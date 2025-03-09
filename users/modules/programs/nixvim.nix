@@ -4,6 +4,8 @@
     ./nixvim/nvim-tree.nix # filetree
     ./nixvim/noice.nix # custom CMDLINE
     ./nixvim/lualine.nix # custom statusline
+    ./nixvim/treesitter.nix # syntax highlighting
+    ./nixvim/treesitter-context.nix # context line
   ];
   programs.nixvim = {
     enable = true;
