@@ -74,6 +74,10 @@
 	"$mainMod, V, togglefloating"
       ];
 
+      bindm = [
+        "ALT, mouse:272, movewindow"
+      ];
+
       input = {
 	numlock_by_default = true;
 	follow_mouse = 2; # Click on a window to change focus
