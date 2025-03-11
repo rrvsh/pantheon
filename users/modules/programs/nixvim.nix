@@ -1,13 +1,13 @@
 { inputs, ... }: {
   imports = [ 
     inputs.nixvim.homeManagerModules.nixvim 
+    ./nixvim/conform-nvim.nix # formatter
     ./nixvim/lualine.nix # custom statusline
     ./nixvim/noice.nix # custom CMDLINE
     ./nixvim/nvim-tree.nix # filetree
     ./nixvim/treesitter-context.nix # context line
     ./nixvim/treesitter.nix # syntax highlighting
     ./nixvim/which-key.nix # show keybind hints
-    ./nixvim/conform-nvim.nix # formatter
   ];
   programs.nixvim = {
     enable = true;

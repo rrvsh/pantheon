@@ -23,6 +23,10 @@
         set -g default-terminal "tmux-256color"
         set -ag terminal-overrides ",tmux-256color:RGB"
 	set -as terminal-features ",tmux-256color:RGB"
+        
+        # inherit environment variables from outside so that we can use wl-copy etc
+        setenv -g WAYLAND_DISPLAY "$WAYLAND_DISPLAY"
+setenv -g XDG_RUNTIME_DIR "$XDG_RUNTIME_DIR"
       '';
     };
 }
