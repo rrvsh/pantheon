@@ -3,6 +3,9 @@
     isNormalUser = true;
     description = "rafiq";
     extraGroups = ["networkmanager" "wheel"];
+    openssh.authorizedKeys.keys = [
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILv8HqazE294YdyGaXK6q2EniDlTpGaUL071kk9+W0GJ rafiq@nemesis"
+    ];
   };
 
   # Enable basic fonts for reasonable Unicode coverage
