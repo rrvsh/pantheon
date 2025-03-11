@@ -34,6 +34,15 @@
         name = "nemesis";
         value = mkSystem "nemesis";
       }
+      {
+        name = "orpheus";
+        value = nixpkgs.lib.nixosSystem {
+          specialArgs = args;
+          modules = [
+            ./systems/orpheus.nix
+          ];
+        };
+      }
     ];
   };
 
