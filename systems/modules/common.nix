@@ -7,6 +7,10 @@
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILv8HqazE294YdyGaXK6q2EniDlTpGaUL071kk9+W0GJ rafiq@nemesis"
     ];
   };
+  
+  security.sudo = {
+    wheelNeedsPassword = false;
+  };
 
   # Enable basic fonts for reasonable Unicode coverage
   fonts.enableDefaultPackages = true;
