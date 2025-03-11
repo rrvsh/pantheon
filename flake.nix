@@ -10,9 +10,9 @@
     args = {inherit self inputs;};
     mkSystem = hostname:
       nixpkgs.lib.nixosSystem {
-        specialArgs = args; 
-	modules = [ 
-	  ./systems/${hostname}.nix
+        specialArgs = args;
+        modules = [
+          ./systems/${hostname}.nix
 
           # Add the home-manager user
           home-manager.nixosModules.home-manager
@@ -50,7 +50,8 @@
     nvf.url = "github:notashelf/nvf";
     nixvim.url = "github:nix-community/nixvim";
     nixvim.inputs.nixpkgs.follows = "nixpkgs";
+    nixd.url = "github:nix-community/nixd";
 
-    stylix.url  = "github:danth/stylix";
+    stylix.url = "github:danth/stylix";
   };
 }

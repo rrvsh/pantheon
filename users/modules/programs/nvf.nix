@@ -1,6 +1,11 @@
 { inputs, ... }: {
   imports = [ 
     inputs.nvf.homeManagerModules.default
+    ./nvf/lualine.nix
+    ./nvf/noice.nix
+    ./nvf/nvim-tree.nix
+    ./nvf/languages/nix.nix
+    ./nvf/conform-nvim.nix
   ];
 
   programs.nvf = {
@@ -42,6 +47,11 @@
           silent = true;
         }
       ];
+      languages = {
+        enableFormat = true;
+        enableLSP = true;
+        enableTreesitter = true;
+      };
     };
   };
 }
