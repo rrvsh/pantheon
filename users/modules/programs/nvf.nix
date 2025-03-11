@@ -6,7 +6,6 @@
     ./nvf/languages/nix.nix
     ./nvf/lualine.nix
     ./nvf/noice.nix
-    ./nvf/nvim-tree.nix
   ];
   programs.nvf = {
     enable = true;
