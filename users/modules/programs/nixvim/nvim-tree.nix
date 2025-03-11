@@ -5,6 +5,9 @@
 	mode = "n";
 	key = "t";
 	action = ":NvimTreeToggle<CR>";
+    options = {
+      silent = true;
+    };
       }
     ];
     plugins = {

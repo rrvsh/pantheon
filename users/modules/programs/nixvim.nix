@@ -7,6 +7,7 @@
     ./nixvim/treesitter-context.nix # context line
     ./nixvim/treesitter.nix # syntax highlighting
     ./nixvim/which-key.nix # show keybind hints
+    ./nixvim/conform-nvim.nix # formatter
   ];
   programs.nixvim = {
     enable = true;
@@ -42,6 +43,19 @@
       # Input
       backspace = "indent,eol,start";
     };
+
+    keymaps = [
+  {
+    # make gf create the file if it doesnt exist
+    # cd to the working directory to handle relative file paths
+    key = "gf";
+    action = ":cd %:p:h<CR>:e <cfile><CR>";
+    options = {
+      silent = true;
+    };
+  }
+];
+
 
     clipboard.providers.wl-copy.enable = true;
   };
