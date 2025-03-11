@@ -3,7 +3,7 @@
     enable = true;
     settings = {
       mainBar = {
-	layer = "top";
+        layer = "top";
       };
     };
     style = ''

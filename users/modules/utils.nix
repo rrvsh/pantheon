@@ -1,5 +1,4 @@
 {pkgs, ...}: {
-
   home.packages = with pkgs; [
     fastfetch # system info
     wl-clipboard # provides cli copy and paste commands

@@ -1,5 +1,5 @@
-{ pkgs, ... }: {
-  services.xserver.videoDrivers = [ "nvidia" ];
+{pkgs, ...}: {
+  services.xserver.videoDrivers = ["nvidia"];
   hardware.graphics = {
     enable = true;
     extraPackages = with pkgs; [

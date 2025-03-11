@@ -1,6 +1,6 @@
-{ inputs, ... }: {
-  imports = [ 
-    inputs.nixvim.homeManagerModules.nixvim 
+{inputs, ...}: {
+  imports = [
+    inputs.nixvim.homeManagerModules.nixvim
     ./nixvim/conform-nvim.nix # formatter
     ./nixvim/lualine.nix # custom statusline
     ./nixvim/noice.nix # custom CMDLINE
@@ -45,17 +45,16 @@
     };
 
     keymaps = [
-  {
-    # make gf create the file if it doesnt exist
-    # cd to the working directory to handle relative file paths
-    key = "gf";
-    action = ":cd %:p:h<CR>:e <cfile><CR>";
-    options = {
-      silent = true;
-    };
-  }
-];
-
+      {
+        # make gf create the file if it doesnt exist
+        # cd to the working directory to handle relative file paths
+        key = "gf";
+        action = ":cd %:p:h<CR>:e <cfile><CR>";
+        options = {
+          silent = true;
+        };
+      }
+    ];
 
     clipboard.providers.wl-copy.enable = true;
   };

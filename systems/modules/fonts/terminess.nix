@@ -1,6 +1,10 @@
-{ pkgs, config, ... }: {
+{
+  pkgs,
+  config,
+  ...
+}: {
   fonts.packages = with pkgs; [
-    nerd-fonts.terminess-ttf 
+    nerd-fonts.terminess-ttf
   ];
   stylix.fonts = {
     serif = config.stylix.fonts.monospace;

@@ -19,7 +19,10 @@
         view = {
           cursorline = true;
           side = "right";
-          width = { min = "25%"; max = "25%"; };
+          width = {
+            min = "25%";
+            max = "25%";
+          };
         };
       };
     };

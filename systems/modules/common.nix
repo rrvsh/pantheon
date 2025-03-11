@@ -5,12 +5,11 @@
     extraGroups = ["networkmanager" "wheel"];
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILv8HqazE294YdyGaXK6q2EniDlTpGaUL071kk9+W0GJ rafiq@nemesis"
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICbZfOYt6zydLyO4f9JAsxb1i6kHAjYzqa0SOqef6MKM rafiq@orpheus"
     ];
   };
 
-  security.sudo = {
-    wheelNeedsPassword = false;
-  };
+  security.sudo.wheelNeedsPassword = false;
 
   # Enable basic fonts for reasonable Unicode coverage
   fonts.enableDefaultPackages = true;

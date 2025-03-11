@@ -1,25 +1,14 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}: {
+{inputs, ...}: {
   imports = [
-    # Include the results of the hardware scan.
     ./hw-orpheus.nix
+    ./modules/bootloaders/extlinux.nix
     ./modules/common.nix
+    ./modules/networking.nix
+    ./modules/stylix.nix
+    inputs.nixos-hardware.nixosModules.raspberry-pi-4
+    "${inputs.nixpkgs}/nixos/modules/profiles/minimal.nix"
   ];
 
-  # Use the extlinux boot loader. (NixOS wants to enable GRUB by default)
-  boot.loader.grub.enable = false;
-  # Enables the generation of /boot/extlinux/extlinux.conf
-  boot.loader.generic-extlinux-compatible.enable = true;
-
-  networking.hostName = "orpheus"; # Define your hostname.
-  networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
-
-  services.openssh.enable = true;
-  networking.firewall.enable = false;
-
+  networking.hostName = "orpheus";
   system.stateVersion = "25.05";
 }
