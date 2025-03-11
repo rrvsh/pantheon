@@ -1,13 +1,13 @@
-{ inputs, ... }: {
-  imports = [ 
+{inputs, ...}: {
+  imports = [
     inputs.nvf.homeManagerModules.default
+    ./nvf/blink-cmp.nix
+    ./nvf/conform-nvim.nix
+    ./nvf/languages/nix.nix
     ./nvf/lualine.nix
     ./nvf/noice.nix
     ./nvf/nvim-tree.nix
-    ./nvf/languages/nix.nix
-    ./nvf/conform-nvim.nix
   ];
-
   programs.nvf = {
     enable = true;
 
