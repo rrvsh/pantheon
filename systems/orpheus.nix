@@ -7,6 +7,7 @@
   imports = [
     # Include the results of the hardware scan.
     ./hw-orpheus.nix
+    ./modules/common.nix
   ];
 
   # Use the extlinux boot loader. (NixOS wants to enable GRUB by default)

@@ -1,5 +1,5 @@
 {
-  description = "NixOS setup for one host with home-manager";
+  description = "flake forward setup with two hosts on different architectures";
 
   outputs = {
     self,
@@ -14,7 +14,6 @@
         modules = [
           ./systems/${hostname}.nix
 
-          # Add the home-manager user
           home-manager.nixosModules.home-manager
           {
             home-manager = {
@@ -39,7 +38,20 @@
         value = nixpkgs.lib.nixosSystem {
           specialArgs = args;
           modules = [
+            inputs.nixos-hardware.nixosModules.raspberry-pi-4
+            "${nixpkgs}/nixos/modules/profiles/minimal.nix"
             ./systems/orpheus.nix
+
+            home-manager.nixosModules.home-manager
+            {
+              home-manager = {
+                useUserPackages = true;
+                extraSpecialArgs = args;
+                users.rafiq.imports = [
+                  ./users/rafiq.nix
+                ];
+              };
+            }
           ];
         };
       }
@@ -48,6 +60,7 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixos-hardware.url = "github:nixos/nixos-hardware";
 
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";

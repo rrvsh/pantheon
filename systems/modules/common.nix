@@ -7,7 +7,7 @@
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILv8HqazE294YdyGaXK6q2EniDlTpGaUL071kk9+W0GJ rafiq@nemesis"
     ];
   };
-  
+
   security.sudo = {
     wheelNeedsPassword = false;
   };
@@ -17,6 +17,7 @@
 
   nixpkgs.config.allowUnfree = true;
   nix.settings.experimental-features = ["nix-command" "flakes"];
+  nix.settings.trusted-users = ["root" "@wheel"];
 
   environment.systemPackages = with pkgs; [
     git
