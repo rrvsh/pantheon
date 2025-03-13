@@ -47,7 +47,7 @@
         # - Sort buffers by directory:<leader>bsd
         # - Sort buffers by extension:<leader>bse
         # - Sort buffers by ID:<leader>bsi
-        closeCurrent = "<C-w>";
+        # closeCurrent = "<C-w>";
         # TODO: check these mappigns
         # cycleNext = "<C-Tab>";
         # cyclePrevious = "<C-Shift-Tab>";
