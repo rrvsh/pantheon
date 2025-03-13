@@ -3,6 +3,8 @@
     fastfetch # system info
     wl-clipboard # provides cli copy and paste commands
     aichat # duh
+    ripgrep
+    ueberzugpp # image rendering backend for the terminal
   ];
 
   services = {

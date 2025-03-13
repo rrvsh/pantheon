@@ -7,9 +7,18 @@
     nerd-fonts.terminess-ttf
   ];
   stylix.fonts = {
-    serif = config.stylix.fonts.monospace;
-    sansSerif = config.stylix.fonts.monospace;
-    emoji = config.stylix.fonts.monospace;
+    serif = {
+      package = pkgs.nerd-fonts.terminess-ttf;
+      name = "Terminess Nerd Font";
+    };
+    sansSerif = {
+      package = pkgs.nerd-fonts.terminess-ttf;
+      name = "Terminess Nerd Font";
+    };
+    emoji = {
+      package = pkgs.nerd-fonts.terminess-ttf;
+      name = "Terminess Nerd Font";
+    };
     monospace = {
       package = pkgs.nerd-fonts.terminess-ttf;
       name = "Terminess Nerd Font Mono";
