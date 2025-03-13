@@ -7,8 +7,10 @@
     ./nvf/lualine.nix
     ./nvf/noice.nix
   ];
+  home.sessionVariables.EDITOR = "nvim";
   programs.nvf = {
     enable = true;
+    enableManpages = true;
 
     settings.vim = {
       options = {
