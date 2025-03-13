@@ -1,17 +1,17 @@
 {inputs, ...}: {
   imports = [
     inputs.nvf.homeManagerModules.default
-    ./nvf/options.nix
-    ./nvf/keymaps.nix
-    ./nvf/lsp.nix
     ./nvf/debugger.nix
-    ./nvf/languages.nix
-    ./nvf/visual.nix
-    ./nvf/input.nix
     ./nvf/filetree.nix
+    ./nvf/input.nix
+    ./nvf/keymaps.nix
+    ./nvf/languages.nix
+    ./nvf/lsp.nix
+    ./nvf/notes.nix
+    ./nvf/options.nix
     ./nvf/search.nix
     ./nvf/utilities.nix
-    ./nvf/notes.nix
+    ./nvf/visual.nix
   ];
   home.sessionVariables.EDITOR = "nvim";
   programs.nvf = {
@@ -20,7 +20,6 @@
     settings.vim = {
       viAlias = true;
       vimAlias = true;
-      spellcheck.enable = true;
     };
   };
 }

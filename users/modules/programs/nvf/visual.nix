@@ -20,7 +20,7 @@
       };
       # nvim-cursorline provides cursor word and line highlighting
       nvim-cursorline = {
-        enable = true;
+        enable = false;
         setupOpts = {
           cursorword.enable = true;
           cursorline.enable = false;
@@ -61,7 +61,7 @@
       fold = true;
       # provide context for current scope
       context = {
-        enable = true;
+        enable = false;
         setupOpts = {
           mode = "topline";
         };

@@ -37,7 +37,7 @@
         };
         # precognition.nvim shows hints for motions
         precognition = {
-          enable = true;
+          enable = false;
           setupOpts = {
             # TODO: may want to fix dashboard
           };

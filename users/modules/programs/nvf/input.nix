@@ -20,6 +20,7 @@
         };
         setupOpts = {
           cmdline.sources = null; # use default source list
+          sources.providers.cmdline.module = "blink.cmp.sources.cmdline";
           completion.documentation.auto_show_delay_ms = 0;
           signature.enabled = true;
         };
