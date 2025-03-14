@@ -1,4 +1,10 @@
 {pkgs, ...}: {
+  imports = [
+    ./networking.nix
+    ./shell.nix
+    ./stylix.nix
+  ];
+
   users.users.rafiq = {
     isNormalUser = true;
     description = "rafiq";

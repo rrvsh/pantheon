@@ -3,8 +3,6 @@
     ./hw-orpheus.nix
     ./modules/bootloaders/extlinux.nix
     ./modules/common.nix
-    ./modules/networking.nix
-    ./modules/stylix.nix
     inputs.nixos-hardware.nixosModules.raspberry-pi-4
     "${inputs.nixpkgs}/nixos/modules/profiles/minimal.nix"
   ];
