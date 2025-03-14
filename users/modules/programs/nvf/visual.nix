@@ -35,7 +35,7 @@
       enable = true;
     };
     tabline.nvimBufferline = {
-      enable = true;
+      enable = false;
       mappings = {
         # default mappings:
         # - Close buffer:null
