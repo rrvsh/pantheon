@@ -3,6 +3,7 @@
   programs.starship = {
     enable = true;
     settings = {
+      add_newline = false;
       format = "$character";
       right_format = "$all";
     };
