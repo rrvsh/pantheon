@@ -13,4 +13,10 @@
     ./programs/zsh.nix
     ./scripts
   ];
+
+  home.shell.enableShellIntegration = true;
+  home.shellAliases = {
+    gs = "git status";
+    ai = "aichat -r %shell% -e";
+  };
 }
