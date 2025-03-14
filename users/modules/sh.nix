@@ -8,8 +8,8 @@
     ./programs/nvf.nix
     ./programs/starship.nix
     ./programs/tealdeer.nix
-    ./programs/tmux.nix
     ./programs/yazi.nix
+    ./programs/zellij.nix
     ./programs/zsh.nix
     ./scripts
   ];
@@ -25,7 +25,6 @@
         indent_style = "space";
         indent_size = 2;
         trim_trailing_whitespace = true;
-        insert_final_newline = false;
       };
     };
   };
