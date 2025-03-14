@@ -7,6 +7,7 @@
       enable = true;
       setupOpts = {
         enable_cursor_hijack = true; # keep the cursor on the first char
+        hijack_netrw_behavior = "disabled";
       };
     };
     # TODO: add keymap for :NeoTree action=show position=right toggle=true reveal=true
