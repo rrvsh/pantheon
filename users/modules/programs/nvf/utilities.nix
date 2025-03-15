@@ -13,7 +13,10 @@
       icon-picker.enable = true;
       # image rendering
       # TODO: look into image-magick and if it is needed
-      images.image-nvim.enable = true;
+      images.image-nvim = {
+        enable = true;
+        setupOpts.backend = "kitty";
+      };
       # leetcode
       leetcode-nvim = {
         enable = true;
