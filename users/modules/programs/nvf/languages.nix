@@ -9,5 +9,7 @@
 
     # Enable specific languages
     nix.enable = true;
+    rust.enable = true;
+    clang.enable = true;
   };
 }
