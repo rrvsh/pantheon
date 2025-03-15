@@ -6,7 +6,7 @@
       smartindent = true;
       expandtab = true;
       smarttab = true;
-      wrap = false;
+      wrap = true;
       shiftwidth = 2;
       tabstop = 2;
       foldlevel = 1000; # Open all folds by default
