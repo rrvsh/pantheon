@@ -17,6 +17,7 @@
           home-manager.nixosModules.home-manager
           {
             home-manager = {
+              useGlobalPkgs = true; # inherit the nixpkgs and its config
               useUserPackages = true;
               extraSpecialArgs = args;
               users.rafiq.imports = [
@@ -52,5 +53,6 @@
     nixvim.inputs.nixpkgs.follows = "nixpkgs";
     nixd.url = "github:nix-community/nixd";
     stylix.url = "github:danth/stylix";
+    spicetify-nix.url = "github:Gerg-L/spicetify-nix";
   };
 }

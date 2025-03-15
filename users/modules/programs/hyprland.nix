@@ -48,11 +48,13 @@
       "$mainMod" = "SUPER";
       "$terminal" = "kitty";
       "$browser" = "firefox";
+      "$music" = "spotify";
 
       bind = [
-        "$mainMod, Q, exec, $terminal"
+        "$mainMod, SEMICOLON, exec, $terminal"
         "$mainMod, W, killactive"
-        "$mainMod, E, exec, $browser"
+        "$mainMod, O, exec, $browser"
+        "$mainMod, S, exec, $music"
         "$mainMod, M, exit"
 
         # HJKL to move between windows

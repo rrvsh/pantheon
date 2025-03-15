@@ -5,6 +5,7 @@
     ./programs/firefox.nix
     ./programs/hyprland.nix
     ./programs/kitty.nix
+    ./programs/spicetify.nix
     ./programs/waybar.nix
   ];
 }
