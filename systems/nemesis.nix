@@ -5,6 +5,7 @@
     ./modules/desktop.nix
     ./modules/bootloaders/systemd-boot.nix
     ./modules/hardware/nvidia.nix
+    ./modules/hardware/bluetooth.nix
   ];
 
   networking.hostName = "nemesis";
