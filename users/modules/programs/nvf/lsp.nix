@@ -32,7 +32,7 @@
       };
     };
     # lsplines moves diagnostics to virtual lines after the actual line
-    lsplines.enable = true; # TODO: add a keymap to toggle this
+    lsplines.enable = false; # TODO: add a keymap to toggle this
     # lspsaga provides many features:
     # - breadcrumbs: provides trace to current symbol at top
     # - callhierarchy: provides a list of the call hierarchy
