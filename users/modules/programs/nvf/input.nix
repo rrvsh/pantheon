@@ -1,7 +1,9 @@
 {lib, ...}: {
   programs.nvf.settings.vim = {
-    autopairs = {
-      nvim-autopairs.enable = true;
+    autopairs.nvim-autopairs.enable = true;
+    snippets.luasnip = {
+      enable = true;
+      setupOpts.enable_autosnippets = true;
     };
     autocomplete = {
       blink-cmp = {
@@ -32,19 +34,12 @@
         };
       };
     };
-    # enable code snippets using luasnip
-    # loads from vscode by default using friendly-snippets
-    snippets.luasnip = {
-      enable = true;
-      setupOpts = {
-        enable_autosnippets = true;
+    utility = {
+      motion = {
+        hop.enable = true; # <leader>h
+        precognition.enable = false;
       };
-    };
-    binds = {
-      # cheatsheet.nvim provides cheatsheets with fuzzy finding with <leader>?
-      cheatsheet.enable = true;
-      # whichkey provides a popup window with hotkeys
-      whichKey.enable = true;
+      yanky-nvim.enable = true;
     };
   };
 }

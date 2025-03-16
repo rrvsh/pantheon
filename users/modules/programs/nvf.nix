@@ -1,17 +1,10 @@
 {inputs, ...}: {
   imports = [
     inputs.nvf.homeManagerModules.default
-    ./nvf/debugger.nix
-    ./nvf/filetree.nix
     ./nvf/input.nix
-    ./nvf/keymaps.nix
     ./nvf/languages.nix
-    ./nvf/lsp.nix
-    ./nvf/notes.nix
-    ./nvf/options.nix
-    ./nvf/search.nix
+    ./nvf/ui.nix
     ./nvf/utilities.nix
-    ./nvf/visual.nix
   ];
   home.sessionVariables.EDITOR = "nvim";
   programs.nvf = {
@@ -20,6 +13,40 @@
     settings.vim = {
       viAlias = true;
       vimAlias = true;
+      options = {
+        # Indentation
+        autoindent = true;
+        smartindent = true;
+        expandtab = true;
+        smarttab = true;
+        wrap = true;
+        shiftwidth = 2;
+        tabstop = 2;
+        foldlevel = 1000; # Open all folds by default
+
+        # Search
+        hlsearch = true;
+        ignorecase = true;
+        incsearch = true;
+        smartcase = true; # case-sensitive if search contains uppercase
+
+        # Visual
+        number = true;
+        cursorline = true;
+        visualbell = true;
+        termguicolors = true;
+
+        # Input
+        backspace = "indent,eol,start";
+      };
+      keymaps = [
+        {
+          key = "gf";
+          mode = "n";
+          action = ":cd %:p:h<CR>:e <cfile><CR>";
+          silent = true;
+        }
+      ];
     };
   };
 }
