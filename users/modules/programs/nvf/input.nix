@@ -1,4 +1,4 @@
-{
+{lib, ...}: {
   programs.nvf.settings.vim = {
     autopairs = {
       nvim-autopairs.enable = true;
@@ -19,9 +19,22 @@
           # - Scroll docs up [blink.cmp]:<C-d>
         };
         setupOpts = {
+          # Disable completion for markdown
+          enabled =
+            lib.generators.mkLuaInline
+            /*
+            lua
+            */
+            ''
+              function()
+                return not vim.tbl_contains({"markdown"}, vim.bo.filetype)
+                  and vim.bo.buftype ~= "prompt"
+                  and vim.b.completion ~= false
+                end
+            '';
           cmdline.sources = null; # use default source list
           sources.providers.cmdline.module = "blink.cmp.sources.cmdline";
-          menu.auto_show = false;
+          # menu.auto_show = false;
           completion.documentation.auto_show_delay_ms = 0;
           signature.enabled = true;
         };
