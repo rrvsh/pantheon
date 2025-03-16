@@ -39,6 +39,10 @@
         resize_on_border = true;
       };
 
+      windowrulev2 = [
+        "float, class:firefox, title:Picture-in-Picture"
+      ];
+
       # Programs
       exec-once = [
         "waybar"
