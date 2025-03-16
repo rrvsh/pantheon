@@ -47,6 +47,15 @@
           silent = true;
         }
       ];
+      luaConfigRC.turn_off_inline_diagnostics =
+        /*
+        lua
+        */
+        ''
+          vim.diagnostic.config({
+            virtual_text = false -- turn off inline diagnostics
+          })
+        '';
     };
   };
 }
