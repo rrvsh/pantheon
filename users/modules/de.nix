@@ -7,5 +7,6 @@
     ./programs/kitty.nix
     ./programs/spicetify.nix
     ./programs/waybar.nix
+    ./programs/hyprlock.nix
   ];
 }
