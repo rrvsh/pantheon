@@ -57,5 +57,9 @@
     stylix.url = "github:danth/stylix";
     spicetify-nix.url = "github:Gerg-L/spicetify-nix";
     sops-nix.url = "github:Mic92/sops-nix";
+    hyprland-plugins = {
+      url = "github:hyprwm/hyprland-plugins";
+      inputs.hyprland.follows = "hyprland";
+    };
   };
 }
