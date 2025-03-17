@@ -7,7 +7,9 @@
     home-manager,
     ...
   } @ inputs: let
+    # args will later be used in outputs to inherit the flake and its inputs for use in modules.
     args = {inherit self inputs;};
+    # mkSystem lets us repeat the same config for multiple systems, called later in outputs.
     mkSystem = hostname:
       nixpkgs.lib.nixosSystem {
         specialArgs = args;

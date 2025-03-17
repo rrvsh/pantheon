@@ -4,11 +4,7 @@
   config,
   ...
 }: {
-  # Should not be needed because we set modesetting.enable = true;
-  boot.kernelParams = [
-    "nvidia-drm.modeset=1"
-    "nvidia-drm.fbdev=1"
-  ];
+  # Accept the license by default; needed for some packages.
   nixpkgs.config.nvidia.acceptLicense = true;
   services.xserver.videoDrivers = ["nvidia"];
   environment.variables = {
@@ -35,4 +31,5 @@
       package = config.boot.kernelPackages.nvidiaPackages.latest;
     };
   };
+  boot.initrd.availableKernelModules = ["nvidia" "nvidia_modeset" "nvidia_uvm" "nvidia_drm"];
 }

@@ -5,6 +5,8 @@
     aichat # duh
     ripgrep
     devenv
+    thefuck
+    bat
   ];
 
   services = {
