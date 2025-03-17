@@ -41,12 +41,11 @@
 
       # Programs
       exec-once = [
-        "waybar"
       ];
 
       # Keybinds
       "$mainMod" = "SUPER";
-      "$terminal" = "kitty";
+      "$terminal" = "kitty -1 -e zellij";
       "$browser" = "firefox";
       "$music" = "spotify";
 
