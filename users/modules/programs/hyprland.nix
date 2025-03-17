@@ -16,7 +16,7 @@
 
       # Monitors
       monitor = [
-        "DP-1, 3640x2160@60, auto, 1"
+        # "DP-1, preferred, auto, 1"
         # "HDMI-A-1, 1920x1080@60, -1280x0, 1.5"
         ", preferred, auto, 1"
       ];
