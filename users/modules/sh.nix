@@ -11,6 +11,7 @@
     ./programs/yazi.nix
     ./programs/zellij.nix
     ./programs/zsh.nix
+    ./programs/thefuck.nix
     ./scripts
   ];
   home.shell.enableShellIntegration = true;

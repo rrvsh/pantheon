@@ -5,7 +5,6 @@
     aichat # duh
     ripgrep
     devenv
-    thefuck
     bat
   ];
 
