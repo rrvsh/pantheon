@@ -9,6 +9,11 @@
     package = null;
     portalPackage = null;
     settings = {
+      # Programs to run at startup
+      exec-once = [
+        "hyprlock"
+      ];
+
       env = [
         "XCURSOR_SIZE,32"
 
@@ -43,10 +48,6 @@
         "float, class:firefox, title:Picture-in-Picture"
       ];
 
-      # Programs
-      exec-once = [
-      ];
-
       # Keybinds
       "$mainMod" = "SUPER";
       "$terminal" = "kitty -1 -e zellij";
@@ -59,10 +60,10 @@
         "$mainMod, O, exec, $browser"
         "$mainMod, S, exec, $music"
         "$mainMod, M, exit"
+        "$mainMod, L, exec, hyprlock"
 
-        # HJKL to move between windows
-        "$mainMod, H, cyclenext, visible"
-        "$mainMod, L, cyclenext, visible prev"
+        # move between windows
+        "ALT, Tab, cyclenext"
 
         # HJKL to move a window
         "$mainMod_ALT, H, movewindow, l"
