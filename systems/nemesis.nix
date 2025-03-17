@@ -16,4 +16,5 @@
   boot.plymouth = {
     enable = true;
   };
+  boot.initrd.availableKernelModules = ["nvidia" "nvidia_modeset" "nvidia_uvm" "nvidia_drm"];
 }
