@@ -2,9 +2,9 @@
 
 # As Yet Unreproducible
 
-- User passwords
-- Spotify login
-- Firefox login
+- [x] ~User passwords~ -> _Managed with sops-nix_
+- [ ] Spotify login
+- [ ] Firefox login
 
 # Acknowledgements
 - https://www.youtube.com/watch?v=CwfKlX3rA6E for piquing my interest in this OS in the first place
