@@ -1,4 +1,4 @@
-{
+{pkgs, ...}: {
   imports = [
     ./hw-nemesis.nix
     ./modules/common.nix
@@ -11,4 +11,9 @@
   networking.hostName = "nemesis";
   system.stateVersion = "24.11";
   boot.binfmt.emulatedSystems = ["wasm32-wasi" "x86_64-windows" "aarch64-linux"];
+  boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelModules = ["dm_crypt"];
+  boot.plymouth = {
+    enable = true;
+  };
 }
