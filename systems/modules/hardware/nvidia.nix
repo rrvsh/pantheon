@@ -1,4 +1,5 @@
 {
+  inputs,
   pkgs,
   config,
   ...
@@ -20,6 +21,7 @@
     nvidia-container-toolkit.enable = true;
     graphics = {
       enable = true;
+      package = inputs.hyprland.inputs.nixpkgs.legacyPackages.${pkgs.stdenv.hostPlatform.system}.mesa.drivers;
       extraPackages = with pkgs; [
         nvidia-vaapi-driver # hardware acceleration
       ];
@@ -29,6 +31,7 @@
       # powerManagement.enable = true;
       open = false;
       nvidiaSettings = true;
+      nvidiaPersistenced = true;
       package = config.boot.kernelPackages.nvidiaPackages.latest;
     };
   };

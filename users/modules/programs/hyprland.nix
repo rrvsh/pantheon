@@ -16,14 +16,14 @@
 
       # Monitors
       monitor = [
-        # "DP-1, preferred, auto, 1"
-        # "HDMI-A-1, 1920x1080@60, -1280x0, 1.5"
+        "desc:OOO AN-270W04K, 3840x2160@60, auto, auto"
+        "desc:Philips Consumer Electronics Company PHL 246V5 AU11330000086, 1920x1080@60, auto-left, auto, transform, 3"
         ", preferred, auto, 1"
       ];
 
       # Switching to the current workspace will switch to the previous
       binds.workspace_back_and_forth = true;
-      cursor.default_monitor = "HDMI-A-2";
+      cursor.default_monitor = "HDMI-A-1";
 
       # Windows
       general = {
