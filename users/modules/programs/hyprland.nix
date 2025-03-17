@@ -1,8 +1,4 @@
 {
-  config,
-  lib,
-  ...
-}: {
   home.sessionVariables.NIXOS_OZONE_WL = "1";
   wayland.windowManager.hyprland = {
     enable = true;
@@ -82,6 +78,13 @@
         "$mainMod_CTRL, L, workspace, r+1"
 
         "$mainMod, V, togglefloating"
+      ];
+
+      # Repeat when held
+      binde = [
+        # Keyboard Media Keys
+        ", XF86AudioRaiseVolume, exec, wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%+"
+        ", XF86AudioLowerVolume, exec, wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%-"
       ];
 
       bindm = [
