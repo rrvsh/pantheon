@@ -9,6 +9,7 @@
 
     # Enable specific languages
     nix.enable = true;
+    nix.format.type = "nixfmt";
     rust.enable = true;
     clang.enable = true;
     lua.enable = true;
