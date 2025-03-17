@@ -1,13 +1,20 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  config,
+  ...
+}: {
   imports = [
     ./networking.nix
     ./shell.nix
     ./stylix.nix
+    ./sops.nix
   ];
 
+  users.mutableUsers = false; # Always reset users on system activation
   users.users.rafiq = {
     isNormalUser = true;
     description = "rafiq";
+    hashedPasswordFile = config.sops.secrets.hashed_password_rafiq.path;
     extraGroups = ["networkmanager" "wheel"];
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILv8HqazE294YdyGaXK6q2EniDlTpGaUL071kk9+W0GJ rafiq@nemesis"
