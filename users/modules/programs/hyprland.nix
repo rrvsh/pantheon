@@ -9,6 +9,13 @@
     package = null;
     portalPackage = null;
     settings = {
+      "$mainMonitor" = "desc:OOO AN-270W04K";
+      "$vertMonitor" = "desc:Philips Consumer Electronics Company PHL 246V5 AU11330000086";
+      "$mainMod" = "SUPER";
+      "$terminal" = "kitty -1 -e zellij";
+      "$browser" = "firefox";
+      "$music" = "spotify";
+
       # Programs to run at startup
       exec-once = [
         "hyprlock"
@@ -25,14 +32,14 @@
 
       # Monitors
       monitor = [
-        "desc:OOO AN-270W04K, 3840x2160@60, auto, auto"
-        "desc:Philips Consumer Electronics Company PHL 246V5 AU11330000086, 1920x1080@60, auto-left, auto, transform, 3"
+        "$mainMonitor, 3840x2160@60, auto, auto"
+        "$vertMonitor, 1920x1080@60, auto-left, auto, transform, 3"
         ", preferred, auto, 1"
       ];
 
       # Switching to the current workspace will switch to the previous
       binds.workspace_back_and_forth = true;
-      cursor.default_monitor = "HDMI-A-1";
+      cursor.default_monitor = "$mainMonitor";
 
       # Windows
       general = {
@@ -49,21 +56,17 @@
       ];
 
       # Keybinds
-      "$mainMod" = "SUPER";
-      "$terminal" = "kitty -1 -e zellij";
-      "$browser" = "firefox";
-      "$music" = "spotify";
-
       bind = [
         "$mainMod, SEMICOLON, exec, $terminal"
         "$mainMod, W, killactive"
         "$mainMod, O, exec, $browser"
         "$mainMod, S, exec, $music"
         "$mainMod, M, exit"
-        "$mainMod, L, exec, hyprlock"
+        "$mainMod, Escape, exec, hyprlock"
 
         # move between windows
-        "ALT, Tab, cyclenext"
+        "$mainMod, H, cyclenext, visible"
+        "$mainMod, L, cyclenext, visible prev"
 
         # HJKL to move a window
         "$mainMod_ALT, H, movewindow, l"
@@ -80,12 +83,10 @@
         # H and L to move between workspaces on the current monitor including creation
         "$mainMod_CTRL, H, workspace, r-1"
         "$mainMod_CTRL, L, workspace, r+1"
-
-        "$mainMod, V, togglefloating"
       ];
 
       # Repeat when held
-      binde = [
+      bindle = [
         # Keyboard Media Keys
         ", XF86AudioRaiseVolume, exec, wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%+"
         ", XF86AudioLowerVolume, exec, wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%-"
