@@ -1,0 +1,22 @@
+(defwindow example
+           :monitor 0
+           :geometry (geometry :x "0%"
+                               :t "20px"
+                               :width "90%"
+                               :height "30px"
+                               :anchor "top center")
+           :stacking "fg"
+ (labeled-container :name "foo"
+  (greeter :name "rafiq")))
+
+(defwidget greeter [?text name]
+  (box :orientation "horizontal"
+       :halign "center"
+   text
+   (button :onclick "hyprctl notify 0 1000 0 'Hello, ${name}.'"
+    "Greet")))
+
+(defwidget labeled-container [name]
+ (box :class "container"
+  name
+  (children)))
