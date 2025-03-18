@@ -8,5 +8,6 @@
     ./programs/spicetify.nix
     ./programs/waybar.nix
     ./programs/hyprlock.nix
+    ./programs/eww.nix
   ];
 }

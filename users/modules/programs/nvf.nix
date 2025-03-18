@@ -1,4 +1,5 @@
-{inputs, ...}: {
+{ inputs, pkgs, ... }:
+{
   imports = [
     inputs.nvf.homeManagerModules.default
     ./nvf/input.nix
@@ -48,14 +49,20 @@
         }
       ];
       luaConfigRC.turn_off_inline_diagnostics =
-        /*
-        lua
-        */
+        # lua
         ''
           vim.diagnostic.config({
             virtual_text = false -- turn off inline diagnostics
           })
         '';
+      extraPlugins = with pkgs.vimPlugins; {
+        yuck-vim = {
+          package = yuck-vim;
+        };
+        nvim-treesitter-parsers = {
+          package = nvim-treesitter-parsers.yuck;
+        };
+      };
     };
   };
 }
