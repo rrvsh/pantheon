@@ -2,7 +2,8 @@
   inputs,
   pkgs,
   ...
-}: {
+}:
+{
   home.sessionVariables.NIXOS_OZONE_WL = "1";
   wayland.windowManager.hyprland = {
     enable = true;
@@ -100,24 +101,6 @@
         numlock_by_default = true;
         follow_mouse = 2; # Click on a window to change focus
       };
-      plugin = {
-        hyprbars = {
-          # example config
-          bar_height = 20;
-
-          # example buttons (R -> L)
-          # hyprbars-button = color, size, on-click
-          hyprbars-button = [
-            "rgb(ff4040), 10, 󰖭, hyprctl dispatch killactive"
-            "rgb(eeee11), 10, , hyprctl dispatch fullscreen 1"
-          ];
-        };
-      };
-      # Hyprbars
     };
-    plugins = [
-      inputs.hyprland-plugins.packages.${pkgs.system}.hyprbars
-      # ...
-    ];
   };
 }
