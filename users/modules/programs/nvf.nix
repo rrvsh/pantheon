@@ -62,6 +62,9 @@
         nvim-treesitter-parsers = {
           package = nvim-treesitter-parsers.yuck;
         };
+        nvim-parinfer = {
+          package = nvim-parinfer;
+        };
       };
     };
   };
