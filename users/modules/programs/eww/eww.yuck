@@ -1,22 +1,30 @@
-(defwindow example
-           :monitor 0
-           :geometry (geometry :x "0%"
-                               :t "20px"
-                               :width "90%"
-                               :height "30px"
-                               :anchor "top center")
-           :stacking "fg"
- (labeled-container :name "foo"
-  (greeter :name "rafiq")))
+(defwindow lockscreen_background :monitor 0
+                                 :geometry (geometry :width "100%"
+                                                     :height "100%"
+                                                     :anchor "center")
+                                 :stacking "fg"
+ (box))
 
-(defwidget greeter [?text name]
-  (box :orientation "horizontal"
-       :halign "center"
-   text
-   (button :onclick "hyprctl notify 0 1000 0 'Hello, ${name}.'"
-    "Greet")))
+(defwindow lockscreen_title :monitor 0
+                            :geometry (geometry :anchor "center")
+                            :stacking "fg"
+ (greeting))
 
-(defwidget labeled-container [name]
- (box :class "container"
-  name
-  (children)))
+(defwidget greeting[]
+ (box (label :markup '<span size="32pt">Hi, rafiq.</span>')))
+
+(defwindow lockscreen_input :monitor 0
+                            :geometry (geometry :y "55%"
+                                                :width "5%"
+                                                :height "2.5%"
+                                                :anchor "center top")
+                            :stacking "fg"
+                            :focusable "ondemand"
+ (password_input))
+
+(defwidget password_input[]
+ (box
+    (input :onaccept "${EWW_CMD} close-all"
+           :password true
+           :class "password_input"
+           :css ".password_input {border-radius:50px;}")))
