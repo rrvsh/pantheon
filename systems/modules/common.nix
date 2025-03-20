@@ -2,7 +2,8 @@
   pkgs,
   config,
   ...
-}: {
+}:
+{
   imports = [
     ./networking.nix
     ./shell.nix
@@ -15,12 +16,19 @@
     isNormalUser = true;
     description = "rafiq";
     hashedPasswordFile = config.sops.secrets.hashed_password_rafiq.path;
-    extraGroups = ["networkmanager" "wheel"];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+    ];
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILv8HqazE294YdyGaXK6q2EniDlTpGaUL071kk9+W0GJ rafiq@nemesis"
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICbZfOYt6zydLyO4f9JAsxb1i6kHAjYzqa0SOqef6MKM rafiq@orpheus"
     ];
   };
+
+  environment.sessionVariables.CWP_JIRA_ACCESS_KEY_FILE =
+    config.sops.secrets.cwp_jira_access_key.path;
+  environment.sessionVariables.CWP_JIRA_LINK_FILE = config.sops.secrets.cwp_jira_link.path;
 
   security.sudo.wheelNeedsPassword = false;
 
@@ -28,8 +36,14 @@
   fonts.enableDefaultPackages = true;
 
   nixpkgs.config.allowUnfree = true;
-  nix.settings.experimental-features = ["nix-command" "flakes"];
-  nix.settings.trusted-users = ["root" "@wheel"];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
+  nix.settings.trusted-users = [
+    "root"
+    "@wheel"
+  ];
 
   environment.systemPackages = with pkgs; [
     git

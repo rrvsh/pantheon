@@ -1,5 +1,6 @@
-{inputs, ...}: {
-  imports = [inputs.sops-nix.nixosModules.sops];
+{ inputs, ... }:
+{
+  imports = [ inputs.sops-nix.nixosModules.sops ];
   sops = {
     defaultSopsFile = ../../secrets/secrets.yaml;
     age.sshKeyPaths = [
@@ -10,6 +11,8 @@
       hashed_password_rafiq = {
         neededForUsers = true;
       };
+      cwp_jira_access_key = { };
+      cwp_jira_link = { };
     };
   };
 }
