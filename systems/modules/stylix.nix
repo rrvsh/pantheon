@@ -2,7 +2,7 @@
 {
   imports = [
     inputs.stylix.nixosModules.stylix
-    ./themes/3024.nix
+    ./themes/black-metal.nix
     ./fonts/sauce-code-pro.nix
   ];
   stylix.enable = true;
