@@ -1,7 +1,8 @@
-{inputs, ...}: {
+{ inputs, ... }:
+{
   imports = [
     inputs.stylix.nixosModules.stylix
-    ./themes/catppuccin.nix
+    ./themes/3024.nix
     ./fonts/sauce-code-pro.nix
   ];
   stylix.enable = true;
