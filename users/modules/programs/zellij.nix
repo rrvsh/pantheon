@@ -6,4 +6,7 @@
       # theme = "stylix";
     };
   };
+  home.sessionVariables.ZELLIJ_AUTO_ATTACH = "true";
+  home.sessionVariables.ZELLIJ_AUTO_EXIT = "true";
 }
+
