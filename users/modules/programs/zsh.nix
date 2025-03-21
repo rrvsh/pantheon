@@ -3,6 +3,15 @@
     enable = true;
     enableCompletion = true;
     enableVteIntegration = true;
+    dirHashes = {
+      repos = "$HOME/GitRepos";
+      dl = "$HOME/Downloads";
+    };
+    initContent = # zsh
+      ''
+        # Bind CTRL+Backspace to delete whole word
+        bindkey '^H' backward-kill-word
+      '';
     # TODO: Look into whether we need to add the history attribute
     profileExtra = # bash
       ''
