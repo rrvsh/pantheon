@@ -64,4 +64,10 @@
     LC_TELEPHONE = "en_SG.UTF-8";
     LC_TIME = "en_SG.UTF-8";
   };
+
+  nix.gc = {
+    automatic = true;
+    dates = "daily";
+    options = "-d";
+  };
 }
