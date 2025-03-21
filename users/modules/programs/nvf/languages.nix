@@ -13,5 +13,6 @@
     rust.enable = true;
     clang.enable = true;
     lua.enable = true;
+    python.enable = true;
   };
 }
