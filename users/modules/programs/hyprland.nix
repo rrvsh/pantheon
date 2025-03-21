@@ -56,6 +56,10 @@
         "float, class:firefox, title:Picture-in-Picture"
       ];
 
+      animation = [
+        "workspaces, 0, , "
+      ];
+
       # Keybinds
       bind = [
         "$mainMod, SEMICOLON, exec, $terminal"
