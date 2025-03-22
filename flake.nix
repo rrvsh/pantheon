@@ -1,47 +1,48 @@
 {
   description = "flake forward setup with two hosts on different architectures";
 
-  outputs = {
-    self,
-    nixpkgs,
-    home-manager,
-    ...
-  } @ inputs: let
-    # args will later be used in outputs to inherit the flake and its inputs for use in modules.
-    args = {inherit self inputs;};
-    # mkSystem lets us repeat the same config for multiple systems, called later in outputs.
-    mkSystem = hostname:
-      nixpkgs.lib.nixosSystem {
+  outputs =
+    {
+      self,
+      nixpkgs,
+      home-manager,
+      ...
+    }@inputs:
+    let
+      # args will later be used in outputs to inherit the flake and its inputs for use in modules.
+      args = { inherit self inputs; };
+      # mkSystem lets us repeat the same config for multiple systems, called later in outputs.
+      mkSystem =
+        hostname:
+        nixpkgs.lib.nixosSystem {
+          specialArgs = args;
+          modules = [
+            ./systems/${hostname}.nix
+
+            home-manager.nixosModules.home-manager
+            {
+              home-manager = {
+                useGlobalPkgs = true; # inherit the nixpkgs and its config
+                useUserPackages = true;
+                extraSpecialArgs = args;
+                users.rafiq.imports = [
+                  ./users/rafiq.nix
+                ];
+              };
+            }
+          ];
+        };
+    in
+    {
+      # System Configurations
+      nixosConfigurations.nemesis = mkSystem "nemesis";
+      nixosConfigurations.mellinoe = nixpkgs.lib.nixosSystem {
         specialArgs = args;
         modules = [
-          ./systems/${hostname}.nix
-
-          home-manager.nixosModules.home-manager
-          {
-            home-manager = {
-              useGlobalPkgs = true; # inherit the nixpkgs and its config
-              useUserPackages = true;
-              extraSpecialArgs = args;
-              users.rafiq.imports = [
-                ./users/rafiq.nix
-              ];
-            };
-          }
+          ./systems/mellinoe.nix
         ];
       };
-  in {
-    # System Configurations
-    nixosConfigurations = builtins.listToAttrs [
-      {
-        name = "nemesis";
-        value = mkSystem "nemesis";
-      }
-      {
-        name = "orpheus";
-        value = mkSystem "orpheus";
-      }
-    ];
-  };
+    };
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
@@ -62,5 +63,8 @@
       inputs.hyprland.follows = "hyprland";
     };
     hyprlock.url = "github:hyprwm/hyprlock";
+    disko.url = "github:nix-community/disko/latest";
+    disko.inputs.nixpkgs.follows = "nixpkgs";
+    impermanence.url = "github:nix-community/impermanence";
   };
 }
