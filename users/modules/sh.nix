@@ -11,6 +11,7 @@
     ./programs/yazi.nix
     ./programs/zellij.nix
     ./programs/zsh.nix
+    ./programs/zoxide.nix
     ./programs/thefuck.nix
     ./scripts
   ];
@@ -18,6 +19,7 @@
   home.shellAliases = {
     gs = "git status";
     ai = "aichat -r %shell% -e";
+    cd = "z";
   };
   editorconfig = {
     enable = true;
