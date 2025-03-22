@@ -1,12 +1,9 @@
 {
   programs.zellij = {
     enable = true;
-    # package = inputs.zellij blablabla
     settings = {
-      # theme = "stylix";
+      mouse_mode = false;
     };
   };
   home.sessionVariables.ZELLIJ_AUTO_ATTACH = "true";
-  home.sessionVariables.ZELLIJ_AUTO_EXIT = "true";
 }
-
