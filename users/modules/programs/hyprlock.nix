@@ -1,16 +1,25 @@
-{ pkgs, ... }:
+{ pkgs, osConfig, ... }:
+let
+  cfg =
+    if osConfig.networking.hostName == "nemesis" then
+      {
+        mainMonitor = "desc:OOO AN-270W04K";
+      }
+    else
+      {
+        mainMonitor = "";
+      };
+in
 {
   programs.hyprlock = {
     enable = true;
     package = null;
 
     settings = {
-      "$mainMonitor" = "desc:OOO AN-270W04K";
-      "$vertMonitor" = "desc:Philips Consumer Electronics Company PHL 246V5 AU11330000086";
       general.hide_cursor = true;
 
       label = {
-        monitor = "HDMI-A-1";
+        monitor = cfg.mainMonitor;
         text = ''hi, $USER.'';
         font_size = 32;
         halign = "center";
@@ -19,7 +28,6 @@
         zindex = 1;
       };
       input-field = {
-        monitor = "HDMI-A-1";
         fade_on_empty = true;
         size = "200, 45";
         halign = "center";

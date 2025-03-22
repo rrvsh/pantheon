@@ -40,6 +40,17 @@
         specialArgs = args;
         modules = [
           ./systems/mellinoe.nix
+            home-manager.nixosModules.home-manager
+            {
+              home-manager = {
+                useGlobalPkgs = true; # inherit the nixpkgs and its config
+                useUserPackages = true;
+                extraSpecialArgs = args;
+                users.rafiq.imports = [
+                  ./users/rafiq.nix
+                ];
+              };
+            }
         ];
       };
     };
