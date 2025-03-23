@@ -40,17 +40,17 @@
         specialArgs = args;
         modules = [
           ./systems/mellinoe.nix
-            home-manager.nixosModules.home-manager
-            {
-              home-manager = {
-                useGlobalPkgs = true; # inherit the nixpkgs and its config
-                useUserPackages = true;
-                extraSpecialArgs = args;
-                users.rafiq.imports = [
-                  ./users/rafiq.nix
-                ];
-              };
-            }
+          home-manager.nixosModules.home-manager
+          {
+            home-manager = {
+              useGlobalPkgs = true; # inherit the nixpkgs and its config
+              useUserPackages = true;
+              extraSpecialArgs = args;
+              users.rafiq.imports = [
+                ./users/rafiq.nix
+              ];
+            };
+          }
         ];
       };
     };
@@ -77,5 +77,7 @@
     disko.url = "github:nix-community/disko/latest";
     disko.inputs.nixpkgs.follows = "nixpkgs";
     impermanence.url = "github:nix-community/impermanence";
+    nix-index-database.url = "github:nix-community/nix-index-database";
+    nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
   };
 }

@@ -1,4 +1,5 @@
 {
+  inputs,
   pkgs,
   config,
   ...
@@ -9,6 +10,7 @@
     ./shell.nix
     ./stylix.nix
     ./sops.nix
+    inputs.nix-index-database.nixosModules.nix-index
   ];
 
   users.mutableUsers = false; # Always reset users on system activation
@@ -70,4 +72,6 @@
     dates = "daily";
     options = "-d";
   };
+
+  programs.nix-index-database.comma.enable = true;
 }
