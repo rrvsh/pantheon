@@ -57,7 +57,7 @@
 
       # Keybinds
       bind = [
-        "$mainMod, SEMICOLON, exec, $terminal"
+        "$mainMod, return, exec, $terminal"
         "$mainMod, W, killactive"
         "$mainMod, O, exec, $browser"
         "$mainMod, S, exec, $music"
