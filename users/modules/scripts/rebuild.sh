@@ -1,2 +1,3 @@
 git add .
-sudo nixos-rebuild switch --flake .
+nh clean all
+nh os switch .
