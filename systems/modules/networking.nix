@@ -19,6 +19,17 @@
       ];
       allowedUDPPorts = [ ];
     };
+
+    interfaces.enp12s0.wakeOnLan.policy = [
+      "phy"
+      "unicast"
+      "multicast"
+      "broadcast"
+      "arp"
+      "magic"
+      "secureon"
+    ];
+    interfaces.enp12s0.wakeOnLan.enable = true;
   };
 
   # Add binary caches to avoid having to compile them
