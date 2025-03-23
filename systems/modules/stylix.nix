@@ -6,4 +6,5 @@
     ./fonts/sauce-code-pro.nix
   ];
   stylix.enable = true;
+  stylix.image = ../../media/wallpaper.jpg;
 }
