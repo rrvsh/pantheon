@@ -28,10 +28,16 @@
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICbZfOYt6zydLyO4f9JAsxb1i6kHAjYzqa0SOqef6MKM rafiq@orpheus"
     ];
   };
+  environment = {
+    sessionVariables = {
+      CWP_JIRA_ACCESS_KEY_FILE = config.sops.secrets.cwp_jira_access_key.path;
+      CWP_JIRA_LINK_FILE = config.sops.secrets.cwp_jira_link.path;
+    };
 
-  environment.sessionVariables.CWP_JIRA_ACCESS_KEY_FILE =
-    config.sops.secrets.cwp_jira_access_key.path;
-  environment.sessionVariables.CWP_JIRA_LINK_FILE = config.sops.secrets.cwp_jira_link.path;
+    systemPackages = with pkgs; [
+      git
+    ];
+  };
 
   security.sudo.wheelNeedsPassword = false;
 
@@ -46,10 +52,6 @@
   nix.settings.trusted-users = [
     "root"
     "@wheel"
-  ];
-
-  environment.systemPackages = with pkgs; [
-    git
   ];
 
   time.timeZone = "Asia/Singapore";

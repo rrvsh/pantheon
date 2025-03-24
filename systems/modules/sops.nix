@@ -1,4 +1,4 @@
-{ inputs, ... }:
+{ inputs, config, ... }:
 {
   imports = [ inputs.sops-nix.nixosModules.sops ];
   sops = {
@@ -13,6 +13,11 @@
       };
       cwp_jira_access_key = { };
       cwp_jira_link = { };
+      cargo_api_key = {
+        mode = "0440";
+        owner = config.users.users.rafiq.name;
+        group = config.users.users.rafiq.group;
+      };
     };
   };
 }
