@@ -11,6 +11,7 @@
       "$terminal" = "kitty -1 -e zellij";
       "$browser" = "firefox";
       "$music" = "spotify";
+      "$launcher" = "fuzzel";
 
       # Programs to run at startup
       exec-once = [
@@ -63,6 +64,7 @@
         "$mainMod, S, exec, $music"
         "$mainMod, M, exit"
         "$mainMod, Escape, exec, hyprlock"
+        "$mainMod, Space, exec, $launcher"
 
         # move between windows
         "$mainMod, H, cyclenext, visible"
