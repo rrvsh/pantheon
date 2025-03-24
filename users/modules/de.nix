@@ -9,5 +9,6 @@
     ./programs/waybar.nix
     ./programs/hyprlock.nix
     ./programs/fuzzel.nix
+    ./programs/hyprshade.nix
   ];
 }
