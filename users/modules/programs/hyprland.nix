@@ -54,7 +54,10 @@
       windowrulev2 = [
         "float, class:firefox, title:Picture-in-Picture"
         "float, class:(clipse)"
-        "size 622 652,class:(clipse)"
+        "move cursor 0 0, class:(clipse)"
+        "size 622 652, class:(clipse)"
+        "noanim, class:(clipse)"
+        "focusonactivate, class:(clipse)"
       ];
 
       animation = [
