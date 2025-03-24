@@ -8,6 +8,7 @@
     devenv
     bat
     ttyper
+    hyprpicker
   ];
 
   services = {

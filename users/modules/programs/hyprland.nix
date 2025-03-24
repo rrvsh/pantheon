@@ -61,10 +61,11 @@
         "$mainMod, return, exec, $terminal"
         "$mainMod, W, killactive"
         "$mainMod, O, exec, $browser"
-        "$mainMod, S, exec, $music"
-        "$mainMod, M, exit"
         "$mainMod, Escape, exec, hyprlock"
         "$mainMod, Space, exec, $launcher"
+
+        # Launch utilities
+        "$mainMod_SHIFT, A, exec, hyprpicker -a"
 
         # move between windows
         "$mainMod, H, cyclenext, visible"
