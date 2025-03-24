@@ -10,9 +10,4 @@
     ttyper
     hyprpicker
   ];
-
-  services = {
-    # clipboard history (depends on wl-clipboard)
-    cliphist.enable = true;
-  };
 }

@@ -8,14 +8,17 @@
       "$mainMonitor" = "desc:OOO AN-270W04K";
       "$vertMonitor" = "desc:Philips Consumer Electronics Company PHL 246V5 AU11330000086";
       "$mainMod" = "SUPER";
-      "$terminal" = "kitty -1 -e zellij";
+      "$terminal" = "kitty -1";
+      "$multiplexer" = "$terminal -e zellij";
       "$browser" = "firefox";
       "$music" = "spotify";
       "$launcher" = "fuzzel";
+      "$clipboard" = "$terminal --class clipse -e clipse";
 
       # Programs to run at startup
       exec-once = [
         "hyprlock"
+        "clipse -listen"
       ];
 
       env = [
@@ -50,6 +53,8 @@
 
       windowrulev2 = [
         "float, class:firefox, title:Picture-in-Picture"
+        "float, class:(clipse)"
+        "size 622 652,class:(clipse)"
       ];
 
       animation = [
@@ -58,7 +63,7 @@
 
       # Keybinds
       bind = [
-        "$mainMod, return, exec, $terminal"
+        "$mainMod, return, exec, $multiplexer"
         "$mainMod, W, killactive"
         "$mainMod, O, exec, $browser"
         "$mainMod, Escape, exec, hyprlock"
@@ -66,6 +71,7 @@
 
         # Launch utilities
         "$mainMod_SHIFT, A, exec, hyprpicker -a"
+        "$mainMod, V, exec, $clipboard"
 
         # move between windows
         "$mainMod, H, cyclenext, visible"
