@@ -57,7 +57,6 @@
         "move cursor 0 0, class:(clipse)"
         "size 622 652, class:(clipse)"
         "noanim, class:(clipse)"
-        "focusonactivate, class:(clipse)"
       ];
 
       animation = [
