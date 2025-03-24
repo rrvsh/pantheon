@@ -14,5 +14,6 @@
     clang.enable = true;
     lua.enable = true;
     python.enable = true;
+    css.enable = true;
   };
 }

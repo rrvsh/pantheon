@@ -1,8 +1,15 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  inputs,
+  lib,
+  ...
+}:
+{
   imports = [
     ./modules/sh.nix
     ./modules/de.nix
     ./modules/utils.nix
+    ./modules/stylix.nix
   ];
 
   # This enables using home-manager from the command line.
@@ -17,4 +24,5 @@
     # Do not change it.
     stateVersion = "25.05";
   };
+
 }

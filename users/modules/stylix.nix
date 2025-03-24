@@ -1,7 +1,7 @@
 { inputs, pkgs, ... }:
 {
   imports = [
-    inputs.stylix.nixosModules.stylix
+    inputs.stylix.homeManagerModules.stylix
     ../../themes/darkviolet.nix
     ../../themes/fonts/sauce-code-pro.nix
     ../../themes/cursors/banana-cursor.nix
@@ -9,7 +9,8 @@
   stylix = {
     enable = true;
     image = ../../media/wallpaper.jpg;
-    homeManagerIntegration.autoImport = false;
-    homeManagerIntegration.followSystem = false;
   };
+  stylix.targets.gtk.extraCss = ''
+
+  '';
 }
