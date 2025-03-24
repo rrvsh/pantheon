@@ -21,6 +21,7 @@
     gs = "git status";
     ai = "aichat -r %shell% -e";
     cd = "z";
+    list-all-packages = "nix-store --query --requisites /run/current-system | cut -d- -f2- | sort | uniq";
   };
   editorconfig = {
     enable = true;
