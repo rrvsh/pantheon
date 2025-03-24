@@ -10,7 +10,18 @@
     enable = true;
     image = ../../media/wallpaper.jpg;
   };
-  stylix.targets.gtk.extraCss = ''
-
-  '';
+  stylix.targets.gtk.extraCss = # css
+    ''
+      window {
+          background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.1) 50%);
+          background-size: 100% 2px;  /* Adjust height for scanline thickness */
+            background-color: rgba(0, 0, 0, 0.05); /*Very slight transparency*/
+      }
+      entry {
+        box-shadow: inset 1px 1px 2px rgba(0, 0, 0, 0.2);
+      }
+      button:hover {
+        box-shadow: 0 0 5px rgba(0, 255, 0, 0.5);  /* Replace color */
+      }
+    '';
 }
