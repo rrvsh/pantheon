@@ -112,6 +112,10 @@
         numlock_by_default = true;
         follow_mouse = 2; # Click on a window to change focus
       };
+
+      debug = {
+        damage_tracking = 0;
+      };
     };
   };
 }
