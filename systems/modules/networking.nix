@@ -9,6 +9,7 @@
 
   networking = {
     networkmanager.enable = true;
+    networkmanager.wifi.backend = "iwd";
 
     # Configures a simple stateful firewall.
     # By default, it doesn't allow any incoming connections.
