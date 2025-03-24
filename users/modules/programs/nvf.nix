@@ -55,6 +55,13 @@
           action = "<C-W>";
           silent = true;
         }
+        {
+          desc = "Open the filetree.";
+          key = "t";
+          mode = "n";
+          action = ":Yazi<CR>";
+          silent = true;
+        }
       ];
       luaConfigRC.turn_off_inline_diagnostics =
         # lua
