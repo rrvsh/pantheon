@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ inputs, pkgs, ... }:
 {
   home.packages = [ pkgs.hyprshade ];
   xdg.configFile."hypr/hyprshade.toml" = {
@@ -14,5 +14,10 @@
         start_time = 19:00:00
         end_time = 07:00:00   # optional if more than one shader has start_time
       '';
+  };
+  xdg.configFile."hypr/shaders" = {
+    enable = true;
+    recursive = true;
+    source = "${inputs.hyprshaders}/shaders";
   };
 }

@@ -819,6 +819,22 @@
         "type": "github"
       }
     },
+    "hyprshaders": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1734682301,
+        "narHash": "sha256-vZMg5gZUfI3LDOyIKqL+qDOs+lAhmvclGH2crcTvX0M=",
+        "owner": "0x15BA88FF",
+        "repo": "hyprshaders",
+        "rev": "efe1f79c28692a315b7a6aaaaee0e4047e2d4a57",
+        "type": "github"
+      },
+      "original": {
+        "owner": "0x15BA88FF",
+        "repo": "hyprshaders",
+        "type": "github"
+      }
+    },
     "hyprutils": {
       "inputs": {
         "nixpkgs": [
@@ -1401,6 +1417,7 @@
         "hyprland": "hyprland",
         "hyprland-plugins": "hyprland-plugins",
         "hyprlock": "hyprlock",
+        "hyprshaders": "hyprshaders",
         "impermanence": "impermanence",
         "nix-index-database": "nix-index-database",
         "nixd": "nixd",

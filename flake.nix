@@ -84,5 +84,7 @@
       path = "/home/rafiq/repos/dotfiles/media/wii-cursors-xcursor";
     };
     hyprcloser.url = "github:rrvsh/hyprcloser";
+    hyprshaders.url = "github:0x15BA88FF/hyprshaders";
+    hyprshaders.flake = false;
   };
 }
