@@ -19,6 +19,7 @@
       exec-once = [
         "hyprlock"
         "clipse -listen"
+        "hyprcloser"
       ];
 
       env = [

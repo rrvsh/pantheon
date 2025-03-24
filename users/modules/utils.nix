@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, inputs, ... }:
 {
   home.packages = with pkgs; [
     fastfetch # system info
@@ -9,5 +9,6 @@
     bat
     ttyper
     hyprpicker
+    inputs.hyprcloser.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];
 }

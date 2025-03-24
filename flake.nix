@@ -83,5 +83,6 @@
       type = "path";
       path = "/home/rafiq/repos/dotfiles/media/wii-cursors-xcursor";
     };
+    hyprcloser.url = "github:rrvsh/hyprcloser";
   };
 }
