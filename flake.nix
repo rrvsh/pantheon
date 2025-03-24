@@ -79,5 +79,9 @@
     impermanence.url = "github:nix-community/impermanence";
     nix-index-database.url = "github:nix-community/nix-index-database";
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
+    wii-cursor = {
+      type = "path";
+      path = "/home/rafiq/repos/dotfiles/media/wii-cursors-xcursor";
+    };
   };
 }
