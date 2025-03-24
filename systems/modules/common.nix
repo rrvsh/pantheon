@@ -10,6 +10,7 @@
     ./shell.nix
     ./stylix.nix
     ./sops.nix
+    ./pipewire.nix
     inputs.nix-index-database.nixosModules.nix-index
   ];
 
