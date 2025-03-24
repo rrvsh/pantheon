@@ -10,5 +10,6 @@
     ttyper
     hyprpicker
     inputs.hyprcloser.packages.${pkgs.stdenv.hostPlatform.system}.default
+    hyprshade
   ];
 }
