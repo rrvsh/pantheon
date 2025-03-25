@@ -11,8 +11,8 @@
 
         [[shades]]
         name = "blue-light-filter"
-        start_time = 19:00:00
-        end_time = 07:00:00   # optional if more than one shader has start_time
+        start_time = 22:00:00
+        end_time = 08:00:00   # optional if more than one shader has start_time
       '';
   };
   xdg.configFile."hypr/shaders" = {
