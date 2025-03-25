@@ -15,9 +15,14 @@
         "x86_64-darwin"
         "aarch64-darwin"
       ];
-      forEachSupportedSystem = nixpkgs.lib.genAttrs supportedSystems (system: {
-        pkgs = import nixpkgs { inherit system; };
-      });
+      forEachSupportedSystem =
+        f:
+        nixpkgs.lib.genAttrs supportedSystems (
+          system:
+          f {
+            pkgs = import nixpkgs { inherit system; };
+          }
+        );
       # args will later be used in outputs to inherit the flake and its inputs for use in modules.
       args = { inherit self inputs; };
       # mkSystem lets us repeat the same config for multiple systems, called later in outputs.
