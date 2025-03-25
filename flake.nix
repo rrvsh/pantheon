@@ -9,6 +9,15 @@
       ...
     }@inputs:
     let
+      supportedSystems = [
+        "x86_64-linux"
+        "aarch64-linux"
+        "x86_64-darwin"
+        "aarch64-darwin"
+      ];
+      forEachSupportedSystem = nixpkgs.lib.genAttrs supportedSystems (system: {
+        pkgs = import nixpkgs { inherit system; };
+      });
       # args will later be used in outputs to inherit the flake and its inputs for use in modules.
       args = { inherit self inputs; };
       # mkSystem lets us repeat the same config for multiple systems, called later in outputs.
@@ -32,59 +41,49 @@
             }
           ];
         };
+      mkListItem = hostname: {
+        name = "${hostname}";
+        value = mkSystem "${hostname}";
+      };
     in
     {
       # System Configurations
-      nixosConfigurations.nemesis = mkSystem "nemesis";
-      nixosConfigurations.mellinoe = nixpkgs.lib.nixosSystem {
-        specialArgs = args;
-        modules = [
-          ./systems/mellinoe.nix
-          home-manager.nixosModules.home-manager
-          {
-            home-manager = {
-              useGlobalPkgs = true; # inherit the nixpkgs and its config
-              useUserPackages = true;
-              extraSpecialArgs = args;
-              users.rafiq.imports = [
-                ./users/rafiq.nix
-              ];
-            };
-          }
-        ];
-      };
+      nixosConfigurations = builtins.listToAttrs [
+        (mkListItem "nemesis")
+        (mkListItem "mellinoe")
+      ];
     };
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    nixos-hardware.url = "github:nixos/nixos-hardware";
-    home-manager.url = "github:nix-community/home-manager";
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
-    hyprland.url = "github:hyprwm/Hyprland";
-    yazi.url = "github:sxyazi/yazi";
-    nvf.url = "github:notashelf/nvf";
-    nixvim.url = "github:nix-community/nixvim";
-    nixvim.inputs.nixpkgs.follows = "nixpkgs";
-    nixd.url = "github:nix-community/nixd";
-    stylix.url = "github:danth/stylix";
-    spicetify-nix.url = "github:Gerg-L/spicetify-nix";
-    sops-nix.url = "github:Mic92/sops-nix";
-    hyprland-plugins = {
-      url = "github:hyprwm/hyprland-plugins";
-      inputs.hyprland.follows = "hyprland";
-    };
-    hyprlock.url = "github:hyprwm/hyprlock";
-    disko.url = "github:nix-community/disko/latest";
+    hyprland-plugins.inputs.hyprland.follows = "hyprland";
+    hyprland-plugins.url = "github:hyprwm/hyprland-plugins";
+    wii-cursor.path = "/home/rafiq/repos/dotfiles/media/wii-cursors-xcursor";
+    wii-cursor.type = "path";
     disko.inputs.nixpkgs.follows = "nixpkgs";
-    impermanence.url = "github:nix-community/impermanence";
-    nix-index-database.url = "github:nix-community/nix-index-database";
-    nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
-    wii-cursor = {
-      type = "path";
-      path = "/home/rafiq/repos/dotfiles/media/wii-cursors-xcursor";
-    };
+    disko.url = "github:nix-community/disko/latest";
+    home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    home-manager.url = "github:nix-community/home-manager";
     hyprcloser.url = "github:rrvsh/hyprcloser";
-    hyprshaders.url = "github:0x15BA88FF/hyprshaders";
+    hyprland.url = "github:hyprwm/Hyprland";
+    hyprlock.url = "github:hyprwm/hyprlock";
     hyprshaders.flake = false;
+    hyprshaders.url = "github:0x15BA88FF/hyprshaders";
+    impermanence.url = "github:nix-community/impermanence";
+    nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
+    nix-index-database.url = "github:nix-community/nix-index-database";
+    nixd.url = "github:nix-community/nixd";
+    nixos-hardware.url = "github:nixos/nixos-hardware";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixvim.inputs.nixpkgs.follows = "nixpkgs";
+    nixvim.url = "github:nix-community/nixvim";
+    nvf.url = "github:notashelf/nvf";
+    sops-nix.url = "github:Mic92/sops-nix";
+    spicetify-nix.url = "github:Gerg-L/spicetify-nix";
+    stylix.url = "github:danth/stylix";
+    yazi.url = "github:sxyazi/yazi";
+    astal.url = "github:aylur/astal";
+    astal.inputs.nixpkgs.follows = "nixpkgs";
+    ags.url = "github:aylur/ags";
+    ags.inputs.nixpkgs.follows = "nixpkgs";
   };
 }
