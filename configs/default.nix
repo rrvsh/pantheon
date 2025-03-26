@@ -14,10 +14,12 @@
       ./networking.nix
       ./nix-config.nix
       ./security.nix
+      ./shell
       ./users.nix
     ]
     # Options for graphical systems.
     (lib.optionals (type == "desktop") [
+      ./graphical
       ./hardware/audio.nix
       ./hardware/bluetooth.nix
       ./stylix.nix
