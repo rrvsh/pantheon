@@ -11,6 +11,7 @@
 
       (pkgs.writeShellScriptBin "rebuild" (builtins.readFile ./rebuild.sh))
       (pkgs.writeShellScriptBin "byebye" (builtins.readFile ./byebye.sh))
+      (pkgs.writeShellScriptBin "deploy" (builtins.readFile ./deploy.sh))
     ];
   };
 }
