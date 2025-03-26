@@ -8,6 +8,7 @@
     defaultSopsFile = ./secrets/secrets.yaml;
     age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
     secrets.password.neededForUsers = true;
+    secrets.ts_auth_key = { };
   };
 
   security.sudo.wheelNeedsPassword = false;

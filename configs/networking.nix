@@ -1,4 +1,9 @@
-{ hostname, lib, ... }:
+{
+  hostname,
+  lib,
+  config,
+  ...
+}:
 {
   networking = {
     hostName = hostname;
@@ -28,5 +33,8 @@
     interfaces.enp12s0.wakeOnLan.enable = true;
   };
   services.openssh.enable = true;
-  services.tailscale.enable = true;
+  services.tailscale = {
+    enable = true;
+    authKeyFile = config.sops.secrets.ts_auth_key.path;
+  };
 }
