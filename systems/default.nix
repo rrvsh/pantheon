@@ -6,6 +6,7 @@
   modulesPath,
   inputs,
   config,
+  specialArgs,
   ...
 }:
 {
@@ -16,6 +17,18 @@
       ./modules/programs/tailscale.nix
       ./modules/programs/zsh.nix
       inputs.sops-nix.nixosModules.sops
+
+      inputs.home-manager.nixosModules.home-manager
+      {
+        home-manager = {
+          useGlobalPkgs = true;
+          useUserPackages = true;
+          extraSpecialArgs = specialArgs;
+          users.rafiq.imports = [
+            ../users/rafiq.nix
+          ];
+        };
+      }
     ]
     (lib.optionals (type == "desktop") [
       ../themes/cursors/banana-cursor.nix
