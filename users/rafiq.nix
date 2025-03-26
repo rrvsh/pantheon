@@ -9,7 +9,6 @@
     ./modules/sh.nix
     ./modules/de.nix
     ./modules/utils.nix
-    ./modules/stylix.nix
   ];
 
   # This enables using home-manager from the command line.
