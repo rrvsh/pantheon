@@ -24,11 +24,9 @@ done
 
 # Prepare temporary directory and copy necessary files
 root=$(mktemp -d)
-sudo mkdir -p ${root}/home/rafiq/.config/sops/age
-sudo cp ~/.config/sops/age/keys.txt "${root}/home/rafiq/.config/sops/age/keys.txt"
-sudo mkdir -p ${root}/home/rafiq/.ssh
-sudo cp ~/.ssh/id_ed25519 "${root}/home/rafiq/.ssh/id_ed25519"
-sudo cp ~/.ssh/id_ed25519.pub "${root}/home/rafiq/.ssh/id_ed25519.pub"
+sudo cp --verbose --archive --parents /etc/ssh/ssh_host_* ${root}
+sudo cp --verbose --archive --parents ~/.ssh/id_ed25519 ${root}
+sudo cp --verbose --archive --parents ~/.config/sops/age/keys.txt ${root}
 
 # Run nixos-anywhere
 sudo nix run github:nix-community/nixos-anywhere -- \
