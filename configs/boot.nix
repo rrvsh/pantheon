@@ -7,12 +7,13 @@
     };
     kernelPackages = pkgs.linuxPackages_latest;
     initrd.availableKernelModules = [
-      "nvme"
-      "xhci_pci"
       "ahci"
-      "usbhid"
-      "usb_storage"
+      "nvme"
       "sd_mod"
+      "usb_storage"
+      "usbhid"
+      "xhci_pci"
+      "rtsx_pci_sdmmc"
     ];
   };
 }
