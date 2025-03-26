@@ -16,21 +16,10 @@
     [
       (modulesPath + "/installer/scan/not-detected.nix")
       ./modules/bootloaders/systemd-boot.nix
-      ./modules/programs/tailscale.nix
       ./modules/programs/zsh.nix
+      ./modules/hardware/networking.nix
       inputs.sops-nix.nixosModules.sops
-
       inputs.home-manager.nixosModules.home-manager
-      {
-        home-manager = {
-          useGlobalPkgs = true;
-          useUserPackages = true;
-          extraSpecialArgs = specialArgs;
-          users.${username}.imports = [
-            ../users/rafiq.nix
-          ];
-        };
-      }
     ]
     # Options for desktops.
     (lib.optionals (type == "desktop") [
@@ -50,6 +39,10 @@
   ];
 
   boot = {
+    loader = {
+      timeout = 5;
+      efi.canTouchEfiVariables = true;
+    };
     kernelPackages = pkgs.linuxPackages_latest;
     initrd.availableKernelModules = [
       "nvme"
@@ -60,36 +53,14 @@
       "sd_mod"
     ];
   };
+  home-manager = {
+    useGlobalPkgs = true;
+    useUserPackages = true;
+    extraSpecialArgs = specialArgs;
+    users.${username}.imports = [ ../users/rafiq.nix ];
+  };
 
   system.stateVersion = "24.11";
-  networking = {
-    hostName = hostname;
-    useDHCP = lib.mkDefault true;
-    networkmanager.enable = true;
-    networkmanager.wifi.backend = "iwd";
-
-    # Configures a simple stateful firewall.
-    # By default, it doesn't allow any incoming connections.
-    firewall = {
-      enable = true;
-      allowedTCPPorts = [
-        22 # SSH
-      ];
-      allowedUDPPorts = [ ];
-    };
-
-    interfaces.enp12s0.wakeOnLan.policy = [
-      "phy"
-      "unicast"
-      "multicast"
-      "broadcast"
-      "arp"
-      "magic"
-      "secureon"
-    ];
-    interfaces.enp12s0.wakeOnLan.enable = true;
-
-  };
 
   users.mutableUsers = false; # Always reset users on system activation
   users.users.${username} = {
@@ -136,8 +107,6 @@
   time.timeZone = "Asia/Singapore";
 
   i18n.defaultLocale = "en_SG.UTF-8";
-
-  services.openssh.enable = true;
 
   sops = {
     defaultSopsFile = ../secrets/secrets.yaml;
