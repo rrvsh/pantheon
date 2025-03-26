@@ -1,4 +1,5 @@
 {
+  inputs,
   lib,
   hostname,
   type,
@@ -34,6 +35,7 @@
     (lib.optionals (hostname == "mellinoe") [
       ./bootloaders/systemd-boot.nix
       (import ./filesystems/impermanence.nix {
+        inherit inputs lib;
         device = "/dev/disk/by-id/nvme-eui.01000000000000008ce38e04019a68ab";
       })
       ./hardware/cpu_intel.nix
