@@ -1,4 +1,9 @@
-{ pkgs, osConfig, ... }:
+{
+  pkgs,
+  osConfig,
+  type,
+  ...
+}:
 {
   programs.zsh = {
     enable = true;
@@ -14,6 +19,7 @@
         bindkey '^H' backward-kill-word
         # Set Cargo Registry Token
         export CARGO_REGISTRY_TOKEN="$(cat ${osConfig.sops.secrets.cargo_api_key.path})"
+        export SYSTEM_TYPE="${type}"
       '';
     # TODO: Look into whether we need to add the history attribute
     profileExtra = # bash
