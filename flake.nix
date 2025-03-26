@@ -20,21 +20,7 @@
           in
           inputs.nixpkgs.lib.nixosSystem {
             specialArgs = args;
-            modules = [
-              ./systems
-
-              inputs.home-manager.nixosModules.home-manager
-              {
-                home-manager = {
-                  useGlobalPkgs = true;
-                  useUserPackages = true;
-                  extraSpecialArgs = args;
-                  users.rafiq.imports = [
-                    ./users/rafiq.nix
-                  ];
-                };
-              }
-            ];
+            modules = [ ./systems ];
           };
       };
     in
