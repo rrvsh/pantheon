@@ -1,8 +1,6 @@
 {
   pkgs,
   inputs,
-  lib,
-  username,
   ...
 }:
 {
@@ -57,8 +55,8 @@
   };
 
   home = {
-    username = "${username}";
-    homeDirectory = "/home/${username}";
+    username = "rafiq";
+    homeDirectory = "/home/rafiq";
 
     # This defines the version home-manager
     # was originally bulit against on this system.

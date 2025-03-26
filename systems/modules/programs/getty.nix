@@ -1,6 +1,5 @@
-{ username, ... }:
 {
   services.getty = {
-    autologinUser = "${username}";
+    autologinUser = "rafiq";
   };
 }

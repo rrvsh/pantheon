@@ -18,8 +18,8 @@
       ./modules/bootloaders/systemd-boot.nix
       ./modules/programs/zsh.nix
       ./modules/hardware/networking.nix
-      inputs.sops-nix.nixosModules.sops
-      inputs.home-manager.nixosModules.home-manager
+      ./modules/security.nix
+      ./modules/users.nix
     ]
     # Options for desktops.
     (lib.optionals (type == "desktop") [
@@ -53,29 +53,16 @@
       "sd_mod"
     ];
   };
+
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
     extraSpecialArgs = specialArgs;
-    users.${username}.imports = [ ../users/rafiq.nix ];
   };
 
   system.stateVersion = "24.11";
 
   users.mutableUsers = false; # Always reset users on system activation
-  users.users.${username} = {
-    isNormalUser = true;
-    description = "${username}";
-    hashedPasswordFile = config.sops.secrets.password.path;
-    extraGroups = [
-      "networkmanager"
-      "wheel"
-    ];
-    openssh.authorizedKeys.keys = [
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILdsZyY3gu8IGB8MzMnLdh+ClDxQQ2RYG9rkeetIKq8n"
-    ];
-  };
-  security.sudo.wheelNeedsPassword = false;
 
   nixpkgs.config.allowUnfree = true;
   nix = {
@@ -108,9 +95,4 @@
 
   i18n.defaultLocale = "en_SG.UTF-8";
 
-  sops = {
-    defaultSopsFile = ../secrets/secrets.yaml;
-    age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
-    secrets.password.neededForUsers = true;
-  };
 }
