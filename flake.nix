@@ -9,23 +9,22 @@
       ...
     }@inputs:
     let
-      supportedSystems = [
-        "x86_64-linux"
-        "aarch64-linux"
-        "x86_64-darwin"
-        "aarch64-darwin"
-      ];
       forEachSupportedSystem =
         f:
-        nixpkgs.lib.genAttrs supportedSystems (
-          system:
-          f {
-            pkgs = import nixpkgs { inherit system; };
-          }
-        );
-      # args will later be used in outputs to inherit the flake and its inputs for use in modules.
+        nixpkgs.lib.genAttrs
+          [
+            "x86_64-linux"
+            "aarch64-linux"
+            "x86_64-darwin"
+            "aarch64-darwin"
+          ]
+          (
+            system:
+            f {
+              pkgs = import nixpkgs { inherit system; };
+            }
+          );
       args = { inherit self inputs; };
-      # mkSystem lets us repeat the same config for multiple systems, called later in outputs.
       mkSystem =
         hostname:
         nixpkgs.lib.nixosSystem {
@@ -36,7 +35,7 @@
             home-manager.nixosModules.home-manager
             {
               home-manager = {
-                useGlobalPkgs = true; # inherit the nixpkgs and its config
+                useGlobalPkgs = true;
                 useUserPackages = true;
                 extraSpecialArgs = args;
                 users.rafiq.imports = [
