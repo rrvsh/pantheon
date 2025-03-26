@@ -3,9 +3,9 @@
     ./ags.nix
     ./clipse.nix
     ./comma.nix
-    ./zsh.nix
     ./direnv.nix
     ./dunst.nix
+    ./editorconfig.nix
     ./firefox.nix
     ./fuzzel.nix
     ./fzf.nix
@@ -23,5 +23,6 @@
     ./yazi.nix
     ./zellij.nix
     ./zoxide.nix
+    ./zsh.nix
   ];
 }
