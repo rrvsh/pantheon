@@ -1,3 +1,3 @@
 git add .
-nh clean all
+# nh clean all
 nh os switch .
