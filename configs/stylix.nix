@@ -9,7 +9,7 @@ let
       # Put options that exist in both NixOS and home-manager modules here.
       stylix = {
         enable = true;
-        image = ../../media/wallpaper.jpg;
+        image = ./media/wallpaper.jpg;
         opacity = {
           applications = opacity;
           desktop = opacity;
