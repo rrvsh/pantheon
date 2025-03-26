@@ -1,4 +1,3 @@
-{ config, ... }:
 {
   home-manager.users.rafiq = {
     home.sessionVariables.GIT_CONFIG_GLOBAL = "$HOME/.config/git/config";
