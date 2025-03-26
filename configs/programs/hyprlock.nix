@@ -46,6 +46,7 @@ in
         };
 
         input-field = {
+          monitor = cfg.mainMonitor;
           fade_on_empty = true;
           size = "200, 45";
           halign = "center";

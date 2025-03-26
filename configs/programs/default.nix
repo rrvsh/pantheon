@@ -1,0 +1,27 @@
+{
+  imports = [
+    ./ags.nix
+    ./clipse.nix
+    ./comma.nix
+    ./zsh.nix
+    ./direnv.nix
+    ./dunst.nix
+    ./firefox.nix
+    ./fuzzel.nix
+    ./fzf.nix
+    ./getty.nix
+    ./git.nix
+    ./hyprland.nix
+    ./hyprlock.nix
+    ./hyprshade.nix
+    ./kitty.nix
+    ./nh.nix
+    ./nvf.nix
+    ./spicetify.nix
+    ./starship.nix
+    ./tealdeer.nix
+    ./yazi.nix
+    ./zellij.nix
+    ./zoxide.nix
+  ];
+}

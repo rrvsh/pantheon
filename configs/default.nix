@@ -13,7 +13,6 @@
       ./boot.nix
       ./networking.nix
       ./nix-config.nix
-      ./programs/zsh.nix
       ./security.nix
       ./users.nix
     ]
@@ -21,9 +20,6 @@
     (lib.optionals (type == "desktop") [
       ./hardware/audio.nix
       ./hardware/bluetooth.nix
-      ./programs/getty.nix
-      ./programs/hyprland.nix
-      ./programs/hyprlock.nix
       ./stylix.nix
     ])
     # Options for specific hostnames.

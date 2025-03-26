@@ -17,30 +17,24 @@
   time.timeZone = "Asia/Singapore";
   i18n.defaultLocale = "en_SG.UTF-8";
 
-  home-manager.users.rafiq.imports = [
-    ../programs_temp/ags.nix
-    ../programs_temp/btop.nix
-    ../programs_temp/clipse.nix
-    ../programs_temp/comma.nix
-    ../programs_temp/direnv.nix
-    ../programs_temp/dunst.nix
-    ../programs_temp/firefox.nix
-    ../programs_temp/fuzzel.nix
-    ../programs_temp/fzf.nix
-    ../programs_temp/git.nix
-    ../programs_temp/hyprland.nix
-    ../programs_temp/hyprshade.nix
-    ../programs_temp/kitty.nix
-    ../programs_temp/nh.nix
-    ../programs_temp/nvf.nix
-    ../programs_temp/spicetify.nix
-    ../programs_temp/starship.nix
-    ../programs_temp/tealdeer.nix
-    ../programs_temp/yazi.nix
-    ../programs_temp/zellij.nix
-    ../programs_temp/zoxide.nix
-    ../programs_temp/zsh.nix
+  users.users.rafiq = {
+    isNormalUser = true;
+    description = "rafiq";
+    hashedPasswordFile = config.sops.secrets.password.path;
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+    ];
+    openssh.authorizedKeys.keys = [
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILdsZyY3gu8IGB8MzMnLdh+ClDxQQ2RYG9rkeetIKq8n"
+    ];
+  };
+  imports = [
     ./scripts
+    ./programs
+  ];
+
+  home-manager.users.rafiq.imports = [
     {
       # This enables using home-manager from the command line.
       programs.home-manager.enable = true;
@@ -83,29 +77,18 @@
         };
 
         packages = with pkgs; [
-          fastfetch # system info
-          wl-clipboard # provides cli copy and paste commands
           aichat # duh
-          ripgrep
-          devenv
           bat
-          ttyper
+          btop # add settings as home-manager module
+          devenv
+          fastfetch # system info
           hyprpicker
           inputs.hyprcloser.packages.${pkgs.stdenv.hostPlatform.system}.default
+          ripgrep
+          ttyper
+          wl-clipboard # provides cli copy and paste commands
         ];
       };
     }
   ];
-  users.users.rafiq = {
-    isNormalUser = true;
-    description = "rafiq";
-    hashedPasswordFile = config.sops.secrets.password.path;
-    extraGroups = [
-      "networkmanager"
-      "wheel"
-    ];
-    openssh.authorizedKeys.keys = [
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILdsZyY3gu8IGB8MzMnLdh+ClDxQQ2RYG9rkeetIKq8n"
-    ];
-  };
 }
