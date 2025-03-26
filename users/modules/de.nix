@@ -6,7 +6,6 @@
     ./programs/hyprland.nix
     ./programs/kitty.nix
     ./programs/spicetify.nix
-    ./programs/hyprlock.nix
     ./programs/fuzzel.nix
     ./programs/hyprshade.nix
     ./programs/ags.nix
