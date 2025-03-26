@@ -1,4 +1,9 @@
-{ inputs, lib, ... }:
+{
+  inputs,
+  lib,
+  device ? throw "Set this to your disk device",
+  ...
+}:
 {
   imports = [
     inputs.disko.nixosModules.disko
@@ -6,7 +11,8 @@
   ];
   # Disk Partitioning
   disko.devices.disk.main = {
-    device = "/dev/disk/by-id/nvme-eui.01000000000000008ce38e04019a68ab";
+    # device = "/dev/disk/by-id/nvme-eui.01000000000000008ce38e04019a68ab";
+    inherit device;
     type = "disk";
     content.type = "gpt";
     content.partitions = {
