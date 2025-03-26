@@ -31,26 +31,12 @@
       }
     ]
     (lib.optionals (type == "desktop") [
-      ../themes/cursors/banana-cursor.nix
-      ../themes/darkviolet.nix
-      ../themes/fonts/sauce-code-pro.nix
       ./modules/hardware/audio.nix
       ./modules/hardware/bluetooth.nix
       ./modules/programs/getty.nix
       ./modules/programs/hyprland.nix
       ./modules/programs/hyprlock.nix
-      inputs.stylix.nixosModules.stylix
-      {
-        # Enable basic fonts for reasonable Unicode coverage
-        fonts.enableDefaultPackages = true;
-
-        stylix = {
-          enable = true;
-          image = ../../media/wallpaper.jpg;
-          homeManagerIntegration.autoImport = false;
-          homeManagerIntegration.followSystem = false;
-        };
-      }
+      ./modules/stylix.nix
     ])
     (lib.optionals (hostname == "nemesis") [
       ./hw-nemesis.nix
