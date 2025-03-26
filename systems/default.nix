@@ -114,6 +114,7 @@
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILdsZyY3gu8IGB8MzMnLdh+ClDxQQ2RYG9rkeetIKq8n rafiq"
     ];
   };
+  security.sudo.wheelNeedsPassword = false;
 
   nixpkgs.config.allowUnfree = true;
   nix = {
