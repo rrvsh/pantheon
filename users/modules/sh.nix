@@ -15,6 +15,7 @@
     ./programs/zoxide.nix
     ./programs/thefuck.nix
     ./programs/clipse.nix
+    ./programs/comma.nix
     ./scripts
   ];
   home.shell.enableShellIntegration = true;

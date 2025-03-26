@@ -9,12 +9,19 @@
         name = "${hostname}";
         value =
           let
-            args = { inherit self inputs type; };
+            args = {
+              inherit
+                self
+                inputs
+                type
+                hostname
+                ;
+            };
           in
           inputs.nixpkgs.lib.nixosSystem {
             specialArgs = args;
             modules = [
-              ./systems/${hostname}.nix
+              ./systems
 
               inputs.home-manager.nixosModules.home-manager
               {
@@ -32,10 +39,8 @@
       };
     in
     {
-      # System Configurations
       nixosConfigurations = builtins.listToAttrs [
         (mkSystem "desktop" "nemesis")
-        (mkSystem "desktop" "mellinoe")
       ];
     };
 
