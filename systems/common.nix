@@ -5,8 +5,9 @@
 }:
 {
   imports = [
-    ./programs/tailscale.nix
-    ./programs/zsh.nix
+    ./modules/programs/tailscale.nix
+    ./modules/bootloaders/systemd-boot.nix
+    ./modules/programs/zsh.nix
     inputs.nix-index-database.nixosModules.nix-index
     inputs.sops-nix.nixosModules.sops
   ];
@@ -87,7 +88,7 @@
   services.openssh.enable = true;
 
   sops = {
-    defaultSopsFile = ../../secrets/secrets.yaml;
+    defaultSopsFile = ../secrets/secrets.yaml;
     age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
     secrets.password.neededForUsers = true;
   };

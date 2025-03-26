@@ -1,13 +1,14 @@
 { inputs, ... }:
 {
   imports = [
-    ../../themes/cursors/banana-cursor.nix
-    ../../themes/darkviolet.nix
-    ../../themes/fonts/sauce-code-pro.nix
-    ./programs/getty.nix
-    ./programs/hyprland.nix
-    ./programs/hyprlock.nix
+    ../themes/cursors/banana-cursor.nix
+    ../themes/darkviolet.nix
+    ../themes/fonts/sauce-code-pro.nix
+    ./modules/programs/getty.nix
+    ./modules/programs/hyprland.nix
+    ./modules/programs/hyprlock.nix
     inputs.stylix.nixosModules.stylix
+    ./modules/hardware/bluetooth.nix
   ];
 
   # Enable basic fonts for reasonable Unicode coverage

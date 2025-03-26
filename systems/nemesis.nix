@@ -2,11 +2,9 @@
 {
   imports = [
     ./hw-nemesis.nix
-    ./modules/common.nix
-    ./modules/desktop.nix
-    ./modules/bootloaders/systemd-boot.nix
+    ./common.nix
+    ./desktop.nix
     ./modules/hardware/nvidia.nix
-    ./modules/hardware/bluetooth.nix
   ];
 
   networking.hostName = "nemesis";
