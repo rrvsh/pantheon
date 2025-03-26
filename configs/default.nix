@@ -28,8 +28,8 @@
     ])
     # Options for specific hostnames.
     (lib.optionals (hostname == "nemesis") [
-      ./hw-nemesis.nix
       ./bootloaders/systemd-boot.nix
+      ./filesystems/hw-nemesis.nix
       ./hardware/cpu_amd.nix
       ./hardware/nvidia.nix
     ])
