@@ -1,9 +1,9 @@
 keys:
-  - &rafiq age12l33pas8eptwjc7ewux3d8snyzfzwz0tn9qg5kw8le79fswmjgjqdjgyy6
+  - &admin age12l33pas8eptwjc7ewux3d8snyzfzwz0tn9qg5kw8le79fswmjgjqdjgyy6
   - &nemesis age1sq4n2ywk6h94a0r5rye6vzkqy5x6ae736faqregz8u2ku8ttepeqqh5crh
 creation_rules:
   - path_regex: secrets/[^/]+\.(yaml|json|env|ini)$
     key_groups:
       - age:
-          - *rafiq
+          - *admin
           - *nemesis

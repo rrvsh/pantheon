@@ -5,6 +5,7 @@
       ...
     }@inputs:
     let
+      username = "rafiq";
       mkSystem = type: hostname: {
         name = "${hostname}";
         value =
@@ -15,6 +16,7 @@
                 inputs
                 type
                 hostname
+                username
                 ;
             };
           in

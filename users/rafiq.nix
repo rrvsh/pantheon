@@ -2,6 +2,7 @@
   pkgs,
   inputs,
   lib,
+  username,
   ...
 }:
 {
@@ -15,8 +16,8 @@
   programs.home-manager.enable = true;
 
   home = {
-    username = "rafiq";
-    homeDirectory = "/home/rafiq";
+    username = "${username}";
+    homeDirectory = "/home/${username}";
 
     # This defines the version home-manager
     # was originally bulit against on this system.

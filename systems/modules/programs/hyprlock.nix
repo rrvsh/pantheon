@@ -2,6 +2,7 @@
   inputs,
   hostname,
   pkgs,
+  username,
   ...
 }:
 let
@@ -17,7 +18,7 @@ let
 in
 {
   security.pam.services.hyprlock = { };
-  home-manager.users.rafiq = {
+  home-manager.users.${username} = {
     programs.hyprlock = {
       enable = true;
       package = inputs.hyprlock.packages.${pkgs.stdenv.hostPlatform.system}.hyprlock;

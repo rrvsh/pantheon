@@ -7,10 +7,12 @@
   inputs,
   config,
   specialArgs,
+  username,
   ...
 }:
 {
   imports = builtins.concatLists [
+    # Common options for all machines.
     [
       (modulesPath + "/installer/scan/not-detected.nix")
       ./modules/bootloaders/systemd-boot.nix
@@ -24,12 +26,13 @@
           useGlobalPkgs = true;
           useUserPackages = true;
           extraSpecialArgs = specialArgs;
-          users.rafiq.imports = [
+          users.${username}.imports = [
             ../users/rafiq.nix
           ];
         };
       }
     ]
+    # Options for desktops.
     (lib.optionals (type == "desktop") [
       ./modules/hardware/audio.nix
       ./modules/hardware/bluetooth.nix
@@ -38,6 +41,7 @@
       ./modules/programs/hyprlock.nix
       ./modules/stylix.nix
     ])
+    # Options for specific hostnames.
     (lib.optionals (hostname == "nemesis") [
       ./hw-nemesis.nix
       ./modules/hardware/nvidia.nix
@@ -88,16 +92,16 @@
   };
 
   users.mutableUsers = false; # Always reset users on system activation
-  users.users.rafiq = {
+  users.users.${username} = {
     isNormalUser = true;
-    description = "rafiq";
+    description = "${username}";
     hashedPasswordFile = config.sops.secrets.password.path;
     extraGroups = [
       "networkmanager"
       "wheel"
     ];
     openssh.authorizedKeys.keys = [
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILdsZyY3gu8IGB8MzMnLdh+ClDxQQ2RYG9rkeetIKq8n rafiq"
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILdsZyY3gu8IGB8MzMnLdh+ClDxQQ2RYG9rkeetIKq8n"
     ];
   };
   security.sudo.wheelNeedsPassword = false;

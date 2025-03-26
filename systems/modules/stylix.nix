@@ -1,4 +1,4 @@
-{ inputs, ... }:
+{ inputs, username, ... }:
 let
   opacity = 0.8;
   toImport = [
@@ -25,12 +25,12 @@ in
   fonts.enableDefaultPackages = true;
 
   imports = [ inputs.stylix.nixosModules.stylix ] ++ toImport;
-  home-manager.users.rafiq.imports = [ inputs.stylix.homeManagerModules.stylix ] ++ toImport;
+  home-manager.users.${username}.imports = [ inputs.stylix.homeManagerModules.stylix ] ++ toImport;
 
   # Put options that only exist in the NixOS module here.
   stylix.homeManagerIntegration.autoImport = false;
   stylix.homeManagerIntegration.followSystem = false;
 
   # Put options that only exist in the home-manager module here.
-  # home-manager.users.rafiq.stylix = {};
+  # home-manager.users.${username}.stylix = {};
 }
