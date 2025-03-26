@@ -1,5 +1,16 @@
-{ config, ... }:
+{ config, specialArgs, ... }:
 {
+  home-manager = {
+    useGlobalPkgs = true;
+    useUserPackages = true;
+    extraSpecialArgs = specialArgs;
+  };
+
+  users.mutableUsers = false; # Always reset users on system activation
+
+  time.timeZone = "Asia/Singapore";
+  i18n.defaultLocale = "en_SG.UTF-8";
+
   home-manager.users.rafiq.imports = [ ../../users/rafiq.nix ];
   users.users.rafiq = {
     isNormalUser = true;
