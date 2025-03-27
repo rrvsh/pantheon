@@ -10,6 +10,10 @@
         "pipe-operators"
       ];
 
+      trusted-users = [
+        "@wheel"
+      ];
+
       # Add binary caches to avoid having to compile them
       substituters = [
         "https://hyprland.cachix.org"
