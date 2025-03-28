@@ -1,5 +1,6 @@
 {
   pkgs,
+  config,
   ...
 }:
 {
@@ -21,6 +22,9 @@
         ''
           # Bind CTRL+Backspace to delete whole word
           bindkey '^H' backward-kill-word
+
+          export CWP_JIRA_LINK_FILE="${config.sops.secrets.cwp_jira_link.path}"
+          export CWP_JIRA_PAT_FILE="${config.sops.secrets.cwp_jira_pat.path}"
         '';
       # TODO: Look into whether we need to add the history attribute
       profileExtra = # bash

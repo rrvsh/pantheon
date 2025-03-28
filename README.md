@@ -8,9 +8,9 @@
 
 # Adding Secrets with sops-nix
 
-Secrets are stored in secrets/secrets.yaml. You can edit these secrets with `sops secrets/secrets.yaml` given you have an age private key stored at `~/.config/sops/age/keys.txt`.
+Secrets are stored in configs/secrets/secrets.yaml. You can edit these secrets with `sops secrets.yaml` given you have an age private key stored at `~/.config/sops/age/keys.txt`.
 
-To decrypt these secrets with sops-nix during a rebuild, you must add your host public key to the `.sops.yaml` file. Generate it with `cat /etc/ssh/ssh_host_ed25519_key.pub | ssh-to-age`, add it to the file, then run `sops updatekeys secrets/secrets.yaml`.
+To decrypt these secrets with sops-nix during a rebuild, you must add your host public key to the `.sops.yaml` file. Generate it with `cat /etc/ssh/ssh_host_ed25519_key.pub | ssh-to-age`, add it to the file, then run `sops updatekeys secrets.yaml`.
 
 # Provisioning A New Machine
 

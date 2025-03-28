@@ -7,8 +7,12 @@
   sops = {
     defaultSopsFile = ./secrets/secrets.yaml;
     age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
-    secrets.password.neededForUsers = true;
-    secrets.ts_auth_key = { };
+    secrets = {
+      password.neededForUsers = true;
+      ts_auth_key = { };
+      cwp_jira_link = { };
+      cwp_jira_pat = { };
+    };
   };
 
   security.sudo.wheelNeedsPassword = false;
