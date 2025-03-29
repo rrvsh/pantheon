@@ -1,7 +1,8 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 {
   imports = [
     ./scripts
+    ./aichat.nix
     ./comma.nix
     ./direnv.nix
     ./editorconfig.nix
@@ -17,11 +18,17 @@
     ./zsh.nix
   ];
 
+  environment.shellInit = # sh
+    ''
+      export CWP_JIRA_LINK=$(sudo cat ${config.sops.secrets.cwp_jira_link.path})
+      export CWP_JIRA_PAT=$(sudo cat ${config.sops.secrets.cwp_jira_pat.path})
+      export GEMINI_API_KEY=$(sudo cat ${config.sops.secrets.gemini_api_key.path})
+    '';
+
   home-manager.users.rafiq.home = {
     shell.enableShellIntegration = true;
     shellAliases = {
       gs = "git status";
-      ai = "aichat -r %shell% -e";
       cd = "z";
       v = "$EDITOR";
       g = "git";
@@ -30,7 +37,6 @@
     };
 
     packages = with pkgs; [
-      aichat
       bat
       btop # add settings as home-manager module
       devenv

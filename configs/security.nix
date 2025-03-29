@@ -12,6 +12,7 @@
       ts_auth_key = { };
       cwp_jira_link = { };
       cwp_jira_pat = { };
+      gemini_api_key = { };
     };
   };
 
