@@ -25,7 +25,7 @@
       cd = "z";
       v = "$EDITOR";
       g = "git";
-
+      l = "eza -1lah --git --time-style '+%Y-%m-%d %H:%M'";
       list-all-packages = "nix-store --query --requisites /run/current-system | cut -d- -f2- | sort | uniq";
     };
 
@@ -37,6 +37,7 @@
       fastfetch
       ripgrep
       ttyper
+      eza
     ];
   };
 }
