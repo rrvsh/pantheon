@@ -30,6 +30,7 @@
       nixosConfigurations = builtins.listToAttrs [
         (mkSystem "desktop" "nemesis")
         (mkSystem "desktop" "mellinoe")
+        (mkSystem "headless" "apollo")
       ];
     };
 

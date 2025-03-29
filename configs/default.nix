@@ -40,5 +40,13 @@
       })
       ./hardware/cpu_intel.nix
     ])
+    (lib.optionals (hostname == "apollo") [
+      ./bootloaders/systemd-boot.nix
+      (import ./filesystems/impermanence.nix {
+        inherit inputs lib;
+        device = "/dev/disk/by-id/nvme-eui.002538d221b47b01";
+      })
+      ./hardware/cpu_intel.nix
+    ])
   ];
 }

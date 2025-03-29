@@ -33,7 +33,27 @@ wpa_cli
 ip addr
 ```
 
-On the host machine, run the command `deploy --flake .#<hostname> --target-host <username>@<ip_address>` to build the new system configuration and copy it over SSH along with the sops age key and ssh keys.
+On the host machine, run the following command to build the new system configuration and copy it over SSH along with the sops age key and ssh keys.
+
+```bash
+# WARNING: You must use the IP address of the machine.
+# The hostname will not suffice as it will boot into a NixOS installer through kexec.
+deploy --flake .#<hostname> --target-host <username>@<ip_address>
+```
+
+Complete the setup by running the following on the target system once it is booted into the new install.
+
+```bash
+# On the target machine:
+sudo rm /etc/ssh/ssh_host_*
+sudo ssh-keygen -A
+cat /etc/ssh/ssh_host_ed25519_key.pub | ssh-to-age
+
+# On the host machine:
+# Add the host age public key to .sops.yaml
+sops updatekeys secrets.yaml
+
+```
 
 # Acknowledgements
 
