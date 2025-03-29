@@ -23,6 +23,9 @@
       gs = "git status";
       ai = "aichat -r %shell% -e";
       cd = "z";
+      v = "$EDITOR";
+      g = "git";
+
       list-all-packages = "nix-store --query --requisites /run/current-system | cut -d- -f2- | sort | uniq";
     };
 
