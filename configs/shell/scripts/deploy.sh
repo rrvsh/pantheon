@@ -24,6 +24,8 @@ done
 
 # Prepare temporary directory and copy necessary files
 root=$(mktemp -d)
+mkdir -p ${root}/persist
+root=${root}/persist
 sudo cp --verbose --archive --parents /etc/ssh/ssh_host_* ${root}
 sudo cp --verbose --archive --parents ~/.ssh/id_ed25519 ${root}
 sudo cp --verbose --archive --parents ~/.config/sops/age/keys.txt ${root}

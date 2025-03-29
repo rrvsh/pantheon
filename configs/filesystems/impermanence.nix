@@ -105,6 +105,21 @@
   # Directories to persist between boots
   fileSystems."/persist".neededForBoot = true;
   environment.persistence."/persist" = {
+    # Hide the mounts from showing up in the file manager.
     hideMounts = true;
+    files = [
+      "/etc/ssh/ssh_host_ed25519_key"
+      "/etc/ssh/ssh_host_ed25519_key.pub"
+      "/etc/machine-id"
+    ];
+    users.rafiq = {
+      directories = [
+        "repos"
+      ];
+      files = [
+        ".config/sops/age/keys.txt"
+        ".ssh/id_ed25519"
+      ];
+    };
   };
 }
