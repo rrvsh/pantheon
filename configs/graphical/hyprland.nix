@@ -46,7 +46,7 @@
 
         # Monitors
         monitor = [
-          "$mainMonitor, 3840x2160@60, auto, auto"
+          "$mainMonitor, 3840x2160@60, auto, 2"
           "$vertMonitor, 1920x1080@60, auto-left, auto, transform, 3"
           ", preferred, auto, 1"
         ];
