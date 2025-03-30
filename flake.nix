@@ -5,12 +5,6 @@
       ...
     }@inputs:
     let
-      inherit (inputs.nixpkgs) lib;
-      mkDiskConfig = device: {
-        imports = [
-          (import ./modules/filesystems/impermanence.nix { inherit inputs lib device; })
-        ];
-      };
       mkSystem = type: hostname: {
         name = "${hostname}";
         value =
@@ -23,24 +17,27 @@
                 hostname
                 ;
             };
+            inherit (inputs.nixpkgs) lib;
+            mkDiskConfig =
+              device: (import ./modules/filesystems/impermanence.nix { inherit inputs lib device; });
+            commonModules = [
+              ./modules/boot.nix
+              ./modules/bootloaders/systemd-boot.nix
+              ./modules/networking.nix
+              ./modules/nix-config.nix
+              ./modules/security.nix
+              ./modules/shell.nix
+              ./modules/users.nix
+            ];
+            graphicalModules = lib.optionals (type == "graphical") [
+              ./modules/graphical.nix
+            ];
           in
           inputs.nixpkgs.lib.nixosSystem {
             specialArgs = args;
             modules = builtins.concatLists [
-              # Common options for all machines.
-              [
-                ./modules/boot.nix
-                ./modules/bootloaders/systemd-boot.nix
-                ./modules/networking.nix
-                ./modules/nix-config.nix
-                ./modules/security.nix
-                ./modules/shell.nix
-                ./modules/users.nix
-              ]
-              # Options for graphical systems.
-              (lib.optionals (type == "graphical") [
-                ./modules/graphical.nix
-              ])
+              commonModules
+              graphicalModules
               # Options for specific hostnames.
               (lib.optionals (hostname == "nemesis") [
                 # mkDiskConfig
@@ -70,7 +67,6 @@
         (mkSystem "headless" "apollo")
       ];
     };
-
   inputs = {
     ags.inputs.nixpkgs.follows = "nixpkgs";
     ags.url = "github:aylur/ags";
