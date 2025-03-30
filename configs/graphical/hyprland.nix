@@ -4,6 +4,12 @@
   ...
 }:
 {
+  environment.loginShellInit = # sh
+    ''
+        if [ -z "$WAYLAND_DISPLAY" ] && [ "$XDG_VTNR" -eq 1 ]; then
+      dbus-run-session Hyprland
+        fi
+    '';
   programs.hyprland = {
     enable = true;
     package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;

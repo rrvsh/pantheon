@@ -29,6 +29,10 @@
     (lib.optionals (hostname == "nemesis") [
       ./bootloaders/systemd-boot.nix
       ./filesystems/hw-nemesis.nix
+      # (import ./filesystems/impermanence.nix {
+      #   inherit inputs lib;
+      #   device = "nvme-nvme.c0a9-323332354536453737343334-435432303030503353534438-00000001";
+      # })
       ./hardware/cpu_amd.nix
       ./hardware/nvidia.nix
     ])
