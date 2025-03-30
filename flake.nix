@@ -5,6 +5,12 @@
       ...
     }@inputs:
     let
+      inherit (inputs.nixpkgs) lib;
+      mkDiskConfig = device: {
+        imports = [
+          (import ./modules/filesystems/impermanence.nix { inherit inputs lib device; })
+        ];
+      };
       mkSystem = type: hostname: {
         name = "${hostname}";
         value =
@@ -20,16 +26,47 @@
           in
           inputs.nixpkgs.lib.nixosSystem {
             specialArgs = args;
-            modules = [
-              ./configs
+            modules = builtins.concatLists [
+              # Common options for all machines.
+              [
+                ./modules/boot.nix
+                ./modules/bootloaders/systemd-boot.nix
+                ./modules/networking.nix
+                ./modules/nix-config.nix
+                ./modules/security.nix
+                ./modules/shell.nix
+                ./modules/users.nix
+              ]
+              # Options for graphical systems.
+              (lib.optionals (type == "graphical") [
+                ./modules/graphical.nix
+              ])
+              # Options for specific hostnames.
+              (lib.optionals (hostname == "nemesis") [
+                # mkDiskConfig
+                # "nvme-nvme.c0a9-323332354536453737343334-435432303030503353534438-00000001"
+                ./modules/filesystems/hw-nemesis.nix
+                ./modules/hardware/cpu_amd.nix
+                ./modules/hardware/nvidia.nix
+              ])
+              (lib.optionals (hostname == "mellinoe") [
+                mkDiskConfig
+                "/dev/disk/by-id/nvme-eui.01000000000000008ce38e04019a68ab"
+                ./modules/hardware/cpu_intel.nix
+              ])
+              (lib.optionals (hostname == "apollo") [
+                mkDiskConfig
+                "/dev/disk/by-id/nvme-eui.002538d221b47b01"
+                ./modules/hardware/cpu_intel.nix
+              ])
             ];
           };
       };
     in
     {
       nixosConfigurations = builtins.listToAttrs [
-        (mkSystem "desktop" "nemesis")
-        (mkSystem "desktop" "mellinoe")
+        (mkSystem "graphical" "nemesis")
+        (mkSystem "graphical" "mellinoe")
         (mkSystem "headless" "apollo")
       ];
     };
