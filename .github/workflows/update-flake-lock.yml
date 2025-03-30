@@ -19,9 +19,9 @@ jobs:
           pr-labels: |                  # Labels to be set on the PR
             dependencies
             automated
-          git-author-name: 'Pantheon'
+          git-author-name: 'github-actions[bot]'
           git-author-email: 'github-actions[bot]@users.noreply.github.com'
-          git-committer-name: 'Pantheon'
+          git-committer-name: 'github-actions[bot]'
           git-committer-email: 'github-actions[bot]@users.noreply.github.com'
           pr-assignees: ${{ github.repository_owner }}
           pr-reviewers: ${{ github.repository_owner }}
