@@ -1,21 +1,21 @@
 { pkgs, config, ... }:
 {
   imports = [
-    ./scripts
-    ./aichat.nix
-    ./comma.nix
-    ./direnv.nix
-    ./editorconfig.nix
-    ./fzf.nix
-    ./git.nix
-    ./nh.nix
-    ./nvf.nix
-    ./starship.nix
-    ./tealdeer.nix
-    ./yazi.nix
-    ./zellij.nix
-    ./zoxide.nix
-    ./zsh.nix
+    ./programs/scripts
+    ./programs/aichat.nix
+    ./programs/comma.nix
+    ./programs/direnv.nix
+    ./programs/editorconfig.nix
+    ./programs/fzf.nix
+    ./programs/git.nix
+    ./programs/nh.nix
+    ./programs/nvf.nix
+    ./programs/starship.nix
+    ./programs/tealdeer.nix
+    ./programs/yazi.nix
+    ./programs/zellij.nix
+    ./programs/zoxide.nix
+    ./programs/zsh.nix
   ];
 
   environment.shellInit = # sh
