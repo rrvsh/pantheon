@@ -39,6 +39,7 @@
           "hyprlock"
           "clipse -listen"
           "hyprcloser"
+          "hyprshade auto"
         ];
 
         env = [
