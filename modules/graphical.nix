@@ -1,4 +1,5 @@
 { pkgs, inputs, ... }:
+with pkgs;
 {
   imports = [
     ./programs/ags.nix
@@ -17,9 +18,12 @@
     ./hardware/bluetooth.nix
   ];
 
-  home-manager.users.rafiq.home.packages = with pkgs; [
+  environment.systemPackages = [
+    wl-clipboard
+  ];
+
+  home-manager.users.rafiq.home.packages = [
     hyprpicker
     inputs.hyprcloser.packages.${pkgs.stdenv.hostPlatform.system}.default
-    wl-clipboard # provides cli copy and paste commands
   ];
 }
