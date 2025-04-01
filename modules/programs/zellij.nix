@@ -3,7 +3,7 @@
     programs.zellij = {
       enable = true;
       settings = {
-        mouse_mode = false;
+        show_startup_tips = false;
         keybinds.unbind = [
           "Ctrl h"
         ];
