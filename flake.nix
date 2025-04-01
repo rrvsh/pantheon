@@ -5,7 +5,7 @@
       ...
     }@inputs:
     let
-      mkSystem = type: hostname: {
+      mkSystem = type: hostname: bootDisk: {
         name = "${hostname}";
         value =
           let
@@ -15,11 +15,10 @@
                 inputs
                 type
                 hostname
+                bootDisk
                 ;
             };
             inherit (inputs.nixpkgs) lib;
-            mkDiskConfig =
-              device: (import ./modules/filesystems/impermanence.nix { inherit inputs lib device; });
             commonModules = [
               ./modules/boot.nix
               ./modules/bootloaders/systemd-boot.nix
@@ -29,45 +28,40 @@
               ./modules/shell.nix
               ./modules/users.nix
             ];
-            graphicalModules = lib.optionals (type == "graphical") [
+            graphicalModules = [
               ./modules/graphical.nix
             ];
           in
           inputs.nixpkgs.lib.nixosSystem {
             specialArgs = args;
-            modules = builtins.concatLists [
+            modules =
               commonModules
-              graphicalModules
-              # Options for specific hostnames.
-              (lib.optionals (hostname == "nemesis") [
-                # mkDiskConfig
-                # "nvme-nvme.c0a9-323332354536453737343334-435432303030503353534438-00000001"
-                ./modules/filesystems/hw-nemesis.nix
-                ./modules/hardware/cpu_amd.nix
-                ./modules/hardware/nvidia.nix
-              ])
-              (lib.optionals (hostname == "mellinoe") [
-                mkDiskConfig
-                "/dev/disk/by-id/nvme-eui.01000000000000008ce38e04019a68ab"
+              ++ lib.optionals (type == "graphical") graphicalModules
+              ++
+                # Options for specific hostnames.
+                (lib.optionals (hostname == "nemesis") [
+                  ./modules/filesystems/hw-nemesis.nix
+                  ./modules/hardware/cpu_amd.nix
+                  ./modules/hardware/nvidia.nix
+                ])
+              ++ (lib.optionals (hostname == "mellinoe") [
+                ./modules/filesystems/impermanence.nix
                 ./modules/hardware/cpu_intel.nix
               ])
-              (lib.optionals (hostname == "apollo") [
-                (import ./modules/filesystems/impermanence.nix {
-                  inherit inputs lib;
-                  device = "/dev/disk/by-id/nvme-eui.002538d221b47b01";
-
-                })
+              ++ (lib.optionals (hostname == "apollo") [
+                ./modules/filesystems/impermanence.nix
                 ./modules/hardware/cpu_intel.nix
-              ])
-            ];
+              ]);
           };
       };
     in
     {
       nixosConfigurations = builtins.listToAttrs [
-        (mkSystem "graphical" "nemesis")
-        (mkSystem "graphical" "mellinoe")
-        (mkSystem "headless" "apollo")
+        (mkSystem "graphical" "nemesis"
+          "nvme-nvme.c0a9-323332354536453737343334-435432303030503353534438-00000001"
+        )
+        (mkSystem "graphical" "mellinoe" "/dev/disk/by-id/nvme-eui.01000000000000008ce38e04019a68ab")
+        (mkSystem "headless" "apollo" "/dev/disk/by-id/nvme-eui.002538d221b47b01")
       ];
     };
   inputs = {

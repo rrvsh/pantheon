@@ -1,7 +1,7 @@
 {
   inputs,
   lib,
-  device ? throw "Set this to your disk device",
+  bootDisk,
   ...
 }:
 {
@@ -11,7 +11,7 @@
   ];
   # Disk Partitioning
   disko.devices.disk.main = {
-    inherit device;
+    device = bootDisk;
     type = "disk";
     content.type = "gpt";
     content.partitions = {
