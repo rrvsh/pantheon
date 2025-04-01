@@ -33,6 +33,7 @@
     interfaces.enp12s0.wakeOnLan.enable = true;
   };
   services.openssh.enable = true;
+  services.openssh.settings.PrintMotd = true;
   services.tailscale = {
     enable = true;
     authKeyFile = config.sops.secrets.ts_auth_key.path;

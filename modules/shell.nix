@@ -8,6 +8,7 @@
     ./programs/editorconfig.nix
     ./programs/fzf.nix
     ./programs/git.nix
+    ./programs/hyfetch.nix
     ./programs/nh.nix
     ./programs/nvf.nix
     ./programs/starship.nix
@@ -40,7 +41,6 @@
       bat
       btop # add settings as home-manager module
       devenv
-      fastfetch
       ripgrep
       ttyper
       eza
