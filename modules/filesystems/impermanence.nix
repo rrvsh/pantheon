@@ -11,7 +11,6 @@
   ];
   # Disk Partitioning
   disko.devices.disk.main = {
-    # device = "/dev/disk/by-id/nvme-eui.01000000000000008ce38e04019a68ab";
     inherit device;
     type = "disk";
     content.type = "gpt";
@@ -103,6 +102,7 @@
     	'';
 
   # Directories to persist between boots
+  programs.fuse.userAllowOther = true;
   fileSystems."/persist".neededForBoot = true;
   environment.persistence."/persist" = {
     # Hide the mounts from showing up in the file manager.
@@ -112,14 +112,17 @@
       "/etc/ssh/ssh_host_ed25519_key.pub"
       "/etc/machine-id"
     ];
-    users.rafiq = {
-      directories = [
-        "repos"
-      ];
+  };
+
+  home-manager.users.rafiq = {
+    imports = [ inputs.impermanence.homeManagerModules.impermanence ];
+    home.persistence."/persist/home/rafiq" = {
       files = [
         ".config/sops/age/keys.txt"
         ".ssh/id_ed25519"
       ];
+      # Allows root and other users to access the bindfs files.
+      allowOther = true;
     };
   };
 }

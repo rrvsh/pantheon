@@ -52,8 +52,11 @@
                 ./modules/hardware/cpu_intel.nix
               ])
               (lib.optionals (hostname == "apollo") [
-                mkDiskConfig
-                "/dev/disk/by-id/nvme-eui.002538d221b47b01"
+                (import ./modules/filesystems/impermanence.nix {
+                  inherit inputs lib;
+                  device = "/dev/disk/by-id/nvme-eui.002538d221b47b01";
+
+                })
                 ./modules/hardware/cpu_intel.nix
               ])
             ];
