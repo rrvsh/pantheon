@@ -1,5 +1,10 @@
 { inputs, pkgs, ... }:
 {
+  nix.settings.substituters = [ "https://nvf.cachix.org" ];
+  nix.settings.trusted-public-keys = [
+    "nvf.cachix.org-1:GMQWiUhZ6ux9D5CvFFMwnc2nFrUHTeGaXRlVBXo+naI="
+  ];
+
   home-manager.users.rafiq = {
     imports = [
       inputs.nvf.homeManagerModules.default

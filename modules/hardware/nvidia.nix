@@ -24,7 +24,6 @@
     nvidia-container-toolkit.enable = true;
     graphics = {
       enable = true;
-      package = inputs.hyprland.inputs.nixpkgs.legacyPackages.${pkgs.stdenv.hostPlatform.system}.mesa;
       extraPackages = with pkgs; [
         nvidia-vaapi-driver # hardware acceleration
       ];

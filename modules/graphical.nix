@@ -2,7 +2,6 @@
 with pkgs;
 {
   imports = [
-    ./programs/ags.nix
     ./programs/clipse.nix
     ./programs/dunst.nix
     ./programs/firefox.nix
