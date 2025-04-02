@@ -86,7 +86,7 @@
     nixd.url = "github:nix-community/nixd";
     nixos-hardware.url = "github:nixos/nixos-hardware";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    nvf.url = "github:notashelf/nvf";
+    nvf.url = "github:rrvsh/nvf/fix/pylsp-pkgs";
     sops-nix.url = "github:Mic92/sops-nix";
     spicetify-nix.url = "github:Gerg-L/spicetify-nix";
     stylix.url = "github:danth/stylix";

@@ -1290,15 +1290,16 @@
         "systems": "systems_4"
       },
       "locked": {
-        "lastModified": 1743301931,
-        "narHash": "sha256-gex4W+Fyn6RB8x9/y+VWY1EG6RItmlW1HJjAj3mWqKc=",
-        "owner": "notashelf",
+        "lastModified": 1743568014,
+        "narHash": "sha256-yGegHHE/dIhFFgDIwSVM8LsgWuNaL5lxKaWQyPF2LJs=",
+        "owner": "rrvsh",
         "repo": "nvf",
-        "rev": "05489d95b69b4c81e9b9a66a23f6e0cb1c8edb3d",
+        "rev": "f6511e77c41bb9c0818b06e458c5f6a25ce7b3e2",
         "type": "github"
       },
       "original": {
-        "owner": "notashelf",
+        "owner": "rrvsh",
+        "ref": "fix/pylsp-pkgs",
         "repo": "nvf",
         "type": "github"
       }

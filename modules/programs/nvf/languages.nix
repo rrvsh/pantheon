@@ -16,6 +16,7 @@
     nix.enable = true;
     nix.format.type = "nixfmt";
     python.enable = true;
+    python.lsp.server = "python-lsp-server";
     rust.enable = true;
     rust.crates.enable = true;
     ts.enable = true;
