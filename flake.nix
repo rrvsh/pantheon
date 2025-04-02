@@ -61,22 +61,62 @@
       ];
     };
   inputs = {
-    disko.inputs.nixpkgs.follows = "nixpkgs";
-    disko.url = "github:nix-community/disko/latest";
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
-    home-manager.url = "github:nix-community/home-manager";
-    hyprcloser.url = "github:rrvsh/hyprcloser";
-    hyprland-plugins.url = "github:hyprwm/hyprland-plugins";
-    hyprshaders.flake = false;
-    hyprshaders.url = "github:0x15BA88FF/hyprshaders";
     impermanence.url = "github:nix-community/impermanence";
-    nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
-    nix-index-database.url = "github:nix-community/nix-index-database";
     nixos-hardware.url = "github:nixos/nixos-hardware";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    nvf.url = "github:rrvsh/nvf/fix/pylsp-pkgs";
-    sops-nix.url = "github:Mic92/sops-nix";
-    spicetify-nix.url = "github:Gerg-L/spicetify-nix";
-    stylix.url = "github:danth/stylix";
+    systems.url = "github:nix-systems/default";
+    disko = {
+      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:nix-community/disko/latest";
+    };
+    flake-utils = {
+      inputs.systems.follows = "systems";
+      url = "github:numtide/flake-utils";
+    };
+    home-manager = {
+      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:nix-community/home-manager";
+    };
+    hyprcloser = {
+      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:rrvsh/hyprcloser";
+    };
+    hyprshaders = {
+      flake = false;
+      url = "github:0x15BA88FF/hyprshaders";
+    };
+    nix-index-database = {
+      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:nix-community/nix-index-database";
+    };
+    nvf = {
+      inputs = {
+        flake-utils.follows = "flake-utils";
+        nixpkgs.follows = "nixpkgs";
+        systems.follows = "systems";
+      };
+      #FIXME: Change back to NotAShelf/nvf once fix is merged
+      url = "github:rrvsh/nvf/fix/pylsp-pkgs";
+    };
+    sops-nix = {
+      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:Mic92/sops-nix";
+    };
+    spicetify-nix = {
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        systems.follows = "systems";
+      };
+      url = "github:Gerg-L/spicetify-nix";
+    };
+    stylix = {
+      inputs = {
+        flake-utils.follows = "flake-utils";
+        home-manager.follows = "home-manager";
+        nixpkgs.follows = "nixpkgs";
+        systems.follows = "systems";
+      };
+      url = "github:danth/stylix";
+    };
   };
 }
