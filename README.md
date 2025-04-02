@@ -1,6 +1,6 @@
-> "This is fucking brilliant. Nobody needs this, nobody has a real use for this
+> This is fucking brilliant. Nobody needs this, nobody has a real use for this
 > and this definitely does not attract girls. Still, I'll try this and probably
-> love it. -Tim Goeree"
+> love it. -Tim Goeree
 
 # As Yet Unreproducible
 
@@ -65,9 +65,8 @@ sops updatekeys secrets.yaml
 
 # Hardening
 
-[!NOTE] Thanks to
-https://blog.notashelf.dev/posts/2025-03-03-insecurities-remedies-i.html for
-this section!
+> [!NOTE]
+> Thanks to https://blog.notashelf.dev/posts/2025-03-03-insecurities-remedies-i.html for this section!
 
 Systemd services where appropriate are hardened using
 `systemd.services.<servicename>.serviceConfig`:
