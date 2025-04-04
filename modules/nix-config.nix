@@ -1,7 +1,4 @@
-{ inputs, ... }:
 {
-  imports = [ inputs.lix-module.nixosModules.default ];
-
   system.stateVersion = "24.11";
 
   nixpkgs.config.allowUnfree = true;
@@ -10,7 +7,7 @@
     experimental-features = [
       "nix-command"
       "flakes"
-      "pipe-operator"
+      "pipe-operators"
     ];
 
     trusted-users = [ "@wheel" ];

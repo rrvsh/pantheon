@@ -25,10 +25,10 @@
               ./modules/security.nix
               ./modules/users.nix
               ./modules/networking.nix
+              ./modules/shell.nix
             ];
             desktopModules = [
               ./modules/graphical.nix
-              ./modules/shell.nix
             ];
           in
           inputs.nixpkgs.lib.nixosSystem {
@@ -54,26 +54,13 @@
               ])
               ++ (lib.optionals (hostname == "orpheus") [
                 inputs.nixos-hardware.nixosModules.raspberry-pi-4
-                (
-                  {
-                    pkgs,
-                    lib,
-                    bootDisk,
-                    ...
-                  }:
-                  {
-                    nixpkgs.hostPlatform = lib.mkDefault "aarch64-linux";
-                    fileSystems."/" = {
-                      device = bootDisk;
-                      fsType = "ext4";
-                    };
-                    services.cage = {
-                      enable = true;
-                      user = "rafiq";
-                      program = "${pkgs.firefox}/bin/firefox -kiosk -private-window https://youtube.com/tv";
-                    };
-                  }
-                )
+                {
+                  fileSystems."/" = {
+                    device = "/dev/disk/by-uuid/44444444-4444-4444-8888-888888888888";
+                    fsType = "ext4";
+                  };
+                  nixpkgs.hostPlatform = "aarch64-linux";
+                }
               ]);
           };
       };
@@ -147,10 +134,6 @@
         systems.follows = "systems";
       };
       url = "github:danth/stylix";
-    };
-    lix-module = {
-      url = "https://git.lix.systems/lix-project/nixos-module/archive/2.92.0-3.tar.gz";
-      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 }
