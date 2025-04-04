@@ -20,6 +20,7 @@
             };
             inherit (inputs.nixpkgs) lib;
             commonModules = [
+              ./modules/boot.nix
               ./modules/nix-config.nix
               ./modules/security.nix
               ./modules/users.nix
@@ -37,7 +38,6 @@
               ++ lib.optionals (type == "desktop") desktopModules
               # Options for specific hostnames.
               ++ (lib.optionals (hostname == "nemesis") [
-                ./modules/boot.nix
                 ./modules/bootloaders/systemd-boot.nix
                 ./modules/filesystems/hw-nemesis.nix
                 ./modules/hardware/cpu_amd.nix
@@ -48,7 +48,6 @@
                 }
               ])
               ++ (lib.optionals (hostname == "mellinoe" || hostname == "apollo") [
-                ./modules/boot.nix
                 ./modules/bootloaders/systemd-boot.nix
                 ./modules/filesystems/impermanence.nix
                 ./modules/hardware/cpu_intel.nix
