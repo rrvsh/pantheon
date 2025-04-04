@@ -23,6 +23,7 @@
               ./modules/nix-config.nix
               ./modules/security.nix
               ./modules/users.nix
+              ./modules/networking.nix
             ];
             desktopModules = [
               ./modules/graphical.nix
@@ -41,7 +42,6 @@
                 ./modules/filesystems/hw-nemesis.nix
                 ./modules/hardware/cpu_amd.nix
                 ./modules/hardware/nvidia.nix
-                ./modules/networking.nix
                 inputs.nixos-hardware.nixosModules.gigabyte-b650
                 {
                   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
@@ -52,48 +52,26 @@
                 ./modules/bootloaders/systemd-boot.nix
                 ./modules/filesystems/impermanence.nix
                 ./modules/hardware/cpu_intel.nix
-                ./modules/networking.nix
               ])
               ++ (lib.optionals (hostname == "orpheus") [
-                # inputs.nixos-hardware.nixosModules.raspberry-pi-4
-                # Base SD image module for the target architecture
-                "${inputs.nixpkgs}/nixos/modules/installer/sd-card/sd-image-aarch64.nix"
+                inputs.nixos-hardware.nixosModules.raspberry-pi-4
                 (
                   {
                     pkgs,
-                    config,
                     lib,
+                    bootDisk,
                     ...
                   }:
                   {
                     nixpkgs.hostPlatform = lib.mkDefault "aarch64-linux";
-                    # fileSystems."/" = {
-                    #   device = bootDisk;
-                    #   fsType = "ext4";
-                    # };
+                    fileSystems."/" = {
+                      device = bootDisk;
+                      fsType = "ext4";
+                    };
                     services.cage = {
                       enable = true;
                       user = "rafiq";
                       program = "${pkgs.firefox}/bin/firefox -kiosk -private-window https://youtube.com/tv";
-                    };
-                    networking = {
-                      hostName = hostname;
-                      useDHCP = lib.mkDefault true;
-
-                      # Configures a simple stateful firewall.
-                      # By default, it doesn't allow any incoming connections.
-                      firewall = {
-                        enable = true;
-                        allowedTCPPorts = [
-                          22 # SSH
-                        ];
-                      };
-                    };
-                    services.openssh.enable = true;
-                    services.openssh.settings.PrintMotd = true;
-                    services.tailscale = {
-                      enable = true;
-                      authKeyFile = config.sops.secrets.ts_auth_key.path;
                     };
                   }
                 )
