@@ -34,6 +34,7 @@
       v = "$EDITOR";
       g = "git";
       l = "eza -1lah --git --time-style '+%Y-%m-%d %H:%M'";
+      # Thanks to https://www.reddit.com/r/NixOS/comments/fsummx/comment/fm3jbcm/!
       list-all-packages = "nix-store --query --requisites /run/current-system | cut -d- -f2- | sort | uniq";
     };
 

@@ -66,7 +66,9 @@ sops updatekeys secrets.yaml
 # Hardening
 
 > [!NOTE]
-> Thanks to https://blog.notashelf.dev/posts/2025-03-03-insecurities-remedies-i.html for this section!
+> Thanks to
+> https://blog.notashelf.dev/posts/2025-03-03-insecurities-remedies-i.html for
+> this section!
 
 Systemd services where appropriate are hardened using
 `systemd.services.<servicename>.serviceConfig`:
@@ -86,8 +88,3 @@ Systemd services where appropriate are hardened using
 - https://nixos-and-flakes.thiscute.world/ for teaching me about nix, nixos,
   flakes, and home-manager in an extremely easy to follow and well-documented
   fashion
-- https://blog.notashelf.dev/posts/2025-02-24-ssh-signing-commits.html for
-  teaching me how to trivially sign my commits
-- https://www.reddit.com/r/NixOS/comments/fsummx/comment/fm3jbcm/ for an easy
-  way to list all installed packages
-  (`nix-store --query --requisites /run/current-system | cut -d- -f2- | sort | uniq`)
