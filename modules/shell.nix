@@ -9,6 +9,7 @@
     ./programs/fzf.nix
     ./programs/git.nix
     ./programs/hyfetch.nix
+    ./programs/kanata.nix
     ./programs/nh.nix
     ./programs/nvf.nix
     ./programs/starship.nix
