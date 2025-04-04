@@ -127,8 +127,7 @@
         nixpkgs.follows = "nixpkgs";
         systems.follows = "systems";
       };
-      #FIXME: Change back to NotAShelf/nvf once fix is merged
-      url = "github:rrvsh/nvf/fix/pylsp-pkgs";
+      url = "github:NotAShelf/nvf";
     };
     sops-nix = {
       inputs.nixpkgs.follows = "nixpkgs";
