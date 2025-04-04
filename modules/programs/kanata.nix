@@ -17,8 +17,18 @@
 
           (deflayermap (default-layer)
             ;; tap caps lock as enter, hold as left ctrl
-            caps (tap-hold-release $tt $ht esc lctl)
-            Space (tap-dance $ht (Space return))
+            ;; tap-hold-release will activate the hold action early
+            ;; if another key is pressed while it is held.
+            CapsLock (tap-hold-release 200 200 Escape ControlLeft)
+
+            ;; space if pressed twice in quick succession will
+            ;; enter a space then delete it and put enter
+            Space (tap-hold-release 200 200
+                    (tap-dance-eager 200 (
+                      (macro Space) ;; use macro to prevent auto repeat
+                      (macro Backspace Enter)
+                    ))
+                  MetaRight)
           )
         '';
     };
