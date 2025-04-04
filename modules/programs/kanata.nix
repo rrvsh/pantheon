@@ -10,9 +10,9 @@
 
           (defvar
             tap-timeout 200
-            hold-timeout 200
+            home-row-hold-timeout 200
             tt $tap-timeout
-            ht $hold-timeout
+            hrht $home-row-hold-timeout
           )
 
           (deflayermap (default-layer)
@@ -29,6 +29,17 @@
                       (macro Backspace Enter)
                     ))
                   MetaRight)
+
+            ;; Home Row Mods
+            KeyA (tap-hold-release $tt $hrht KeyA ControlLeft)
+            KeyS (tap-hold-release $tt $hrht KeyS ShiftLeft)
+            KeyD (tap-hold-release $tt $hrht KeyD AltLeft)
+            KeyF (tap-hold-release $tt $hrht KeyF MetaLeft)
+
+            Semicolon (tap-hold-release $tt $hrht Semicolon ControlRight)
+            KeyL (tap-hold-release $tt $hrht KeyL ShiftRight)
+            KeyK (tap-hold-release $tt $hrht KeyK AltRight)
+            KeyJ (tap-hold-release $tt $hrht KeyJ MetaRight)
           )
         '';
     };
