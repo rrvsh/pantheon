@@ -8,9 +8,18 @@
         ''
           (defsrc)
 
+          (defvar
+            tap-timeout 200
+            hold-timeout 200
+            tt $tap-timeout
+            ht $hold-timeout
+          )
+
           (deflayermap (default-layer)
-          ;; tap caps lock as enter, hold as left shift
-          caps (tap-hold 100 100 esc lshift))
+            ;; tap caps lock as enter, hold as left ctrl
+            caps (tap-hold-release $tt $ht esc lctl)
+            Space (tap-dance $ht (Space return))
+          )
         '';
     };
   };
