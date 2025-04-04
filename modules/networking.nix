@@ -45,8 +45,11 @@
       enable = true;
       allowedTCPPorts = [
         22 # SSH
+        5353 # spotifyd
       ];
-      allowedUDPPorts = [ ];
+      allowedUDPPorts = [
+        5353 # spotifyd
+      ];
     };
 
     interfaces.enp12s0.wakeOnLan.policy = [

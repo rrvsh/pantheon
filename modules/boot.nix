@@ -1,7 +1,6 @@
 {
   pkgs,
   modulesPath,
-  lib,
   ...
 }:
 {
@@ -23,5 +22,8 @@
       "xhci_pci"
       "rtsx_pci_sdmmc"
     ];
+  };
+  services.dbus = {
+    enable = true;
   };
 }

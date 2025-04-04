@@ -12,6 +12,7 @@ with pkgs;
     ./programs/hyprshade.nix
     ./programs/kitty.nix
     ./programs/spicetify.nix
+    ./programs/spotifyd.nix
     ./programs/stylix.nix
     ./hardware/audio.nix
     ./hardware/bluetooth.nix
