@@ -1,46 +1,51 @@
 {
   environment.loginShellInit = # sh
     ''
-        if [ -z "$WAYLAND_DISPLAY" ] && [ "$XDG_VTNR" -eq 1 ]; then
-      dbus-run-session Hyprland
-        fi
+      if uwsm check may-start; then
+        exec uwsm start hyprland-uwsm.desktop
+      fi
     '';
+
   programs.hyprland = {
     enable = true;
+    withUWSM = true;
   };
 
   home-manager.users.rafiq = {
-    home.sessionVariables.NIXOS_OZONE_WL = "1";
+    xdg.configFile."uwsm/env".text = # sh
+      ''
+        export XCURSOR_SIZE=32
+
+        # Nvidia Settings
+        export LIBVA_DRIVER_NAME=nvidia
+        export __GLX_VENDOR_LIBRARY_NAME=nvidia
+        export NVD_BACKEND=direct # needed for running vaapi-driver on later drivers"
+        export NIXOS_OZONE_WL=1
+      '';
     wayland.windowManager.hyprland = {
       enable = true;
       package = null;
       portalPackage = null;
+      systemd.enable = false;
       settings = {
         "$mainMonitor" = "desc:OOO AN-270W04K";
         "$vertMonitor" = "desc:Philips Consumer Electronics Company PHL 246V5 AU11330000086";
         "$mainMod" = "SUPER";
-        "$terminal" = "kitty -1";
-        "$multiplexer" = "$terminal -e zellij";
-        "$browser" = "firefox";
-        "$music" = "spotify";
-        "$launcher" = "fuzzel";
+
+        "$terminal" = "uwsm app -- kitty -1";
+        "$browser" = "uwsm app -- firefox";
+        "$launcher" = "uwsm app -- fuzzel";
+        "$lockscreen" = "uwsm app -- hyprlock";
+
         "$clipboard" = "$terminal --class clipse -e clipse";
+        "$multiplexer" = "$terminal -e zellij";
 
         # Programs to run at startup
         exec-once = [
-          "hyprlock"
-          "clipse -listen"
-          "hyprcloser"
-          "hyprshade auto"
-        ];
-
-        env = [
-          "XCURSOR_SIZE,32"
-
-          # Nvidia Settings
-          "LIBVA_DRIVER_NAME,nvidia"
-          "__GLX_VENDOR_LIBRARY_NAME,nvidia"
-          "NVD_BACKEND,direct # needed for running vaapi-driver on later drivers"
+          "uwsm app -- hyprlock"
+          "uwsm app -- clipse -listen"
+          "uwsm app -- hyprcloser"
+          "uwsm app -- hyprshade auto"
         ];
 
         # Monitors
@@ -78,15 +83,16 @@
 
         # Keybinds
         bind = [
-          "$mainMod, return, exec, $multiplexer"
           "$mainMod, W, killactive"
-          "$mainMod, O, exec, $browser"
-          "$mainMod, Escape, exec, hyprlock"
-          "$mainMod, Space, exec, $launcher"
+          "$mainMod, M, exec, uwsm stop"
 
           # Launch utilities
-          "$mainMod_SHIFT, A, exec, hyprpicker -a"
+          "$mainMod, return, exec, $multiplexer"
+          "$mainMod, O, exec, $browser"
+          "$mainMod, Escape, exec, $lockscreen"
+          "$mainMod, Space, exec, $launcher"
           "$mainMod, V, exec, $clipboard"
+          "$mainMod_SHIFT, A, exec, hyprpicker -a"
 
           # move between windows
           "$mainMod, H, cyclenext, visible"
