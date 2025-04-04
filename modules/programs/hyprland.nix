@@ -1,3 +1,4 @@
+{ pkgs, ... }:
 {
   environment.loginShellInit = # sh
     ''
@@ -113,13 +114,17 @@
           # H and L to move between workspaces on the current monitor including creation
           "$mainMod_CTRL, H, workspace, r-1"
           "$mainMod_CTRL, L, workspace, r+1"
+
+          "SUPER, 7, exec, ${pkgs.playerctl}/bin/playerctl previous"
+          "SUPER, 8, exec, ${pkgs.playerctl}/bin/playerctl play-pause"
+          "SUPER, 9, exec, ${pkgs.playerctl}/bin/playerctl next"
         ];
 
         # Repeat when held
         bindle = [
           # Keyboard Media Keys
-          ", XF86AudioRaiseVolume, exec, wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%+"
-          ", XF86AudioLowerVolume, exec, wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%-"
+          "SUPER, equal, exec, wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%+"
+          "SUPER, minus, exec, wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%-"
         ];
 
         bindm = [
