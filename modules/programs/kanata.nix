@@ -15,7 +15,7 @@
             hrht $home-row-hold-timeout
           )
 
-          (deflayermap (default-layer)
+          (deflayermap (base)
             ;; tap caps lock as enter, hold as left ctrl
             ;; tap-hold-release will activate the hold action early
             ;; if another key is pressed while it is held.
@@ -28,7 +28,8 @@
                       (macro Space) ;; use macro to prevent auto repeat
                       (macro Backspace Enter)
                     ))
-                  MetaRight)
+                    (layer-while-held num)
+                  )
 
             ;; Home Row Mods
             KeyA (tap-hold-release $tt $hrht KeyA ControlLeft)
@@ -40,6 +41,20 @@
             KeyL (tap-hold-release $tt $hrht KeyL ShiftRight)
             KeyK (tap-hold-release $tt $hrht KeyK AltRight)
             KeyJ (tap-hold-release $tt $hrht KeyJ MetaRight)
+            ;; Pressing JKLA + Space will result in s being s
+          )
+
+          (deflayermap (num)
+            KeyA Digit1
+            KeyS Digit2
+            KeyD Digit3
+            KeyF Digit4
+            KeyG Digit5
+            KeyH Digit6
+            KeyJ Digit7
+            KeyK Digit8
+            KeyL Digit9
+            Semicolon Digit0
           )
         '';
     };
