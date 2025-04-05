@@ -64,8 +64,8 @@
         general = {
           # Make there be no gaps in between windows or edges
           border_size = 5;
-          gaps_in = 0;
-          gaps_out = 0;
+          gaps_in = 20;
+          gaps_out = 20;
 
           resize_on_border = true;
         };
