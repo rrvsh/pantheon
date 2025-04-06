@@ -43,65 +43,11 @@
                 ./modules/hardware/cpu_amd.nix
                 ./modules/hardware/nvidia.nix
                 inputs.nixos-hardware.nixosModules.gigabyte-b650
-                {
-                  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
-                }
               ])
               ++ (lib.optionals (hostname == "mellinoe" || hostname == "apollo") [
                 ./modules/bootloaders/systemd-boot.nix
                 ./modules/filesystems/impermanence.nix
                 ./modules/hardware/cpu_intel.nix
-              ])
-              ++ (lib.optionals (hostname == "orpheus") [
-                inputs.nixos-hardware.nixosModules.raspberry-pi-4
-                (
-                  { pkgs, lib, ... }:
-                  {
-                    fileSystems."/" = {
-                      device = "/dev/disk/by-uuid/44444444-4444-4444-8888-888888888888";
-                      fsType = "ext4";
-                    };
-                    nixpkgs.hostPlatform = "aarch64-linux";
-                    services.cage = {
-                      enable = true;
-                      user = "rafiq";
-                      program = "${pkgs.firefox}/bin/firefox --kiosk -P orpheus https://www.youtube.com/watch?v=JW5meKfy3fY&autoplay=1";
-                    };
-                    home-manager.users.rafiq.programs.firefox = {
-                      enable = true;
-                      profiles.orpheus = {
-                        settings = {
-                          "media.autoplay.default" = 0;
-                        };
-                      };
-                    };
-                    boot = {
-                      kernelPackages = lib.mkForce pkgs.linuxPackages_rpi4;
-                      # Thanks to https://discourse.nixos.org/t/sound-on-raspberry-pi-4/15965/9
-                      kernelParams = [
-                        "snd_bcm2835.enable_hdmi=1"
-                        "snd_bcm2835.enable_headphones=1"
-                      ];
-                      extraModprobeConfig = ''
-                        options snd_bcm2835 enable_headphones=1
-                      '';
-                    };
-                    systemd.user.services.wireplumber.wantedBy = [ "default.target" ];
-
-                    security.rtkit.enable = true;
-                    services.pipewire = {
-                      enable = true;
-                      socketActivation = false;
-                      extraConfig = { };
-                      jack.enable = true;
-                      pulse.enable = true;
-                      alsa = {
-                        enable = true;
-                        support32Bit = true;
-                      };
-                    };
-                  }
-                )
               ]);
           };
       };
@@ -113,11 +59,7 @@
         )
         (mkSystem "graphical" "mellinoe" "/dev/disk/by-id/nvme-eui.01000000000000008ce38e04019a68ab")
         (mkSystem "headless" "apollo" "/dev/disk/by-id/nvme-eui.002538d221b47b01")
-        (mkSystem "headless" "orpheus" "/dev/disk/by-uuid/44444444-4444-4444-8888-888888888888")
       ];
-
-      # Make the SD image the default build output for `nix build`
-      packages.aarch64-linux.default = self.nixosConfigurations.orpheus.config.system.build.sdImage;
     };
   inputs = {
     impermanence.url = "github:nix-community/impermanence";
