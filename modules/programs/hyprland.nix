@@ -2,8 +2,10 @@
 {
   environment.loginShellInit = # sh
     ''
-      if uwsm check may-start; then
-        exec uwsm start hyprland-uwsm.desktop
+      if [[ -z "$SSH_CLIENT" && -z "$SSH_CONNECTION" ]]; then
+        if uwsm check may-start; then
+          exec uwsm start hyprland-uwsm.desktop
+        fi
       fi
     '';
 
