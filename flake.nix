@@ -44,10 +44,11 @@
                 ./modules/hardware/nvidia.nix
                 inputs.nixos-hardware.nixosModules.gigabyte-b650
               ])
-              ++ (lib.optionals (hostname == "mellinoe" || hostname == "apollo") [
+              ++ (lib.optionals (hostname == "apollo") [
                 ./modules/bootloaders/systemd-boot.nix
                 ./modules/filesystems/impermanence.nix
                 ./modules/hardware/cpu_intel.nix
+                ./modules/services.nix
               ]);
           };
       };
