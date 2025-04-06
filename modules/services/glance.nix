@@ -1,27 +1,7 @@
 let
   glancePort = 8080;
-  newsFeedColumn = {
+  homeColumn = {
     size = "full";
-    widgets = [
-      {
-        title = "Feed";
-        type = "rss";
-        style = "detailed-list";
-        feeds = [
-          {
-            title = "Bloomberg";
-            url = "https://feeds.bloomberg.com/markets/news.rss";
-          }
-          {
-            title = "Fox Business";
-            url = "https://moxie.foxbusiness.com/google-publisher/markets.xml";
-          }
-        ];
-      }
-    ];
-  };
-  serviceMonitoringColumn = {
-    size = "small";
     widgets = [
       {
         title = "Services";
@@ -41,6 +21,17 @@ let
           }
         ];
       }
+      {
+        title = "Feed";
+        type = "rss";
+        style = "detailed-list";
+        feeds = [
+          {
+            title = "selfh.st";
+            url = "https://selfh.st/rss/";
+          }
+        ];
+      }
     ];
   };
 in
@@ -55,8 +46,7 @@ in
       {
         name = "Home";
         columns = [
-          serviceMonitoringColumn
-          newsFeedColumn
+          homeColumn
         ];
       }
     ];
