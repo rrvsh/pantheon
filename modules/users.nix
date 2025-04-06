@@ -29,7 +29,7 @@
     users.rafiq = {
       isNormalUser = true;
       description = "rafiq";
-      hashedPasswordFile = config.sops.secrets.password.path;
+      hashedPasswordFile = config.sops.secrets."rafiq/password".path;
       uid = 1000;
       extraGroups = [
         "networkmanager"
