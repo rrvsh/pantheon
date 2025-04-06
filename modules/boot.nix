@@ -1,6 +1,7 @@
 {
   pkgs,
   modulesPath,
+  lib,
   ...
 }:
 {
@@ -12,7 +13,7 @@
       timeout = 5;
       efi.canTouchEfiVariables = true;
     };
-    kernelPackages = pkgs.linuxPackages_latest;
+    kernelPackages = lib.mkDefault pkgs.linuxPackages_latest;
     initrd.availableKernelModules = [
       "ahci"
       "nvme"

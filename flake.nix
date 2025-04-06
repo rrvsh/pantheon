@@ -55,7 +55,7 @@
               ++ (lib.optionals (hostname == "orpheus") [
                 inputs.nixos-hardware.nixosModules.raspberry-pi-4
                 (
-                  { pkgs, ... }:
+                  { pkgs, lib, ... }:
                   {
                     fileSystems."/" = {
                       device = "/dev/disk/by-uuid/44444444-4444-4444-8888-888888888888";
@@ -73,6 +73,31 @@
                         settings = {
                           "media.autoplay.default" = 0;
                         };
+                      };
+                    };
+                    boot = {
+                      kernelPackages = lib.mkForce pkgs.linuxPackages_rpi4;
+                      # Thanks to https://discourse.nixos.org/t/sound-on-raspberry-pi-4/15965/9
+                      kernelParams = [
+                        "snd_bcm2835.enable_hdmi=1"
+                        "snd_bcm2835.enable_headphones=1"
+                      ];
+                      extraModprobeConfig = ''
+                        options snd_bcm2835 enable_headphones=1
+                      '';
+                    };
+                    systemd.user.services.wireplumber.wantedBy = [ "default.target" ];
+
+                    security.rtkit.enable = true;
+                    services.pipewire = {
+                      enable = true;
+                      socketActivation = false;
+                      extraConfig = { };
+                      jack.enable = true;
+                      pulse.enable = true;
+                      alsa = {
+                        enable = true;
+                        support32Bit = true;
                       };
                     };
                   }
