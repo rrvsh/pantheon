@@ -65,11 +65,16 @@
         # Windows
         general = {
           # Make there be no gaps in between windows or edges
-          border_size = 5;
-          gaps_in = 20;
-          gaps_out = 20;
-
+          border_size = 0;
+          no_border_on_floating = true;
+          gaps_in = 0;
+          gaps_out = 0;
           resize_on_border = true;
+        };
+
+        decoration = {
+          active_opacity = 1;
+          inactive_opacity = 0.9;
         };
 
         windowrulev2 = [
