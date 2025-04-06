@@ -26,6 +26,7 @@
               ./modules/users.nix
               ./modules/networking.nix
               ./modules/shell.nix
+              ./modules/programs/stylix.nix
             ];
             graphicalModules = [
               ./modules/graphical.nix
