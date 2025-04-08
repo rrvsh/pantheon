@@ -23,9 +23,19 @@ main() {
 
   case "$1" in
   all)
-    rebuild_remote nemesis &&
-      rebuild_remote apollo
-    exit 0
+    # Create a list of hostnames to rebuild
+    hosts=("nemesis" "apollo")
+
+    # Use parallel to rebuild each host
+    , parallel rebuild ::: "${hosts[@]}"
+
+    # Check the exit code of parallel
+    if [[ $? -ne 0 ]]; then
+      echo "One or more rebuilds failed."
+      exit 1
+    else
+      exit 0
+    fi
     ;;
   *)
     rebuild_remote "$1"
