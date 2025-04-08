@@ -2,8 +2,12 @@
 
 rebuild_remote() {
   hostname=$1
-  builder=localhost
-  nixos-rebuild switch --flake .#"${hostname}" --target-host "$(whoami)"@"${hostname}" --build-host "${builder}" --use-remote-sudo
+  builder="nemesis"
+  if [[ "${hostname}" == "${builder}" ]]; then
+    nh os switch .
+  else
+    nixos-rebuild switch --flake .#"${hostname}" --target-host "$(whoami)"@"${hostname}" --build-host "${builder}" --use-remote-sudo
+  fi
 }
 
 main() {
@@ -11,23 +15,15 @@ main() {
     echo "Only one argument is allowed. Pass in a hostname or all."
     exit 1
   elif [[ $# -lt 1 ]]; then
-    nh os switch .
+    rebuild_remote "$HOSTNAME"
     exit 0
   fi
 
   git add .
 
   case "$1" in
-  nemesis)
-    if [[ $HOSTNAME == "nemesis" ]]; then
-      nh os switch .
-    else
-      rebuild_remote nemesis
-    fi
-    exit 0
-    ;;
   all)
-    nh os switch . &&
+    rebuild_remote nemesis &&
       rebuild_remote apollo
     exit 0
     ;;
