@@ -15,6 +15,7 @@ with pkgs;
     ./programs/spotifyd.nix
     ./hardware/audio.nix
     ./hardware/bluetooth.nix
+    ./hardware/udev.nix
   ];
 
   environment.systemPackages = [
