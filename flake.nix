@@ -20,16 +20,16 @@
             };
             inherit (inputs.nixpkgs) lib;
             commonModules = [
-              ./modules/boot.nix
-              ./modules/nix-config.nix
-              ./modules/security.nix
-              ./modules/users.nix
-              ./modules/networking.nix
-              ./modules/shell.nix
-              ./modules/programs/stylix.nix
+              ./configs/boot.nix
+              ./configs/nix-config.nix
+              ./configs/security.nix
+              ./configs/users.nix
+              ./configs/networking.nix
+              ./configs/shell.nix
+              ./configs/programs/stylix.nix
             ];
             graphicalModules = [
-              ./modules/graphical.nix
+              ./configs/graphical.nix
             ];
           in
           inputs.nixpkgs.lib.nixosSystem {
@@ -39,17 +39,17 @@
               ++ lib.optionals (type == "graphical") graphicalModules
               # Options for specific hostnames.
               ++ (lib.optionals (hostname == "nemesis") [
-                ./modules/bootloaders/systemd-boot.nix
-                ./modules/filesystems/hw-nemesis.nix
-                ./modules/hardware/cpu_amd.nix
-                ./modules/hardware/nvidia.nix
+                ./configs/bootloaders/systemd-boot.nix
+                ./configs/filesystems/hw-nemesis.nix
+                ./configs/hardware/cpu_amd.nix
+                ./configs/hardware/nvidia.nix
                 inputs.nixos-hardware.nixosModules.gigabyte-b650
               ])
               ++ (lib.optionals (hostname == "apollo") [
-                ./modules/bootloaders/systemd-boot.nix
-                ./modules/filesystems/impermanence.nix
-                ./modules/hardware/cpu_intel.nix
-                ./modules/services.nix
+                ./configs/bootloaders/systemd-boot.nix
+                ./configs/filesystems/impermanence.nix
+                ./configs/hardware/cpu_intel.nix
+                ./configs/services.nix
               ]);
           };
       };
