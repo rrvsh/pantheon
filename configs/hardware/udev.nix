@@ -10,4 +10,9 @@
       qmk_hid
     ];
   };
+  environment.systemPackages = with pkgs; [
+    qmk
+    qmk-udev-rules
+    qmk_hid
+  ];
 }
