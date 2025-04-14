@@ -16,6 +16,7 @@ with pkgs;
     ./hardware/audio.nix
     ./hardware/bluetooth.nix
     ./hardware/udev.nix
+    ./hardware/vr.nix
   ];
 
   environment.systemPackages = [
