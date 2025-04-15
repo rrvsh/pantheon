@@ -19,25 +19,13 @@
                 ;
             };
             inherit (inputs.nixpkgs) lib;
-            commonModules = [
-              ./configs/boot.nix
-              ./configs/nix-config.nix
-              ./configs/security.nix
-              ./configs/users.nix
-              ./configs/networking.nix
-              ./configs/shell.nix
-              ./configs/programs/stylix.nix
-            ];
-            graphicalModules = [
-              ./configs/graphical.nix
-            ];
           in
           inputs.nixpkgs.lib.nixosSystem {
             specialArgs = args;
-            modules =
-              commonModules
-              ++ lib.optionals (type == "graphical") graphicalModules
-              ++ [ ./hosts/${hostname}.nix ];
+            modules = [
+              ./hosts/common.nix
+              ./hosts/${hostname}.nix
+            ];
           };
       };
     in
