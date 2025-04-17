@@ -1,5 +1,5 @@
 let
-  glancePort = 8080;
+  glancePort = 1227;
   homeColumn = {
     size = "full";
     widgets = [
@@ -29,6 +29,10 @@ let
           {
             title = "selfh.st";
             url = "https://selfh.st/rss/";
+          }
+          {
+            title = "This Week in Rust";
+            url = "https://this-week-in-rust.org/rss.xml";
           }
         ];
       }
