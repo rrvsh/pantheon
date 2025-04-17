@@ -43,11 +43,15 @@
         "$clipboard" = "$terminal --class clipse -e clipse";
         "$multiplexer" = "$terminal -e zellij";
 
-        # Programs to run at startup
         exec-once = [
           "uwsm app -- hyprlock"
           "uwsm app -- clipse -listen"
           "uwsm app -- hyprcloser"
+          "uwsm app -- waybar"
+        ];
+
+        # Programs to run at startup
+        exec = [
           "uwsm app -- hyprshade auto"
         ];
 
