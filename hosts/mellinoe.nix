@@ -8,8 +8,7 @@
   imports = [
     ../configs/bootloaders/systemd-boot.nix
     ../configs/filesystems/impermanence.nix
-    ../configs/hardware/nvidia.nix
-    inputs.nixos-hardware.nixosModules.gigabyte-b650
+    inputs.nixos-hardware.nixosModules.microsoft-surface-go
   ];
   boot.kernelModules = [ "kvm-intel" ];
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
