@@ -34,7 +34,7 @@
         (mkSystem "graphical" "nemesis"
           "nvme-nvme.c0a9-323332354536453737343334-435432303030503353534438-00000001"
         )
-        # (mkSystem "graphical" "mellinoe" "/dev/disk/by-id/nvme-eui.01000000000000008ce38e04019a68ab")
+        (mkSystem "graphical" "mellinoe" "/dev/disk/by-id/nvme-eui.01000000000000008ce38e04019a68ab")
         (mkSystem "headless" "apollo" "/dev/disk/by-id/nvme-eui.002538d221b47b01")
       ];
     };

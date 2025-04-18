@@ -38,7 +38,7 @@
             case "$1" in
             all)
               # Create a list of hostnames to rebuild
-              hosts=("nemesis" "apollo")
+              hosts=("nemesis" "apollo" "mellinoe")
 
               # Use parallel to rebuild each host
               , parallel rebuild ::: "''${hosts[@]}"
@@ -52,6 +52,9 @@
               fi
               ;;
             *)
+              echo "=========================="
+              echo "=== Rebuilding $1 ==="
+              echo "=========================="
               rebuild_remote "$1"
               exit 0
               ;;

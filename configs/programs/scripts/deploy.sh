@@ -1,6 +1,6 @@
 # Set default values
-flake=".#default"              # Default flake attribute if none is provided
-target_host="nixos@<hostname>" # Default target host
+flake=""       # Default flake attribute if none is provided
+target_host="" # Default target host
 
 # Process command-line arguments
 while [[ $# -gt 0 ]]; do
