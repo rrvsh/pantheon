@@ -27,5 +27,6 @@ with pkgs;
   home-manager.users.rafiq.home.packages = [
     hyprpicker
     inputs.hyprcloser.packages.${pkgs.stdenv.hostPlatform.system}.default
+    vlc
   ];
 }
