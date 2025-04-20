@@ -34,6 +34,10 @@ let
             title = "This Week in Rust";
             url = "https://this-week-in-rust.org/rss.xml";
           }
+          {
+            title = "Makefile.feld";
+            url = "https://blog.feld.me/feeds/all.atom.xml";
+          }
         ];
       }
     ];
