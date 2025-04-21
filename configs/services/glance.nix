@@ -22,7 +22,7 @@ let
         ];
       }
       {
-        title = "Feed";
+        title = "Newsletters";
         type = "rss";
         style = "detailed-list";
         feeds = [
@@ -34,9 +34,20 @@ let
             title = "This Week in Rust";
             url = "https://this-week-in-rust.org/rss.xml";
           }
+        ];
+      }
+      {
+        title = "Blogs";
+        type = "rss";
+        style = "detailed-list";
+        feeds = [
           {
             title = "Makefile.feld";
             url = "https://blog.feld.me/feeds/all.atom.xml";
+          }
+          {
+            title = "Xe Iaso";
+            url = "https://xeiaso.net/blog.rss";
           }
         ];
       }
