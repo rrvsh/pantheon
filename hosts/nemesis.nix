@@ -9,6 +9,7 @@
     ../configs/bootloaders/systemd-boot.nix
     ../configs/filesystems/hw-nemesis.nix
     ../configs/hardware/nvidia.nix
+    ../configs/hardware/powermanagement.nix
     inputs.nixos-hardware.nixosModules.gigabyte-b650
   ];
   boot.kernelModules = [ "kvm-amd" ];
