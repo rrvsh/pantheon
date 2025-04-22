@@ -2,6 +2,7 @@
 {
   imports =
     [
+      ../nixosModules
       ../configs/boot.nix
       ../configs/nix-config.nix
       ../configs/security.nix
@@ -13,4 +14,5 @@
     ++ lib.optionals (type == "graphical") [
       ../configs/graphical.nix
     ];
+  nixosModules.enable = true;
 }
