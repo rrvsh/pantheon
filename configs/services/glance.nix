@@ -49,6 +49,10 @@ let
             title = "Xe Iaso";
             url = "https://xeiaso.net/blog.rss";
           }
+          {
+            title = "Alex Haydock";
+            url = "https://blog.infected.systems/posts/index.xml";
+          }
         ];
       }
     ];
