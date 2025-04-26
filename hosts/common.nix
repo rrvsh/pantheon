@@ -4,7 +4,6 @@
     [
       ../nixosModules
       ../configs/boot.nix
-      ../configs/nix-config.nix
       ../configs/security.nix
       ../configs/users.nix
       ../configs/networking.nix
@@ -15,4 +14,5 @@
       ../configs/graphical.nix
     ];
   nixosModules.enable = true;
+  nix-config.enable = true;
 }

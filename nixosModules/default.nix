@@ -10,7 +10,7 @@ let
 in
 {
   imports = [
-    # The rest
+    ./nix-config.nix
   ];
 
   options = {
