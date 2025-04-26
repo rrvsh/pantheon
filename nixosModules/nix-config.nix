@@ -10,7 +10,9 @@ let
 in
 {
   options = {
-    "${moduleName}".enable = lib.mkEnableOption "Enable ${moduleName}.";
+    "${moduleName}" = {
+      enable = lib.mkEnableOption "Enable ${moduleName}.";
+    };
   };
 
   config = lib.mkIf cfg.enable {

@@ -3,7 +3,6 @@
   imports =
     [
       ../nixosModules
-      ../configs/boot.nix
       ../configs/security.nix
       ../configs/users.nix
       ../configs/networking.nix
@@ -15,4 +14,5 @@
     ];
   nixosModules.enable = true;
   nix-config.enable = true;
+  boot-config.enable = true;
 }
