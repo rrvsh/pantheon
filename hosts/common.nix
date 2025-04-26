@@ -15,4 +15,5 @@
   nixosModules.enable = true;
   nix-config.enable = true;
   boot-config.enable = true;
+  hardware-config.enable = true;
 }

@@ -1,7 +1,6 @@
 {
   config,
   lib,
-  pkgs,
   ...
 }:
 let
@@ -10,8 +9,9 @@ let
 in
 {
   imports = [
-    ./nix-config.nix
     ./boot.nix
+    ./hardware.nix
+    ./nix-config.nix
   ];
 
   options = {
@@ -20,7 +20,5 @@ in
     };
   };
 
-  config = lib.mkIf cfg.enable {
-    environment.systemPackages = with pkgs; [ micro ];
-  };
+  config = lib.mkIf cfg.enable { };
 }
