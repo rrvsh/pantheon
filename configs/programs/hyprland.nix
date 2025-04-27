@@ -122,6 +122,9 @@
           "ALT_SHIFT, K, resizeactive, 0 10%"
           "ALT_SHIFT, L, resizeactive, 10% 0"
 
+          # Make fullscreen
+          "$mainMod, Up, fullscreen, 0"
+
           # H and L to move between workspaces on the current monitor including creation
           "$mainMod_CTRL, H, workspace, r-1"
           "$mainMod_CTRL, L, workspace, r+1"
