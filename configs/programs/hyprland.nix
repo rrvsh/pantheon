@@ -62,6 +62,13 @@
           ", preferred, auto, 1"
         ];
 
+        xwayland.force_zero_scaling = true;
+
+        env = [
+          "GDK_SCALE,2"
+          "XCURSOR_SIZE,32"
+        ];
+
         # Switching to the current workspace will switch to the previous
         binds.workspace_back_and_forth = true;
         cursor.default_monitor = "$mainMonitor";
