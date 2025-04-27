@@ -58,7 +58,6 @@ in
         nvidia-container-toolkit.enable = true;
         graphics = {
           enable = true;
-          driSupport = true;
           driSupport32Bit = true;
           extraPackages = with pkgs; [
             nvidia-vaapi-driver # hardware acceleration
