@@ -38,7 +38,7 @@
             case "$1" in
             all)
               # Create a list of hostnames to rebuild
-              hosts=("nemesis" "apollo" "mellinoe")
+              hosts=("nemesis" "apollo")
 
               # Use parallel to rebuild each host
               , parallel rebuild ::: "''${hosts[@]}"
