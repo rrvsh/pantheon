@@ -9,5 +9,4 @@
   hardware-config.cpu = "amd";
   hardware-config.gpu = "nvidia";
   gaming.steam.enable = true;
-  gaming.steam.enableGamescope = true;
 }

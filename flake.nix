@@ -69,6 +69,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:nix-community/nix-index-database";
     };
+    nix-gaming = {
+      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:fufexan/nix-gaming";
+    };
     nvf = {
       inputs = {
         flake-utils.follows = "flake-utils";
