@@ -1,5 +1,4 @@
 {
-  inputs,
   pkgs,
   ...
 }:
@@ -48,18 +47,6 @@ in
               run = "mediainfo";
             }
           ];
-          prepend_fetchers = [
-            {
-              id = "git";
-              name = "*";
-              run = "git";
-            }
-            {
-              id = "git";
-              name = "*/";
-              run = "git";
-            }
-          ];
         };
       };
       # ~/.config/yazi/keymap.toml
@@ -80,7 +67,6 @@ in
       plugins = {
         full-border = "${yazi-plugins}/full-border.yazi";
         smart-enter = "${yazi-plugins}/smart-enter.yazi";
-        git = "${yazi-plugins}/git.yazi";
         mount = "${yazi-plugins}/mount.yazi";
         glow = pkgs.fetchFromGitHub {
           owner = "Reledia";
@@ -103,7 +89,6 @@ in
       };
       initLua = ''
         require("full-border"):setup()
-        require("git"):setup()
         require("starship"):setup({
           config_file = "${./yazi/starship.toml}",
         })
