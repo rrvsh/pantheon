@@ -46,7 +46,14 @@ in
         wineWowPackages.stable
         wine64
         wineWowPackages.waylandFull
+        protonup
+        lutris
+        heroic
+        bottles
       ];
+      environment.sessionVariables = {
+        STEAM_EXTRA_COMPAT_TOOLS_PATHS = "\${HOME}/.steam/root/compatibilitytools.d";
+      };
     })
   ];
 }
