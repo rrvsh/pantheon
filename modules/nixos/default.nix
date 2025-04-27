@@ -13,6 +13,7 @@ in
     ./hardware.nix
     ./nix-config.nix
     ./gaming.nix
+    ./filesystems.nix
   ];
 
   options = {

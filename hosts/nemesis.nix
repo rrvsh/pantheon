@@ -9,4 +9,5 @@
   hardware-config.cpu = "amd";
   hardware-config.gpu = "nvidia";
   gaming.steam.enable = true;
+  fs-config.mountHeliosData = true;
 }
