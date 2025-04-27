@@ -11,7 +11,6 @@ in
 {
   options = {
     "${moduleName}" = {
-      enable = lib.mkEnableOption "Enable ${moduleName}.";
       cpu = lib.mkOption {
         type = lib.types.str;
         default = "";
@@ -24,6 +23,7 @@ in
         example = "nvidia";
         description = "What GPU is being used.";
       };
+      usbAutoMount = lib.mkEnableOption "Enable auto mounting USB drives.";
     };
   };
 
@@ -76,6 +76,12 @@ in
         "nvidia_uvm"
         "nvidia_drm"
       ];
+    })
+    (lib.mkIf cfg.usbAutoMount {
+      services.udisks2 = {
+        enable = true;
+        mountOnMedia = true;
+      };
     })
   ];
 }

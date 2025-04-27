@@ -2,7 +2,6 @@
 {
   imports =
     [
-      ../nixosModules
       ../configs/security.nix
       ../configs/users.nix
       ../configs/networking.nix
@@ -15,5 +14,5 @@
   nixosModules.enable = true;
   nix-config.enable = true;
   boot-config.enable = true;
-  hardware-config.enable = true;
+  hardware-config.usbAutoMount = true;
 }

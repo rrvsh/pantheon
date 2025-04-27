@@ -23,6 +23,7 @@
           inputs.nixpkgs.lib.nixosSystem {
             specialArgs = args;
             modules = [
+              ./modules/nixos
               ./hosts/common.nix
               ./hosts/${hostname}.nix
             ];
