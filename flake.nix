@@ -24,6 +24,7 @@
             specialArgs = args;
             modules = [
               ./modules/nixos
+              ./modules/hm
               ./hosts/common.nix
               ./hosts/${hostname}.nix
             ];

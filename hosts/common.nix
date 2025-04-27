@@ -12,6 +12,7 @@
       ../configs/graphical.nix
     ];
   nixosModules.enable = true;
+  hmModules.enable = true;
   nix-config.enable = true;
   boot-config.enable = true;
   hardware-config.usbAutoMount = true;
