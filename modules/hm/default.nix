@@ -10,7 +10,10 @@ let
   cfg = config."${moduleName}";
 in
 {
-  imports = [ inputs.home-manager.nixosModules.home-manager ];
+  imports = [
+    inputs.home-manager.nixosModules.home-manager
+    ./hardware.nix
+  ];
 
   options = {
     "${moduleName}" = {
