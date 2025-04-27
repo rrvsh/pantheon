@@ -10,10 +10,6 @@ let
   cfg = config."${moduleName}";
 in
 {
-  imports = [
-    inputs.nix-gaming.nixosModules.platformOptimizations
-  ];
-
   options = {
     "${moduleName}" = {
       steam = {
@@ -24,23 +20,7 @@ in
 
   config = lib.mkMerge [
     (lib.mkIf cfg.steam.enable {
-      programs = {
-        steam = {
-          enable = true;
-          remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
-          protontricks.enable = true;
-          dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
-          localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
-          gamescopeSession.enable = true;
-          extraCompatPackages = with pkgs; [ proton-ge-bin ];
-          platformOptimizations.enable = true;
-        };
-        gamescope = {
-          enable = true;
-          capSysNice = true;
-        };
-        gamemode.enable = true;
-      };
+      programs.steam.enable = true;
       environment.systemPackages = with pkgs; [
         steam-run
         wineWowPackages.stable
