@@ -12,6 +12,7 @@ in
     ./boot.nix
     ./hardware.nix
     ./nix-config.nix
+    ./gaming.nix
   ];
 
   options = {
