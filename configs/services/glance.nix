@@ -25,6 +25,7 @@ let
         title = "Newsletters";
         type = "rss";
         style = "detailed-list";
+        limit = 100000;
         feeds = [
           {
             title = "selfh.st";
@@ -40,6 +41,7 @@ let
         title = "Blogs";
         type = "rss";
         style = "detailed-list";
+        limit = 100000;
         feeds = [
           {
             title = "Makefile.feld";
@@ -52,6 +54,10 @@ let
           {
             title = "Alex Haydock";
             url = "https://blog.infected.systems/posts/index.xml";
+          }
+          {
+            title = "journix.dev";
+            url = "https://journix.dev/feed.xml";
           }
         ];
       }
