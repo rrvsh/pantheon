@@ -10,4 +10,10 @@
       };
     };
   };
+  networking.firewall.allowedTCPPorts = [
+    5353 # spotifyd
+  ];
+  networking.firewall.allowedUDPPorts = [
+    5353 # spotifyd
+  ];
 }

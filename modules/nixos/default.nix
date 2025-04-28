@@ -14,11 +14,18 @@ in
     ./nix-config.nix
     ./gaming.nix
     ./filesystems.nix
+    ./networking.nix
   ];
 
   options = {
     "${moduleName}" = {
       enable = lib.mkEnableOption "Enable ${moduleName}.";
+      hostname = lib.mkOption {
+        type = lib.types.str;
+        default = "";
+        example = "goron";
+        description = "The name this machine will be known by.";
+      };
     };
   };
 

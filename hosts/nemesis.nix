@@ -10,4 +10,6 @@
   hardware-config.gpu = "nvidia";
   gaming.steam.enable = true;
   fs-config.mountHeliosData = true;
+  nw-config.wol.enable = true;
+  nw-config.wol.interface = "enp12s0";
 }
