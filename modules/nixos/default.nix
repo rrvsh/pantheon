@@ -15,6 +15,7 @@ in
     ./gaming.nix
     ./filesystems.nix
     ./networking.nix
+    ./services/glance.nix
   ];
 
   options = {

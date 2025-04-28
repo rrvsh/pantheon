@@ -1,4 +1,12 @@
+{
+  config,
+  lib,
+  ...
+}:
 let
+  moduleName = "service-glance";
+  cfg = config."${moduleName}";
+
   glancePort = 1227;
   homeColumn = {
     size = "full";
@@ -65,20 +73,32 @@ let
   };
 in
 {
-  home-manager.users.rafiq.services.glance = {
-    enable = true;
-    settings.server = {
-      host = "0.0.0.0";
-      port = glancePort;
+  options = {
+    "${moduleName}" = {
+      enable = lib.mkEnableOption "Enable ${moduleName}.";
     };
-    settings.pages = [
-      {
-        name = "Home";
-        columns = [
-          homeColumn
-        ];
-      }
-    ];
   };
-  networking.firewall.allowedTCPPorts = [ glancePort ];
+
+  config = lib.mkIf cfg.enable (
+    lib.mkMerge [
+      {
+        networking.firewall.allowedTCPPorts = [ glancePort ];
+        services.glance = {
+          enable = true;
+          settings.server = {
+            host = "0.0.0.0";
+            port = glancePort;
+          };
+          settings.pages = [
+            {
+              name = "Home";
+              columns = [
+                homeColumn
+              ];
+            }
+          ];
+        };
+      }
+    ]
+  );
 }
