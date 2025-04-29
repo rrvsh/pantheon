@@ -67,6 +67,10 @@ let
             title = "journix.dev";
             url = "https://journix.dev/feed.xml";
           }
+          {
+            title = "Venam's Blog";
+            url = "https://venam.net/blog/feed.xml";
+          }
         ];
       }
     ];
