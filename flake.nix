@@ -18,7 +18,6 @@
                 bootDisk
                 ;
             };
-            inherit (inputs.nixpkgs) lib;
           in
           inputs.nixpkgs.lib.nixosSystem {
             specialArgs = args;
@@ -38,6 +37,7 @@
         )
         (mkSystem "graphical" "mellinoe" "/dev/disk/by-id/nvme-eui.01000000000000008ce38e04019a68ab")
         (mkSystem "headless" "apollo" "/dev/disk/by-id/nvme-eui.002538d221b47b01")
+        (mkSystem "headless" "eurus" "/dev/disk/by-id/scsi-0QEMU_QEMU_HARDDISK_drive-scsi0-0-0-0")
       ];
     };
   inputs = {

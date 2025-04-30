@@ -35,13 +35,21 @@ in
         };
       kernelPackages = lib.mkDefault pkgs.linuxPackages_latest;
       initrd.availableKernelModules = [
+        "9p"
+        "9pnet_virtio"
         "ahci"
         "nvme"
+        "rtsx_pci_sdmmc"
         "sd_mod"
+        "sr_mod"
         "usb_storage"
         "usbhid"
+        "virtio_blk"
+        "virtio_mmio"
+        "virtio_net"
+        "virtio_pci"
+        "virtio_scsi"
         "xhci_pci"
-        "rtsx_pci_sdmmc"
       ];
     };
     services.dbus = {
