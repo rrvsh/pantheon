@@ -8,11 +8,11 @@
     interfaces.enp3s0.useDHCP = false; # Disable DHCP, we use static IP
     interfaces.enp3s0.ipv4.addresses = [
       {
-        address = "160.191.77.168";
+        address = "103.179.44.32";
         prefixLength = 24; # Or 255.255.255.0
       }
     ];
-    defaultGateway = "160.191.77.1"; # The gateway from the admin panel
+    defaultGateway = "103.179.44.1"; # The gateway from the admin panel
     nameservers = [
       "1.1.1.1"
       "1.0.0.1"
