@@ -10,6 +10,7 @@ in
 {
   imports = [
     ./boot.nix
+    ./de.nix
     ./hardware.nix
     ./nix-config.nix
     ./gaming.nix

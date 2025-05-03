@@ -11,9 +11,6 @@ with pkgs;
     ./programs/hyprlock.nix
     ./programs/hyprshade.nix
     ./programs/kitty.nix
-    ./programs/spotifyd.nix
-    ./hardware/audio.nix
-    ./hardware/bluetooth.nix
     ./programs/waybar.nix
   ];
 
