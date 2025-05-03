@@ -1,10 +1,5 @@
 { inputs, ... }:
 {
-  imports = [
-    ../configs/filesystems/hw-nemesis.nix
-    ../configs/hardware/powermanagement.nix
-    inputs.nixos-hardware.nixosModules.gigabyte-b650
-  ];
   boot-config.bootloader = "systemd-boot";
   hardware-config.cpu = "amd";
   hardware-config.gpu = "nvidia";
@@ -12,4 +7,18 @@
   fs-config.mountHeliosData = true;
   nw-config.wol.enable = true;
   nw-config.wol.interface = "enp12s0";
+
+  fileSystems."/" = {
+    device = "/dev/disk/by-uuid/e5005ea6-6c5a-4ab3-9767-ce7772582024";
+    fsType = "ext4";
+  };
+
+  fileSystems."/boot" = {
+    device = "/dev/disk/by-uuid/6BBE-0E70";
+    fsType = "vfat";
+    options = [
+      "fmask=0077"
+      "dmask=0077"
+    ];
+  };
 }

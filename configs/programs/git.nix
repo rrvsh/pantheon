@@ -1,6 +1,10 @@
 {
   home-manager.users.rafiq = {
     home.sessionVariables.GIT_CONFIG_GLOBAL = "$HOME/.config/git/config";
+    home.shellAliases = {
+      g = "git";
+      gs = "git status";
+    };
 
     programs.git = {
       enable = true;
