@@ -3,10 +3,13 @@
   lib,
   ...
 }:
+let
+  username = config.nixosModules.mainUser;
+in
 {
   config = lib.mkMerge [
     (lib.mkIf config."hardware-config".usbAutoMount {
-      home-manager.users.rafiq.services.udiskie = {
+      home-manager.users.${username}.services.udiskie = {
         enable = true;
         settings = {
           # workaround for

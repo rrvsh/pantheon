@@ -8,6 +8,7 @@
 let
   moduleName = "hmModules";
   cfg = config."${moduleName}";
+  username = config.nixosModules.mainUser;
 in
 {
   imports = [
@@ -26,9 +27,9 @@ in
       useGlobalPkgs = true;
       useUserPackages = true;
       extraSpecialArgs = specialArgs;
-      users.rafiq.home = {
-        username = "rafiq";
-        homeDirectory = "/home/rafiq";
+      users."${username}".home = {
+        username = username;
+        homeDirectory = "/home/${username}";
         stateVersion = "25.05";
       };
     };

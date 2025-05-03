@@ -27,6 +27,12 @@ in
         example = "goron";
         description = "The name this machine will be known by.";
       };
+      mainUser = lib.mkOption {
+        type = lib.types.str;
+        default = "";
+        example = "link";
+        description = "The main user of pantheon.";
+      };
     };
   };
 
