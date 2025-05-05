@@ -54,6 +54,22 @@ in
         networking.firewall.allowedTCPPorts = [ 5353 ];
         networking.firewall.allowedUDPPorts = [ 5353 ];
       })
+      (lib.mkIf (cfg.type == "hyprland") {
+        environment.loginShellInit = # sh
+          ''
+            if [[ -z "$SSH_CLIENT" && -z "$SSH_CONNECTION" ]]; then
+              if uwsm check may-start; then
+                exec uwsm start hyprland-uwsm.desktop
+              fi
+            fi
+          '';
+
+        programs.hyprland = {
+          enable = true;
+          withUWSM = true;
+        };
+
+      })
     ]
   );
 }
