@@ -1,0 +1,8 @@
+# comment
+snippet option
+  lib.mkOption {
+    type = lib.types.$1;
+    default = $2;
+    example = "$3";
+    description = "$4";
+  };
