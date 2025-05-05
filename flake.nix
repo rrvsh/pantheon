@@ -7,27 +7,23 @@
     let
       mkSystem = type: hostname: bootDisk: {
         name = "${hostname}";
-        value =
-          let
-            args = {
-              inherit
-                self
-                inputs
-                type
-                hostname
-                bootDisk
-                ;
-            };
-          in
-          inputs.nixpkgs.lib.nixosSystem {
-            specialArgs = args;
-            modules = [
-              ./modules/nixos
-              ./modules/hm
-              ./hosts/common.nix
-              ./hosts/${hostname}.nix
-            ];
+        value = inputs.nixpkgs.lib.nixosSystem {
+          specialArgs = {
+            inherit
+              self
+              inputs
+              type
+              hostname
+              bootDisk
+              ;
           };
+          modules = [
+            ./modules/nixos
+            ./modules/hm
+            ./hosts/common.nix
+            ./hosts/${hostname}.nix
+          ];
+        };
       };
     in
     {
