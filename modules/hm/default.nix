@@ -14,6 +14,7 @@ in
   imports = [
     inputs.home-manager.nixosModules.home-manager
     ./hardware.nix
+    ./programs/editor.nix
   ];
 
   options = {
@@ -31,6 +32,12 @@ in
           default = "firefox";
           example = "firefox";
           description = "What browser is the default.";
+        };
+        editor = lib.mkOption {
+          type = lib.types.str;
+          default = "nvf";
+          example = "nvf";
+          description = "What editor is the default.";
         };
         launcher = lib.mkOption {
           type = lib.types.str;

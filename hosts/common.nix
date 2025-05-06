@@ -18,9 +18,11 @@
   nixosModules.enable = true;
   nixosModules.hostname = hostname;
   nixosModules.mainUser = "rafiq";
-  hmModules.enable = true;
   nix-config.enable = true;
   boot-config.enable = true;
   hardware-config.usbAutoMount = true;
   nw-config.backend = "networkmanager";
+
+  hmModules.enable = true;
+  hmModules.mainApps.editor = "nvf";
 }
