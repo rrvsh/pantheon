@@ -14,7 +14,7 @@ in
   home-manager.users.rafiq = {
     programs.yazi = {
       enable = true;
-      shellWrapperName = "y";
+      shellWrapperName = "t";
       # yazi.toml
       settings = {
         manager = {
