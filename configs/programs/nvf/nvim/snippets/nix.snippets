@@ -6,3 +6,29 @@ snippet option
     example = "$3";
     description = "$4";
   };
+
+snippet fn An empty function that takes an attribute set as a parameter.
+  { $1 }:
+  {
+    $2
+  }
+
+snippet module An empty module.
+  { config, lib, ... }:
+  let
+    moduleName = "$2";
+    cfg = config.${${moduleName}};
+  in
+  {
+    imports = [];
+
+    options.${${moduleName}} = {
+      enable = lib.mkEnableOption "Enable ${${moduleName}}";
+    };
+
+    configs = lib.mkIf cfg.enable (lib.mkMerge [
+      {
+        $3
+      }
+    ]);
+  }
