@@ -47,6 +47,9 @@
       inputs.systems.follows = "systems";
       url = "github:numtide/flake-utils";
     };
+    flake-parts = {
+      url = "github:hercules-ci/flake-parts";
+    };
     home-manager = {
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:nix-community/home-manager";
@@ -65,6 +68,7 @@
     };
     nix-gaming = {
       inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-parts.follows = "flake-parts";
       url = "github:fufexan/nix-gaming";
     };
     nvf = {
@@ -72,6 +76,7 @@
         flake-utils.follows = "flake-utils";
         nixpkgs.follows = "nixpkgs";
         systems.follows = "systems";
+        flake-parts.follows = "flake-parts";
       };
       url = "github:NotAShelf/nvf";
     };
