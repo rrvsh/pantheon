@@ -9,7 +9,7 @@
     programs.git = {
       enable = true;
       userName = "Mohammad Rafiq";
-      userEmail = "mohammadrafiq567@gmail.com";
+      userEmail = "rafiq@rrv.sh";
       # Thanks to https://blog.notashelf.dev/posts/2025-02-24-ssh-signing-commits.html!
       signing.key = "~/.ssh/id_ed25519.pub";
       signing.signByDefault = true;
