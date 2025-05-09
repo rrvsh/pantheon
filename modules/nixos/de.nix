@@ -13,7 +13,7 @@ in
       enable = lib.mkEnableOption "Enable ${moduleName}.";
       type = lib.mkOption {
         type = lib.types.str;
-        default = "";
+        default = "hsjaia";
         example = "hyprland";
         description = "What desktop environment should be installed on the host.";
       };

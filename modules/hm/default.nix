@@ -15,6 +15,7 @@ in
     inputs.home-manager.nixosModules.home-manager
     ./hardware.nix
     ./programs/editor.nix
+    ./programs/de.nix
   ];
 
   options = {

@@ -7,7 +7,6 @@ with pkgs;
     ./programs/firefox.nix
     ./programs/fuzzel.nix
     ./programs/getty.nix
-    ./programs/hyprland.nix
     ./programs/hyprlock.nix
     ./programs/hyprshade.nix
     ./programs/kitty.nix
