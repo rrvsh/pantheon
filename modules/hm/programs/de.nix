@@ -36,6 +36,8 @@ in
             "$mainMonitor" = "desc:OOO AN-270W04K";
             "$vertMonitor" = "desc:Philips Consumer Electronics Company PHL 246V5 AU11330000086";
             "$mainMod" = "SUPER";
+            "$hyper" = "CONTROL_SHIFT_ALT_SUPER";
+            "$meh" = "CONTROL_SHIFT_ALT";
 
             "$terminal" = "uwsm app -- kitty -1";
             "$browser" = "uwsm app -- firefox";
@@ -106,6 +108,7 @@ in
             bind = [
               "$mainMod, W, killactive"
               "$mainMod, M, exec, uwsm stop"
+              "$mainMod, Up, fullscreen"
 
               # Launch utilities
               "$mainMod, return, exec, $multiplexer"
@@ -115,43 +118,36 @@ in
               "$mainMod, V, exec, $clipboard"
               "$mainMod_SHIFT, A, exec, hyprpicker -a"
 
-              # move between windows
+              # Window Settings
               "$mainMod, H, cyclenext, visible"
               "$mainMod, L, cyclenext, visible prev"
-
-              # HJKL to move a window
               "$mainMod_ALT, H, movewindow, l"
               "$mainMod_ALT, J, movewindow, d"
               "$mainMod_ALT, K, movewindow, u"
               "$mainMod_ALT, L, movewindow, r"
-
-              # HJKL to resize a window
               "ALT_SHIFT, H, resizeactive, -10% 0"
               "ALT_SHIFT, J, resizeactive, 0 -10%"
               "ALT_SHIFT, K, resizeactive, 0 10%"
               "ALT_SHIFT, L, resizeactive, 10% 0"
 
-              # Make fullscreen
-              "$mainMod, Up, fullscreen"
-
-              # H and L to move between workspaces on the current monitor including creation
+              # Workspace Settings
               "$mainMod_CTRL, H, workspace, r-1"
               "$mainMod_CTRL, L, workspace, r+1"
-
-              "SUPER, 7, exec, ${pkgs.playerctl}/bin/playerctl previous"
-              "SUPER, 8, exec, ${pkgs.playerctl}/bin/playerctl play-pause"
-              "SUPER, 9, exec, ${pkgs.playerctl}/bin/playerctl next"
+              "$hyper, H, movetoworkspace, r-1"
+              "$hyper, L, movetoworkspace, r+1"
             ];
 
             # Repeat when held
             bindle = [
-              # Keyboard Media Keys
-              "SUPER, equal, exec, wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%+"
-              "SUPER, minus, exec, wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%-"
+              "SUPER, 6, exec, wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%+"
+              "SUPER, 7, exec, ${pkgs.playerctl}/bin/playerctl previous"
+              "SUPER, 8, exec, ${pkgs.playerctl}/bin/playerctl play-pause"
+              "SUPER, 9, exec, ${pkgs.playerctl}/bin/playerctl next"
+              "SUPER, 0, exec, wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%-"
             ];
 
             bindm = [
-              "ALT, mouse:272, movewindow"
+              "$meh, mouse:272, movewindow"
             ];
 
             input = {
