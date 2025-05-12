@@ -144,10 +144,13 @@ in
               "SUPER, 8, exec, ${pkgs.playerctl}/bin/playerctl play-pause"
               "SUPER, 9, exec, ${pkgs.playerctl}/bin/playerctl next"
               "SUPER, 0, exec, wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%-"
+              "$meh, mouse_up, resizeactive, 10% 10%"
+              "$meh, mouse_down, resizeactive, -10% -10%"
             ];
 
             bindm = [
               "$meh, mouse:272, movewindow"
+              "$meh, mouse:273, resizewindow"
             ];
 
             input = {
