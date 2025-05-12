@@ -17,6 +17,7 @@ in
         example = "hyprland";
         description = "What desktop environment should be installed on the host.";
       };
+      enableSunshine = lib.mkEnableOption "Enable streaming with Sunshine.";
     };
   };
 
@@ -69,6 +70,16 @@ in
           withUWSM = true;
         };
 
+      })
+      (lib.mkIf cfg.enableSunshine {
+        services.sunshine = {
+          enable = true;
+          capSysAdmin = true;
+          autoStart = true;
+          openFirewall = true;
+          settings = { };
+          applications = { };
+        };
       })
     ]
   );

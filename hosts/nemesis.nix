@@ -8,6 +8,7 @@
   nw-config.wol.interface = "enp12s0";
   de.enable = true;
   de.type = "hyprland";
+  de.enableSunshine = true;
 
   fileSystems."/" = {
     device = "/dev/disk/by-uuid/e5005ea6-6c5a-4ab3-9767-ce7772582024";
