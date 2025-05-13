@@ -37,7 +37,11 @@ in
       };
     }
     {
-      services.openssh.enable = true;
+      services.openssh = {
+        enable = true;
+        settings.ClientAliveInterval = 60;
+        settings.ClientAliveCountMax = 3;
+      };
       networking.firewall.allowedTCPPorts = [ 22 ];
     }
     {
