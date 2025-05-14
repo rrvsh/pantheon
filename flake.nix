@@ -5,33 +5,17 @@
       ...
     }@inputs:
     let
-      mkSystem = type: hostname: bootDisk: {
-        name = "${hostname}";
-        value = inputs.nixpkgs.lib.nixosSystem {
-          specialArgs = {
-            inherit
-              self
-              inputs
-              type
-              hostname
-              bootDisk
-              ;
-          };
-          modules = [
-            ./modules/nixos
-            ./modules/hm
-            ./hosts/common.nix
-            ./hosts/${hostname}.nix
-          ];
-        };
+      myLib = import ./lib {
+        inherit self inputs;
+        workingDir = ./.;
       };
     in
     {
       nixosConfigurations = builtins.listToAttrs [
-        (mkSystem "graphical" "nemesis"
+        (myLib.mkSystem "graphical" "nemesis"
           "nvme-nvme.c0a9-323332354536453737343334-435432303030503353534438-00000001"
         )
-        (mkSystem "headless" "apollo" "/dev/disk/by-id/nvme-eui.002538d221b47b01")
+        (myLib.mkSystem "headless" "apollo" "/dev/disk/by-id/nvme-eui.002538d221b47b01")
       ];
     };
   inputs = {
