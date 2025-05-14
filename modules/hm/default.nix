@@ -14,9 +14,7 @@ in
   imports = [
     inputs.home-manager.nixosModules.home-manager
     ./hardware.nix
-    ./programs/default.nix
-    ./programs/editor.nix
-    ./programs/de.nix
+    ./programs
   ];
 
   options = {
