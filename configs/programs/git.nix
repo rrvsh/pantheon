@@ -4,6 +4,10 @@
     home.shellAliases = {
       g = "git";
       gs = "git status";
+      gc = "git commit";
+      gcam = "git commit -am";
+      gu = "git push";
+      gy = "git pull";
     };
 
     programs.git = {
