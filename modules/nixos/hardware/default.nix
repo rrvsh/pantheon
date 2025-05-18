@@ -17,4 +17,11 @@
     gpu = lib.pantheon.mkStrOption;
     platform = lib.pantheon.mkStrOption;
   };
+
+  config = {
+    hardware.bluetooth = {
+      enable = true;
+      settings.General.Experimental = true;
+    };
+  };
 }
