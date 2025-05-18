@@ -11,6 +11,8 @@
   hardware.platform = "amd";
   hardware.gpu = "nvidia";
 
+  desktop.windowManager = "hyprland";
+
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 }
 

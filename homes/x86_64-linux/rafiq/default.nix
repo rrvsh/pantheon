@@ -13,6 +13,7 @@
   home.packages = with pkgs; [
     neovim
     ripgrep
+    kitty
   ];
   home.sessionVariables = {
     EDITOR = "nvim";
