@@ -8,10 +8,6 @@
         extraGroups = [ 
 	  "wheel" 
 	];
-        packages = with pkgs; [
-          git
-          neovim
-        ];
       };
     }
   ];
