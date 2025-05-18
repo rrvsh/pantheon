@@ -1,5 +1,6 @@
 {config, lib, osConfig, ...}:
 {
+  
   xdg.configFile."uwsm/env".text = # sh
   ''
   
