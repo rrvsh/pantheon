@@ -1,8 +1,8 @@
 { config, lib, pkgs, osConfig, ... }:
 {
   imports = [
-    ./programs/git.nix
-    ./programs/zsh.nix
+    ./cli/git.nix
+    ./cli/zsh.nix
   ];
 
   home.sessionVariables = {

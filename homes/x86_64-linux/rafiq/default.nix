@@ -2,17 +2,9 @@
 
 {
   imports = [
-    ./programs/hyprland.nix
     ./cli.nix
+    ./desktop.nix
   ];
-
-  home.packages = with pkgs; [
-	  kitty
-  ];
-  home.sessionVariables = {
-    TERMINAL = "kitty";
-    BROWSER = ", firefox";
-  };
 
   home.persistence."/persist/home/rafiq" = {
 	directories = [
