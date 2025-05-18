@@ -5,6 +5,7 @@ in
 {
   config = lib.mkIf (cfg.enable) (lib.mkMerge [
     {
+  boot.initrd.kernelModules = [ "dm-snapshot" ];
   disko.devices.disk.main = {
   device = cfg.drive;
     type = "disk";

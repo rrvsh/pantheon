@@ -3,6 +3,8 @@
   imports = [
     ./btrfs.nix
     ./nvidia.nix
+    ./audio.nix
+    ./cpu.nix
   ];
 
   options.hardware = {
@@ -12,5 +14,6 @@
       ephemeralRoot = lib.mkEnableOption "";
     };
     gpu = lib.pantheon.mkStrOption;
+    platform = lib.pantheon.mkStrOption;
   };
 }
