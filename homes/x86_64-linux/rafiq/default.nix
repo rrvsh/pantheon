@@ -18,6 +18,7 @@
   home.persistence."/persist/home/rafiq" = {
 directories = [
 ".ssh"
+"repos"
 ];
 allowOther = true;
   };
