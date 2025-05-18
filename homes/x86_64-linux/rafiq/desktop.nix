@@ -2,6 +2,7 @@
 {
 imports = [
     ./desktop/hyprland.nix
+    ./desktop/firefox.nix
 ];
   home.packages = with pkgs; [
 	  kitty
@@ -10,5 +11,4 @@ imports = [
     TERMINAL = "kitty";
     BROWSER = "firefox";
   };
-
 }
