@@ -1,7 +1,8 @@
 { config, lib, pkgs, ... }:
 {
   system.hostname = "nemesis";
-  system.mainUser = "rafiq";
+  system.mainUser.name = "rafiq";
+  system.mainUser.publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILdsZyY3gu8IGB8MzMnLdh+ClDxQQ2RYG9rkeetIKq8n";
   system.bootloader = "systemd-boot";
   hardware.drives.btrfs = {
     enable = true;

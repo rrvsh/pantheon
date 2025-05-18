@@ -5,19 +5,17 @@
     users.mutableUsers = false;
     users.groups.users = {
 	gid = 100;
-      members = [ "${config.system.mainUser}" ];
+      members = [ "${config.system.mainUser.name}" ];
     };
-      users.users."${config.system.mainUser}" = {
+      users.users."${config.system.mainUser.name}" = {
       linger = true;
       uid = 1000;
         isNormalUser = true;
-        initialPassword = "1";
+	hashedPasswordFile = config.sops.secrets."${config.system.mainUser.name}/hashedPassword".path;
         extraGroups = [ "wheel" ];
-      openssh.authorizedKeys.keys = [
-        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILdsZyY3gu8IGB8MzMnLdh+ClDxQQ2RYG9rkeetIKq8n"
-      ];
+      openssh.authorizedKeys.keys = [ config.system.mainUser.publicKey ];
       };
-      services.getty.autologinUser = config.system.mainUser;
+      services.getty.autologinUser = config.system.mainUser.name;
     }
   ];
 }
