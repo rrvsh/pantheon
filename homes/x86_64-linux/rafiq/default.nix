@@ -23,8 +23,8 @@
 	exit 1
     fi
 
-    git add .
-    nixos-rebuild switch --flake . --use-remote-sudo
+    git add . && \
+    nixos-rebuild switch --flake . --use-remote-sudo && \
     git commit -a
     '')
   ];
