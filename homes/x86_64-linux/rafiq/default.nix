@@ -3,6 +3,7 @@
 {
   imports = [
     ./programs/git.nix
+    ./programs/hyprland.nix
   ];
 
   home.stateVersion = "24.11";
