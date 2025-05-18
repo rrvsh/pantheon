@@ -7,6 +7,7 @@
   home.packages = with pkgs; [
     neovim
     ripgrep
+    fzf
     (pkgs.writeShellScriptBin "rebuild" # sh
     ''
     if [ ! -f "flake.nix" ]; then
@@ -22,6 +23,10 @@
 
   home.sessionVariables = {
     EDITOR = "nvim";
+  };
+
+  home.shellAliases = {
+    edit = "nvim $(fzf)";
   };
 
   programs.nix-index.enable = true;
