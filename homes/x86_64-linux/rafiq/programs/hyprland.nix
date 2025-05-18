@@ -23,6 +23,7 @@ in
 	"SUPER, W, killactive"
 
 	"SUPER, return, exec, uwsm app -- $TERMINAL"
+	"SUPER, O, exec, uwsm app -- $BROWSER"
 
             "SUPER, H, cyclenext, visible"
             "SUPER, L, cyclenext, visible prev"

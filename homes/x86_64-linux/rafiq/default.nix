@@ -11,6 +11,7 @@
   ];
   home.sessionVariables = {
     TERMINAL = "kitty";
+    BROWSER = ", firefox";
   };
 
   home.persistence."/persist/home/rafiq" = {
