@@ -9,6 +9,9 @@
   home.packages = with pkgs; [
 	  kitty
   ];
+  home.sessionVariables = {
+    TERMINAL = "kitty";
+  };
 
   home.persistence."/persist/home/rafiq" = {
 	directories = [
