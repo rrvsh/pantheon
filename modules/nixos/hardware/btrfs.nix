@@ -75,6 +75,7 @@ in
 	    btrfs subvolume create /btrfs_tmp/root
 	    umount /btrfs_tmp
 	  '';
+	  programs.fuse.userAllowOther = true;
     })
   ]);
 }

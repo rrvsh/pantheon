@@ -16,5 +16,10 @@
     EDITOR = "nvim";
   };
 
-  programs.home-manager.enable = true;
+  home.persistence."/persist/home/rafiq" = {
+directories = [
+".ssh"
+];
+allowOther = true;
+  };
 }

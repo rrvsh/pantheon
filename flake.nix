@@ -19,5 +19,8 @@
 			disko.nixosModules.disko
 			impermanence.nixosModules.impermanence
 		];
+		homes.modules = with inputs; [
+impermanence.homeManagerModules.impermanence
+		];
 	 };
 }
