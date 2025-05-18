@@ -5,6 +5,7 @@
     ./nvidia.nix
     ./audio.nix
     ./cpu.nix
+    ./networking.nix
   ];
 
   options.hardware = {

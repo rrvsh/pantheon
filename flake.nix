@@ -5,6 +5,7 @@
     disko.inputs.nixpkgs.follows = "nixpkgs";
     snowfall-lib.url = "github:snowfallorg/lib";
     snowfall-lib.inputs.nixpkgs.follows = "nixpkgs";
+    impermanence.url = "github:nix-community/impermanence";
   };
 
   outputs = inputs: 
@@ -13,7 +14,8 @@
 		src = ./.;
 		snowfall.namespace = "pantheon";
 		systems.modules.nixos = with inputs; [
-			inputs.disko.nixosModules.disko
+			disko.nixosModules.disko
+			impermanence.nixosModules.impermanence
 		];
 	 };
 }

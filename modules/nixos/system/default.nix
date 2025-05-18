@@ -8,6 +8,7 @@
   ];
 
   options.system = {
+   hostname = lib.pantheon.mkStrOption;
    mainUser = lib.pantheon.mkStrOption;
    bootloader = lib.pantheon.mkStrOption;
   };
