@@ -4,6 +4,19 @@
     ./programs/git.nix
     ./programs/zsh.nix
   ];
+
+  home.sessionVariables = {
+    EDITOR = "nvim";
+  };
+
+  home.shellAliases = {
+    edit = "nvim $(fzf)";
+  };
+
+  programs.zoxide.enable = true;
+  programs.nix-index.enable = true;
+  programs.nix-index-database.comma.enable = true;
+
   home.packages = with pkgs; [
     neovim
     ripgrep
@@ -20,15 +33,4 @@
     git commit -a
     '')
   ];
-
-  home.sessionVariables = {
-    EDITOR = "nvim";
-  };
-
-  home.shellAliases = {
-    edit = "nvim $(fzf)";
-  };
-
-  programs.nix-index.enable = true;
-  programs.nix-index-database.comma.enable = true;
 }
