@@ -19,6 +19,7 @@
   };
 
   config = {
+    services.fwupd.enable = true;
     hardware.bluetooth = {
       enable = true;
       settings.General.Experimental = true;
