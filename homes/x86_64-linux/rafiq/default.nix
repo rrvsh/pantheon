@@ -4,6 +4,7 @@
   imports = [
     ./programs/git.nix
     ./programs/hyprland.nix
+    ./programs/zsh.nix
   ];
 
   home.stateVersion = "24.11";
@@ -27,6 +28,7 @@
     git commit -a
     '')
   ];
+
   home.sessionVariables = {
     EDITOR = "nvim";
   };

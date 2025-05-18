@@ -2,6 +2,7 @@
 {
   config = lib.mkMerge [
     {
+      users.defaultUserShell = pkgs.zsh;
       users.users."${config.system.mainUser}" = {
         isNormalUser = true;
         initialPassword = "1";
