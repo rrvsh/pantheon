@@ -1,4 +1,4 @@
-{lib, device,...}:
+{lib, device, ...}:
 {
   boot.initrd.postDeviceCommands = lib.mkAfter ''
     mkdir /btrfs_tmp

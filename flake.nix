@@ -3,15 +3,17 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     disko.url = "github:nix-community/disko";
     disko.inputs.nixpkgs.follows = "nixpkgs";
+    snowfall-lib.url = "github:snowfallorg/lib";
+    snowfall-lib.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = inputs: {
-    nixosConfigurations.nemesis = inputs.nixpkgs.lib.nixosSystem {
-      specialArgs = { inherit inputs; };
-      modules = [
-        inputs.disko.nixosModules.disko
-        ./configuration.nix
-      ];
-    };
-  };
+  outputs = inputs: 
+	 inputs.snowfall-lib.mkFlake {
+		inherit inputs;
+		src = ./.;
+		snowfall.namespace = "pantheon";
+		systems.modules.nixos = with inputs; [
+			inputs.disko.nixosModules.disko
+		];
+	 };
 }
