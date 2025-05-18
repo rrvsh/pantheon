@@ -13,10 +13,10 @@
 
   desktop.windowManager = "hyprland";
   desktop.mainMonitor = {
-id = "HDMI-A-1";
-scale = "2";
-resolution = "3840x2160";
-refresh-rate = "60";
+id = "desc:OOO AN-270W04K";
+scale = "1";
+resolution = "2560x1440";
+refresh-rate = "144";
   };
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
