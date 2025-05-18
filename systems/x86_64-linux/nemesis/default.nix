@@ -5,6 +5,7 @@
     drive = "/dev/disk/by-id/nvme-CT2000P3SSD8_2325E6E77434";
     ephemeralRoot = true;
   };
+  hardware.gpu = "nvidia";
 
   boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" ];
   boot.initrd.kernelModules = [ "dm-snapshot" ];
