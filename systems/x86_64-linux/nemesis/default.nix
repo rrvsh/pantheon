@@ -1,10 +1,10 @@
-{ config, lib, pkgs, modulesPath, ... }:
+{ config, lib, pkgs, ... }:
 {
-  imports =
-    [ 
-      (modulesPath + "/installer/scan/not-detected.nix")
-      (import ./disko.nix {inherit lib; device = "/dev/disk/by-id/nvme-CT2000P3SSD8_2325E6E77434";})
-    ];
+  hardware.drives.btrfs = {
+    enable = true;
+    drive = "/dev/disk/by-id/nvme-CT2000P3SSD8_2325E6E77434";
+    ephemeralRoot = true;
+  };
 
   boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" ];
   boot.initrd.kernelModules = [ "dm-snapshot" ];
