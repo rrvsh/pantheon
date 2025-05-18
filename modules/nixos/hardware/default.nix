@@ -8,15 +8,9 @@
   options.hardware = {
     drives.btrfs = {
       enable = lib.mkEnableOption "";
-      drive = lib.mkOption {
-        type = lib.types.str;
-        default = "";
-      }; 
+      drive = lib.pantheon.mkStrOption;
       ephemeralRoot = lib.mkEnableOption "";
     };
-    gpu = lib.mkOption {
-      type = lib.types.str;
-        default = "";
-    };
+    gpu = lib.pantheon.mkStrOption;
   };
 }
