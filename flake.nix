@@ -10,6 +10,8 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     nix-index-database.url = "github:nix-community/nix-index-database";
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
+    sops-nix.url = "github:Mic92/sops-nix";
+    sops-nix.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = inputs: 
@@ -20,6 +22,7 @@
 		systems.modules.nixos = with inputs; [
 			disko.nixosModules.disko
 			impermanence.nixosModules.impermanence
+			sops-nix.nixosModules.sops
 		];
 		homes.modules = with inputs; [
 impermanence.homeManagerModules.impermanence

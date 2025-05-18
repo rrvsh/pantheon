@@ -5,6 +5,7 @@
     ./users.nix
     ./localisation.nix
     ./nix-config.nix
+    ./secrets.nix
   ];
 
   options.system = {
