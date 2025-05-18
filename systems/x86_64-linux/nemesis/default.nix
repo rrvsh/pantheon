@@ -12,6 +12,12 @@
   hardware.gpu = "nvidia";
 
   desktop.windowManager = "hyprland";
+  desktop.mainMonitor = {
+id = "HDMI-A-1";
+scale = "2";
+resolution = "3840x2160";
+refresh-rate = "60";
+  };
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 }

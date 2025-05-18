@@ -1,4 +1,7 @@
 {config, lib, osConfig, ...}:
+let
+  mainMonitor = osConfig.desktop.mainMonitor;
+in
 {
   xdg.configFile."uwsm/env".text = # sh
   ''
@@ -9,6 +12,12 @@
     systemd.enable = false;
     settings = {
       "$hypr" = "CTRL_SUPER_ALT_SHIFT";
+
+          monitor = [
+            "${mainMonitor.id}, ${mainMonitor.resolution}@${mainMonitor.refresh-rate}, auto, ${mainMonitor.scale}"
+            ", preferred, auto, 1"
+          ];
+
       bind = [
         "$hypr, Q, exec, uwsm stop"
 	"SUPER, W, killactive"
