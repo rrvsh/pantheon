@@ -30,7 +30,7 @@ refresh-rate = "144";
     ];
     files = [
       "/etc/ssh/ssh_host_ed25519_key"
-      "/etc/ssh/ssh_host_ed25519_key_pub"
+      "/etc/ssh/ssh_host_ed25519_key.pub"
       "/etc/machine-id"
     ];
   };
