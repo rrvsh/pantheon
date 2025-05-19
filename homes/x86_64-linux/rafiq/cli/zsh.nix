@@ -1,5 +1,6 @@
 { config, lib, ... }:
 {
+  home.sessionVariables.SHELL = "zsh";
   programs.zsh = {
     enable = true;
     enableVteIntegration = true;
