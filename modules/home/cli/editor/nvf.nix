@@ -1,6 +1,7 @@
 { config, lib, ... }:
 {
   config = lib.mkIf (config.cli.editor == "nvf") {
+    home.sessionVariables.EDITOR = "nvim";
     programs.nvf = {
       enable = true;
       settings.vim = {
