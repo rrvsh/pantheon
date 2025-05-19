@@ -12,6 +12,8 @@
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
     sops-nix.url = "github:Mic92/sops-nix";
     sops-nix.inputs.nixpkgs.follows = "nixpkgs";
+    nvf.url = "github:notashelf/nvf";
+    nvf.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = inputs: 
@@ -27,6 +29,7 @@
 		homes.modules = with inputs; [
 impermanence.homeManagerModules.impermanence
 nix-index-database.hmModules.nix-index
+nvf.homeManagerModules.default
 		];
 	 };
 }

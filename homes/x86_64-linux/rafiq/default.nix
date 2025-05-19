@@ -6,7 +6,7 @@
     ./desktop.nix
   ];
 
-  cli.editor = "nvim";
+  cli.editor = "nvf";
   cli.file-browser = "yazi";
 
   home.persistence."/persist/home/rafiq" = {

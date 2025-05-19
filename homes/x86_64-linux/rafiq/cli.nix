@@ -19,7 +19,6 @@
   programs.nix-index-database.comma.enable = true;
 
   home.packages = with pkgs; [
-    neovim
     ripgrep
     fzf
     pantheon.rebuild

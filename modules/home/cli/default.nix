@@ -2,6 +2,7 @@
 {
   imports = [
     ./file-browser/yazi.nix
+    ./editor/nvf.nix
   ];
 
   options.cli =	{
