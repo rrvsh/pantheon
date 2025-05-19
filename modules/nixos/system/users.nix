@@ -16,6 +16,7 @@
       openssh.authorizedKeys.keys = [ config.system.mainUser.publicKey ];
       };
       services.getty.autologinUser = config.system.mainUser.name;
+      security.sudo.wheelNeedsPassword = false;
     }
   ];
 }
