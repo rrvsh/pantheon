@@ -6,6 +6,9 @@
     ./desktop.nix
   ];
 
+  cli.editor = "nvim";
+  cli.file-browser = "yazi";
+
   home.persistence."/persist/home/rafiq" = {
 	directories = [
 	".ssh"
