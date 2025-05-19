@@ -15,6 +15,8 @@ PrintMotd = true;};
   services.tailscale = {
   enable = true;
   authKeyFile = config.sops.secrets."keys/tailscale".path;};
+    environment.persistence."/persist".files = [ "/var/lib/tailscale/tailscaled.state"];
     }
+
   ];
 }
