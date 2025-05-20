@@ -6,18 +6,14 @@
   cli.git.name = "Mohammad Rafiq";
   cli.git.email = "rafiq@rrv.sh";
   cli.git.defaultBranch = "prime";
- desktop.windowManager = "hyprland";
- desktop.browser = "firefox";
- desktop.terminal = "kitty";
+  desktop.windowManager = "hyprland";
+  desktop.browser = "firefox";
+  desktop.terminal = "kitty";
 
-  home.shellAliases.v = "nvim";
   home.shellAliases = {
+    v = "nvim";
     edit = "nvim $(fzf)";
   };
-
-  programs.zoxide.enable = true;
-  programs.nix-index.enable = true;
-  programs.nix-index-database.comma.enable = true;
 
   home.packages = with pkgs; [
     ripgrep
@@ -26,13 +22,13 @@
     pantheon.rebuild
   ];
 
+  home.persistence."/persist/home/rafiq".directories = [
+	"repos" 
+	];
+
     programs.direnv = {
       enable = true;
       nix-direnv.enable = true;
     };
 
-  home.persistence."/persist/home/rafiq".directories = [
-	"repos" 
-        ".local/share/zoxide" 
-	];
 }
