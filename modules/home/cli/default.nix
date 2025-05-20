@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  pkgs,
   ...
 }:
 {
@@ -28,6 +29,17 @@
     {
       programs.nix-index.enable = true;
       programs.nix-index-database.comma.enable = true;
+    }
+    {
+      home.shellAliases.ai = "aichat -r %shell% -e";
+
+      home.packages = with pkgs; [ aichat ];
+
+      xdg.configFile."aichat/config.yaml".text = ''
+        model: gemini:gemini-2.0-flash
+        clients:
+        - type: gemini
+      '';
     }
   ];
 }
