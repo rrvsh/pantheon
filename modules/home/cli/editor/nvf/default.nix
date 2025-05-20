@@ -5,18 +5,12 @@
     programs.nvf = {
       enable = true;
       settings.vim = {
+        options = import ./options.nix;
         keymaps = import ./keymaps.nix;
         lsp = import ./lsp.nix;
         languages = import ./languages.nix;
         autocomplete = import ./autocomplete.nix;
-        utility.yazi-nvim = {
-          enable = true;
-          mappings = {
-            openYazi = "t";
-            openYaziDir = "T";
-          };
-          setupOpts.open_for_directories = true;
-        };
+        utility = import ./utility.nix;
       };
     };
   };
