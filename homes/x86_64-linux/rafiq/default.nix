@@ -19,7 +19,6 @@
 
   home.packages = with pkgs; [
     ripgrep
-    fzf
     devenv
     pantheon.rebuild
     pantheon.edit
@@ -32,6 +31,14 @@
   programs.direnv = {
     enable = true;
     nix-direnv.enable = true;
+  };
+
+  programs = {
+    thefuck.enable = true;
+    fzf = {
+      enable = true;
+      enableZshIntegration = true;
+    };
   };
 
 }
