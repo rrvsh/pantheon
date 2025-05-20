@@ -22,6 +22,7 @@
     devenv
     pantheon.rebuild
     pantheon.edit
+    pantheon.inspect
   ];
 
   home.persistence."/persist/home/rafiq".directories = [
