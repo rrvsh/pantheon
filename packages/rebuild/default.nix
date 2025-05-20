@@ -19,7 +19,7 @@ pkgs.writeShellScriptBin "rebuild" # sh
     echo "--- opening test shell... ---"
     ${pkgs.cowsay}/bin/cowsay -f elephant "Entering a test shell.  Type 'exit 1' to abort changes and 'exit' to commit."
     PS1="Test shell> " $SHELL || {
-      ${pkgs.cowsay}/bin/cowsay -f satanic "You aborted."
+      ${pkgs.cowsay}/bin/cowsay "You aborted."
       exit 1
     }
 
@@ -29,5 +29,14 @@ pkgs.writeShellScriptBin "rebuild" # sh
       exit 1
     }
     git commit
-    exit 0
+
+    read -p "Reboot the system now? (y/n) [n]: " -n 1 -r
+    echo    # (optional) move to a new line
+    if [[ $REPLY =~ ^[Yy]$ ]]; then
+      echo "Rebooting the system..."
+      sudo systemctl reboot
+    else
+      echo "Not rebooting."
+      exit 0
+    fi
   ''
