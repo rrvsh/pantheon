@@ -1,7 +1,6 @@
 {pkgs,...}:
 {
 imports = [
-    ./desktop/hyprland.nix
     ./desktop/firefox.nix
 ];
   home.packages = with pkgs; [

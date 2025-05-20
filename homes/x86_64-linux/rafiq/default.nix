@@ -11,6 +11,7 @@
   cli.git.name = "Mohammad Rafiq";
   cli.git.email = "rafiq@rrv.sh";
   cli.git.defaultBranch = "prime";
+ desktop.windowManager = "hyprland";
 
   home.shellAliases.v = "nvim";
   home.shellAliases = {

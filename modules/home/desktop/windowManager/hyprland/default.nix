@@ -1,8 +1,14 @@
-{config, lib, osConfig, ...}:
+{ config, lib, osConfig, ... }:
 let
   mainMonitor = osConfig.desktop.mainMonitor;
 in
 {
+  imports = [
+
+  ];
+
+  config = lib.mkIf (config.desktop.windowManager == "hyprland") (lib.mkMerge [
+    {
   xdg.configFile."uwsm/env".text = # sh
   ''
   
@@ -43,4 +49,6 @@ in
       ];
     };
   };
+    }
+  ]);
 }
