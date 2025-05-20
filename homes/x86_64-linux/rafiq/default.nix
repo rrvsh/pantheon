@@ -1,10 +1,6 @@
 { config, pkgs, osConfig, ... }:
 
 {
-  imports = [
-    ./desktop.nix
-  ];
-
   cli.shell = "zsh";
   cli.editor = "nvf";
   cli.file-browser = "yazi";
@@ -12,6 +8,7 @@
   cli.git.email = "rafiq@rrv.sh";
   cli.git.defaultBranch = "prime";
  desktop.windowManager = "hyprland";
+ desktop.browser = "firefox";
 
   home.shellAliases.v = "nvim";
   home.shellAliases = {
@@ -27,7 +24,10 @@
     fzf
     devenv
     pantheon.rebuild
+    kitty
   ];
+
+  home.sessionVariables = { TERMINAL = "kitty"; };
 
     programs.direnv = {
       enable = true;
