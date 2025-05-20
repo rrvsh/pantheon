@@ -1,5 +1,7 @@
+{ pkgs, ... }:
 {
   "$hypr" = "CTRL_SUPER_ALT_SHIFT";
+  "$meh" = "CONTROL_SHIFT_ALT";
   bind = [
     "$hypr, Q, exec, uwsm stop"
     "SUPER, W, killactive"
@@ -22,5 +24,15 @@
     "SUPER_CTRL, L, workspace, r+1"
     "$hypr, H, movetoworkspace, r-1"
     "$hypr, L, movetoworkspace, r+1"
+  ];
+
+  bindle = [
+    "SUPER, 6, exec, wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%-"
+    "SUPER, 7, exec, ${pkgs.playerctl}/bin/playerctl previous"
+    "SUPER, 8, exec, ${pkgs.playerctl}/bin/playerctl play-pause"
+    "SUPER, 9, exec, ${pkgs.playerctl}/bin/playerctl next"
+    "SUPER, 0, exec, wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%+"
+    "$meh, mouse_up, resizeactive, 10% 10%"
+    "$meh, mouse_down, resizeactive, -10% -10%"
   ];
 }

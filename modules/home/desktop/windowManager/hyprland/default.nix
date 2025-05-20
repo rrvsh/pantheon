@@ -1,4 +1,5 @@
 {
+  pkgs,
   config,
   lib,
   osConfig,
@@ -24,7 +25,7 @@ in
           exec-once = [ "uwsm app -- $LOCKSCREEN" ];
         }
         (import ./decoration.nix)
-        (import ./keybinds.nix)
+        (import ./keybinds.nix { inherit pkgs; })
       ];
     };
     xdg.configFile."uwsm/env".text = # sh
