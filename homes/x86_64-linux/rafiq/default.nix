@@ -15,7 +15,6 @@
 
   home.shellAliases = {
     v = "nvim";
-    edit = "nvim $(fzf)";
   };
 
   home.packages = with pkgs; [
@@ -23,6 +22,7 @@
     fzf
     devenv
     pantheon.rebuild
+    pantheon.edit
   ];
 
   home.persistence."/persist/home/rafiq".directories = [
