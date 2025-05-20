@@ -2,6 +2,7 @@
   config,
   lib,
   osConfig,
+  pkgs,
   ...
 }:
 {
@@ -11,12 +12,20 @@
     terminal = lib.pantheon.mkStrOption;
   };
 
-  config = {
-    assertions = [
-      {
-        assertion = (osConfig.desktop.windowManager == config.desktop.windowManager);
-        message = "You have set your home window manager to one that is not installed on this system.";
-      }
-    ];
-  };
+  config = lib.mkMerge [
+    {
+      assertions = [
+        {
+          assertion = (osConfig.desktop.windowManager == config.desktop.windowManager);
+          message = "You have set your home window manager to one that is not installed on this system.";
+        }
+      ];
+    }
+    (lib.mkIf (osConfig.hardware.gpu == "nvidia") {
+      home.packages = [ pkgs.stable-diffusion-webui.forge.cuda ];
+      home.persistence."/persist/home/${config.snowfallorg.user.name}".directories = [
+        ".local/share/stable-diffusion-webui"
+      ];
+    })
+  ];
 }

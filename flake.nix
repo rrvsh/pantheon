@@ -15,6 +15,8 @@
     nvf.url = "github:notashelf/nvf";
     nvf.inputs.nixpkgs.follows = "nixpkgs";
     nixspect.url = "github:rrvsh/nixspect";
+    stable-diffusion-webui-nix.url = "github:Janrupf/stable-diffusion-webui-nix/main";
+    stable-diffusion-webui-nix.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs =
@@ -23,6 +25,9 @@
       inherit inputs;
       src = ./.;
       snowfall.namespace = "pantheon";
+      overlays = with inputs; [
+        stable-diffusion-webui-nix.overlays.default
+      ];
       systems.modules.nixos = with inputs; [
         disko.nixosModules.disko
         impermanence.nixosModules.impermanence
