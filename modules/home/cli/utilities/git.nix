@@ -1,11 +1,5 @@
 {lib,config,...}:
 {
-  options.cli.git = {
-    name = lib.pantheon.mkStrOption;
-    email = lib.pantheon.mkStrOption;
-    defaultBranch = lib.pantheon.mkStrOption;
-  };
-
   config = {
   home.sessionVariables.GIT_CONFIG_GLOBAL = "$HOME/.config/git/config";
   home.shellAliases = {
