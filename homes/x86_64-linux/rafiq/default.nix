@@ -2,10 +2,10 @@
 
 {
   imports = [
-    ./cli.nix
     ./desktop.nix
   ];
 
+  cli.shell = "zsh";
   cli.editor = "nvf";
   cli.file-browser = "yazi";
   cli.git.name = "Mohammad Rafiq";
