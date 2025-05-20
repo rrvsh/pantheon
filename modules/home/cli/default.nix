@@ -10,6 +10,7 @@
     editor = lib.pantheon.mkStrOption;
     file-browser = lib.pantheon.mkStrOption;
     multiplexer = lib.pantheon.mkStrOption;
+    fetch = lib.pantheon.mkStrOption;
     git = {
       name = lib.pantheon.mkStrOption;
       email = lib.pantheon.mkStrOption;
