@@ -16,6 +16,7 @@
   desktop.browser = "firefox";
   desktop.terminal = "ghostty";
   desktop.lockscreen = "hyprlock";
+  desktop.notification-daemon = "mako";
 
   home.shellAliases = {
     v = "nvim";

@@ -22,7 +22,10 @@ in
             ", preferred, auto, 1"
           ];
 
-          exec-once = [ "uwsm app -- $LOCKSCREEN" ];
+          exec-once = [
+            "uwsm app -- $LOCKSCREEN"
+            "uwsm app -- $NOTIFICATION_DAEMON"
+          ];
         }
         (import ./decoration.nix)
         (import ./keybinds.nix { inherit pkgs; })

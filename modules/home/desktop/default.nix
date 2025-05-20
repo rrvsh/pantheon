@@ -11,6 +11,7 @@
     lockscreen = lib.pantheon.mkStrOption;
     browser = lib.pantheon.mkStrOption;
     terminal = lib.pantheon.mkStrOption;
+    notification-daemon = lib.pantheon.mkStrOption;
   };
 
   config = lib.mkMerge [
