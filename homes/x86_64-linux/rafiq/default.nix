@@ -1,5 +1,4 @@
 { config, pkgs, osConfig, ... }:
-
 {
   cli.shell = "zsh";
   cli.editor = "nvf";
@@ -32,15 +31,8 @@
       nix-direnv.enable = true;
     };
 
-  home.persistence."/persist/home/rafiq" = {
-	directories = [
-	".ssh"
-	".config/sops/age"
+  home.persistence."/persist/home/rafiq".directories = [
 	"repos" 
         ".local/share/zoxide" 
 	];
-	allowOther = true;
-  };
-
-  home.stateVersion = "24.11";
 }
