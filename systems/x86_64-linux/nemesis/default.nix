@@ -18,9 +18,9 @@
   desktop.windowManager = "hyprland";
   desktop.mainMonitor = {
     id = "desc:OOO AN-270W04K";
-    scale = "1";
-    resolution = "2560x1440";
-    refresh-rate = "144";
+    scale = "2";
+    resolution = "3840x2160";
+    refresh-rate = "60";
   };
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
