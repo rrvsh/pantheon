@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 {
   system.hostname = "nemesis";
   system.mainUser.name = "rafiq";
@@ -14,10 +19,10 @@
 
   desktop.windowManager = "hyprland";
   desktop.mainMonitor = {
-id = "desc:OOO AN-270W04K";
-scale = "1";
-resolution = "2560x1440";
-refresh-rate = "144";
+    id = "desc:OOO AN-270W04K";
+    scale = "1";
+    resolution = "2560x1440";
+    refresh-rate = "144";
   };
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
@@ -26,7 +31,7 @@ refresh-rate = "144";
   environment.persistence."/persist" = {
     hideMounts = true;
     directories = [
-    "/var/lib/systemd"
+      "/var/lib/systemd"
     ];
     files = [
       "/etc/ssh/ssh_host_ed25519_key"

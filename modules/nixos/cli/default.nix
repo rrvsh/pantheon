@@ -1,14 +1,19 @@
-{config, lib, pkgs, ...}:
 {
-imports = [];
-
-options.cli = {};
-
-config = lib.mkMerge [
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 {
-  programs.zsh.enable = true;
-  users.defaultUserShell = pkgs.zsh;
-  environment.pathsToLink = [ "/share/zsh" ]; # enables completion
-}
-];
+  imports = [ ];
+
+  options.cli = { };
+
+  config = lib.mkMerge [
+    {
+      programs.zsh.enable = true;
+      users.defaultUserShell = pkgs.zsh;
+      environment.pathsToLink = [ "/share/zsh" ]; # enables completion
+    }
+  ];
 }

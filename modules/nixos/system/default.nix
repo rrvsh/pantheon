@@ -1,4 +1,4 @@
-{ config, lib, ...}:
+{ config, lib, ... }:
 {
   imports = [
     ./boot.nix
@@ -9,10 +9,10 @@
   ];
 
   options.system = {
-   hostname = lib.pantheon.mkStrOption;
-   mainUser.name = lib.pantheon.mkStrOption;
-   mainUser.publicKey = lib.pantheon.mkStrOption;
-   bootloader = lib.pantheon.mkStrOption;
+    hostname = lib.pantheon.mkStrOption;
+    mainUser.name = lib.pantheon.mkStrOption;
+    mainUser.publicKey = lib.pantheon.mkStrOption;
+    bootloader = lib.pantheon.mkStrOption;
   };
 
   config = {

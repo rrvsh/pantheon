@@ -5,15 +5,15 @@
     programs.nvf = {
       enable = true;
       settings.vim = {
-      keymaps = import ./keymaps.nix;
+        keymaps = import ./keymaps.nix;
         utility.yazi-nvim = {
           enable = true;
-	  mappings = {
+          mappings = {
             openYazi = "t";
             openYaziDir = "T";
-	  };
-	  setupOpts.open_for_directories = true;
-	};
+          };
+          setupOpts.open_for_directories = true;
+        };
       };
     };
   };

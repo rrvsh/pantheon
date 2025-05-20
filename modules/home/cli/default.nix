@@ -1,6 +1,11 @@
-{config, lib, osConfig, ... }:
 {
-  options.cli =	{
+  config,
+  lib,
+  osConfig,
+  ...
+}:
+{
+  options.cli = {
     shell = lib.pantheon.mkStrOption;
     editor = lib.pantheon.mkStrOption;
     file-browser = lib.pantheon.mkStrOption;
@@ -14,7 +19,9 @@
   config = lib.mkMerge [
     {
       programs.zoxide.enable = true;
-      home.persistence."/persist/home/${config.snowfallorg.user.name}".directories = [ "./local/share/zoxide" ];
+      home.persistence."/persist/home/${config.snowfallorg.user.name}".directories = [
+        "./local/share/zoxide"
+      ];
     }
     {
       programs.nix-index.enable = true;

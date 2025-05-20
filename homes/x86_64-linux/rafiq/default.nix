@@ -1,4 +1,9 @@
-{ config, pkgs, osConfig, ... }:
+{
+  config,
+  pkgs,
+  osConfig,
+  ...
+}:
 {
   cli.shell = "zsh";
   cli.editor = "nvf";
@@ -23,12 +28,12 @@
   ];
 
   home.persistence."/persist/home/rafiq".directories = [
-	"repos" 
-	];
+    "repos"
+  ];
 
-    programs.direnv = {
-      enable = true;
-      nix-direnv.enable = true;
-    };
+  programs.direnv = {
+    enable = true;
+    nix-direnv.enable = true;
+  };
 
 }

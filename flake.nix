@@ -16,20 +16,24 @@
     nvf.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = inputs: 
-	 inputs.snowfall-lib.mkFlake {
-		inherit inputs;
-		src = ./.;
-		snowfall.namespace = "pantheon";
-		systems.modules.nixos = with inputs; [
-			disko.nixosModules.disko
-			impermanence.nixosModules.impermanence
-			sops-nix.nixosModules.sops
-		];
-		homes.modules = with inputs; [
-impermanence.homeManagerModules.impermanence
-nix-index-database.hmModules.nix-index
-nvf.homeManagerModules.default
-		];
-	 };
+  outputs =
+    inputs:
+    inputs.snowfall-lib.mkFlake {
+      inherit inputs;
+      src = ./.;
+      snowfall.namespace = "pantheon";
+      systems.modules.nixos = with inputs; [
+        disko.nixosModules.disko
+        impermanence.nixosModules.impermanence
+        sops-nix.nixosModules.sops
+      ];
+      homes.modules = with inputs; [
+        impermanence.homeManagerModules.impermanence
+        nix-index-database.hmModules.nix-index
+        nvf.homeManagerModules.default
+      ];
+      outputs-builder = channels: {
+        formatter = channels.nixpkgs.nixfmt-rfc-style;
+      };
+    };
 }
