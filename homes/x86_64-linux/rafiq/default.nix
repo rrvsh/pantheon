@@ -37,6 +37,8 @@
 
   programs = {
     thefuck.enable = true;
+    tealdeer.enable = true;
+    tealdeer.settings.updates.auto_update = true;
     fzf = {
       enable = true;
       enableZshIntegration = true;
