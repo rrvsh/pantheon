@@ -28,9 +28,7 @@
   fileSystems."/persist".neededForBoot = true;
   environment.persistence."/persist" = {
     hideMounts = true;
-    directories = [
-      "/var/lib/systemd"
-    ];
+    directories = [ "/var/lib/systemd" ];
     files = [
       "/etc/ssh/ssh_host_ed25519_key"
       "/etc/ssh/ssh_host_ed25519_key.pub"
@@ -39,5 +37,4 @@
       "/etc/machine-id"
     ];
   };
-
 }

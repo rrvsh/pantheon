@@ -22,7 +22,7 @@
       programs.zoxide.enable = true;
       home.shellAliases.cd = "z";
       home.persistence."/persist/home/${config.snowfallorg.user.name}".directories = [
-        "./local/share/zoxide"
+        ".local/share/zoxide"
       ];
     }
     {

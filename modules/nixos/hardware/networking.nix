@@ -19,6 +19,5 @@
       };
       environment.persistence."/persist".files = [ "/var/lib/tailscale/tailscaled.state" ];
     }
-
   ];
 }

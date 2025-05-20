@@ -27,9 +27,7 @@
     inputs.nixspect.packages."x86_64-linux".nixspect
   ];
 
-  home.persistence."/persist/home/rafiq".directories = [
-    "repos"
-  ];
+  home.persistence."/persist/home/rafiq".directories = [ "repos" ];
 
   programs.direnv = {
     enable = true;
