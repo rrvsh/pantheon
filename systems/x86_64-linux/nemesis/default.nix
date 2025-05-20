@@ -24,17 +24,4 @@
   };
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
-
-  fileSystems."/persist".neededForBoot = true;
-  environment.persistence."/persist" = {
-    hideMounts = true;
-    directories = [ "/var/lib/systemd" ];
-    files = [
-      "/etc/ssh/ssh_host_ed25519_key"
-      "/etc/ssh/ssh_host_ed25519_key.pub"
-      "/etc/ssh/ssh_host_rsa_key"
-      "/etc/ssh/ssh_host_rsa_key.pub"
-      "/etc/machine-id"
-    ];
-  };
 }

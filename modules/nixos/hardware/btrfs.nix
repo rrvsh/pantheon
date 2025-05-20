@@ -83,6 +83,21 @@ in
           	    umount /btrfs_tmp
           	  '';
         programs.fuse.userAllowOther = true;
+        fileSystems."/persist".neededForBoot = true;
+        environment.persistence."/persist" = {
+          hideMounts = true;
+          directories = [
+            "/var/lib/systemd"
+            "/var/lib/nixos"
+          ];
+          files = [
+            "/etc/ssh/ssh_host_ed25519_key"
+            "/etc/ssh/ssh_host_ed25519_key.pub"
+            "/etc/ssh/ssh_host_rsa_key"
+            "/etc/ssh/ssh_host_rsa_key.pub"
+            "/etc/machine-id"
+          ];
+        };
       })
     ]
   );
