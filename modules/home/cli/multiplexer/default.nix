@@ -4,6 +4,7 @@
     home.sessionVariables.MULTIPLEXER = "zellij";
     programs.zellij = {
       enable = true;
+      enableZshIntegration = true;
       attachExistingSession = true;
       exitShellOnExit = true;
       settings = {
