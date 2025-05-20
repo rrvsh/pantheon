@@ -7,6 +7,7 @@
   cli.shell = "zsh";
   cli.editor = "nvf";
   cli.file-browser = "yazi";
+  cli.multiplexer = "zellij";
   cli.git.name = "Mohammad Rafiq";
   cli.git.email = "rafiq@rrv.sh";
   cli.git.defaultBranch = "prime";
