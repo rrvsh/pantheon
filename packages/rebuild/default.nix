@@ -8,9 +8,7 @@ pkgs.writeShellScriptBin "rebuild" # sh
 
     git add . && \
     nixos-rebuild switch --flake . --use-remote-sudo && \
-    echo "=== opening test shell. ===" && \
-    echo "=== exit = commit       ===" && \
-    echo "=== exit 1 = abort      ===" && \
+    ${pkgs.cowsay}/bin/cowsay -f elephant "Opening a test shell. Type exit 1 to abort and exit to commit your changes." && \
     $SHELL && \
     git commit -a
   ''
