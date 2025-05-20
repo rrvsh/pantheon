@@ -4,7 +4,7 @@
     "$hypr, Q, exec, uwsm stop"
     "SUPER, W, killactive"
 
-    "SUPER, return, exec, uwsm app -- $TERMINAL"
+    "SUPER, return, exec, uwsm app -- $TERMINAL $MULTIPLEXER"
     "SUPER, O, exec, uwsm app -- $BROWSER"
 
     "SUPER, H, cyclenext, visible"

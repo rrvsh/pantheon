@@ -1,7 +1,7 @@
 { config, lib, ... }:
 {
   config = lib.mkIf (config.cli.multiplexer == "zellij") {
-    home.sessionVariables.multiplexer = "zellij -c";
+    home.sessionVariables.MULTIPLEXER = "zellij";
     programs.zellij = {
       enable = true;
       attachExistingSession = true;
