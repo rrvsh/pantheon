@@ -11,6 +11,7 @@ in
     enable = true;
     systemd.enable = false;
     settings = {
+      ecosystem.no_update_news = true;
       "$hypr" = "CTRL_SUPER_ALT_SHIFT";
 
           monitor = [
