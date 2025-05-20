@@ -9,6 +9,7 @@
   cli.git.defaultBranch = "prime";
  desktop.windowManager = "hyprland";
  desktop.browser = "firefox";
+ desktop.terminal = "kitty";
 
   home.shellAliases.v = "nvim";
   home.shellAliases = {
@@ -24,10 +25,7 @@
     fzf
     devenv
     pantheon.rebuild
-    kitty
   ];
-
-  home.sessionVariables = { TERMINAL = "kitty"; };
 
     programs.direnv = {
       enable = true;

@@ -3,6 +3,7 @@
   options.desktop = {
     windowManager = lib.pantheon.mkStrOption;
     browser = lib.pantheon.mkStrOption;
+    terminal = lib.pantheon.mkStrOption;
   };
 
 
