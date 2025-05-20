@@ -8,7 +8,7 @@ pkgs.writeShellScriptBin "rebuild" # sh
 
     echo "--- building the new config... ---"
     git add .
-    nixos-rebuild test --flake . --use-remote-sudo || {
+    nh os test . || {
       echo "Error: nixos-rebuild switch failed.  Check the output for details."
       exit 1
     }
@@ -24,7 +24,7 @@ pkgs.writeShellScriptBin "rebuild" # sh
     }
 
     echo "--- adding the built configuration to the bootloader... ---"
-    nixos-rebuild switch --flake . --use-remote-sudo || {
+    nh os boot . || {
       echo "Error: nixos-rebuild switch failed.  Check the output for details."
       exit 1
     }

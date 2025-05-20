@@ -42,6 +42,7 @@
       enable = true;
       enableZshIntegration = true;
     };
+    nh.enable = true;
   };
 
 }
