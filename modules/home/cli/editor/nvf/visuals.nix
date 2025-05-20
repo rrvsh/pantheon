@@ -1,0 +1,3 @@
+{
+  indent-blankline.enable = true;
+}
