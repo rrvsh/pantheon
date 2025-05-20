@@ -14,6 +14,7 @@
     sops-nix.inputs.nixpkgs.follows = "nixpkgs";
     nvf.url = "github:notashelf/nvf";
     nvf.inputs.nixpkgs.follows = "nixpkgs";
+    nixspect.url = "github:rrvsh/nixspect";
   };
 
   outputs =

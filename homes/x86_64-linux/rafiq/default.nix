@@ -1,5 +1,6 @@
 {
   pkgs,
+  inputs,
   ...
 }:
 {
@@ -22,7 +23,7 @@
     devenv
     pantheon.rebuild
     pantheon.edit
-    pantheon.inspect
+    inputs.nixspect.packages."x86_64-linux".nixspect
   ];
 
   home.persistence."/persist/home/rafiq".directories = [
