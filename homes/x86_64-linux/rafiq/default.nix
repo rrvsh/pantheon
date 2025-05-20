@@ -8,6 +8,9 @@
 
   cli.editor = "nvf";
   cli.file-browser = "yazi";
+  cli.git.name = "Mohammad Rafiq";
+  cli.git.email = "rafiq@rrv.sh";
+  cli.git.defaultBranch = "prime";
 
   home.shellAliases.v = "nvim";
   home.shellAliases = {

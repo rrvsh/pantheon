@@ -3,6 +3,7 @@
   imports = [
     ./file-browser/yazi.nix
     ./editor/nvf.nix
+    ./utilities/git.nix
   ];
 
   options.cli =	{
