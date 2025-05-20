@@ -1,4 +1,4 @@
-{ lib, config, ... }:
+{ config, ... }:
 {
   config = {
     home.sessionVariables.GIT_CONFIG_GLOBAL = "$HOME/.config/git/config";

@@ -1,4 +1,4 @@
-{ lib, pkgs, ... }:
+{ pkgs, ... }:
 pkgs.writeShellScriptBin "rebuild" # sh
   ''
     if [ ! -f "flake.nix" ]; then

@@ -1,4 +1,4 @@
-{ config, lib, ... }:
+{ lib, ... }:
 {
   sops = {
     defaultSopsFile = lib.snowfall.fs.get-file "secrets/secrets.yaml";
