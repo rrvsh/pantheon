@@ -16,6 +16,7 @@
   hardware.gpu = "nvidia";
 
   desktop.windowManager = "hyprland";
+  desktop.lockscreen = "hyprlock";
   desktop.mainMonitor = {
     id = "desc:OOO AN-270W04K";
     scale = "2";

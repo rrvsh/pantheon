@@ -12,5 +12,6 @@
       refresh-rate = lib.pantheon.mkStrOption;
     };
     windowManager = lib.pantheon.mkStrOption;
+    lockscreen = lib.pantheon.mkStrOption;
   };
 }

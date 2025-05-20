@@ -20,6 +20,8 @@ in
             "${mainMonitor.id}, ${mainMonitor.resolution}@${mainMonitor.refresh-rate}, auto, ${mainMonitor.scale}"
             ", preferred, auto, 1"
           ];
+
+          exec-once = [ "uwsm app -- $LOCKSCREEN" ];
         }
         (import ./decoration.nix)
         (import ./keybinds.nix)

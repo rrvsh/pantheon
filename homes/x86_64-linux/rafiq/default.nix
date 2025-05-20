@@ -14,6 +14,7 @@
   desktop.windowManager = "hyprland";
   desktop.browser = "firefox";
   desktop.terminal = "ghostty";
+  desktop.lockscreen = "hyprlock";
 
   home.shellAliases = {
     v = "nvim";

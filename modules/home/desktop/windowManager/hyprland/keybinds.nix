@@ -6,6 +6,7 @@
 
     "SUPER, return, exec, uwsm app -- $TERMINAL $MULTIPLEXER"
     "SUPER, O, exec, uwsm app -- $BROWSER"
+    "SUPER, Escape, exec, uwsm app -- $LOCKSCREEN"
 
     "SUPER, H, cyclenext, visible"
     "SUPER, L, cyclenext, visible prev"
