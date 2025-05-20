@@ -6,6 +6,9 @@
       enable = true;
       settings.vim = {
         keymaps = import ./keymaps.nix;
+        lsp = import ./lsp.nix;
+        languages = import ./languages.nix;
+        autocomplete = import ./autocomplete.nix;
         utility.yazi-nvim = {
           enable = true;
           mappings = {
