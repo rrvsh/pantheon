@@ -13,7 +13,7 @@
   cli.git.defaultBranch = "prime";
   desktop.windowManager = "hyprland";
   desktop.browser = "firefox";
-  desktop.terminal = "kitty";
+  desktop.terminal = "ghostty";
 
   home.shellAliases = {
     v = "nvim";
