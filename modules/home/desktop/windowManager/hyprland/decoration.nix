@@ -1,0 +1,3 @@
+{
+  animation = [ "workspaces, 0" ];
+}

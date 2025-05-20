@@ -21,6 +21,7 @@ in
             ", preferred, auto, 1"
           ];
         }
+        (import ./decoration.nix)
         (import ./keybinds.nix)
       ];
     };
