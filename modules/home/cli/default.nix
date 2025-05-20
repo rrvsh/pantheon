@@ -20,6 +20,13 @@
   config = lib.mkMerge [
     {
       home.shell.enableShellIntegration = true;
+      programs.ssh = {
+        enable = true;
+        extraConfig = ''
+          Host *
+            SetEnv TERM=xterm-256color
+        '';
+      };
       programs.zoxide.enable = true;
       home.shellAliases.cd = "z";
       home.persistence."/persist/home/${config.snowfallorg.user.name}".directories = [
