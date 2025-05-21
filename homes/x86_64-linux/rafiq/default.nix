@@ -6,7 +6,8 @@
 {
   cli.shell = "zsh";
   cli.screensaver.enable = true;
-  cli.screensaver.timeout = "10";
+  cli.screensaver.timeout = "100";
+  cli.screensaver.command = "cbonsai -S";
   cli.editor = "nvf";
   cli.file-browser = "yazi";
   cli.multiplexer = "zellij";
@@ -20,6 +21,7 @@
   };
 
   home.packages = with pkgs; [
+    cbonsai
     ripgrep
     devenv
     pantheon.rebuild

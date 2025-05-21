@@ -21,15 +21,16 @@
       lib.mkOrder 1200
         # zsh
         ''
-          setopt PROMPT_SUBST
-          PROMPT='> '
-          RPROMPT='[%D{%L:%M:%S %p}]'
-
-          TMOUT=${config.cli.screensaver.timeout}
+          precmd() {
+            TMOUT=${config.cli.screensaver.timeout}
+          }
 
           TRAPALRM() {
-              PROMPT='IDLE > '
-              zle reset-prompt
+            TMOUT=1
+            ${config.cli.screensaver.command}
+            # If we exit, assume the previous command was exited out of
+            TMOUT=${config.cli.screensaver.timeout}
+            zle reset-prompt
           }
         ''
     );

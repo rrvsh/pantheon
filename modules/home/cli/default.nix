@@ -9,6 +9,7 @@
     shell = lib.pantheon.mkStrOption;
     screensaver.enable = lib.mkEnableOption "";
     screensaver.timeout = lib.pantheon.mkStrOption;
+    screensaver.command = lib.pantheon.mkStrOption;
     editor = lib.pantheon.mkStrOption;
     file-browser = lib.pantheon.mkStrOption;
     multiplexer = lib.pantheon.mkStrOption;
