@@ -5,6 +5,7 @@
 }:
 {
   cli.shell = "zsh";
+  cli.enableScreensaver = true;
   cli.editor = "nvf";
   cli.file-browser = "yazi";
   cli.multiplexer = "zellij";
