@@ -10,6 +10,18 @@
       history.size = 10000;
       history.ignoreDups = true;
       history.ignoreSpace = true;
+      initContent =
+        lib.mkOrder 1200
+          # zsh
+          ''
+            RPROMPT='[%D{%L:%M:%S %p}]'
+
+            TMOUT=1
+
+            TRAPALRM() {
+                zle reset-prompt
+            }
+          '';
     };
   };
 }
