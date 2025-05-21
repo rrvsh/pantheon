@@ -17,7 +17,7 @@
         size = 10000;
       };
     };
-    programs.zsh.initContent = lib.mkIf config.cli.enableScreensaver (
+    programs.zsh.initContent = lib.mkIf config.cli.screensaver.enable (
       lib.mkOrder 1200
         # zsh
         ''
@@ -25,9 +25,10 @@
           PROMPT='> '
           RPROMPT='[%D{%L:%M:%S %p}]'
 
-          TMOUT=10
+          TMOUT=${config.cli.screensaver.timeout}
 
           TRAPALRM() {
+              PROMPT='IDLE > '
               zle reset-prompt
           }
         ''

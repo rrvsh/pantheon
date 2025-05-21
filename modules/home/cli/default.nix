@@ -7,7 +7,8 @@
 {
   options.cli = {
     shell = lib.pantheon.mkStrOption;
-    enableScreensaver = lib.mkEnableOption "";
+    screensaver.enable = lib.mkEnableOption "";
+    screensaver.timeout = lib.pantheon.mkStrOption;
     editor = lib.pantheon.mkStrOption;
     file-browser = lib.pantheon.mkStrOption;
     multiplexer = lib.pantheon.mkStrOption;
