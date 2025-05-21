@@ -2,7 +2,6 @@
 {
   config = lib.mkIf (config.cli.shell == "zsh") {
     home.sessionVariables.SHELL = "zsh";
-    home.persistence."/persist/home/${config.snowfallorg.user.name}".files = [ ".zsh_history" ];
     programs.zsh = {
       enable = true;
       enableVteIntegration = true;
@@ -26,7 +25,7 @@
           PROMPT='> '
           RPROMPT='[%D{%L:%M:%S %p}]'
 
-          TMOUT=1
+          TMOUT=10
 
           TRAPALRM() {
               zle reset-prompt
