@@ -12,11 +12,6 @@
   cli.git.name = "Mohammad Rafiq";
   cli.git.email = "rafiq@rrv.sh";
   cli.git.defaultBranch = "prime";
-  desktop.windowManager = "hyprland";
-  desktop.browser = "firefox";
-  desktop.terminal = "ghostty";
-  desktop.lockscreen = "hyprlock";
-  desktop.notification-daemon = "mako";
 
   home.shellAliases = {
     v = "nvim";

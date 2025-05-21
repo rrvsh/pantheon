@@ -1,6 +1,5 @@
 {
   pkgs,
-  config,
   lib,
   osConfig,
   ...
@@ -9,7 +8,7 @@ let
   mainMonitor = osConfig.desktop.mainMonitor;
 in
 {
-  config = lib.mkIf (config.desktop.windowManager == "hyprland") {
+  config = lib.mkIf (osConfig.desktop.windowManager == "hyprland") {
     wayland.windowManager.hyprland = {
       enable = true;
       systemd.enable = false;

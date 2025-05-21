@@ -1,6 +1,6 @@
-{ config, lib, ... }:
+{ osConfig, lib, ... }:
 {
-  config = lib.mkIf (config.desktop.browser == "firefox") {
+  config = lib.mkIf (osConfig.desktop.browser == "firefox") {
     home.persistence."/persist/home/rafiq".directories = [ ".mozilla/firefox" ];
     home.sessionVariables.BROWSER = "firefox";
     programs.firefox = {

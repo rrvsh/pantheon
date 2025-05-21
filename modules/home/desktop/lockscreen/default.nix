@@ -1,11 +1,11 @@
 {
-  config,
+  osConfig,
   lib,
   ...
 }:
 {
   config = lib.mkMerge [
-    (lib.mkIf (config.desktop.lockscreen == "hyprlock") {
+    (lib.mkIf (osConfig.desktop.lockscreen == "hyprlock") {
       home.sessionVariables.LOCKSCREEN = "hyprlock";
       programs.hyprlock = {
         enable = true;

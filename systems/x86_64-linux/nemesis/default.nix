@@ -16,7 +16,10 @@
   hardware.gpu = "nvidia";
 
   desktop.windowManager = "hyprland";
+  desktop.browser = "firefox";
+  desktop.terminal = "ghostty";
   desktop.lockscreen = "hyprlock";
+  desktop.notification-daemon = "mako";
   desktop.mainMonitor = {
     id = "desc:OOO AN-270W04K";
     scale = "2";
