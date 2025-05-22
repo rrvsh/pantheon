@@ -9,6 +9,8 @@
       enable = true;
       settings.vim = {
         hideSearchHighlight = true;
+        syntaxHighlighting = true;
+        telescope.enable = true;
         searchCase = "ignore";
         undoFile.enable = true;
         fzf-lua.enable = true;
@@ -26,6 +28,8 @@
         options = import ./options.nix;
         notify = import ./notify.nix;
         snippets = import ./snippets.nix;
+        treesitter = import ./treesitter.nix;
+        ui = import ./ui.nix;
         utility = import ./utility.nix;
         visuals = import ./visuals.nix;
       };
