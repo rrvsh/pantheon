@@ -8,12 +8,19 @@
     programs.nvf = {
       enable = true;
       settings.vim = {
+        hideSearchHighlight = true;
         undoFile.enable = true;
-        autocomplete = import ./autocomplete.nix;
+        fzf-lua.enable = true;
+        git.enable = true;
+        autocomplete = import ./autocomplete.nix { inherit lib; };
+        autopairs.nvim-autopairs.enable = true;
         binds = import ./binds.nix;
+        clipboard = import ./clipboard.nix;
+        diagnostics = import ./diagnostics.nix;
         keymaps = import ./keymaps.nix;
         languages = import ./languages.nix;
         lsp = import ./lsp.nix;
+
         options = import ./options.nix;
         notify = import ./notify.nix;
         utility = import ./utility.nix;

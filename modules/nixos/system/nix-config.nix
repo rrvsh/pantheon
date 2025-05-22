@@ -1,7 +1,8 @@
-{ config, ... }:
+{ config, inputs, ... }:
 {
   config = {
     nixpkgs.config.allowUnfree = true;
+      nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
 
     nix.settings = {
       experimental-features = [

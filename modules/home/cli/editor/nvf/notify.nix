@@ -1,3 +1,3 @@
 {
-  nvim-notify.enable = true;
+
 }
