@@ -6,7 +6,6 @@
 }:
 {
   config = lib.mkIf (config.hardware.gpu == "nvidia") {
-    #TODO: Setup CUDA
     hardware.graphics.enable = true;
     hardware.graphics.extraPackages = with pkgs; [
       nvidia-vaapi-driver

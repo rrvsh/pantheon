@@ -9,6 +9,7 @@
       enable = true;
       settings.vim = {
         hideSearchHighlight = true;
+        searchCase = "ignore";
         undoFile.enable = true;
         fzf-lua.enable = true;
         git.enable = true;
@@ -20,9 +21,11 @@
         keymaps = import ./keymaps.nix;
         languages = import ./languages.nix;
         lsp = import ./lsp.nix;
-
+        navigation = import ./navigation.nix;
+        notes = import ./notes.nix;
         options = import ./options.nix;
         notify = import ./notify.nix;
+        snippets = import ./snippets.nix;
         utility = import ./utility.nix;
         visuals = import ./visuals.nix;
       };

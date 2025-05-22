@@ -11,6 +11,10 @@
     screensaver.timeout = lib.pantheon.mkStrOption;
     screensaver.command = lib.pantheon.mkStrOption;
     editor = lib.pantheon.mkStrOption;
+    nvf.snippets = lib.mkOption {
+      type = lib.types.listOf lib.types.attrs;
+      default = { };
+    };
     file-browser = lib.pantheon.mkStrOption;
     multiplexer = lib.pantheon.mkStrOption;
     fetch = lib.pantheon.mkStrOption;
