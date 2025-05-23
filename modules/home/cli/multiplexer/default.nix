@@ -40,6 +40,7 @@
                         hide_frame_for_single_pane "false"
 
                         mode_normal        "#[bg=#89B4FA] {name} "
+                        mode_locked "#[bg=#f55e18] {name} "
 
                         tab_normal   "#[fg=#6C7086] {index} "
                         tab_active   "#[fg=#9399B2,bold,italic] {index} "
