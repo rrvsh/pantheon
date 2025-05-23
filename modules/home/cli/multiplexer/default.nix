@@ -25,7 +25,7 @@
             default_tab_template {
                 pane size=1 borderless=true {
                     plugin location="file:${pkgs.zjstatus}/bin/zjstatus.wasm" {
-                        format_left   "{mode} {command_pwd}"
+                        format_left   "{mode}"
                         format_center "{tabs}"
                         format_right  "{datetime}"
                         format_space  ""
@@ -44,14 +44,11 @@
                         tab_normal   "#[fg=#6C7086] {index} "
                         tab_active   "#[fg=#9399B2,bold,italic] {index} "
                         tab_display_count         "3"  // limit to showing 3 tabs
-                        tab_truncate_start_format "#[fg=red,bg=#181825] < +{count} ..."
-                        tab_truncate_end_format   "#[fg=red,bg=#181825] ... +{count} >"
+                        tab_truncate_start_format "..."
+                        tab_truncate_end_format   "..."
 
-                        command_pwd_command "pwd"
-                        command_pwd_format "{stdout}"
-
-                        datetime        "#[fg=#6C7086,bold] {format} "
-                        datetime_format "%A, %d %b %Y %H:%M"
+                        datetime        "#[fg=#6C7086,bold] {format}"
+                        datetime_format "%H:%M:%S"
                         datetime_timezone "Asia/Singapore"
                     }
                 }
