@@ -17,6 +17,7 @@
     nixspect.url = "github:rrvsh/nixspect";
     stable-diffusion-webui-nix.url = "github:Janrupf/stable-diffusion-webui-nix/main";
     stable-diffusion-webui-nix.inputs.nixpkgs.follows = "nixpkgs";
+    zjstatus.url = "github:dj95/zjstatus";
   };
 
   outputs =
@@ -27,6 +28,9 @@
       snowfall.namespace = "pantheon";
       overlays = with inputs; [
         stable-diffusion-webui-nix.overlays.default
+        (final: prev: {
+          zjstatus = zjstatus.packages.${prev.system}.default;
+        })
       ];
       systems.modules.nixos = with inputs; [
         disko.nixosModules.disko

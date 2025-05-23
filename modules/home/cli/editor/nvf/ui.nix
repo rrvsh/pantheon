@@ -3,10 +3,7 @@
     enable = true;
     globalStyle = "double";
   };
-  breadcrumbs = {
-    enable = true;
-    navbuddy.enable = true;
-  };
+  breadcrumbs.enable = true;
   colorizer.enable = true;
   illuminate.enable = true;
   noice.enable = true;
