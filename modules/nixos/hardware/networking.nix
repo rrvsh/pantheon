@@ -19,5 +19,9 @@
       };
       environment.persistence."/persist".files = [ "/var/lib/tailscale/tailscaled.state" ];
     }
+    (lib.mkIf config.desktop.enableSpotifyd {
+      networking.firewall.allowedTCPPorts = [ 5353 ];
+      networking.firewall.allowedUDPPorts = [ 5353 ];
+    })
   ];
 }

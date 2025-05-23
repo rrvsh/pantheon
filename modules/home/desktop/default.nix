@@ -13,5 +13,13 @@
         ".local/share/stable-diffusion-webui"
       ];
     })
+    (lib.mkIf osConfig.desktop.enableSpotifyd {
+      services.spotifyd.enable = true;
+      services.spotifyd.settings.global = {
+        device_name = "${osConfig.system.hostname}";
+        device_type = "computer";
+        zeroconf_port = 5353;
+      };
+    })
   ];
 }

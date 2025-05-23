@@ -26,6 +26,7 @@
     resolution = "3840x2160";
     refresh-rate = "60";
   };
+  desktop.enableSpotifyd = true;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 }
