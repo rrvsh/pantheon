@@ -1,42 +1,49 @@
 { pkgs, ... }:
 pkgs.writeShellScriptBin "rebuild" # sh
   ''
+    CURRENT_GENERATION=$(readlink /nix/var/nix/profiles/system | cut -d- -f2)
+
     if [ ! -f "flake.nix" ]; then
       echo "Error: flake.nix not found in the current directory. Exiting."
       exit 1  # Indicate an error
     fi
 
-    echo "--- building the new config... ---"
     git add .
     nh os test . || {
       echo "Error: nixos-rebuild switch failed.  Check the output for details."
       exit 1
     }
 
-    echo "--- diffing... ---"
     git diff HEAD --color=always --stat --patch
 
-    echo "--- opening test shell... ---"
-    ${pkgs.cowsay}/bin/cowsay -f elephant "Entering a test shell.  Type 'exit 1' to abort changes and 'exit' to commit."
-    PS1="Test shell> " $SHELL || {
+    (export PS1="Test shell> " 
+    exec ${pkgs.bash}/bin/bash) || {
       ${pkgs.cowsay}/bin/cowsay "You aborted."
       exit 1
     }
 
-    echo "--- adding the built configuration to the bootloader... ---"
+    export NIXOS_LABEL="$(date +%d%m%y\ %H:%M:%S)"
     nh os boot . || {
       echo "Error: nixos-rebuild switch failed.  Check the output for details."
       exit 1
     }
-    git commit
 
-    read -p "Reboot the system now? (y/n) [n]: " -n 1 -r
-    echo    # (optional) move to a new line
-    if [[ $REPLY =~ ^[Yy]$ ]]; then
-      echo "Rebooting the system..."
-      sudo systemctl reboot
+    NEW_GENERATION=$(readlink /nix/var/nix/profiles/system | cut -d- -f2)
+    echo "New generation is $NEW_GENERATION. Current is $CURRENT_GENERATION."
+    if [ ! $NEW_GENERATION -gt $CURRENT_GENERATION ]; then
+      echo "ERROR: New config was not added to bootloader. Exiting..."
+      exit 1
     else
-      echo "Not rebooting."
-      exit 0
+      git commit
+
+      read -p "Reboot the system now? (y/n) [n]: " -n 1 -r
+      echo    # (optional) move to a new line
+      if [[ $REPLY =~ ^[Yy]$ ]]; then
+        echo "Rebooting the system..."
+        sudo systemctl reboot
+      else
+        echo "Not rebooting."
+        exit 0
+      fi
     fi
   ''
