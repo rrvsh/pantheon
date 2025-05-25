@@ -26,6 +26,7 @@
     terminal = "ghostty";
     lockscreen = "hyprlock";
     notification-daemon = "mako";
+    launcher = "fuzzel";
     mainMonitor = {
       id = "desc:OOO AN-270W04K";
       scale = "2";

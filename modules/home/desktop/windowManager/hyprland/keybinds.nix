@@ -9,6 +9,7 @@
     "SUPER, return, exec, uwsm app -- $TERMINAL $MULTIPLEXER"
     "SUPER, O, exec, uwsm app -- $BROWSER"
     "SUPER, Escape, exec, uwsm app -- $LOCKSCREEN"
+    "SUPER, space, exec, uwsm app -- $($LAUNCHER --launch-prefix=\"uwsm app -- \")"
 
     "SUPER, H, cyclenext, visible"
     "SUPER, L, cyclenext, visible prev"
