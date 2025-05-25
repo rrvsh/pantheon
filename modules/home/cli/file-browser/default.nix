@@ -5,6 +5,18 @@
     programs.yazi = {
       enable = true;
       shellWrapperName = "t";
+      settings = {
+        manager = {
+          sort_by = "natural";
+          prepend_keymap = [
+            {
+              on = "l";
+              run = "plugin smart-enter";
+              desc = "";
+            }
+          ];
+        };
+      };
     };
   };
 }

@@ -1,50 +1,44 @@
+{ pkgs, inputs, ... }:
 {
-  pkgs,
-  inputs,
-  ...
-}:
-{
-  cli.shell = "zsh";
-  cli.screensaver.enable = true;
-  cli.screensaver.timeout = "100";
-  cli.screensaver.command = "cbonsai -S";
-  cli.editor = "nvf";
-  cli.file-browser = "yazi";
-  cli.multiplexer = "zellij";
-  cli.fetch = "hyfetch";
-  cli.git.name = "Mohammad Rafiq";
-  cli.git.email = "rafiq@rrv.sh";
-  cli.git.defaultBranch = "prime";
-
-  home.shellAliases = {
-    v = "nvim";
+  cli = {
+    shell = "zsh";
+    screensaver.enable = true;
+    screensaver.timeout = "100";
+    screensaver.command = "cbonsai -S";
+    editor = "nvf";
+    file-browser = "yazi";
+    multiplexer = "zellij";
+    fetch = "hyfetch";
+    git.name = "Mohammad Rafiq";
+    git.email = "rafiq@rrv.sh";
+    git.defaultBranch = "prime";
   };
+  home = {
+    shellAliases.v = "nvim";
 
-  home.packages = with pkgs; [
-    cbonsai
-    ripgrep
-    devenv
-    pantheon.rebuild
-    pantheon.edit
-    inputs.nixspect.packages."x86_64-linux".nixspect
-  ];
+    packages = with pkgs; [
+      cbonsai
+      ripgrep
+      devenv
+      pantheon.rebuild
+      pantheon.edit
+      inputs.nixspect.packages."x86_64-linux".nixspect
+    ];
 
-  home.persistence."/persist/home/rafiq".directories = [ "repos" ];
-
-  programs.direnv = {
-    enable = true;
-    nix-direnv.enable = true;
+    persistence."/persist/home/rafiq".directories = [ "repos" ];
   };
-
   programs = {
+    nh.enable = true;
     thefuck.enable = true;
     tealdeer.enable = true;
     tealdeer.settings.updates.auto_update = true;
+    direnv = {
+      enable = true;
+      nix-direnv.enable = true;
+    };
     fzf = {
       enable = true;
       enableZshIntegration = true;
     };
-    nh.enable = true;
   };
-
 }

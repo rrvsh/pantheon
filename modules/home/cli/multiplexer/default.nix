@@ -11,8 +11,6 @@
     programs.zellij = {
       enable = true;
       enableZshIntegration = true;
-      attachExistingSession = true;
-      exitShellOnExit = true;
       settings = {
         pane_frames = false;
         show_startup_tips = false;
@@ -41,6 +39,7 @@
 
                         mode_normal        "#[bg=#89B4FA] {name} "
                         mode_locked "#[bg=#f55e18] {name} "
+                        mode_session "#[bq=#00ff00 {name}]"
 
                         tab_normal   "#[fg=#6C7086] {index} "
                         tab_active   "#[fg=#9399B2,bold,italic] {index} "
