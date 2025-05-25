@@ -1,4 +1,9 @@
-{ lib, config, ... }:
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}:
 {
   imports = [
     ./windowManager.nix
@@ -18,6 +23,7 @@
     notification-daemon = lib.pantheon.mkStrOption;
     enableSpotifyd = lib.mkEnableOption "";
     enableSteam = lib.mkEnableOption "";
+    enableVR = lib.mkEnableOption "";
   };
 
   config = lib.mkMerge [
@@ -26,6 +32,13 @@
         enable = true;
         gamescopeSession.enable = true;
       };
+    })
+    (lib.mkIf config.desktop.enableVR {
+      programs.alvr = {
+        enable = true;
+        openFirewall = true;
+      };
+      environment.systemPackages = [ pkgs.android-tools ];
     })
   ];
 }
