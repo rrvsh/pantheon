@@ -1,5 +1,13 @@
-{ config, lib, ... }:
 {
+  config,
+  lib,
+  modulesPath,
+  ...
+}:
+{
+  imports = [
+    (modulesPath + "/installer/scan/not-detected.nix")
+  ];
   config = lib.mkMerge [
     {
       boot.initrd.availableKernelModules = [
