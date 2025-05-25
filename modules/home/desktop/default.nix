@@ -21,5 +21,10 @@
         zeroconf_port = 5353;
       };
     })
+    (lib.mkIf osConfig.desktop.enableSteam {
+      home.persistence."/persist/home/${config.snowfallorg.user.name}".directories = [
+        ".local/share/Steam"
+      ];
+    })
   ];
 }

@@ -25,6 +25,7 @@ in
             "uwsm app -- $LOCKSCREEN"
             "uwsm app -- $NOTIFICATION_DAEMON"
           ];
+          xwayland.force_zero_scaling = true;
         }
         (import ./decoration.nix)
         (import ./keybinds.nix { inherit pkgs; })
@@ -32,7 +33,13 @@ in
     };
     xdg.configFile."uwsm/env".text = # sh
       ''
-
+        export GDK_SCALE=${mainMonitor.scale}
+        export STEAM_FORCE_DESKTOPUI_SCALING=${mainMonitor.scale}
+      '';
+    xdg.configFile."uwsm/env-hyprland".text = # sh
+      ''
+        export GDK_SCALE=${mainMonitor.scale}
+        export STEAM_FORCE_DESKTOPUI_SCALING=${mainMonitor.scale}
       '';
   };
 }

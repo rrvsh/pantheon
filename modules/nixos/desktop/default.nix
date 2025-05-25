@@ -1,4 +1,4 @@
-{ lib, ... }:
+{ lib, config, ... }:
 {
   imports = [
     ./windowManager.nix
@@ -17,5 +17,15 @@
     terminal = lib.pantheon.mkStrOption;
     notification-daemon = lib.pantheon.mkStrOption;
     enableSpotifyd = lib.mkEnableOption "";
+    enableSteam = lib.mkEnableOption "";
   };
+
+  config = lib.mkMerge [
+    (lib.mkIf config.desktop.enableSteam {
+      programs.steam = {
+        enable = true;
+        gamescopeSession.enable = true;
+      };
+    })
+  ];
 }
