@@ -35,6 +35,7 @@
     enableSpotifyd = true;
     enableSteam = true;
     enableVR = true;
+    enableSunshine = true;
   };
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 }

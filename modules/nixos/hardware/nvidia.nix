@@ -6,13 +6,15 @@
 }:
 {
   config = lib.mkIf (config.hardware.gpu == "nvidia") {
-    hardware.graphics.enable = true;
-    hardware.graphics.extraPackages = with pkgs; [
-      nvidia-vaapi-driver
-    ];
+    hardware = {
+      graphics.enable = true;
+      graphics.extraPackages = with pkgs; [
+        nvidia-vaapi-driver
+      ];
+      nvidia.open = true;
+      nvidia.package = config.boot.kernelPackages.nvidiaPackages.latest;
+    };
     services.xserver.videoDrivers = [ "nvidia" ];
-    hardware.nvidia.open = true;
-    hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.latest;
     nixpkgs.config.allowUnfree = true;
     environment.variables = {
       LIBVA_DRIVER_NAME = "nvidia";

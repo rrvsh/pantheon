@@ -24,6 +24,7 @@
     enableSpotifyd = lib.mkEnableOption "";
     enableSteam = lib.mkEnableOption "";
     enableVR = lib.mkEnableOption "";
+    enableSunshine = lib.mkEnableOption "";
   };
 
   config = lib.mkMerge [
@@ -39,6 +40,17 @@
         openFirewall = true;
       };
       environment.systemPackages = [ pkgs.android-tools ];
+    })
+    (lib.mkIf config.desktop.enableSunshine {
+      services.sunshine = {
+        enable = true;
+        capSysAdmin = true;
+        openFirewall = true;
+        settings = {
+          sunshine_name = config.system.hostname;
+        };
+        applications = { };
+      };
     })
   ];
 }
