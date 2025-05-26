@@ -4,7 +4,7 @@
     shell = "zsh";
     screensaver.enable = true;
     screensaver.timeout = "100";
-    screensaver.command = "cbonsai -S";
+    screensaver.command = "cbonsai -S -w 0.1 -L 40 -M 2 -b 2";
     editor = "nvf";
     file-browser = "yazi";
     multiplexer = "zellij";
