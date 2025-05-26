@@ -17,7 +17,7 @@
         enable = true;
         authKeyFile = config.sops.secrets."keys/tailscale".path;
       };
-      environment.persistence."/persist".files = [ "/var/lib/tailscale/tailscaled.state" ];
+      environment.persistence."/persist".directories = [ "/var/lib/tailscale" ];
     }
     (lib.mkIf config.desktop.enableSpotifyd {
       networking.firewall.allowedTCPPorts = [ 5353 ];

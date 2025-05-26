@@ -13,7 +13,7 @@
     platform = "intel";
     drives.btrfs = {
       enable = true;
-      drive = "";
+      drive = "/dev/disk/by-id/nvme-eui.002538d221b47b01";
       ephemeralRoot = true;
     };
   };
