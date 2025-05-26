@@ -3,6 +3,7 @@
 ## To-do
 
 - [ ] Implement an status bar for the desktop configuration
+- [ ] Copy over ~/.ssh/id_ed25519 and zellij status bar plugin confirmation
 
 ## Versions
 
