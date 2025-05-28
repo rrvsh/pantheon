@@ -7,6 +7,7 @@
       "keys/tailscale" = { };
       "keys/gemini" = { };
       "keys/cvt-jira" = { };
+      "keys/cloudflare" = { };
       "misc/cvt-jira-link" = { };
       "rafiq/hashedPassword".neededForUsers = true;
     };
