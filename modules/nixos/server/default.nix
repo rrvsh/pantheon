@@ -17,9 +17,19 @@
           domains = [
             {
               domain_name = "rrv.sh";
-              sub_domains = [
-                "@"
-              ];
+              sub_domains = [ "@" ];
+            }
+            {
+              domain_name = "aenyrathia.wiki";
+              sub_domains = [ "@" ];
+            }
+            {
+              domain_name = "bwfiq.com";
+              sub_domains = [ "*" ];
+            }
+            {
+              domain_name = "slayment.com";
+              sub_domains = [ "*" ];
             }
           ];
           resolver = "1.1.1.1";
