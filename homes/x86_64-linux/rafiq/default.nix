@@ -14,7 +14,10 @@
     git.defaultBranch = "prime";
   };
   home = {
-    shellAliases.v = "nvim";
+    shellAliases = {
+      v = "nvim";
+      e = "edit";
+    };
 
     packages = with pkgs; [
       cbonsai
