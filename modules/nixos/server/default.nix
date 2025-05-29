@@ -1,6 +1,7 @@
 { lib, config, ... }:
 {
   options.server = {
+    mountHelios = lib.mkEnableOption "";
     enableDDNS = lib.mkEnableOption "";
   };
 
@@ -51,6 +52,17 @@
             };
           };
         };
+      };
+    })
+    (lib.mkIf config.server.mountHelios {
+      fileSystems."/media/helios/data" = {
+        device = "//helios/data";
+        fsType = "cifs";
+        options = [
+          "x-systemd.automount"
+          "x-systemd.requires=tailscaled.service"
+          "x-systemd.mount-timeout=0"
+        ];
       };
     })
   ];

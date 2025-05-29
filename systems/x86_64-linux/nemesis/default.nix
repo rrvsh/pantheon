@@ -35,5 +35,7 @@
     enableVR = true;
     enableSunshine = true;
   };
+
+  server.mountHelios = true;
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 }
