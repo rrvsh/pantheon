@@ -23,6 +23,7 @@
   server = {
     enableDDNS = true;
     mountHelios = true;
+    databases.mongodb.enable = true;
   };
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
