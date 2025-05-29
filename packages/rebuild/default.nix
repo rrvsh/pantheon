@@ -1,14 +1,22 @@
 { pkgs, ... }:
 pkgs.writeShellScriptBin "rebuild" # sh
   ''
-    CURRENT_GENERATION=$(readlink /nix/var/nix/profiles/system | cut -d- -f2)
-
     if [ ! -f "flake.nix" ]; then
       echo "Error: flake.nix not found in the current directory. Exiting."
       exit 1  # Indicate an error
     fi
 
     git add .
+
+    if [ $# -gt 0 ]; then
+      for arg in "$@"; do
+        nixos-rebuild switch --flake .#"$arg" --target-host "$arg" --use-remote-sudo
+      done
+      exit 0
+    fi
+
+    CURRENT_GENERATION=$(readlink /nix/var/nix/profiles/system | cut -d- -f2)
+
     nh os test . || {
       echo "Error: nixos-rebuild switch failed.  Check the output for details."
       exit 1
