@@ -1,5 +1,6 @@
-{ lib, ... }:
+{ lib, pkgs, ... }:
 {
+  environment.systemPackages = [ pkgs.librechat ];
   system = {
     hostname = "nemesis";
     mainUser.name = "rafiq";
