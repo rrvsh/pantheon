@@ -25,6 +25,10 @@ in
       type = lib.types.str;
       default = "librechat";
     };
+    group = lib.mkOption {
+      type = lib.types.str;
+      default = "librechat";
+    };
   };
 
   config = lib.mkIf cfg.enable {
@@ -35,6 +39,12 @@ in
       serviceConfig = {
         Type = "simple"; # FIXME
         User = cfg.user;
+        Group = cfg.group;
+        PermissionsStartOnly = "true"; # run mkdir as root
+        ExecStartPre = [
+          "${pkgs.coreutils}/bin/mkdir -p ${cfg.path}"
+          "${pkgs.coreutils}/bin/chown -R ${cfg.user}:${cfg.group} ${cfg.path}"
+        ];
         LoadCredential = [
           "CREDS_KEY_FILE:${cfg.creds_key_file}"
           "CREDS_IV_FILE:${cfg.creds_iv_file}"

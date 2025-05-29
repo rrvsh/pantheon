@@ -1,4 +1,5 @@
 {
+  config,
   lib,
   ...
 }:
@@ -24,7 +25,24 @@
     enableDDNS = true;
     mountHelios = true;
     databases.mongodb.enable = true;
+    librechat = {
+      enable = true;
+      mongodbURI = "mongodb://apollo:27017";
+      creds_key_file = config.sops.secrets."librechat/creds_key".path;
+      creds_iv_file = config.sops.secrets."librechat/creds_iv".path;
+      jwt_secret_file = config.sops.secrets."librechat/jwt_secret".path;
+      jwt_refresh_secret_file = config.sops.secrets."librechat/jwt_refresh_secret".path;
+      meili_master_key_file = config.sops.secrets."librechat/meili_master_key".path;
+    };
   };
+
+  environment.persistence."/persist".directories = [
+    {
+      directory = config.server.librechat.path;
+      user = config.server.librechat.user;
+      group = config.server.librechat.group;
+    }
+  ];
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 }
