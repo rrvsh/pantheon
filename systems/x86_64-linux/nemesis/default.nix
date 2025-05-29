@@ -60,5 +60,12 @@
     };
   };
 
+  environment.persistence."/persist".directories = [
+    {
+      directory = config.server.librechat.path;
+      user = config.server.librechat.user;
+      group = "librechat";
+    }
+  ];
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 }
