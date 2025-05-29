@@ -15,6 +15,7 @@
         undoFile.enable = true;
         fzf-lua.enable = true;
         git.enable = true;
+        git.gitsigns.enable = false;
         autocomplete = import ./autocomplete.nix { inherit lib; };
         autopairs.nvim-autopairs.enable = true;
         binds = import ./binds.nix;
