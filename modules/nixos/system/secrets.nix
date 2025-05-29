@@ -23,10 +23,5 @@
       export GEMINI_API_KEY=$(sudo cat ${config.sops.secrets."keys/gemini".path})
       export CVT_JIRA_KEY=$(sudo cat ${config.sops.secrets."keys/cvt-jira".path})
       export CVT_JIRA_LINK=$(sudo cat ${config.sops.secrets."misc/cvt-jira-link".path})
-      export CREDS_KEY=$(sudo cat ${config.sops.secrets."librechat/creds_key".path})
-      export CREDS_IV=$(sudo cat ${config.sops.secrets."librechat/creds_iv".path})
-      export JWT_SECRET=$(sudo cat ${config.sops.secrets."librechat/jwt_secret".path})
-      export JWT_REFRESH_SECRET=$(sudo cat ${config.sops.secrets."librechat/jwt_refresh_secret".path})
-      export MEILI_MASTER_KEY=$(sudo cat ${config.sops.secrets."librechat/meili_master_key".path})
     '';
 }

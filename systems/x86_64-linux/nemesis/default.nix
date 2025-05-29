@@ -1,6 +1,6 @@
-{ lib, pkgs, ... }:
+{ lib, config, ... }:
 {
-  environment.systemPackages = [ pkgs.librechat ];
+
   system = {
     hostname = "nemesis";
     mainUser.name = "rafiq";
@@ -48,6 +48,15 @@
           target = "";
         }
       ];
+    };
+    librechat = {
+      enable = true;
+      mongodbURI = "mongodb://apollo:27017";
+      creds_key_file = config.sops.secrets."librechat/creds_key".path;
+      creds_iv_file = config.sops.secrets."librechat/creds_iv".path;
+      jwt_secret_file = config.sops.secrets."librechat/jwt_secret".path;
+      jwt_refresh_secret_file = config.sops.secrets."librechat/jwt_refresh_secret".path;
+      meili_master_key_file = config.sops.secrets."librechat/meili_master_key".path;
     };
   };
 
