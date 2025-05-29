@@ -8,6 +8,7 @@
       "keys/gemini" = { };
       "keys/cvt-jira" = { };
       "keys/cloudflare" = { };
+      "keys/telegram_bot" = { };
       "misc/cvt-jira-link" = { };
       "rafiq/hashedPassword".neededForUsers = true;
     };
