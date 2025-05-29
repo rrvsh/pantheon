@@ -11,6 +11,15 @@ in
 {
   options.server.librechat = {
     enable = lib.mkEnableOption "";
+    openFirewall = lib.mkEnableOption "";
+    host = lib.mkOption {
+      type = lib.types.str;
+      default = "0.0.0.0";
+    };
+    port = lib.mkOption {
+      type = lib.types.int;
+      default = 3080;
+    };
     mongodbURI = lib.mkOption { type = lib.types.str; };
     creds_key_file = lib.mkOption { type = lib.types.str; };
     creds_iv_file = lib.mkOption { type = lib.types.str; };
@@ -32,6 +41,7 @@ in
   };
 
   config = lib.mkIf cfg.enable {
+    networking.firewall.allowedTCPPorts = if cfg.openFirewall then [ cfg.port ] else [ ];
     systemd.services.librechat = {
       wantedBy = [ "multi-user.target" ];
       after = [ "network.target" ];
@@ -55,6 +65,8 @@ in
       };
       script = # sh
         ''
+          export HOST=${cfg.host}
+          export PORT=${builtins.toString cfg.port}
           export MONGO_URI="${cfg.mongodbURI}"
           export CREDS_KEY=$(${pkgs.systemd}/bin/systemd-creds cat CREDS_KEY_FILE)
           export CREDS_IV=$(${pkgs.systemd}/bin/systemd-creds cat CREDS_IV_FILE)
