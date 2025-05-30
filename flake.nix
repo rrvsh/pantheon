@@ -23,6 +23,9 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixspect.inputs.nixpkgs.follows = "nixpkgs";
     nixspect.url = "github:rrvsh/nixspect";
+    nur.inputs.flake-parts.follows = "flake-parts";
+    nur.inputs.nixpkgs.follows = "nixpkgs";
+    nur.url = "github:nix-community/NUR";
     nvf.inputs.flake-parts.follows = "flake-parts";
     nvf.inputs.flake-utils.follows = "flake-utils";
     nvf.inputs.mnw.follows = "mnw";
@@ -45,6 +48,13 @@
     stable-diffusion-webui-nix.inputs.nixpkgs.follows = "nixpkgs";
     stable-diffusion-webui-nix.inputs.python-flexseal.follows = "python-flexseal";
     stable-diffusion-webui-nix.url = "github:Janrupf/stable-diffusion-webui-nix/main";
+    stylix.inputs.flake-compat.follows = "flake-compat";
+    stylix.inputs.flake-parts.follows = "flake-parts";
+    stylix.inputs.nur.follows = "nur";
+    stylix.inputs.home-manager.follows = "home-manager";
+    stylix.inputs.nixpkgs.follows = "nixpkgs";
+    stylix.inputs.systems.follows = "systems";
+    stylix.url = "github:nix-community/stylix";
     systems.url = "github:nix-systems/default";
     zjstatus.inputs.crane.follows = "crane";
     zjstatus.inputs.flake-utils.follows = "flake-utils";
