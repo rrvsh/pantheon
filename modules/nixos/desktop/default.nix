@@ -43,12 +43,27 @@
       environment.systemPackages = [ pkgs.android-tools ];
     })
     (lib.mkIf config.desktop.enableSunshine {
+      networking.firewall.allowedTCPPortRanges = [
+        {
+          from = 47984;
+          to = 47990;
+        }
+      ];
+      networking.firewall.allowedUDPPortRanges = [
+        {
+          from = 47998;
+          to = 48000;
+        }
+      ];
+      networking.firewall.allowedTCPPorts = [ 48010 ];
       services.sunshine = {
         enable = true;
         capSysAdmin = true;
         openFirewall = true;
         settings = {
           sunshine_name = config.system.hostname;
+          port = 48989; # default
+          origin_web_ui_allowed = "wan";
         };
         applications = { };
       };
