@@ -2,20 +2,21 @@
   hardtime-nvim = {
     enable = true;
     setupOpts = {
+      max_count = 1;
       disabled_keys = {
-        "h" = [
+        "<Up>" = [
           "n"
           "x"
         ];
-        "j" = [
+        "<Down>" = [
           "n"
           "x"
         ];
-        "k" = [
+        "<Right>" = [
           "n"
           "x"
         ];
-        "l" = [
+        "<Left>" = [
           "n"
           "x"
         ];
