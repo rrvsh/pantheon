@@ -29,6 +29,7 @@
         options = import ./options.nix;
         notify = import ./notify.nix;
         snippets = import ./snippets.nix;
+        statusline = import ./statusline.nix;
         treesitter = import ./treesitter.nix;
         ui = import ./ui.nix;
         utility = import ./utility.nix;
