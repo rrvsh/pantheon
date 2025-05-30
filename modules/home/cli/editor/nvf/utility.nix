@@ -8,8 +8,8 @@
   yazi-nvim = {
     enable = true;
     mappings = {
-      openYazi = "t";
-      openYaziDir = "T";
+      openYazi = "<leader>tt";
+      openYaziDir = "<leader>TT";
     };
     setupOpts.open_for_directories = true;
   };

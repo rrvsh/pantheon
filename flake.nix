@@ -1,4 +1,5 @@
 {
+
   inputs = {
     crane.url = "github:ipetkov/crane";
     disko.inputs.nixpkgs.follows = "nixpkgs";
@@ -78,4 +79,5 @@
         formatter = channels.nixpkgs.nixfmt-rfc-style;
       };
     };
+
 }
