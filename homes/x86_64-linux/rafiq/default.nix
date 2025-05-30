@@ -2,6 +2,7 @@
 {
   cli = {
     shell = "zsh";
+    finder = "fzf";
     screensaver.enable = true;
     screensaver.timeout = "100";
     screensaver.command = "cbonsai -S -w 0.1 -L 40 -M 2 -b 2";
@@ -38,10 +39,6 @@
     direnv = {
       enable = true;
       nix-direnv.enable = true;
-    };
-    fzf = {
-      enable = true;
-      enableZshIntegration = true;
     };
   };
 }

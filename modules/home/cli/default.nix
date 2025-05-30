@@ -7,6 +7,7 @@
 {
   options.cli = {
     shell = lib.pantheon.mkStrOption;
+    finder = lib.pantheon.mkStrOption;
     screensaver.enable = lib.mkEnableOption "";
     screensaver.timeout = lib.pantheon.mkStrOption;
     screensaver.command = lib.pantheon.mkStrOption;
