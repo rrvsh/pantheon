@@ -3,19 +3,19 @@
     enable = true;
     setupOpts = {
       disabled_keys = {
-        "<Up>" = [
+        "h" = [
           "n"
           "x"
         ];
-        "<Down>" = [
+        "j" = [
           "n"
           "x"
         ];
-        "<Left>" = [
+        "k" = [
           "n"
           "x"
         ];
-        "<Right>" = [
+        "l" = [
           "n"
           "x"
         ];
