@@ -79,6 +79,7 @@
         disko.nixosModules.disko
         impermanence.nixosModules.impermanence
         sops-nix.nixosModules.sops
+        stylix.nixosModules.stylix
       ];
       homes.modules = with inputs; [
         impermanence.homeManagerModules.impermanence

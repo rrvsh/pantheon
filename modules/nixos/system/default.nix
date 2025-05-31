@@ -1,4 +1,9 @@
-{ config, lib, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 {
   imports = [
     ./boot.nix
@@ -16,6 +21,10 @@
   };
 
   config = {
+    stylix = {
+      enable = true;
+      base16Scheme = "${pkgs.base16-schemes}/share/themes/atelier-cave.yaml";
+    };
     system.stateVersion = "25.05"; # Did you read the comment?
   };
 }
