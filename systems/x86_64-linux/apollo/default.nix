@@ -32,6 +32,30 @@
       mongodbURI = "mongodb://apollo:27017";
       settings = {
         version = "1.0.8";
+        cache = true;
+        interface = {
+          privacyPolicy = {
+            externalUrl = "https://librechat.ai/privacy-policy";
+            openNewTab = true;
+          };
+        };
+        endpoints = {
+          custom = [
+            {
+              name = "OpenRouter";
+              apiKey = "\${OPENROUTER_KEY}";
+              baseURL = "https://openrouter.ai/api/v1";
+              models = {
+                default = [ "meta-llama/llama-3-70b-instruct" ];
+                fetch = true;
+              };
+              titleConvo = true;
+              titleModule = "meta-llama/llama-3-70b-instruct";
+              dropParams = [ "stop" ];
+              modelDisplayLabel = "OpenRouter";
+            }
+          ];
+        };
       };
       auth = {
         allowEmailLogin = true;

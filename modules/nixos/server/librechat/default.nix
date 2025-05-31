@@ -19,7 +19,32 @@ in
       example = # nix
         ''
           {
-
+            version = "1.0.8";
+            cache = true;
+            interface = {
+              privacyPolicy = {
+                externalUrl = "https://librechat.ai/privacy-policy";
+                openNewTab = true;
+              };
+            };
+            endpoints = {
+              custom = [
+                {
+                  name = "OpenRouter";
+                  # Note that the following $ should be escaped with a backslash, not '''
+                  apiKey = "''${OPENROUTER_KEY}";
+                  baseURL = "https://openrouter.ai/api/v1";
+                  models = {
+                    default = ["meta-llama/llama-3-70b-instruct"];
+                    fetch = true;
+                  };
+                  titleConvo = true;
+                  titleModule = "meta-llama/llama-3-70b-instruct";
+                  dropParams = ["stop"];
+                  modelDisplayLabel = "OpenRouter";
+                }
+              ];
+            };
           }
         '';
       description = "A free-form attribute set that will be written to librechat.yaml.";
