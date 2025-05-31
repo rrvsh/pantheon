@@ -176,6 +176,15 @@ in
       };
     };
 
+    auth = {
+      allowEmailLogin = lib.mkOption {
+        type = lib.types.bool;
+        default = true;
+        description = "Enable or disable ONLY email login.";
+      };
+      allowEmailRegistration = lib.mkEnableOption "Enable or disable Email registration of new users.";
+    };
+
   };
 
   config = lib.mkIf cfg.enable {
@@ -247,6 +256,8 @@ in
           export HOST=${cfg.host}
           export PORT=${builtins.toString cfg.port}
           export MONGO_URI="${cfg.mongodbURI}"
+          export ALLOW_EMAIL_LOGIN=${if cfg.auth.allowEmailLogin then "true" else "false"}
+          export ALLOW_REGISTRATION=${if cfg.auth.allowEmailRegistration then "true" else "false"}
 
           cd ${cfg.path}
           ${pkgs.librechat}/bin/librechat-server

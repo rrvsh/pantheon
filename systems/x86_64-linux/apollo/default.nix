@@ -30,6 +30,10 @@
       openFirewall = true;
       host = "0.0.0.0";
       mongodbURI = "mongodb://apollo:27017";
+      auth = {
+        allowEmailLogin = true;
+        allowEmailRegistration = true;
+      };
       credentials = {
         creds_key_file = config.sops.secrets."librechat/creds_key".path;
         creds_iv_file = config.sops.secrets."librechat/creds_iv".path;
