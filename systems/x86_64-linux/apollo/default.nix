@@ -28,8 +28,16 @@
     librechat = {
       enable = true;
       openFirewall = true;
-      host = "0.0.0.0";
-      mongodbURI = "mongodb://apollo:27017";
+      env = {
+        HOST = "0.0.0.0";
+        MONGO_URI = "mongodb://apollo:27017";
+      };
+      credentials = {
+        CREDS_KEY = config.sops.secrets."librechat/creds_key".path;
+        CREDS_IV = config.sops.secrets."librechat/creds_iv".path;
+        JWT_SECRET = config.sops.secrets."librechat/jwt_secret".path;
+        JWT_REFRESH_SECRET = config.sops.secrets."librechat/jwt_refresh_secret".path;
+      };
       settings = {
         version = "1.0.8";
         cache = true;
@@ -57,26 +65,8 @@
           ];
         };
       };
-      auth = {
-        allowEmailLogin = true;
-        allowEmailRegistration = true;
-      };
-      credentials = {
-        creds_key_file = config.sops.secrets."librechat/creds_key".path;
-        creds_iv_file = config.sops.secrets."librechat/creds_iv".path;
-        jwt_secret_file = config.sops.secrets."librechat/jwt_secret".path;
-        jwt_refresh_secret_file = config.sops.secrets."librechat/jwt_refresh_secret".path;
-      };
     };
   };
-
-  environment.persistence."/persist".directories = [
-    {
-      directory = config.server.librechat.path;
-      user = config.server.librechat.user;
-      group = config.server.librechat.group;
-    }
-  ];
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 }
