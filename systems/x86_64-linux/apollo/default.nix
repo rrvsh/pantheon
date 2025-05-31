@@ -28,8 +28,9 @@
     librechat = {
       enable = true;
       openFirewall = true;
-      host = "0.0.0.0";
-      mongodbURI = "mongodb://apollo:27017";
+      env = {
+        TEST_ENV_VAR = "hello";
+      };
       settings = {
         version = "1.0.8";
         cache = true;
@@ -56,16 +57,6 @@
             }
           ];
         };
-      };
-      auth = {
-        allowEmailLogin = true;
-        allowEmailRegistration = true;
-      };
-      credentials = {
-        creds_key_file = config.sops.secrets."librechat/creds_key".path;
-        creds_iv_file = config.sops.secrets."librechat/creds_iv".path;
-        jwt_secret_file = config.sops.secrets."librechat/jwt_secret".path;
-        jwt_refresh_secret_file = config.sops.secrets."librechat/jwt_refresh_secret".path;
       };
     };
   };

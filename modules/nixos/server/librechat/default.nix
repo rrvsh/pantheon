@@ -10,6 +10,24 @@ let
     name = "librechat.yaml";
     text = lib.generators.toYAML { } cfg.settings;
   };
+  # Thanks to https://github.com/nix-community/home-manager/blob/60e4624302d956fe94d3f7d96a560d14d70591b9/modules/lib/shell.nix :)
+  export = n: v: ''export ${n}="${builtins.toString v}"'';
+  exportAll = vars: lib.concatStringsSep "\n" (lib.mapAttrsToList export vars);
+  environmentVariablesFile = pkgs.writeTextFile {
+    name = "librechat-env-variables.sh";
+    text = # sh
+      ''
+        # Thanks to https://github.com/nix-community/home-manager/blob/release-25.05/modules/home-environment.nix :)
+        # Only source this once.
+        if [ -n "$__LC_ENV_VARS_SOURCED" ]; then return; fi
+        export __LC_ENV_VARS_SOURCED=1
+
+        export CONFIG_PATH=${configFile}
+        ${exportAll cfg.env}
+      '';
+  };
+  allowedPorts =
+    if cfg.openFirewall then (if cfg.env ? PORT then [ cfg.env.port ] else [ 3080 ]) else [ ];
 in
 {
   options.server.librechat = {
@@ -29,6 +47,31 @@ in
       type = lib.types.str;
       default = "librechat";
       description = "The group to run the service as.";
+    };
+    credentials = lib.mkOption {
+      type = lib.types.lazyAttrsOf lib.types.path;
+      default = { };
+      example = {
+        CREDS_KEY = /run/secrets/creds_key;
+      };
+      description = "Environment variables that will be loaded in from files at runtime. See https://www.librechat.ai/docs/configuration/dotenv for a full list.";
+    };
+    env = lib.mkOption {
+      type =
+        with lib.types;
+        lazyAttrsOf (oneOf [
+          str
+          path
+          int
+          float
+        ]);
+      example = {
+        ALLOW_REGISTRATION = "true";
+        HOST = "0.0.0.0";
+        CONSOLE_JSON_STRING_LENGTH = 255;
+      };
+      default = { };
+      description = "Environment variables that will be set for the service. See https://www.librechat.ai/docs/configuration/dotenv for a full list.";
     };
     settings = lib.mkOption {
       type = lib.types.attrs;
@@ -69,7 +112,7 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    networking.firewall.allowedTCPPorts = if cfg.openFirewall then [ cfg.port ] else [ ];
+    networking.firewall.allowedTCPPorts = allowedPorts;
     systemd.services.librechat = {
       wantedBy = [ "multi-user.target" ];
       after = [ "network.target" ];
@@ -83,12 +126,11 @@ in
           "${pkgs.coreutils}/bin/mkdir -p ${cfg.path}"
           "${pkgs.coreutils}/bin/chown -R ${cfg.user}:${cfg.group} ${cfg.path}"
         ];
-        LoadCredential = [
-        ];
+        LoadCredential = [ ];
       };
       script = # sh
         ''
-          export CONFIG_PATH=${configFile}
+          source ${environmentVariablesFile}
           cd ${cfg.path}
           ${pkgs.librechat}/bin/librechat-server
         '';
