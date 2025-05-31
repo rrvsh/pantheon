@@ -30,6 +30,9 @@
       openFirewall = true;
       host = "0.0.0.0";
       mongodbURI = "mongodb://apollo:27017";
+      settings = {
+        version = "1.0.8";
+      };
       auth = {
         allowEmailLogin = true;
         allowEmailRegistration = true;

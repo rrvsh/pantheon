@@ -13,6 +13,18 @@ in
     enable = lib.mkEnableOption "Whether to enable the LibreChat server.";
     openFirewall = lib.mkEnableOption "Whether to open the port in the firewall.";
 
+    settings = lib.mkOption {
+      type = lib.types.attrs;
+      default = { };
+      example = # nix
+        ''
+          {
+
+          }
+        '';
+      description = "A free-form attribute set that will be written to librechat.yaml.";
+    };
+
     path = lib.mkOption {
       type = lib.types.str;
       default = "/var/lib/librechat";
@@ -187,89 +199,98 @@ in
 
   };
 
-  config = lib.mkIf cfg.enable {
-
-    assertions = [
-      {
-        assertion = (cfg.credentials.creds_key != "") || (cfg.credentials.creds_key_file != "");
-        message = "You must set either credentials.creds_key or credentials.creds_key_file.";
-      }
-      {
-        assertion = (cfg.credentials.creds_iv != "") || (cfg.credentials.creds_iv_file != "");
-        message = "You must set either credentials.creds_iv or credentials.creds_iv_file.";
-      }
-      {
-        assertion = cfg.mongodbURI != "";
-        message = "You must set the mongodbURI option.";
-      }
-      {
-        assertion =
-          cfg.logging.enableDebugLogging
-          && (
-            (cfg.logging.enableConsoleLogging && !cfg.logging.enableConsoleJSONLogging)
-            || (!cfg.logging.enableConsoleLogging && cfg.logging.enableConsoleJSONLogging)
-            || (!cfg.logging.enableConsoleLogging && !cfg.logging.enableConsoleJSONLogging)
-          );
-        message = "DEBUG_LOGGING can be used with either DEBUG_CONSOLE or CONSOLE_JSON but not both.";
-      }
-      {
-        assertion = (cfg.credentials.jwt_secret != "") || (cfg.credentials.jwt_secret_file != "");
-        message = "You must set either credentials.jwt_secret or credentials.jwt_secret_file.";
-      }
-      {
-        assertion =
-          (cfg.credentials.jwt_refresh_secret != "") || (cfg.credentials.jwt_refresh_secret_file != "");
-        message = "You must set either credentials.jwt_refresh_secret or credentials.jwt_refresh_secret_file.";
-      }
-    ];
-
-    networking.firewall.allowedTCPPorts = if cfg.openFirewall then [ cfg.port ] else [ ];
-    systemd.services.librechat = {
-      wantedBy = [ "multi-user.target" ];
-      after = [ "network.target" ];
-      description = "Open-source app for all your AI conversations, fully customizable and compatible with any AI provider";
-      serviceConfig = {
-        Type = "simple"; # FIXME
-        User = cfg.user;
-        Group = cfg.group;
-        PermissionsStartOnly = "true"; # run mkdir as root
-        ExecStartPre = [
-          "${pkgs.coreutils}/bin/mkdir -p ${cfg.path}"
-          "${pkgs.coreutils}/bin/chown -R ${cfg.user}:${cfg.group} ${cfg.path}"
-        ];
-        LoadCredential = [
-          #TODO: Use the creds_* options
-          "CREDS_KEY_FILE:${cfg.credentials.creds_key_file}"
-          "CREDS_IV_FILE:${cfg.credentials.creds_iv_file}"
-          "JWT_SECRET_FILE:${cfg.credentials.jwt_secret_file}"
-          "JWT_REFRESH_SECRET_FILE:${cfg.credentials.jwt_refresh_secret_file}"
-        ];
+  config = lib.mkIf cfg.enable (
+    let
+      configFile = pkgs.writeTextFile {
+        name = "librechat.yaml";
+        text = lib.generators.toYAML { } cfg.settings;
       };
-      script = # sh
-        ''
-          # Load the systemd credentials
-          export CREDS_KEY=$(${pkgs.systemd}/bin/systemd-creds cat CREDS_KEY_FILE)
-          export CREDS_IV=$(${pkgs.systemd}/bin/systemd-creds cat CREDS_IV_FILE)
-          export JWT_SECRET=$(${pkgs.systemd}/bin/systemd-creds cat JWT_SECRET_FILE)
-          export JWT_REFRESH_SECRET=$(${pkgs.systemd}/bin/systemd-creds cat JWT_REFRESH_SECRET_FILE)
+    in
+    {
 
-          export HOST=${cfg.host}
-          export PORT=${builtins.toString cfg.port}
-          export MONGO_URI="${cfg.mongodbURI}"
-          export ALLOW_EMAIL_LOGIN=${if cfg.auth.allowEmailLogin then "true" else "false"}
-          export ALLOW_REGISTRATION=${if cfg.auth.allowEmailRegistration then "true" else "false"}
+      assertions = [
+        {
+          assertion = (cfg.credentials.creds_key != "") || (cfg.credentials.creds_key_file != "");
+          message = "You must set either credentials.creds_key or credentials.creds_key_file.";
+        }
+        {
+          assertion = (cfg.credentials.creds_iv != "") || (cfg.credentials.creds_iv_file != "");
+          message = "You must set either credentials.creds_iv or credentials.creds_iv_file.";
+        }
+        {
+          assertion = cfg.mongodbURI != "";
+          message = "You must set the mongodbURI option.";
+        }
+        {
+          assertion =
+            cfg.logging.enableDebugLogging
+            && (
+              (cfg.logging.enableConsoleLogging && !cfg.logging.enableConsoleJSONLogging)
+              || (!cfg.logging.enableConsoleLogging && cfg.logging.enableConsoleJSONLogging)
+              || (!cfg.logging.enableConsoleLogging && !cfg.logging.enableConsoleJSONLogging)
+            );
+          message = "DEBUG_LOGGING can be used with either DEBUG_CONSOLE or CONSOLE_JSON but not both.";
+        }
+        {
+          assertion = (cfg.credentials.jwt_secret != "") || (cfg.credentials.jwt_secret_file != "");
+          message = "You must set either credentials.jwt_secret or credentials.jwt_secret_file.";
+        }
+        {
+          assertion =
+            (cfg.credentials.jwt_refresh_secret != "") || (cfg.credentials.jwt_refresh_secret_file != "");
+          message = "You must set either credentials.jwt_refresh_secret or credentials.jwt_refresh_secret_file.";
+        }
+      ];
 
-          cd ${cfg.path}
-          ${pkgs.librechat}/bin/librechat-server
-        '';
-    };
+      networking.firewall.allowedTCPPorts = if cfg.openFirewall then [ cfg.port ] else [ ];
+      systemd.services.librechat = {
+        wantedBy = [ "multi-user.target" ];
+        after = [ "network.target" ];
+        description = "Open-source app for all your AI conversations, fully customizable and compatible with any AI provider";
+        serviceConfig = {
+          Type = "simple"; # FIXME
+          User = cfg.user;
+          Group = cfg.group;
+          PermissionsStartOnly = "true"; # run mkdir as root
+          ExecStartPre = [
+            "${pkgs.coreutils}/bin/mkdir -p ${cfg.path}"
+            "${pkgs.coreutils}/bin/chown -R ${cfg.user}:${cfg.group} ${cfg.path}"
+          ];
+          LoadCredential = [
+            #TODO: Use the creds_* options
+            "CREDS_KEY_FILE:${cfg.credentials.creds_key_file}"
+            "CREDS_IV_FILE:${cfg.credentials.creds_iv_file}"
+            "JWT_SECRET_FILE:${cfg.credentials.jwt_secret_file}"
+            "JWT_REFRESH_SECRET_FILE:${cfg.credentials.jwt_refresh_secret_file}"
+          ];
+        };
+        script = # sh
+          ''
+            # Load the systemd credentials
+            export CREDS_KEY=$(${pkgs.systemd}/bin/systemd-creds cat CREDS_KEY_FILE)
+            export CREDS_IV=$(${pkgs.systemd}/bin/systemd-creds cat CREDS_IV_FILE)
+            export JWT_SECRET=$(${pkgs.systemd}/bin/systemd-creds cat JWT_SECRET_FILE)
+            export JWT_REFRESH_SECRET=$(${pkgs.systemd}/bin/systemd-creds cat JWT_REFRESH_SECRET_FILE)
 
-    users.users.librechat = lib.mkIf (cfg.user == "librechat") {
-      name = "librechat";
-      isSystemUser = true;
-      group = "librechat";
-      description = "LibreChat server user";
-    };
-    users.groups.librechat = lib.mkIf (cfg.user == "librechat") { };
-  };
+            export CONFIG_PATH=${configFile}
+            export HOST=${cfg.host}
+            export PORT=${builtins.toString cfg.port}
+            export MONGO_URI="${cfg.mongodbURI}"
+            export ALLOW_EMAIL_LOGIN=${if cfg.auth.allowEmailLogin then "true" else "false"}
+            export ALLOW_REGISTRATION=${if cfg.auth.allowEmailRegistration then "true" else "false"}
+
+            cd ${cfg.path}
+            ${pkgs.librechat}/bin/librechat-server
+          '';
+      };
+
+      users.users.librechat = lib.mkIf (cfg.user == "librechat") {
+        name = "librechat";
+        isSystemUser = true;
+        group = "librechat";
+        description = "LibreChat server user";
+      };
+      users.groups.librechat = lib.mkIf (cfg.user == "librechat") { };
+    }
+  );
 }
