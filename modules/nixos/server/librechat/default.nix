@@ -13,6 +13,10 @@ let
   # Thanks to https://github.com/nix-community/home-manager/blob/60e4624302d956fe94d3f7d96a560d14d70591b9/modules/lib/shell.nix :)
   export = n: v: ''export ${n}="${builtins.toString v}"'';
   exportAll = vars: lib.concatStringsSep "\n" (lib.mapAttrsToList export vars);
+  exportCredentials = n: _: ''export ${n}="$(${pkgs.systemd}/bin/systemd-creds cat ${n}_FILE)"'';
+  exportAllCredentials = vars: lib.concatStringsSep "\n" (lib.mapAttrsToList exportCredentials vars);
+  transformCredential = n: v: "${n}_FILE:${v}";
+  getLoadCredentialList = lib.mapAttrsToList transformCredential cfg.credentials;
   environmentVariablesFile = pkgs.writeTextFile {
     name = "librechat-env-variables.sh";
     text = # sh
@@ -24,6 +28,7 @@ let
 
         export CONFIG_PATH=${configFile}
         ${exportAll cfg.env}
+        ${exportAllCredentials cfg.credentials}
       '';
   };
   allowedPorts =
@@ -54,7 +59,7 @@ in
       example = {
         CREDS_KEY = /run/secrets/creds_key;
       };
-      description = "Environment variables that will be loaded in from files at runtime. See https://www.librechat.ai/docs/configuration/dotenv for a full list.";
+      description = "Environment variables which are loaded from the contents of files at a file paths, mainly used for secrets. See https://www.librechat.ai/docs/configuration/dotenv for a full list.";
     };
     env = lib.mkOption {
       type =
@@ -107,7 +112,7 @@ in
             };
           }
         '';
-      description = "A free-form attribute set that will be written to librechat.yaml.";
+      description = "A free-form attribute set that will be written to librechat.yaml. You can use environment variables by wrapping them in \${}. Take care to escape the \$ character.";
     };
   };
 
@@ -118,20 +123,21 @@ in
       after = [ "network.target" ];
       description = "Open-source app for all your AI conversations, fully customizable and compatible with any AI provider";
       serviceConfig = {
-        Type = "simple"; # FIXME
+        Type = "simple";
         User = cfg.user;
         Group = cfg.group;
         PermissionsStartOnly = "true"; # run mkdir as root
         ExecStartPre = [
           "${pkgs.coreutils}/bin/mkdir -p ${cfg.path}"
           "${pkgs.coreutils}/bin/chown -R ${cfg.user}:${cfg.group} ${cfg.path}"
+          "${pkgs.coreutils}/bin/chmod 775 ${cfg.path}"
         ];
-        LoadCredential = [ ];
+        LoadCredential = getLoadCredentialList;
       };
       script = # sh
         ''
-          source ${environmentVariablesFile}
           cd ${cfg.path}
+          source ${environmentVariablesFile}
           ${pkgs.librechat}/bin/librechat-server
         '';
     };
