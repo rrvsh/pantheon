@@ -30,6 +30,11 @@
   };
 
   config = lib.mkMerge [
+    {
+      fonts.packages = with pkgs; [
+        font-awesome
+      ];
+    }
     (lib.mkIf config.desktop.enableSteam {
       programs.steam = {
         enable = true;

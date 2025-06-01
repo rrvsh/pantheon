@@ -24,8 +24,12 @@ in
           exec-once = [
             "uwsm app -- $LOCKSCREEN"
             "uwsm app -- $NOTIFICATION_DAEMON"
+          ];
+
+          exec = [
             "uwsm app -- $STATUS_BAR"
           ];
+
           xwayland.force_zero_scaling = true;
         }
         (import ./decoration.nix)
