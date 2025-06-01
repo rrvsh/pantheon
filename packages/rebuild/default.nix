@@ -1,6 +1,22 @@
 { pkgs, ... }:
 pkgs.writeShellScriptBin "rebuild" # sh
   ''
+    TEST_SHELL=false
+    REMOTE_HOSTS=()
+
+    while [[ $# -gt 0 ]]; do
+      case "$1" in
+        --test-shell | -t)
+          TEST_SHELL=true
+          shift
+          ;;
+        *)
+          REMOTE_HOSTS+="$1"
+          shift
+          ;;
+      esac
+    done
+
     if [ ! -f "flake.nix" ]; then
       echo "Error: flake.nix not found in the current directory. Exiting."
       exit 1  # Indicate an error
@@ -8,9 +24,13 @@ pkgs.writeShellScriptBin "rebuild" # sh
 
     git add .
 
-    if [ $# -gt 0 ]; then
-      for arg in "$@"; do
-        nixos-rebuild switch --flake .#"$arg" --target-host "$arg" --use-remote-sudo
+    if [ ''${#REMOTE_HOSTS[@]} -gt 0 ]; then
+      for host in "$REMOTE_HOSTS[@]"; do
+        echo "Rebuilding $host..."
+        nixos-rebuild switch --flake .#"$host" --target-host "$host" --use-remote-sudo || {
+          echo "Error: nixos-rebuild switch failed for $host. Check the output."
+          exit 1
+        }
       done
       exit 0
     fi
@@ -24,11 +44,13 @@ pkgs.writeShellScriptBin "rebuild" # sh
 
     git diff HEAD --color=always --stat --patch
 
-    (export PS1="Test shell> " 
-    exec ${pkgs.bash}/bin/bash) || {
-      ${pkgs.cowsay}/bin/cowsay "You aborted."
-      exit 1
-    }
+    if "$TEST_SHELL"; then
+      (export PS1="Test shell> " 
+      exec ${pkgs.bash}/bin/bash) || {
+        ${pkgs.cowsay}/bin/cowsay "You aborted."
+        exit 1
+      }
+    fi
 
     export NIXOS_LABEL="$(date +%d%m%y\ %H:%M:%S)"
     nh os boot . || {
