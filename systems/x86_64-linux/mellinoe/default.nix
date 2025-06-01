@@ -25,6 +25,12 @@
     notification-daemon = "mako";
     launcher = "fuzzel";
     status-bar = "waybar";
+    mainMonitor = {
+      id = "BOE 0x088B";
+      scale = "2";
+      resolution = "1920x1280";
+      refresh-rate = "60";
+    };
   };
 
   server = {
