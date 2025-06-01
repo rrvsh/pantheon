@@ -24,9 +24,6 @@ in
           exec-once = [
             "uwsm app -- $LOCKSCREEN"
             "uwsm app -- $NOTIFICATION_DAEMON"
-          ];
-
-          exec = [
             "uwsm app -- $STATUS_BAR"
           ];
 
