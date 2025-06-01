@@ -13,13 +13,26 @@
         settings = [
           {
             layer = "top";
-            modules-right = [ "clock" ];
+            modules-right = [
+              "battery"
+              "clock"
+            ];
+            "clock" = {
+              interval = 1;
+              format = "{:%F %T}";
+            };
           }
         ];
         style = # css
           ''
             window#waybar {
               background-color: rgba(0, 0, 0, 0);
+            }
+
+            #clock {
+              padding-top: 5px;
+              padding-right: 5px;
+              color: #ffffff;
             }
           '';
       };
