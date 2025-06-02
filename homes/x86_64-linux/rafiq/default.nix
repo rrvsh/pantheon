@@ -34,6 +34,9 @@
   programs = {
     nh.enable = true;
     tealdeer.enable = true;
+    pay-respects = {
+      enable = true;
+    };
     tealdeer.settings.updates.auto_update = true;
     direnv = {
       enable = true;
