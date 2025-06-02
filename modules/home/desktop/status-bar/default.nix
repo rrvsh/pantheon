@@ -1,4 +1,5 @@
 {
+  pkgs,
   config,
   lib,
   osConfig,
@@ -13,10 +14,22 @@
         settings = [
           {
             layer = "top";
+            modules-left = [
+              "pulseaudio"
+            ];
             modules-right = [
               "battery"
               "clock"
             ];
+            "pulseaudio" = {
+              format = "{icon} {volume}%";
+              format-muted = "";
+              format-icons.default = [
+                ""
+                ""
+              ];
+              on-click = "${pkgs.pulseaudio}/bin/pactl set-sink-mute @DEFAULT_SINK@ toggle";
+            };
             "clock" = {
               interval = 1;
               format = "{:%F %T}";
@@ -33,6 +46,7 @@
               background-color: rgba(0, 0, 0, 0);
             }
 
+            #pulseaudio,
             #battery,
             #clock {
               padding-top: 5px;
