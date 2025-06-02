@@ -519,6 +519,7 @@
         "nur": "nur",
         "nvf": "nvf",
         "python-flexseal": "python-flexseal",
+        "rrvsh-nixpkgs": "rrvsh-nixpkgs",
         "rust-overlay": "rust-overlay",
         "snowfall-lib": "snowfall-lib",
         "sops-nix": "sops-nix",
@@ -526,6 +527,21 @@
         "stylix": "stylix",
         "systems": "systems",
         "zjstatus": "zjstatus"
+      }
+    },
+    "rrvsh-nixpkgs": {
+      "locked": {
+        "lastModified": 1748824126,
+        "narHash": "sha256-EjrHRlTvzECAFH0YSfR+kcK1Q1qDDVX0mQatjpvzwGo=",
+        "ref": "refs/heads/librechat-module",
+        "rev": "b6ef5cc34d3699f505e09308b16fe7c0ea8178fc",
+        "revCount": 808478,
+        "type": "git",
+        "url": "file:///home/rafiq/repos/nixpkgs"
+      },
+      "original": {
+        "type": "git",
+        "url": "file:///home/rafiq/repos/nixpkgs"
       }
     },
     "rust-overlay": {
