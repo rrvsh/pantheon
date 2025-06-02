@@ -531,17 +531,18 @@
     },
     "rrvsh-nixpkgs": {
       "locked": {
-        "lastModified": 1748824126,
-        "narHash": "sha256-EjrHRlTvzECAFH0YSfR+kcK1Q1qDDVX0mQatjpvzwGo=",
-        "ref": "refs/heads/librechat-module",
-        "rev": "b6ef5cc34d3699f505e09308b16fe7c0ea8178fc",
-        "revCount": 808478,
-        "type": "git",
-        "url": "file:///home/rafiq/repos/nixpkgs"
+        "lastModified": 1748853793,
+        "narHash": "sha256-UoWP2Y4r6ntlFNj02afKRukNDTMj/ufKfvNhRwzqzS8=",
+        "owner": "rrvsh",
+        "repo": "nixpkgs",
+        "rev": "eb9aad05033afb7ed417cb187480d20c8daa08b7",
+        "type": "github"
       },
       "original": {
-        "type": "git",
-        "url": "file:///home/rafiq/repos/nixpkgs"
+        "owner": "rrvsh",
+        "ref": "librechat-module",
+        "repo": "nixpkgs",
+        "type": "github"
       }
     },
     "rust-overlay": {

@@ -1,7 +1,7 @@
 {
 
   inputs = {
-    rrvsh-nixpkgs.url = "git+file:///home/rafiq/repos/nixpkgs";
+    rrvsh-nixpkgs.url = "github:rrvsh/nixpkgs/librechat-module";
     crane.url = "github:ipetkov/crane";
     disko.inputs.nixpkgs.follows = "nixpkgs";
     disko.url = "github:nix-community/disko";
