@@ -25,7 +25,7 @@ pkgs.writeShellScriptBin "rebuild" # sh
     git add .
 
     if [ ''${#REMOTE_HOSTS[@]} -gt 0 ]; then
-      for host in "$REMOTE_HOSTS[@]"; do
+      for host in "$REMOTE_HOSTS"; do
         echo "Rebuilding $host..."
         nixos-rebuild switch --flake .#"$host" --target-host "$host" --use-remote-sudo || {
           echo "Error: nixos-rebuild switch failed for $host. Check the output."
@@ -37,26 +37,27 @@ pkgs.writeShellScriptBin "rebuild" # sh
 
     CURRENT_GENERATION=$(readlink /nix/var/nix/profiles/system | cut -d- -f2)
 
-    nh os test . || {
-      echo "Error: nixos-rebuild switch failed.  Check the output for details."
-      exit 1
-    }
-
-    git diff HEAD --color=always --stat --patch
-
     if "$TEST_SHELL"; then
+      nh os test . || {
+        echo "Error: nixos-rebuild switch failed.  Check the output for details."
+        exit 1
+      }
+      git diff HEAD --color=always --stat --patch
       (export PS1="Test shell> " 
       exec ${pkgs.bash}/bin/bash) || {
         ${pkgs.cowsay}/bin/cowsay "You aborted."
         exit 1
       }
+      nh os boot . || {
+        echo "Error: nixos-rebuild switch failed.  Check the output for details."
+        exit 1
+      }
+    else
+      git diff HEAD --color=always --stat --patch
+      nh os switch . || {
+        exit 1
+      }
     fi
-
-    export NIXOS_LABEL="$(date +%d%m%y\ %H:%M:%S)"
-    nh os boot . || {
-      echo "Error: nixos-rebuild switch failed.  Check the output for details."
-      exit 1
-    }
 
     NEW_GENERATION=$(readlink /nix/var/nix/profiles/system | cut -d- -f2)
     echo "New generation is $NEW_GENERATION. Current is $CURRENT_GENERATION."
