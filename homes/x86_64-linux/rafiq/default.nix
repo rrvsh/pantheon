@@ -33,7 +33,6 @@
   };
   programs = {
     nh.enable = true;
-    thefuck.enable = true;
     tealdeer.enable = true;
     tealdeer.settings.updates.auto_update = true;
     direnv = {
