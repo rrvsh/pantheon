@@ -21,6 +21,10 @@
               interval = 1;
               format = "{:%F %T}";
             };
+            "battery" = {
+              interval = 1;
+              bat-compatibility = true;
+            };
           }
         ];
         style = # css
@@ -29,6 +33,7 @@
               background-color: rgba(0, 0, 0, 0);
             }
 
+            #battery,
             #clock {
               padding-top: 5px;
               padding-right: 5px;
