@@ -24,6 +24,7 @@
       cbonsai
       ripgrep
       devenv
+      stremio
       pantheon.rebuild
       pantheon.edit
       inputs.nixspect.packages."x86_64-linux".nixspect
