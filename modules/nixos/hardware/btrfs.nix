@@ -3,7 +3,7 @@ let
   cfg = config.hardware.drives.btrfs;
 in
 {
-  config = lib.mkIf (cfg.enable) (
+  config = lib.mkIf cfg.enable (
     lib.mkMerge [
       {
         boot.initrd.kernelModules = [ "dm-snapshot" ];
@@ -57,7 +57,7 @@ in
           };
         };
       }
-      (lib.mkIf (cfg.ephemeralRoot) {
+      (lib.mkIf cfg.ephemeralRoot {
         boot.initrd.postDeviceCommands = lib.mkAfter ''
           	    mkdir /btrfs_tmp
           	    mount /dev/root_vg/root /btrfs_tmp

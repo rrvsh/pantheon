@@ -5,7 +5,7 @@
   ...
 }:
 let
-  mainMonitor = osConfig.desktop.mainMonitor;
+  inherit (osConfig.desktop) mainMonitor;
 in
 {
   config = lib.mkIf (osConfig.desktop.windowManager == "hyprland") {

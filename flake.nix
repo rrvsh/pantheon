@@ -72,7 +72,7 @@
       snowfall.namespace = "pantheon";
       overlays = with inputs; [
         stable-diffusion-webui-nix.overlays.default
-        (final: prev: {
+        (_final: prev: {
           zjstatus = zjstatus.packages.${prev.system}.default;
         })
       ];
