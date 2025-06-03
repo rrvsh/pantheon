@@ -1,4 +1,5 @@
 {
+  scroll = 1;
   autoindent = true;
   backspace = "indent,eol,start";
   cursorline = true;

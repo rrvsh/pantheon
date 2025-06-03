@@ -3,12 +3,7 @@
   blink-cmp = {
     enable = true;
     friendly-snippets.enable = true;
-    mappings = {
-      next = "<Down>"; # FIXME: results in the menu appearing when navigating
-      previous = "<Up>";
-    };
     sourcePlugins = {
-      emoji.enable = true;
       ripgrep.enable = true;
       spell.enable = true;
     };
