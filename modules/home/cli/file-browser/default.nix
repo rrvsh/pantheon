@@ -6,7 +6,7 @@
       enable = true;
       shellWrapperName = "t";
       settings = {
-        manager = {
+        mgr = {
           sort_by = "natural";
           prepend_keymap = [
             {
