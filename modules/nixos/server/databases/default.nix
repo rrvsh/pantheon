@@ -1,37 +1,57 @@
-{ lib, config, ... }:
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}:
 let
   cfg = config.server.databases;
 in
 {
   options.server.databases = {
-    mongodb.enable = lib.mkEnableOption "";
-    mongodb.dbPath = lib.mkOption {
-      type = lib.types.str;
-      default = "/var/db/mongodb";
+    mongodb = {
+      enable = lib.mkEnableOption "the MongoDB server";
+      port = lib.pantheon.mkPortOption 27017;
     };
-    mongodb.port = lib.mkOption {
-      type = lib.types.int;
-      default = 27017;
+    mysql = {
+      enable = lib.mkEnableOption "the MySQL server";
+      port = lib.pantheon.mkPortOption 3306;
     };
   };
 
   config = lib.mkMerge [
     (lib.mkIf cfg.mongodb.enable {
+      networking.firewall.allowedTCPPorts = [ cfg.mongodb.port ];
       environment.persistence."/persist".directories = [
         {
-          directory = cfg.mongodb.dbPath;
+          directory = builtins.toString config.services.mongodb.dbpath;
           user = "mongodb";
           group = "mongodb";
         }
       ];
-      networking.firewall.allowedTCPPorts = [ cfg.mongodb.port ];
       services.mongodb = {
         enable = true;
-        dbpath = cfg.mongodb.dbPath;
         bind_ip = "0.0.0.0";
         extraConfig = ''
           net.port: ${builtins.toString cfg.mongodb.port}
         '';
+      };
+    })
+    (lib.mkIf cfg.mysql.enable {
+      networking.firewall.allowedTCPPorts = [ cfg.mysql.port ];
+      environment.persistence."/persist".directories = [
+        {
+          directory = builtins.toString config.services.mysql.dataDir;
+          user = "mysql";
+          group = "mysql";
+        }
+      ];
+      services.mysql = {
+        enable = true;
+        package = pkgs.mariadb;
+        settings.mysqld = {
+          inherit (cfg.mysql) port;
+        };
       };
     })
   ];

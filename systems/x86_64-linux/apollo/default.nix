@@ -25,6 +25,7 @@
     enableDDNS = true;
     mountHelios = true;
     databases.mongodb.enable = true;
+    databases.mysql.enable = true;
     librechat.enable = true;
   };
 
