@@ -38,6 +38,8 @@ in
             };
           };
           ${config.system.hostname} = {
+            forceSSL = true;
+            enableACME = true;
             locations."/" = {
               return = "200 '<html><body>It works!</body></html'";
               extraConfig = ''
