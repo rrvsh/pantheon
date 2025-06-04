@@ -3,7 +3,6 @@
   leetcode-nvim.enable = true;
   mkdir.enable = true;
   motion.hop.enable = true;
-  vim-wakatime.enable = true;
   yazi-nvim = {
     enable = true;
     mappings = {

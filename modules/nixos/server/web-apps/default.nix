@@ -5,7 +5,7 @@
   ...
 }:
 let
-  cfg = config.server.librechat;
+  cfg = config.server.web-apps;
 in
 {
 
@@ -13,11 +13,11 @@ in
     "${inputs.rrvsh-nixpkgs}/nixos/modules/services/web-apps/librechat.nix"
   ];
 
-  options.server.librechat = {
-    enable = lib.mkEnableOption "";
+  options.server.web-apps = {
+    librechat.enable = lib.mkEnableOption "";
   };
 
-  config = lib.mkIf cfg.enable {
+  config = lib.mkIf cfg.librechat.enable {
     services.librechat = {
       enable = true;
       openFirewall = true;
