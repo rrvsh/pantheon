@@ -2,8 +2,12 @@
 
 ## To-do
 
-- [ ] Implement an status bar for the desktop configuration
 - [ ] Copy over ~/.ssh/id_ed25519 and zellij status bar plugin confirmation
+- [ ] Migrate immich to apollo, point to helios
+- [ ] Migrate LibreChat to apollo, maintain db
+- [ ] Figure out wakapi
+- [ ] Add forgejo
+- [ ] Add simple blog
 
 ## Versions
 
@@ -18,6 +22,11 @@
     - Network shares
     - Federation with ActivityPub
     - Wakapi
+  - Add a way to define services per host and refer to them by hostname
+- 0.3.0
+  - Integration tests for all services
+  - Easier way to add proxyPass, web server independent
+  - Migrate services from helios
 
 # Modules
 
