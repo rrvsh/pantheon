@@ -42,16 +42,6 @@
 
   server = {
     mountHelios = true;
-    reverse-proxy = {
-      enable = true;
-      type = "nginx";
-      proxies = [
-        {
-          source = "chat.bwfiq.com";
-          target = "";
-        }
-      ];
-    };
   };
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";

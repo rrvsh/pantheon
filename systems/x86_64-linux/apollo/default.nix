@@ -25,6 +25,7 @@
     databases.mongodb.enable = true;
     databases.mysql.enable = true;
     librechat.enable = true;
+    web-servers.nginx.enable = true;
   };
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
