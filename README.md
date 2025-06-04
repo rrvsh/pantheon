@@ -18,9 +18,6 @@
     - Network shares
     - Federation with ActivityPub
     - Wakapi
-- 0.2.0
-  - Provision Apollo
-  - Fix all NVF errors
 
 # Modules
 
