@@ -11,7 +11,8 @@ pkgs.writeShellScriptBin "rebuild" # sh
           shift
           ;;
         *)
-          REMOTE_HOSTS+="$1"
+          REMOTE_HOSTS+=("$1")
+          echo ''${REMOTE_HOSTS[@]}
           shift
           ;;
       esac
@@ -25,7 +26,7 @@ pkgs.writeShellScriptBin "rebuild" # sh
     git add .
 
     if [ ''${#REMOTE_HOSTS[@]} -gt 0 ]; then
-      for host in "$REMOTE_HOSTS"; do
+      for host in "''${REMOTE_HOSTS[@]}"; do
         echo "Rebuilding $host..."
         nixos-rebuild switch --flake .#"$host" --target-host "$host" --use-remote-sudo || {
           echo "Error: nixos-rebuild switch failed for $host. Check the output."
