@@ -5,7 +5,9 @@
       home.sessionVariables.NOTIFICATION_DAEMON = "mako";
       services.mako = {
         enable = true;
-        settings = { };
+        settings = {
+          default-timeout = 10000;
+        };
       };
     })
   ];
