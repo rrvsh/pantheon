@@ -4,6 +4,24 @@
   osConfig,
   ...
 }:
+let
+  mkEmailAccount = address: {
+    inherit address;
+    maildir.path = address;
+    userName = address;
+    realName = "Mohammad Rafiq";
+    passwordCommand = "sudo cat ${osConfig.sops.secrets."rafiq/personalEmailPassword".path}";
+    imap = {
+      host = "imap.forwardemail.net";
+      port = 993;
+    };
+    smtp = {
+      host = "smtp.forwardemail.net";
+      port = 465;
+    };
+    thunderbird.enable = true;
+  };
+in
 {
   accounts = {
     email = {
@@ -11,35 +29,8 @@
       accounts = {
         "rafiq@rrv.sh" = {
           primary = true;
-          address = "rafiq@rrv.sh";
-          maildir.path = "rafiq@rrv.sh";
-          userName = "rafiq@rrv.sh";
-          realName = "Mohammad Rafiq";
-          passwordCommand = "sudo cat ${osConfig.sops.secrets."rafiq/personalEmailPassword".path}";
-          imap = {
-            host = "imap.forwardemail.net";
-            port = 993;
-          };
-          smtp = {
-            host = "smtp.forwardemail.net";
-            port = 465;
-          };
-        };
-        "mohammadrafiq@rrv.sh" = {
-          address = "mohammadrafiq@rrv.sh";
-          maildir.path = "mohammadrafiq@rrv.sh";
-          userName = "mohammadrafiq@rrv.sh";
-          realName = "Mohammad Rafiq";
-          passwordCommand = "sudo cat ${osConfig.sops.secrets."rafiq/workEmailPassword".path}";
-          imap = {
-            host = "imap.forwardemail.net";
-            port = 993;
-          };
-          smtp = {
-            host = "smtp.forwardemail.net";
-            port = 465;
-          };
-        };
+        } // mkEmailAccount "rafiq@rrv.sh";
+        "mohammadrafiq@rrv.sh" = mkEmailAccount "mohammadrafiq@rrv.sh";
       };
     };
   };
@@ -73,7 +64,10 @@
       inputs.nixspect.packages."x86_64-linux".nixspect
     ];
 
-    persistence."/persist/home/rafiq".directories = [ "repos" ];
+    persistence."/persist/home/rafiq".directories = [
+      "docs"
+      "repos"
+    ];
   };
   programs = {
     nh.enable = true;
@@ -85,6 +79,10 @@
     direnv = {
       enable = true;
       nix-direnv.enable = true;
+    };
+    thunderbird.enable = true;
+    thunderbird.profiles.rafiq = {
+      isDefault = true;
     };
   };
 }
