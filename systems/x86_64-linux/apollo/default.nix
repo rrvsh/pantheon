@@ -26,6 +26,16 @@
     databases.mysql.enable = true;
     web-apps.librechat.enable = true;
     web-servers.nginx.enable = true;
+    web-servers.nginx.proxies = [
+      {
+        source = "chat.bwfiq.com";
+        target = "http://helios:3080";
+      }
+      {
+        source = "il.bwfiq.com";
+        target = "http://helios:2283";
+      }
+    ];
   };
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";

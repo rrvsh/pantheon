@@ -6,6 +6,29 @@ in
   options.server.web-servers = {
     nginx = {
       enable = lib.mkEnableOption "the Nginx server";
+      proxies = lib.mkOption {
+        type =
+          with lib.types;
+          listOf (submodule {
+            options = {
+              source = lib.pantheon.mkStrOption;
+              target = lib.pantheon.mkStrOption;
+              extraConfig = lib.mkOption {
+                type = attrs;
+                default = { };
+                description = "Will be added to locations.\"/\"";
+              };
+            };
+          });
+        default = [ ];
+        example = [
+          {
+            source = "chat.bwfiq.com";
+            target = "http://helios:3080";
+            extraConfig = { };
+          }
+        ];
+      };
     };
   };
   config = lib.mkMerge [
@@ -22,32 +45,18 @@ in
       ];
       services.nginx = {
         enable = true;
-        virtualHosts = {
-          "chat.bwfiq.com" = {
-            forceSSL = true;
-            enableACME = true;
-            locations."/" = {
-              proxyPass = "http://helios:3080";
+        virtualHosts = builtins.listToAttrs (
+          builtins.map (proxy: {
+            name = proxy.source;
+            value = {
+              forceSSL = true;
+              enableACME = true;
+              locations."/" = {
+                proxyPass = proxy.target;
+              } // proxy.extraConfig;
             };
-          };
-          "il.bwfiq.com" = {
-            forceSSL = true;
-            enableACME = true;
-            locations."/" = {
-              proxyPass = "http://helios:2283";
-            };
-          };
-          ${config.system.hostname} = {
-            forceSSL = true;
-            enableACME = true;
-            locations."/" = {
-              return = "200 '<html><body>It works!</body></html'";
-              extraConfig = ''
-                default_type text/html;
-              '';
-            };
-          };
-        };
+          }) cfg.nginx.proxies
+        );
       };
     })
   ];
