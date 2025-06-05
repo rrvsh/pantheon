@@ -1,8 +1,19 @@
 { pkgs, ... }:
 pkgs.writeShellScriptBin "rebuild" # sh
   ''
+    if [ ! -f "flake.nix" ]; then
+      echo "Error: flake.nix not found in the current directory. Exiting."
+      exit 1  # Indicate an error
+    fi
+
+    #TODO: get hostnames from flake nixosConfigurations
+
     TEST_SHELL=false
     REMOTE_HOSTS=()
+    ALL_HOSTS=("nemesis" "mellinoe" "apollo")
+    REBUILDING_ALL=false
+
+    CURRENT_GENERATION=$(readlink /nix/var/nix/profiles/system | cut -d- -f2)
 
     while [[ $# -gt 0 ]]; do
       case "$1" in
@@ -10,18 +21,25 @@ pkgs.writeShellScriptBin "rebuild" # sh
           TEST_SHELL=true
           shift
           ;;
+        --all | -a)
+          reachable_hosts=()
+          for host in ''${ALL_HOSTS[@]}; do
+            if ping -c 1 -W 1 "$host" > /dev/null 2>&1 ; then  
+              reachable_hosts+=("$host")
+            fi
+          done
+          REMOTE_HOSTS=(''${reachable_hosts[@]})
+          REBUILDING_ALL=true
+          shift
+          ;;
         *)
-          REMOTE_HOSTS+=("$1")
-          echo ''${REMOTE_HOSTS[@]}
+          if [ !REBUILDING_ALL ]; then
+            REMOTE_HOSTS+=("$1")
+          fi
           shift
           ;;
       esac
     done
-
-    if [ ! -f "flake.nix" ]; then
-      echo "Error: flake.nix not found in the current directory. Exiting."
-      exit 1  # Indicate an error
-    fi
 
     git add .
 
@@ -35,8 +53,6 @@ pkgs.writeShellScriptBin "rebuild" # sh
       done
       exit 0
     fi
-
-    CURRENT_GENERATION=$(readlink /nix/var/nix/profiles/system | cut -d- -f2)
 
     if "$TEST_SHELL"; then
       nh os test . || {
