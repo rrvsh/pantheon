@@ -11,6 +11,8 @@
       "keys/telegram_bot" = { };
       "misc/cvt-jira-link" = { };
       "rafiq/hashedPassword".neededForUsers = true;
+      "rafiq/personalEmailPassword" = { };
+      "rafiq/workEmailPassword" = { };
       "librechat/creds_key" = { };
       "librechat/creds_iv" = { };
       "librechat/jwt_secret" = { };
