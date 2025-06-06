@@ -13,11 +13,18 @@
       "rafiq/hashedPassword".neededForUsers = true;
       "rafiq/personalEmailPassword" = { };
       "rafiq/workEmailPassword" = { };
+      "rafiq/oldSMBCredentials" = { };
       "librechat/creds_key" = { };
       "librechat/creds_iv" = { };
       "librechat/jwt_secret" = { };
       "librechat/jwt_refresh_secret" = { };
       "librechat/meili_master_key" = { };
+    };
+    templates = {
+      "smb-credentials".content = ''
+        username=rafiq
+        password=${config.sops.placeholder."rafiq/oldSMBCredentials"}
+      '';
     };
   };
   environment.shellInit = # sh
