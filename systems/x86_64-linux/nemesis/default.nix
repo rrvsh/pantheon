@@ -44,5 +44,12 @@
     mountHelios = true;
   };
 
+  services = {
+    tor = {
+      enable = true;
+      client.enable = true;
+    };
+  };
+
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 }

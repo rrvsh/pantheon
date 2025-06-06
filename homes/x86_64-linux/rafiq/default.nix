@@ -59,6 +59,7 @@ in
       ripgrep
       devenv
       stremio
+      tor-browser
       pantheon.rebuild
       pantheon.edit
       inputs.nixspect.packages."x86_64-linux".nixspect
@@ -67,6 +68,7 @@ in
     persistence."/persist/home/rafiq".directories = [
       "docs"
       "repos"
+      ".tor project"
     ];
   };
   programs = {
