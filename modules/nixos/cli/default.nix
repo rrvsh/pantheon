@@ -15,5 +15,10 @@
       users.defaultUserShell = pkgs.zsh;
       environment.pathsToLink = [ "/share/zsh" ]; # enables completion
     }
+    {
+      environment.systemPackages = with pkgs; [
+        p7zip
+      ];
+    }
   ];
 }

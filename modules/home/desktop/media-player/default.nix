@@ -8,6 +8,7 @@
   config = lib.mkMerge [
     (lib.mkIf (osConfig.desktop.media-player == "vlc") {
       home.packages = lib.singleton pkgs.vlc;
+      home.file.".local/share/vlc/lua/extensions/vlc-play-next.lua".source = ./vlc-play-next.lua;
     })
     (lib.mkIf (osConfig.desktop.media-player == "mpv") {
       programs.mpv = {
