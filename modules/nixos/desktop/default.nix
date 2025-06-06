@@ -23,6 +23,7 @@
     notification-daemon = lib.pantheon.mkStrOption;
     launcher = lib.pantheon.mkStrOption;
     status-bar = lib.pantheon.mkStrOption;
+    media-player = lib.pantheon.mkStrOption;
     enableSpotifyd = lib.mkEnableOption "";
     enableSteam = lib.mkEnableOption "";
     enableVR = lib.mkEnableOption "";

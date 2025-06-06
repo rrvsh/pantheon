@@ -28,6 +28,7 @@
     notification-daemon = "mako";
     launcher = "fuzzel";
     status-bar = "waybar";
+    media-player = "vlc";
     mainMonitor = {
       id = "desc:OOO AN-270W04K";
       scale = "2";

@@ -8,11 +8,12 @@
       settings = {
         mgr = {
           sort_by = "natural";
-          prepend_keymap = [
+        };
+        opener = {
+          play = [
             {
-              on = "l";
-              run = "plugin smart-enter";
-              desc = "";
+              run = "vlc \"$@\"";
+              desc = "Open";
             }
           ];
         };
