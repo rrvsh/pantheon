@@ -26,5 +26,10 @@
         ".local/share/Steam"
       ];
     })
+    (lib.mkIf osConfig.desktop.enableSunshine {
+      home.persistence."/persist/home/${config.snowfallorg.user.name}".directories = [
+        ".config/sunshine"
+      ];
+    })
   ];
 }
