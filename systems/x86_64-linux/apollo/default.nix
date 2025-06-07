@@ -29,7 +29,7 @@
     web-servers.nginx.proxies = [
       {
         source = "chat.bwfiq.com";
-        target = "http://helios:3080";
+        target = "http://localhost:3080";
       }
       {
         source = "il.bwfiq.com";
