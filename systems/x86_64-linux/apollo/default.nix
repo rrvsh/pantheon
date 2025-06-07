@@ -28,6 +28,10 @@
     web-servers.nginx.enable = true;
     web-servers.nginx.proxies = [
       {
+        source = "aenyrathia.wiki";
+        target = "http://helios:5896";
+      }
+      {
         source = "chat.bwfiq.com";
         target = "http://localhost:3080";
       }
