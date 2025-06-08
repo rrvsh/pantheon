@@ -36,4 +36,12 @@
     "$meh, mouse_up, resizeactive, 10% 10%"
     "$meh, mouse_down, resizeactive, -10% -10%"
   ];
+
+  bindm = [
+    "ALT, mouse:272, movewindow"
+    "ALT, mouse:273, resizeactive"
+  ];
+  bindc = [
+    "ALT, mouse:272, togglefloating"
+  ];
 }
