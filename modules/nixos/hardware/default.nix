@@ -1,10 +1,9 @@
-{ lib, ... }:
+{ lib, config, ... }:
 {
   imports = [
     ./btrfs.nix
     ./nvidia.nix
     ./audio.nix
-    ./cpu.nix
     ./networking.nix
   ];
 
@@ -18,12 +17,22 @@
     platform = lib.pantheon.mkStrOption;
   };
 
-  config = {
-    services.fwupd.enable = true;
-    hardware.bluetooth = {
-      enable = true;
-      settings.General.Experimental = true;
-    };
-    hardware.xone.enable = true;
-  };
+  config = lib.mkMerge [
+    {
+      services.fwupd.enable = true;
+      hardware.bluetooth = {
+        enable = true;
+        settings.General.Experimental = true;
+      };
+      hardware.xone.enable = true;
+    }
+    (lib.mkIf (config.hardware.platform == "amd") {
+      hardware.cpu.amd.updateMicrocode = true;
+      boot.kernelModules = [ "kvm-amd" ];
+    })
+    (lib.mkIf (config.hardware.platform == "intel") {
+      hardware.cpu.intel.updateMicrocode = true;
+      boot.kernelModules = [ "kvm-intel" ];
+    })
+  ];
 }
