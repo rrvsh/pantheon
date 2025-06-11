@@ -1,6 +1,18 @@
 { config, lib, ... }:
 let
   cfg = config.server.web-servers;
+  proxyPasses = builtins.listToAttrs (
+    builtins.map (proxy: {
+      name = proxy.source;
+      value = {
+        forceSSL = true;
+        enableACME = true;
+        locations."/" = {
+          proxyPass = proxy.target;
+        } // proxy.extraConfig;
+      };
+    }) cfg.nginx.proxies
+  );
 in
 {
   options.server.web-servers = {
@@ -45,18 +57,15 @@ in
       ];
       services.nginx = {
         enable = true;
-        virtualHosts = builtins.listToAttrs (
-          builtins.map (proxy: {
-            name = proxy.source;
-            value = {
-              forceSSL = true;
-              enableACME = true;
-              locations."/" = {
-                proxyPass = proxy.target;
-              } // proxy.extraConfig;
+        virtualHosts = {
+          "_" = {
+            default = true;
+            rejectSSL = true;
+            locations."/" = {
+              return = "444";
             };
-          }) cfg.nginx.proxies
-        );
+          };
+        } // proxyPasses;
       };
     })
   ];
