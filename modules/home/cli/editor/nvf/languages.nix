@@ -11,6 +11,7 @@
   lua.enable = true;
   markdown.enable = true;
   markdown.extensions.markview-nvim.enable = true;
+  markdown.format.type = "prettierd";
   nix = {
     enable = true;
     format.type = "nixfmt";
