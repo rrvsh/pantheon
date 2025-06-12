@@ -91,14 +91,13 @@ pkgs.writeShellScriptBin "rebuild" # sh
       nh os switch . || {
         exit 1
       }
-    fi
-
-    if ! "$NO_GENERATION_CHECK"; then
-      NEW_GENERATION=$(readlink /nix/var/nix/profiles/system | cut -d- -f2)
-      echo "New generation is $NEW_GENERATION. Current is $CURRENT_GENERATION."
-      if [ ! $NEW_GENERATION -gt $CURRENT_GENERATION ]; then
-        echo "ERROR: New config was not added to bootloader. Exiting..."
-        exit 1
+      if ! "$NO_GENERATION_CHECK"; then
+        NEW_GENERATION=$(readlink /nix/var/nix/profiles/system | cut -d- -f2)
+        echo "New generation is $NEW_GENERATION. Current is $CURRENT_GENERATION."
+        if [ ! $NEW_GENERATION -gt $CURRENT_GENERATION ]; then
+          echo "ERROR: New config was not added to bootloader. Exiting..."
+          exit 1
+        fi
       fi
     fi
 
