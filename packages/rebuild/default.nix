@@ -19,6 +19,7 @@ pkgs.writeShellScriptBin "rebuild" # sh
     fi
     #TODO: get hostnames from flake nixosConfigurations
 
+    QUICK=false
     NO_GENERATION_CHECK=false
     TEST_SHELL=false
     REMOTE_HOSTS=()
@@ -29,6 +30,10 @@ pkgs.writeShellScriptBin "rebuild" # sh
 
     while [[ $# -gt 0 ]]; do
       case "$1" in
+        --quick | -q)
+          QUICK=true
+          shift
+          ;;
         --no-generation-check | -n)
           NO_GENERATION_CHECK=true
           shift
@@ -101,7 +106,10 @@ pkgs.writeShellScriptBin "rebuild" # sh
       fi
     fi
 
-    prompt "Commit changes" commit
-    prompt "Reboot system" sudo systemctl reboot
+    if "$QUICK"; then
+      prompt "Commit changes" commit
+      prompt "Reboot system" sudo systemctl reboot
+    fi
+
     exit 0
   ''
