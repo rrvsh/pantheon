@@ -72,10 +72,7 @@ pkgs.writeShellScriptBin "rebuild" # sh
           exit 1
         }
       done
-      exit 0
-    fi
-
-    if "$TEST_SHELL"; then
+    elif "$TEST_SHELL"; then
       nh os test . || {
         echo "Error: nixos-rebuild switch failed.  Check the output for details."
         exit 1
@@ -91,7 +88,6 @@ pkgs.writeShellScriptBin "rebuild" # sh
         exit 1
       }
     else
-      git diff HEAD --color=always --stat --patch
       nh os switch . || {
         exit 1
       }
