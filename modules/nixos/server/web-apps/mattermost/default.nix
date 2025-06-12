@@ -1,11 +1,12 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}:
+{ config, lib, ... }:
 let
   cfg = config.server.web-apps.mattermost;
+  upstreamCfg = config.services.mattermost;
+  mkDir = directory: {
+    inherit directory;
+    inherit (upstreamCfg) user group;
+    mode = "0750";
+  };
 in
 {
   options.server.web-apps.mattermost = {
@@ -30,6 +31,11 @@ in
         message = "You must enable a local instance of postgresql.";
       }
     ];
+    environment.persistence."/persist".directories = [
+      (mkDir cfg.configDir)
+      (mkDir cfg.logDir)
+      (mkDir cfg.dataDir)
+    ];
     networking.firewall.allowedTCPPorts = lib.singleton cfg.port;
     services.mattermost = {
       enable = true;
@@ -44,9 +50,9 @@ in
       siteUrl = "https://${cfg.url}";
     };
     services.postgresql = {
-      ensureDatabases = lib.singleton config.services.mattermost.database.name;
+      ensureDatabases = lib.singleton upstreamCfg.database.name;
       ensureUsers = lib.singleton {
-        name = config.services.mattermost.database.user;
+        name = upstreamCfg.database.user;
         ensureDBOwnership = true;
       };
     };
