@@ -63,6 +63,7 @@ in
       pantheon.rebuild
       pantheon.deploy
       pantheon.edit
+      pantheon.commit
       inputs.nixspect.packages."x86_64-linux".nixspect
     ];
 
