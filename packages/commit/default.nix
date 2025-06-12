@@ -27,10 +27,11 @@ pkgs.writeShellScriptBin "commit" # bash
     RESPONSE=$(aichat "$PROMPT\nGuidelines: $GUIDELINES\nContext from git log:\n$CONTEXT\nDiff from git diff HEAD:\n$DIFF")
 
     while true; do
-      echo "Generated Commit Message:"
       echo "$RESPONSE"
-      echo "Options: [y]es, [r]eroll, [e]dit, [q]uit?"
-      read -r -p "Choose an action: " choice
+      echo
+      echo "Choose an action:"
+      read -p "Options: [y]es, [r]eroll, [e]dit, [q]uit?" -n 1 -r choice
+      echo
 
       case "$choice" in
         y | yes)
