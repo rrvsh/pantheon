@@ -52,18 +52,10 @@ in
             extraConfig = lib.mkOption {
               type = attrs;
               default = { };
-              description = "Will be added to locations.\"/\"";
             };
           };
         });
       default = [ ];
-      example = [
-        {
-          source = "chat.bwfiq.com";
-          target = "http://helios:3080";
-          extraConfig = { };
-        }
-      ];
     };
   };
 

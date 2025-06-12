@@ -32,6 +32,7 @@
       mattermost.url = "mm.bwfiq.com";
     };
     web-servers = {
+      enableSSL = true;
       nginx = {
         enable = true;
         proxies = [
