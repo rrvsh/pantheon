@@ -20,6 +20,7 @@
   config = lib.mkMerge [
     {
       services.fwupd.enable = true;
+      environment.persistence."/persist".directories = lib.singleton "/var/lib/bluetooth";
       hardware.bluetooth = {
         enable = true;
         settings.General.Experimental = true;

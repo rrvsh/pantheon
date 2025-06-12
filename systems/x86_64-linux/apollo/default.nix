@@ -24,6 +24,7 @@
     mountHelios = true;
     databases.mongodb.enable = true;
     databases.mysql.enable = true;
+    databases.postgresql.enable = true;
     web-apps.librechat.enable = true;
     web-servers.nginx.enable = true;
     web-servers.nginx.proxies = [
