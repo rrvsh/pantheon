@@ -5,8 +5,20 @@
   pkgs,
   ...
 }:
+let
+  cfg = config.desktop;
+  inherit (lib) mkIf mkEnableOption;
+in
 {
+  options.desktop = {
+    wayland.enableUtils = mkEnableOption "common Wayland utilities";
+  };
   config = lib.mkMerge [
+    (mkIf cfg.wayland.enableUtils {
+      home.packages = with pkgs; [
+        wl-clipboard-rs
+      ];
+    })
     (lib.mkIf (osConfig.hardware.gpu == "nvidia") {
       home.packages = [ pkgs.stable-diffusion-webui.forge.cuda ];
       home.persistence."/persist/home/${config.snowfallorg.user.name}".directories = [

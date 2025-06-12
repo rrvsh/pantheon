@@ -9,6 +9,7 @@ let
 in
 {
   config = lib.mkIf (osConfig.desktop.windowManager == "hyprland") {
+    desktop.wayland.enableUtils = true;
     wayland.windowManager.hyprland = {
       enable = true;
       systemd.enable = false;
