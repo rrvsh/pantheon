@@ -61,6 +61,7 @@ in
       stremio
       tor-browser
       pantheon.rebuild
+      pantheon.deploy
       pantheon.edit
       inputs.nixspect.packages."x86_64-linux".nixspect
     ];

@@ -23,8 +23,10 @@
     - Federation with ActivityPub
     - Wakapi
   - Add a way to define services per host and refer to them by hostname
+  - helios as file and db server, apollo as services and reverse proxy
 - 0.3.0
   - Integration tests for all services
+  - Set directory permissions properly for impermanence
   - Easier way to add proxyPass, web server independent
   - Migrate services from helios
 
@@ -48,6 +50,16 @@ The following files are **required** for system activation:
 - /persist/home/${mainUser}/.ssh/id_ed25519
 
 This private key will be used by sops-nix to decrypt the secrets in [this encrypted file](secrets/secrets.yaml). The secrets inside the yaml file should also be set, or otherwise removed alongside their declarations , found [here](modules/nixos/system/secrets.nix) and references.
+
+```bash
+# On the target machine
+# Boot into the NixOS installer
+
+sudo passwd
+
+# On the host machine
+deploy --user "rafiq" --ip "10.10.0.102" --hostname "apollo"
+```
 
 # Impermanence
 
