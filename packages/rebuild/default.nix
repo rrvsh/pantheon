@@ -106,7 +106,7 @@ pkgs.writeShellScriptBin "rebuild" # sh
       fi
     fi
 
-    if "$QUICK"; then
+    if ! "$QUICK"; then
       prompt "Commit changes" commit
       prompt "Reboot system" sudo systemctl reboot
     fi
