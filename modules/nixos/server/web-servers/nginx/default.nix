@@ -28,9 +28,11 @@ let
         addSSL = sslCheck true false;
         useACMEHost = sslCheck (mkRootDomain proxy.source) null;
         acmeRoot = null; # needed for DNS validation
-        locations."/" = {
-          proxyPass = proxy.target;
-        } // proxy.extraConfig;
+        locations = {
+          "/" = {
+            proxyPass = proxy.target;
+          } // proxy.extraConfig;
+        } // proxy.locations;
       };
     }) cfg.proxies
   );
@@ -51,6 +53,10 @@ in
           source = mkStrOption;
           target = mkStrOption;
           extraConfig = lib.mkOption {
+            type = attrs;
+            default = { };
+          };
+          locations = lib.mkOption {
             type = attrs;
             default = { };
           };
