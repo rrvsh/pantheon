@@ -64,6 +64,7 @@ in
       pantheon.deploy
       pantheon.edit
       pantheon.commit
+      pantheon.check
       inputs.nixspect.packages."x86_64-linux".nixspect
     ];
 
