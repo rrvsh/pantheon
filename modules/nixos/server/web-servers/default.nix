@@ -1,6 +1,11 @@
 { config, lib, ... }:
 let
-  inherit (lib) mkMerge mkIf mkEnableOption;
+  inherit (lib)
+    mkMerge
+    mkIf
+    mkEnableOption
+    singleton
+    ;
   cfg = config.server.web-servers;
 in
 {
@@ -18,6 +23,12 @@ in
           server = "https://acme-staging-v02.api.letsencrypt.org/directory";
           dnsProvider = "cloudflare";
           credentialFiles."CLOUDFLARE_DNS_API_TOKEN_FILE" = config.sops.secrets."keys/cloudflare".path;
+        };
+        certs = {
+          "rrv.sh".extraDomainNames = singleton "*.rrv.sh";
+          "bwfiq.com".extraDomainNames = singleton "*.bwfiq.com";
+          "slayment.com".extraDomainNames = singleton "*.slayment.com";
+          "aenyrathia.wiki".extraDomainNames = singleton "*.aenyrathia.wiki";
         };
       };
     })

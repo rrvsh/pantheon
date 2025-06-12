@@ -5,15 +5,17 @@ let
     mkOption
     mkEnableOption
     mkIf
+    singleton
     ;
-  inherit (lib.pantheon) mkStrOption;
+  inherit (lib.types) listOf submodule attrs;
+  inherit (lib.pantheon) mkStrOption mkRootDomain;
   inherit (builtins) listToAttrs map;
   cfg = config.server.web-servers.nginx;
-  sslCheck = if config.server.web-servers.enableSSL then true else false;
+  sslCheck = good: bad: if config.server.web-servers.enableSSL then good else bad;
   defaultSink = mkIf cfg.enableDefaultSink {
     "_" = {
       default = true;
-      rejectSSL = sslCheck;
+      rejectSSL = sslCheck true false;
       locations."/" = {
         return = "444";
       };
@@ -23,9 +25,9 @@ let
     map (proxy: {
       name = proxy.source;
       value = {
-        addSSL = sslCheck;
-        enableACME = sslCheck;
-        acmeRoot = null;
+        addSSL = sslCheck true false;
+        useACMEHost = sslCheck (mkRootDomain proxy.source) null;
+        acmeRoot = null; # needed for DNS validation
         locations."/" = {
           proxyPass = proxy.target;
         } // proxy.extraConfig;
@@ -43,19 +45,17 @@ in
       default = true;
     };
     proxies = mkOption {
-      type =
-        with lib.types;
-        listOf (submodule {
-          options = {
-            source = mkStrOption;
-            target = mkStrOption;
-            extraConfig = lib.mkOption {
-              type = attrs;
-              default = { };
-            };
-          };
-        });
       default = [ ];
+      type = listOf (submodule {
+        options = {
+          source = mkStrOption;
+          target = mkStrOption;
+          extraConfig = lib.mkOption {
+            type = attrs;
+            default = { };
+          };
+        };
+      });
     };
   };
 
@@ -64,6 +64,7 @@ in
       443
       80
     ];
+    users.users.nginx.extraGroups = singleton "acme";
     services.nginx = {
       enable = true;
       virtualHosts = mkMerge [
