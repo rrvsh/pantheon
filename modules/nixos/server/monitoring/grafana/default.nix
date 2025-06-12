@@ -17,6 +17,10 @@ in
       source = cfg.url;
       target = "http://${config.system.hostname}:${builtins.toString cfg.port}";
       extraConfig.proxyWebsockets = true;
+      locations."/api/live/" = {
+        proxyPass = "http://${config.system.hostname}:${builtins.toString cfg.port}";
+        proxyWebsockets = true;
+      };
     });
     services.grafana = {
       enable = true;
