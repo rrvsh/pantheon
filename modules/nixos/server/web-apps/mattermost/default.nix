@@ -1,5 +1,7 @@
 { config, lib, ... }:
 let
+  inherit (lib) singleton;
+  inherit (lib.pantheon) mkRootDomain;
   cfg = config.server.web-apps.mattermost;
   upstreamCfg = config.services.mattermost;
   mkDir = directory: {
@@ -37,6 +39,7 @@ in
       (mkDir cfg.dataDir)
     ];
     networking.firewall.allowedTCPPorts = lib.singleton cfg.port;
+    server.networking.ddns.domains = singleton (mkRootDomain cfg.url);
     services.mattermost = {
       enable = true;
       inherit (cfg)

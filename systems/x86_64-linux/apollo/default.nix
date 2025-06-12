@@ -20,7 +20,14 @@
   };
 
   server = {
-    enableDDNS = true;
+    networking.ddns = {
+      enable = true;
+      domains = [
+        "rrv.sh"
+        "aenyrathia.wiki"
+        "slayment.com"
+      ];
+    };
     databases = {
       mongodb.enable = true;
       mysql.enable = true;
