@@ -1,0 +1,8 @@
+{ pkgs, ... }:
+let
+  inherit (pkgs.vimUtils) buildVimPlugin;
+in
+buildVimPlugin {
+  name = "snippets";
+  src = ./.;
+}
