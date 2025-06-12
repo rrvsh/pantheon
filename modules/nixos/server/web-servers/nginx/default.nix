@@ -1,26 +1,30 @@
 { config, lib, ... }:
 let
-  inherit (lib) mkOption mkEnableOption mkIf;
+  inherit (lib)
+    mkMerge
+    mkOption
+    mkEnableOption
+    mkIf
+    ;
   inherit (lib.pantheon) mkStrOption;
   inherit (builtins) listToAttrs map;
-  inherit (config.server.web-servers) enableSSL;
   cfg = config.server.web-servers.nginx;
   defaultSink = mkIf cfg.enableDefaultSink {
     "_" = {
       default = true;
-      rejectSSL = mkIf enableSSL true;
+      rejectSSL = true;
       locations."/" = {
         return = "444";
       };
     };
   };
+  sslCheck = if config.server.web-servers.enableSSL then true else false;
   proxyPasses = listToAttrs (
     map (proxy: {
       name = proxy.source;
       value = {
-        forceSSL = mkIf enableSSL true;
-        enableACME = mkIf enableSSL true;
-        acmeRoot = mkIf enableSSL null;
+        enableACME = sslCheck;
+        acmeRoot = null;
         locations."/" = {
           proxyPass = proxy.target;
         } // proxy.extraConfig;
@@ -69,7 +73,10 @@ in
     ];
     services.nginx = {
       enable = true;
-      virtualHosts = defaultSink // proxyPasses;
+      virtualHosts = mkMerge [
+        defaultSink
+        proxyPasses
+      ];
     };
   };
 }
