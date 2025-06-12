@@ -73,6 +73,10 @@ in
     users.users.nginx.extraGroups = singleton "acme";
     services.nginx = {
       enable = true;
+      recommendedProxySettings = true;
+      recommendedTlsSettings = true;
+      recommendedOptimisation = true;
+      recommendedGzipSettings = true;
       virtualHosts = mkMerge [
         defaultSink
         proxyPasses
