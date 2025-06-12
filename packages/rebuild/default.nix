@@ -1,13 +1,25 @@
 { pkgs, ... }:
 pkgs.writeShellScriptBin "rebuild" # sh
   ''
+    prompt() {
+      local PROMPT="$1"
+      shift
+      read -p "$PROMPT? (y/n) [n]: " -n 1 -r REPLY
+      echo
+      if [[ "$REPLY" =~ ^[Yy]$ ]]; then
+          "$*"
+      else
+          echo "$PROMPT aborted."
+      fi
+    }
+
     if [ ! -f "flake.nix" ]; then
       echo "Error: flake.nix not found in the current directory. Exiting."
       exit 1  # Indicate an error
     fi
-
     #TODO: get hostnames from flake nixosConfigurations
 
+    NO_GENERATION_CHECK=false
     TEST_SHELL=false
     REMOTE_HOSTS=()
     ALL_HOSTS=("nemesis" "mellinoe" "apollo")
@@ -17,6 +29,10 @@ pkgs.writeShellScriptBin "rebuild" # sh
 
     while [[ $# -gt 0 ]]; do
       case "$1" in
+        --no-generation-check | -n)
+          NO_GENERATION_CHECK=true
+          shift
+          ;;
         --test-shell | -t)
           TEST_SHELL=true
           shift
@@ -76,22 +92,16 @@ pkgs.writeShellScriptBin "rebuild" # sh
       }
     fi
 
-    NEW_GENERATION=$(readlink /nix/var/nix/profiles/system | cut -d- -f2)
-    echo "New generation is $NEW_GENERATION. Current is $CURRENT_GENERATION."
-    if [ ! $NEW_GENERATION -gt $CURRENT_GENERATION ]; then
-      echo "ERROR: New config was not added to bootloader. Exiting..."
-      exit 1
-    else
-      git commit
-
-      read -p "Reboot the system now? (y/n) [n]: " -n 1 -r
-      echo    # (optional) move to a new line
-      if [[ $REPLY =~ ^[Yy]$ ]]; then
-        echo "Rebooting the system..."
-        sudo systemctl reboot
-      else
-        echo "Not rebooting."
-        exit 0
+    if ! "$NO_GENERATION_CHECK"; then
+      NEW_GENERATION=$(readlink /nix/var/nix/profiles/system | cut -d- -f2)
+      echo "New generation is $NEW_GENERATION. Current is $CURRENT_GENERATION."
+      if [ ! $NEW_GENERATION -gt $CURRENT_GENERATION ]; then
+        echo "ERROR: New config was not added to bootloader. Exiting..."
+        exit 1
       fi
     fi
+
+    prompt "Commit changes" commit
+    prompt "Reboot system" sudo systemctl reboot
+    exit 0
   ''
