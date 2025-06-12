@@ -26,10 +26,17 @@ in
   config = lib.mkMerge [
     (lib.mkIf cfg.postgresql.enable {
       networking.firewall.allowedTCPPorts = lib.singleton cfg.postgresql.port;
+      environment.persistence."/persist".directories = [
+        {
+          directory = builtins.toString config.services.postgresql.dataDir;
+          user = "postgres";
+          group = "postgres";
+        }
+      ];
       services.postgresql = {
         enable = true;
         enableTCPIP = true;
-        inherit (cfg.postgresql) port;
+        settings = { inherit (cfg.postgresql) port; };
         authentication = lib.mkOverride 10 ''
           #type database DBuser auth-method
           local all all trust
