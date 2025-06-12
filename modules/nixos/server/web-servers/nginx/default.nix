@@ -9,20 +9,21 @@ let
   inherit (lib.pantheon) mkStrOption;
   inherit (builtins) listToAttrs map;
   cfg = config.server.web-servers.nginx;
+  sslCheck = if config.server.web-servers.enableSSL then true else false;
   defaultSink = mkIf cfg.enableDefaultSink {
     "_" = {
       default = true;
-      rejectSSL = true;
+      rejectSSL = sslCheck;
       locations."/" = {
         return = "444";
       };
     };
   };
-  sslCheck = if config.server.web-servers.enableSSL then true else false;
   proxyPasses = listToAttrs (
     map (proxy: {
       name = proxy.source;
       value = {
+        addSSL = sslCheck;
         enableACME = sslCheck;
         acmeRoot = null;
         locations."/" = {

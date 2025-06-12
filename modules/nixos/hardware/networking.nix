@@ -2,9 +2,12 @@
 {
   config = lib.mkMerge [
     {
-      networking.useDHCP = lib.mkDefault true;
-      networking.hostName = config.system.hostname;
-      networking.networkmanager.enable = true;
+      networking = {
+        enableIPv6 = false;
+        useDHCP = lib.mkDefault true;
+        hostName = config.system.hostname;
+        networkmanager.enable = true;
+      };
 
       services.openssh = {
         enable = true;
