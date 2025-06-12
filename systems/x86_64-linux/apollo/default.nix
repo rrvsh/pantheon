@@ -35,6 +35,7 @@
     };
     web-apps = {
       librechat.enable = true;
+      librechat.url = "chat.bwfiq.com";
       mattermost.enable = true;
       mattermost.url = "mm.bwfiq.com";
     };
@@ -46,11 +47,6 @@
           {
             source = "aenyrathia.wiki";
             target = "http://helios:5896";
-          }
-          {
-            #TODO: merge into librechat module
-            source = "chat.bwfiq.com";
-            target = "http://localhost:3080";
           }
           {
             source = "il.bwfiq.com";
