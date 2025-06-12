@@ -1,17 +1,49 @@
 { config, lib, ... }:
 let
+  inherit (lib) mkOption mkEnableOption mkIf;
+  inherit (lib.pantheon) mkStrOption;
+  inherit (builtins) listToAttrs map;
+  inherit (config.server.web-servers) enableSSL;
   cfg = config.server.web-servers.nginx;
+  defaultSink = mkIf cfg.enableDefaultSink {
+    "_" = {
+      default = true;
+      rejectSSL = mkIf enableSSL true;
+      locations."/" = {
+        return = "444";
+      };
+    };
+  };
+  proxyPasses = listToAttrs (
+    map (proxy: {
+      name = proxy.source;
+      value = {
+        forceSSL = mkIf enableSSL true;
+        enableACME = mkIf enableSSL true;
+        acmeRoot = mkIf enableSSL null;
+        locations."/" = {
+          proxyPass = proxy.target;
+        } // proxy.extraConfig;
+      };
+    }) cfg.proxies
+  );
 in
 {
   options.server.web-servers.nginx = {
-    enable = lib.mkEnableOption "the Nginx server";
-    proxies = lib.mkOption {
+    enable = mkEnableOption "the Nginx server";
+    openFirewall = mkEnableOption "" // {
+      default = true;
+    };
+    enableDefaultSink = mkEnableOption "" // {
+      default = true;
+    };
+    proxies = mkOption {
       type =
         with lib.types;
         listOf (submodule {
           options = {
-            source = lib.pantheon.mkStrOption;
-            target = lib.pantheon.mkStrOption;
+            source = mkStrOption;
+            target = mkStrOption;
             extraConfig = lib.mkOption {
               type = attrs;
               default = { };
@@ -30,36 +62,14 @@ in
     };
   };
 
-  config = lib.mkIf cfg.enable {
-    networking.firewall.allowedTCPPorts = [
+  config = mkIf cfg.enable {
+    networking.firewall.allowedTCPPorts = mkIf cfg.openFirewall [
       443
       80
     ];
     services.nginx = {
       enable = true;
-      virtualHosts =
-        {
-          "_" = {
-            default = true;
-            rejectSSL = true;
-            locations."/" = {
-              return = "444";
-            };
-          };
-        }
-        // (builtins.listToAttrs (
-          builtins.map (proxy: {
-            name = proxy.source;
-            value = {
-              forceSSL = true;
-              enableACME = true;
-              acmeRoot = null;
-              locations."/" = {
-                proxyPass = proxy.target;
-              } // proxy.extraConfig;
-            };
-          }) cfg.proxies
-        ));
+      virtualHosts = defaultSink // proxyPasses;
     };
   };
 }

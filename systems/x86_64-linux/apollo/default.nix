@@ -3,10 +3,10 @@
   ...
 }:
 {
+  imports = lib.singleton ../common.nix;
+
   system = {
     hostname = "apollo";
-    mainUser.name = "rafiq";
-    mainUser.publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILdsZyY3gu8IGB8MzMnLdh+ClDxQQ2RYG9rkeetIKq8n";
     bootloader = "systemd-boot";
   };
 
@@ -21,7 +21,6 @@
 
   server = {
     enableDDNS = true;
-    mountHelios = true;
     databases = {
       mongodb.enable = true;
       mysql.enable = true;
@@ -32,22 +31,25 @@
       mattermost.enable = true;
       mattermost.url = "mm.bwfiq.com";
     };
-    web-servers.nginx.enable = true;
-    web-servers.nginx.proxies = [
-      {
-        source = "aenyrathia.wiki";
-        target = "http://helios:5896";
-      }
-      {
-        source = "chat.bwfiq.com";
-        target = "http://localhost:3080";
-      }
-      {
-        source = "il.bwfiq.com";
-        target = "http://helios:2283";
-      }
-    ];
+    web-servers = {
+      nginx = {
+        enable = true;
+        proxies = [
+          {
+            source = "aenyrathia.wiki";
+            target = "http://helios:5896";
+          }
+          {
+            #TODO: merge into librechat module
+            source = "chat.bwfiq.com";
+            target = "http://localhost:3080";
+          }
+          {
+            source = "il.bwfiq.com";
+            target = "http://helios:2283";
+          }
+        ];
+      };
+    };
   };
-
-  nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 }

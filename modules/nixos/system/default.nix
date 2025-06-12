@@ -17,6 +17,7 @@
     hostname = lib.pantheon.mkStrOption;
     mainUser.name = lib.pantheon.mkStrOption;
     mainUser.publicKey = lib.pantheon.mkStrOption;
+    mainUser.email = lib.pantheon.mkStrOption;
     bootloader = lib.pantheon.mkStrOption;
   };
 

@@ -3,10 +3,10 @@
   ...
 }:
 {
+  imports = lib.singleton ../common.nix;
+
   system = {
     hostname = "nemesis";
-    mainUser.name = "rafiq";
-    mainUser.publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILdsZyY3gu8IGB8MzMnLdh+ClDxQQ2RYG9rkeetIKq8n";
     bootloader = "systemd-boot";
   };
 
@@ -41,16 +41,10 @@
     enableSunshine = true;
   };
 
-  server = {
-    mountHelios = true;
-  };
-
   services = {
     tor = {
       enable = true;
       client.enable = true;
     };
   };
-
-  nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 }

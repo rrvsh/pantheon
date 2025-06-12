@@ -3,8 +3,6 @@
 
   system = {
     hostname = "mellinoe";
-    mainUser.name = "rafiq";
-    mainUser.publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILdsZyY3gu8IGB8MzMnLdh+ClDxQQ2RYG9rkeetIKq8n";
     bootloader = "systemd-boot";
   };
 
@@ -32,10 +30,4 @@
       refresh-rate = "60";
     };
   };
-
-  server = {
-    mountHelios = true;
-  };
-
-  nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 }
