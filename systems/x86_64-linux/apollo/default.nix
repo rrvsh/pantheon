@@ -22,10 +22,16 @@
   server = {
     enableDDNS = true;
     mountHelios = true;
-    databases.mongodb.enable = true;
-    databases.mysql.enable = true;
-    databases.postgresql.enable = true;
-    web-apps.librechat.enable = true;
+    databases = {
+      mongodb.enable = true;
+      mysql.enable = true;
+      postgresql.enable = true;
+    };
+    web-apps = {
+      librechat.enable = true;
+      mattermost.enable = true;
+      mattermost.url = "mm.bwfiq.com";
+    };
     web-servers.nginx.enable = true;
     web-servers.nginx.proxies = [
       {
