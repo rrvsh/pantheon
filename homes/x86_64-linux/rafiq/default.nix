@@ -28,6 +28,11 @@ in
   config = mkMerge [
     (mkIf osConfig.desktop.enable {
       home.persistence."/persist/home/rafiq".directories = [
+        "docs"
+        "repos"
+        "vids"
+        "tmp"
+        ".tor project"
         ".local/share/PrismLauncher"
       ];
       programs = {
@@ -86,9 +91,6 @@ in
         ];
 
         persistence."/persist/home/rafiq".directories = [
-          "docs"
-          "repos"
-          ".tor project"
         ];
       };
       programs = {
