@@ -27,6 +27,9 @@ in
 {
   config = mkMerge [
     (mkIf osConfig.desktop.enable {
+      home.persistence."/persist/home/rafiq".directories = [
+        ".local/share/PrismLauncher"
+      ];
       programs = {
         obs-studio.enable = true;
         thunderbird.enable = true;
@@ -35,6 +38,7 @@ in
       home.packages = with pkgs; [
         stremio
         tor-browser
+        prismlauncher
       ];
     })
     {
