@@ -1,4 +1,9 @@
-{ lib, config, ... }:
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}:
 {
   imports = [
     ./btrfs.nix
@@ -19,6 +24,16 @@
 
   config = lib.mkMerge [
     {
+      hardware.keyboard.qmk.enable = true;
+      services.udev = {
+        packages = with pkgs; [
+          vial
+          via
+          qmk
+          qmk-udev-rules
+          qmk_hid
+        ];
+      };
       services.fwupd.enable = true;
       environment.persistence."/persist".directories = lib.singleton "/var/lib/bluetooth";
       hardware.bluetooth = {
