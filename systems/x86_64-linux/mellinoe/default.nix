@@ -1,5 +1,8 @@
-{ lib, ... }:
 {
+  imports = [
+    ../common.nix
+    ../desktop.nix
+  ];
 
   system = {
     hostname = "mellinoe";
@@ -13,21 +16,5 @@
       ephemeralRoot = true;
     };
     platform = "intel";
-  };
-
-  desktop = {
-    windowManager = "hyprland";
-    browser = "firefox";
-    terminal = "ghostty";
-    lockscreen = "hyprlock";
-    notification-daemon = "mako";
-    launcher = "fuzzel";
-    status-bar = "waybar";
-    mainMonitor = {
-      id = "BOE 0x088B";
-      scale = "2";
-      resolution = "1920x1280";
-      refresh-rate = "60";
-    };
   };
 }
