@@ -1,10 +1,31 @@
-{ osConfig, lib, ... }:
+{
+  osConfig,
+  lib,
+  inputs,
+  system,
+  ...
+}:
 let
   inherit (builtins) map listToAttrs;
+  inherit (lib) mkIf;
   inherit (lib.lists) findFirstIndex;
+  inherit (inputs.nur.legacyPackages.${system}.repos.rycee) firefox-addons;
   cfg = osConfig.desktop.browser.firefox;
   profileCfg = id: {
     inherit id;
+    #TODO: move this into an option?
+    settings = {
+      "extensions.autoDisableScopes" = 0; # Auto enable extensions
+    };
+    extensions = {
+      force = true;
+      packages = with firefox-addons; [
+        darkreader
+        gesturefy
+        sponsorblock
+        ublock-origin
+      ];
+    };
   };
   profiles = listToAttrs (
     map (name: {
@@ -16,7 +37,7 @@ let
   );
 in
 {
-  config = lib.mkIf cfg.enable {
+  config = mkIf cfg.enable {
     home.persistence."/persist/home/rafiq".directories = [ ".mozilla/firefox" ];
     home.sessionVariables.BROWSER = "firefox";
     programs.firefox = {
@@ -25,6 +46,7 @@ in
     };
     stylix.targets.firefox = {
       profileNames = cfg.syncedProfiles;
+      colorTheme.enable = true;
     };
   };
 }
