@@ -1,7 +1,15 @@
 { config, lib, ... }:
+let
+  inherit (lib) mkEnableOption mkIf mkMerge;
+  cfg = config.desktop.lockscreen;
+in
 {
-  config = lib.mkMerge [
-    (lib.mkIf (config.desktop.lockscreen == "hyprlock") {
+  options.desktop.lockscreen = {
+    hyprlock.enable = mkEnableOption "";
+  };
+
+  config = mkMerge [
+    (mkIf cfg.hyprlock.enable {
       security.pam.services.hyprlock = { };
     })
   ];

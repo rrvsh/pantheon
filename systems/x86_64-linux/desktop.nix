@@ -7,9 +7,9 @@
         "test"
       ];
     };
+    lockscreen.hyprlock.enable = true;
     windowManager = "hyprland";
     terminal = "ghostty";
-    lockscreen = "hyprlock";
     notification-daemon = "mako";
     launcher = "fuzzel";
     status-bar = "waybar";

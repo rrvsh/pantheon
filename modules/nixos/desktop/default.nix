@@ -17,7 +17,6 @@
       refresh-rate = lib.pantheon.mkStrOption;
     };
     windowManager = lib.pantheon.mkStrOption;
-    lockscreen = lib.pantheon.mkStrOption;
     terminal = lib.pantheon.mkStrOption;
     notification-daemon = lib.pantheon.mkStrOption;
     launcher = lib.pantheon.mkStrOption;
