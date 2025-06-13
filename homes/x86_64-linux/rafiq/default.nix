@@ -2,9 +2,11 @@
   pkgs,
   inputs,
   osConfig,
+  lib,
   ...
 }:
 let
+  inherit (lib) mkMerge mkIf;
   mkEmailAccount = address: {
     inherit address;
     maildir.path = address;
@@ -23,71 +25,78 @@ let
   };
 in
 {
-  accounts = {
-    email = {
-      maildirBasePath = "mail";
-      accounts = {
-        "rafiq@rrv.sh" = {
-          primary = true;
-        } // mkEmailAccount "rafiq@rrv.sh";
-        "mohammadrafiq@rrv.sh" = mkEmailAccount "mohammadrafiq@rrv.sh";
+  config = mkMerge [
+    (mkIf osConfig.desktop.enable {
+      programs = {
+        obs-studio.enable = true;
+        thunderbird.enable = true;
+        thunderbird.profiles.rafiq.isDefault = true;
       };
-    };
-  };
-  cli = {
-    shell = "zsh";
-    finder = "fzf";
-    screensaver.enable = true;
-    screensaver.timeout = "100";
-    screensaver.command = "cbonsai -S -w 0.1 -L 40 -M 2 -b 2";
-    editor = "nvf";
-    file-browser = "yazi";
-    multiplexer = "zellij";
-    fetch = "hyfetch";
-    git.name = "Mohammad Rafiq";
-    git.email = "rafiq@rrv.sh";
-    git.defaultBranch = "prime";
-  };
-  home = {
-    shellAliases = {
-      v = "nvim";
-      e = "edit";
-    };
+      home.packages = with pkgs; [
+        stremio
+        tor-browser
+      ];
+    })
+    {
+      accounts = {
+        email = {
+          maildirBasePath = "mail";
+          accounts = {
+            "rafiq@rrv.sh" = {
+              primary = true;
+            } // mkEmailAccount "rafiq@rrv.sh";
+            "mohammadrafiq@rrv.sh" = mkEmailAccount "mohammadrafiq@rrv.sh";
+          };
+        };
+      };
+      cli = {
+        shell = "zsh";
+        finder = "fzf";
+        screensaver.enable = true;
+        screensaver.timeout = "100";
+        screensaver.command = "cbonsai -S -w 0.1 -L 40 -M 2 -b 2";
+        editor = "nvf";
+        file-browser = "yazi";
+        multiplexer = "zellij";
+        fetch = "hyfetch";
+        git.name = "Mohammad Rafiq";
+        git.email = "rafiq@rrv.sh";
+        git.defaultBranch = "prime";
+      };
+      home = {
+        shellAliases = {
+          v = "nvim";
+          e = "edit";
+        };
 
-    packages = with pkgs; [
-      cbonsai
-      ripgrep
-      devenv
-      stremio
-      tor-browser
-      pantheon.rebuild
-      pantheon.deploy
-      pantheon.edit
-      pantheon.commit
-      pantheon.check
-      inputs.nixspect.packages."x86_64-linux".nixspect
-    ];
+        packages = with pkgs; [
+          cbonsai
+          ripgrep
+          devenv
+          pantheon.rebuild
+          pantheon.deploy
+          pantheon.edit
+          pantheon.commit
+          pantheon.check
+          inputs.nixspect.packages."x86_64-linux".nixspect
+        ];
 
-    persistence."/persist/home/rafiq".directories = [
-      "docs"
-      "repos"
-      ".tor project"
-    ];
-  };
-  programs = {
-    nh.enable = true;
-    tealdeer.enable = true;
-    pay-respects = {
-      enable = true;
-    };
-    tealdeer.settings.updates.auto_update = true;
-    direnv = {
-      enable = true;
-      nix-direnv.enable = true;
-    };
-    thunderbird.enable = true;
-    thunderbird.profiles.rafiq = {
-      isDefault = true;
-    };
-  };
+        persistence."/persist/home/rafiq".directories = [
+          "docs"
+          "repos"
+          ".tor project"
+        ];
+      };
+      programs = {
+        nh.enable = true;
+        tealdeer.enable = true;
+        tealdeer.settings.updates.auto_update = true;
+        pay-respects.enable = true;
+        direnv = {
+          enable = true;
+          nix-direnv.enable = true;
+        };
+      };
+    }
+  ];
 }
