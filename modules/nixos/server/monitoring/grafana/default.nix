@@ -19,7 +19,6 @@ in
       extraConfig.proxyWebsockets = true;
       locations."/api/live/" = {
         proxyPass = "http://${config.system.hostname}:${builtins.toString cfg.port}";
-        proxyWebsockets = true;
       };
     });
     services.grafana = {
@@ -29,6 +28,13 @@ in
         http_port = cfg.port;
         http_addr = "0.0.0.0";
       };
+      provision.datasources.settings.datasources = [
+        {
+          name = "prometheus";
+          type = "Prometheus";
+          url = "http://${config.system.hostname}:${builtins.toString config.server.monitoring.prometheus.port}";
+        }
+      ];
     };
   };
 }
