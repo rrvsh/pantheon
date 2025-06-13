@@ -4,14 +4,19 @@
   pkgs,
   ...
 }:
+let
+  inherit (lib) mkEnableOption;
+  inherit (lib.pantheon) mkStrOption;
+in
 {
   imports = [
     ./windowManager.nix
   ];
 
   options.desktop = {
+    enable = mkEnableOption "";
     mainMonitor = {
-      id = lib.pantheon.mkStrOption;
+      id = mkStrOption;
       scale = lib.pantheon.mkStrOption;
       resolution = lib.pantheon.mkStrOption;
       refresh-rate = lib.pantheon.mkStrOption;

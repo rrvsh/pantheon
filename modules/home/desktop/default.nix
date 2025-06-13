@@ -7,13 +7,14 @@
 }:
 let
   cfg = config.desktop;
-  inherit (lib) mkIf mkEnableOption;
+  upstreamCfg = osConfig.desktop;
+  inherit (lib) mkMerge mkIf mkEnableOption;
 in
 {
   options.desktop = {
     wayland.enableUtils = mkEnableOption "common Wayland utilities";
   };
-  config = lib.mkMerge [
+  config = mkIf upstreamCfg.enable (mkMerge [
     (mkIf cfg.wayland.enableUtils {
       home.packages = with pkgs; [
         wl-clipboard-rs
@@ -43,5 +44,5 @@ in
         ".config/sunshine"
       ];
     })
-  ];
+  ]);
 }

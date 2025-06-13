@@ -1,5 +1,6 @@
 {
   desktop = {
+    enable = true;
     browser.firefox = {
       enable = true;
       syncedProfiles = [
