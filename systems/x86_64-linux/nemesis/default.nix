@@ -20,6 +20,13 @@
     usb.automount = true;
   };
 
+  desktop.mainMonitor = {
+    id = "desc:OOO AN-270W04K";
+    scale = "2";
+    resolution = "3840x2160";
+    refresh-rate = "60";
+  };
+
   services = {
     tor = {
       enable = true;

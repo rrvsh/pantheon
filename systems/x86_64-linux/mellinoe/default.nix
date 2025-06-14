@@ -17,4 +17,11 @@
     };
     platform = "intel";
   };
+
+  desktop.mainMonitor = {
+    id = "BOE 0x088B";
+    scale = "2";
+    resolution = "1920x1280";
+    refresh-rate = "60";
+  };
 }
