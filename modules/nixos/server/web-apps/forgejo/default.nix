@@ -24,10 +24,13 @@ in
     });
     services.forgejo = {
       enable = true;
-      settings.server = {
-        DOMAIN = cfg.url;
-        ROOT_URL = "https://${cfg.url}/";
-        HTTP_PORT = cfg.port;
+      settings = {
+        server = {
+          DOMAIN = cfg.url;
+          ROOT_URL = "https://${cfg.url}/";
+          HTTP_PORT = cfg.port;
+        };
+        "repository.signing".FORMAT = "ssh";
       };
     };
   };
