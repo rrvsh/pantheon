@@ -30,7 +30,7 @@ pkgs.writeShellScriptBin "commit" # bash
       echo "$RESPONSE"
       echo
       echo "Choose an action:"
-      read -p "Options: [y]es, [r]eroll, [e]dit, [q]uit?" -n 1 -r choice
+      read -p "Options: [y]es, [r]eroll, [e]dit, [q]uit? " -n 1 -r choice
       echo
 
       case "$choice" in
