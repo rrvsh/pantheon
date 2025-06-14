@@ -1,5 +1,5 @@
 {
-  animation = [ "workspaces, 0" ];
+  animation = [ "workspaces, 1, 1, default" ];
   general = {
     border_size = 2;
     gaps_in = 0;
