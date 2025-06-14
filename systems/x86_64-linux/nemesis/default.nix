@@ -21,6 +21,7 @@
   };
 
   desktop = {
+    browser.tor-browser.enable = true;
     services = {
       steam.enable = true;
       sunshine.enable = true;
@@ -35,10 +36,6 @@
   };
 
   services = {
-    tor = {
-      enable = true;
-      client.enable = true;
-    };
     sd-webui-forge = {
       enable = true;
       listen = true;

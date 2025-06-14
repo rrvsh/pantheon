@@ -5,7 +5,6 @@
     "repos"
     "vids"
     "tmp"
-    ".tor project"
     ".local/share/PrismLauncher"
   ];
   programs = {
@@ -15,7 +14,6 @@
   };
   home.packages = with pkgs; [
     stremio
-    tor-browser
     prismlauncher
   ];
 }
