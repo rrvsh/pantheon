@@ -23,7 +23,6 @@ in
     };
     windowManager = lib.pantheon.mkStrOption;
     terminal = lib.pantheon.mkStrOption;
-    status-bar = lib.pantheon.mkStrOption;
     enableSpotifyd = lib.mkEnableOption "";
     enableSteam = lib.mkEnableOption "";
     enableVR = lib.mkEnableOption "";

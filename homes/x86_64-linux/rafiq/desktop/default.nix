@@ -1,4 +1,5 @@
 {
+  pkgs,
   lib,
   inputs,
   system,
@@ -12,4 +13,5 @@ mkMerge [
   (import ./lockscreen.nix)
   (import ./launcher.nix)
   (import ./media-player.nix)
+  (import ./status-bar.nix { inherit pkgs; })
 ]

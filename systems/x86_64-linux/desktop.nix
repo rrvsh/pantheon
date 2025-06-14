@@ -6,9 +6,9 @@
     launcher.fuzzel.enable = true;
     media-player.vlc.enable = true;
     notification-daemon.mako.enable = true;
+    status-bar.waybar.enable = true;
     windowManager = "hyprland";
     terminal = "ghostty";
-    status-bar = "waybar";
     mainMonitor = {
       id = "desc:OOO AN-270W04K";
       scale = "2";
