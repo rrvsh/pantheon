@@ -3,6 +3,7 @@
   lib,
   inputs,
   system,
+  osConfig,
   ...
 }:
 let
@@ -15,4 +16,5 @@ mkMerge [
   (import ./media-player.nix)
   (import ./status-bar.nix { inherit pkgs; })
   (import ./terminal.nix)
+  (import ./window-manager { inherit pkgs osConfig lib; })
 ]

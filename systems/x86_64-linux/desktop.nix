@@ -8,7 +8,7 @@
     notification-daemon.mako.enable = true;
     status-bar.waybar.enable = true;
     terminal.ghostty.enable = true;
-    windowManager = "hyprland";
+    window-manager.hyprland.enable = true;
     enableSpotifyd = true;
     enableSteam = true;
     enableVR = true;

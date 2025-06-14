@@ -5,23 +5,21 @@
   ...
 }:
 let
-  inherit (lib) mkEnableOption;
+  inherit (lib) mkEnableOption mkIf singleton;
   inherit (lib.pantheon) mkStrOption;
+  inherit (pkgs) wl-clipboard-rs;
+  cfg = config.desktop;
 in
 {
-  imports = [
-    ./windowManager.nix
-  ];
-
   options.desktop = {
     enable = mkEnableOption "";
+    enableWaylandUtilities = mkEnableOption "";
     mainMonitor = {
       id = mkStrOption;
       scale = lib.pantheon.mkStrOption;
       resolution = lib.pantheon.mkStrOption;
       refresh-rate = lib.pantheon.mkStrOption;
     };
-    windowManager = lib.pantheon.mkStrOption;
     enableSpotifyd = lib.mkEnableOption "";
     enableSteam = lib.mkEnableOption "";
     enableVR = lib.mkEnableOption "";
@@ -34,6 +32,9 @@ in
         font-awesome
       ];
     }
+    (mkIf cfg.enableWaylandUtilities {
+      home-manager.sharedModules = singleton { home.packages = [ wl-clipboard-rs ]; };
+    })
     (lib.mkIf config.desktop.enableSteam {
       programs.steam = {
         enable = true;

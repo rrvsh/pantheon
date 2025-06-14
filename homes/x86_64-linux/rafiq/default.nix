@@ -34,6 +34,7 @@ in
           inputs
           system
           pkgs
+          osConfig
           ;
       }
     ))
