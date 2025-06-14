@@ -5,9 +5,14 @@
   ...
 }:
 let
-  inherit (lib) mkEnableOption mkIf singleton;
+  inherit (lib)
+    mkEnableOption
+    mkIf
+    singleton
+    optional
+    ;
   inherit (lib.pantheon) mkStrOption;
-  inherit (pkgs) wl-clipboard-rs;
+  inherit (pkgs) font-awesome wl-clipboard-rs;
   cfg = config.desktop;
 in
 {
@@ -16,49 +21,16 @@ in
     enableWaylandUtilities = mkEnableOption "";
     mainMonitor = {
       id = mkStrOption;
-      scale = lib.pantheon.mkStrOption;
-      resolution = lib.pantheon.mkStrOption;
-      refresh-rate = lib.pantheon.mkStrOption;
+      scale = mkStrOption;
+      resolution = mkStrOption;
+      refresh-rate = mkStrOption;
     };
-    enableSpotifyd = lib.mkEnableOption "";
-    enableSteam = lib.mkEnableOption "";
-    enableVR = lib.mkEnableOption "";
-    enableSunshine = lib.mkEnableOption "";
   };
 
-  config = lib.mkMerge [
-    {
-      fonts.packages = with pkgs; [
-        font-awesome
-      ];
-    }
-    (mkIf cfg.enableWaylandUtilities {
-      home-manager.sharedModules = singleton { home.packages = [ wl-clipboard-rs ]; };
-    })
-    (lib.mkIf config.desktop.enableSteam {
-      programs.steam = {
-        enable = true;
-        gamescopeSession.enable = true;
-      };
-    })
-    (lib.mkIf config.desktop.enableVR {
-      programs.alvr = {
-        enable = true;
-        openFirewall = true;
-      };
-      environment.systemPackages = [ pkgs.android-tools ];
-    })
-    (lib.mkIf config.desktop.enableSunshine {
-      services.sunshine = {
-        enable = true;
-        capSysAdmin = true;
-        openFirewall = true;
-        settings = {
-          sunshine_name = config.system.hostname;
-          origin_web_ui_allowed = "wan";
-        };
-        applications = { };
-      };
-    })
-  ];
+  config = mkIf cfg.enable {
+    fonts.packages = singleton font-awesome;
+    home-manager.sharedModules = optional cfg.enableWaylandUtilities {
+      home.packages = [ wl-clipboard-rs ];
+    };
+  };
 }

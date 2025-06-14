@@ -9,9 +9,5 @@
     status-bar.waybar.enable = true;
     terminal.ghostty.enable = true;
     window-manager.hyprland.enable = true;
-    enableSpotifyd = true;
-    enableSteam = true;
-    enableVR = true;
-    enableSunshine = true;
   };
 }
