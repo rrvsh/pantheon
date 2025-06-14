@@ -41,12 +41,5 @@ in
         };
       };
     })
-    (mkIf cfg.steam.enable {
-      programs.steam = {
-        enable = true;
-        gamescopeSession.enable = true;
-      };
-      home-manager.sharedModules = singleton { persistDirs = singleton ".local/share/Steam"; };
-    })
   ];
 }

@@ -5,7 +5,6 @@
     "repos"
     "vids"
     "tmp"
-    ".local/share/PrismLauncher"
   ];
   programs = {
     obs-studio.enable = true;
@@ -14,6 +13,5 @@
   };
   home.packages = with pkgs; [
     stremio
-    prismlauncher
   ];
 }

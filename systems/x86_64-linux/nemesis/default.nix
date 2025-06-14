@@ -22,8 +22,11 @@
 
   desktop = {
     browser.tor-browser.enable = true;
-    services = {
+    gaming = {
+      prism-launcher.enable = true;
       steam.enable = true;
+    };
+    services = {
       sunshine.enable = true;
       spotifyd.enable = true;
     };
