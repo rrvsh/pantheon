@@ -1,6 +1,12 @@
 { pkgs, ... }:
 pkgs.writeShellScriptBin "rebuild" # sh
   ''
+    QUICK=false
+    NO_GENERATION_CHECK=false
+    TEST_SHELL=false
+    REMOTE_HOSTS=()
+    REBUILDING_ALL=false
+
     prompt() {
       local PROMPT="$1"
       shift
@@ -13,20 +19,44 @@ pkgs.writeShellScriptBin "rebuild" # sh
       fi
     }
 
-    QUICK=false
-    NO_GENERATION_CHECK=false
-    TEST_SHELL=false
-    REMOTE_HOSTS=()
-    ALL_HOSTS=("nemesis" "mellinoe" "apollo")
-    REBUILDING_ALL=false
-    CURRENT_GENERATION=$(readlink /nix/var/nix/profiles/system | cut -d- -f2)
+    spawn_test_shell() {
+      echo "Spawning test shell on $1..."
+      (export PS1="Test shell> "
+      exec ${pkgs.bash}/bin/bash ssh "$1") || {
+        ${pkgs.cowsay}/bin/cowsay "You aborted."
+        exit 1
+      }
+    }
+
+    rebuild_remote() {
+      local args=(".#nixosConfigurations.$1" "--target-host" "$1")
+      local CURRENT_GENERATION=$(ssh "$1" readlink /nix/var/nix/profiles/system | cut -d- -f2)
+
+      if "$TEST_SHELL"; then
+        echo "Testing $1..."
+        nh os test "''${args[@]}"
+        git diff HEAD --color=always --stat --patch
+        spawn_test_shell "$1"
+        echo "Rebuilding $1..."
+        nh os boot "''${args[@]}"
+      else
+        echo "Rebuilding $1 on $HOSTNAME..."
+        nh os switch "''${args[@]}"
+      fi
+
+      if ! "$NO_GENERATION_CHECK"; then
+        local NEW_GENERATION=$(ssh "$1" readlink /nix/var/nix/profiles/system | cut -d- -f2)
+        echo "$1 - New generation is $NEW_GENERATION. Current is $CURRENT_GENERATION."
+        if [ ! $NEW_GENERATION -gt $CURRENT_GENERATION ]; then
+          echo "WARNING: New config was not added to bootloader." 
+        fi
+      fi
+    }
 
     if [ ! -f "flake.nix" ]; then
       echo "Error: flake.nix not found in the current directory. Exiting."
       exit 1  # Indicate an error
     fi
-
-    #TODO: get hostnames from flake nixosConfigurations
 
     while [[ $# -gt 0 ]]; do
       case "$1" in
@@ -44,9 +74,14 @@ pkgs.writeShellScriptBin "rebuild" # sh
           ;;
         --all | -a)
           reachable_hosts=()
-          for host in ''${ALL_HOSTS[@]}; do
+          hostnames=$(nix flake show --all-systems --json | , jq -r '.nixosConfigurations | keys | .[]')
+          for host in ''${hostnames[@]}; do
+            echo "Checking if $host is reachable..."
             if ping -c 1 -W 1 "$host" > /dev/null 2>&1 ; then  
+              echo "$host is reachable."
               reachable_hosts+=("$host")
+            else 
+              echo "$host is unreachable."
             fi
           done
           REMOTE_HOSTS=(''${reachable_hosts[@]})
@@ -55,50 +90,28 @@ pkgs.writeShellScriptBin "rebuild" # sh
           ;;
         *)
           if [ !REBUILDING_ALL ]; then
-            REMOTE_HOSTS+=("$1")
+            if ping -c 1 -W 1 "$1" > /dev/null 2>&1 ; then
+              REMOTE_HOSTS+=("$1")
+            else
+              echo "$1 is unreachable. Exiting."
+              exit 1
+            fi
           fi
           shift
           ;;
       esac
     done
 
+    if [ ''${#REMOTE_HOSTS[@]} == 0 ]; then
+      echo "No hostnames provided."
+      REMOTE_HOSTS=("$HOSTNAME")
+    fi
+
     git add .
 
-    if [ ''${#REMOTE_HOSTS[@]} -gt 0 ]; then
-      for host in "''${REMOTE_HOSTS[@]}"; do
-        echo "Rebuilding $host..."
-        nh os switch .#nixosConfigurations."$host" --target-host "$host" || {
-          exit 1
-        }
-      done
-    elif "$TEST_SHELL"; then
-      nh os test . || {
-        echo "Error: nixos-rebuild switch failed.  Check the output for details."
-        exit 1
-      }
-      git diff HEAD --color=always --stat --patch
-      (export PS1="Test shell> " 
-      exec ${pkgs.bash}/bin/bash) || {
-        ${pkgs.cowsay}/bin/cowsay "You aborted."
-        exit 1
-      }
-      nh os boot . || {
-        echo "Error: nixos-rebuild switch failed.  Check the output for details."
-        exit 1
-      }
-    else
-      nh os switch . || {
-        exit 1
-      }
-      if ! "$NO_GENERATION_CHECK"; then
-        NEW_GENERATION=$(readlink /nix/var/nix/profiles/system | cut -d- -f2)
-        echo "New generation is $NEW_GENERATION. Current is $CURRENT_GENERATION."
-        if [ ! $NEW_GENERATION -gt $CURRENT_GENERATION ]; then
-          echo "ERROR: New config was not added to bootloader. Exiting..."
-          exit 1
-        fi
-      fi
-    fi
+    for host in "''${REMOTE_HOSTS[@]}"; do
+      rebuild_remote $host
+    done
 
     if ! "$QUICK"; then
       prompt "Commit changes" commit
