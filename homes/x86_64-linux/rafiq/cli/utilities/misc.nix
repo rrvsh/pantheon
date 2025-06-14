@@ -2,9 +2,12 @@
 {
   programs = {
     nh.enable = true;
-    tealdeer.enable = true;
-    tealdeer.settings.updates.auto_update = true;
     pay-respects.enable = true;
+    tealdeer = {
+      enable = true;
+      enableAutoUpdates = true;
+      settings.updates.auto_update = true;
+    };
     direnv = {
       enable = true;
       nix-direnv.enable = true;
