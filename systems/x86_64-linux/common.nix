@@ -1,3 +1,7 @@
+{ pkgs, ... }:
+let
+  inherit (pkgs) zsh;
+in
 {
   system.mainUser = {
     name = "rafiq";
@@ -5,5 +9,12 @@
     email = "rafiq@rrv.sh";
   };
   server.mountHelios = true;
+
+  users.defaultUserShell = zsh;
+  programs = {
+    zsh.enable = true;
+    zsh.enableCompletion = true;
+  };
+
   nixpkgs.hostPlatform = "x86_64-linux";
 }
