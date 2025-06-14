@@ -1,6 +1,7 @@
 { pkgs, ... }:
 {
   home.sessionVariables.STATUS_BAR = "waybar";
+  stylix.targets.waybar.addCss = false;
   programs.waybar = {
     settings = [
       {
