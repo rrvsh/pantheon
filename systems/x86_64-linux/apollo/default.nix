@@ -20,15 +20,6 @@
   };
 
   server = {
-    monitoring = {
-      prometheus = {
-        enable = true;
-      };
-      grafana = {
-        enable = true;
-        url = "grafana.bwfiq.com";
-      };
-    };
     networking.ddns = {
       enable = true;
       domains = [
