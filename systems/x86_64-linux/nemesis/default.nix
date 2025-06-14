@@ -1,3 +1,4 @@
+{ pkgs, ... }:
 {
   imports = [
     ../common.nix
@@ -31,6 +32,11 @@
     tor = {
       enable = true;
       client.enable = true;
+    };
+    sd-webui-forge = {
+      enable = true;
+      listen = true;
+      extraArgs = "--cuda-malloc";
     };
   };
 }

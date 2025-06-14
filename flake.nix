@@ -48,7 +48,7 @@
     stable-diffusion-webui-nix.inputs.flake-utils.follows = "flake-utils";
     stable-diffusion-webui-nix.inputs.nixpkgs.follows = "nixpkgs";
     stable-diffusion-webui-nix.inputs.python-flexseal.follows = "python-flexseal";
-    stable-diffusion-webui-nix.url = "github:Janrupf/stable-diffusion-webui-nix/main";
+    stable-diffusion-webui-nix.url = "github:rrvsh/stable-diffusion-webui-nix/add-forge-module";
     stylix.inputs.flake-compat.follows = "flake-compat";
     stylix.inputs.flake-parts.follows = "flake-parts";
     stylix.inputs.nur.follows = "nur";
@@ -81,6 +81,7 @@
         impermanence.nixosModules.impermanence
         sops-nix.nixosModules.sops
         stylix.nixosModules.stylix
+        stable-diffusion-webui-nix.nixosModules.default
       ];
       homes.modules = with inputs; [
         impermanence.homeManagerModules.impermanence

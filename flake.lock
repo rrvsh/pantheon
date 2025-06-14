@@ -624,16 +624,16 @@
         ]
       },
       "locked": {
-        "lastModified": 1748219198,
-        "narHash": "sha256-RRDI12SLfm9lP7tq4vUr/c/TRj0+mgRjAThdnwTJgIE=",
-        "owner": "Janrupf",
+        "lastModified": 1749893259,
+        "narHash": "sha256-xf2axyf+WuoSfDWQLhQigfms2qzSZzLwlFK7VwVxTkw=",
+        "owner": "rrvsh",
         "repo": "stable-diffusion-webui-nix",
-        "rev": "381e5de206d4962d94a8ebc97d6dc04395928e0c",
+        "rev": "0c3ebba0812cc3aa34ed16c6b4a85d96fbb2722f",
         "type": "github"
       },
       "original": {
-        "owner": "Janrupf",
-        "ref": "main",
+        "owner": "rrvsh",
+        "ref": "add-forge-module",
         "repo": "stable-diffusion-webui-nix",
         "type": "github"
       }
