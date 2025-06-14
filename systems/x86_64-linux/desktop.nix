@@ -5,9 +5,9 @@
     lockscreen.hyprlock.enable = true;
     launcher.fuzzel.enable = true;
     media-player.vlc.enable = true;
+    notification-daemon.mako.enable = true;
     windowManager = "hyprland";
     terminal = "ghostty";
-    notification-daemon = "mako";
     status-bar = "waybar";
     mainMonitor = {
       id = "desc:OOO AN-270W04K";
