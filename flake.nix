@@ -1,6 +1,7 @@
 {
 
   inputs = {
+    import-tree.url = "github:vic/import-tree";
     rrvsh-nixpkgs.url = "github:rrvsh/nixpkgs/librechat-module";
     crane.url = "github:ipetkov/crane";
     disko.inputs.nixpkgs.follows = "nixpkgs";

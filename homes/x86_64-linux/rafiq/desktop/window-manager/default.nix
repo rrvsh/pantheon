@@ -5,7 +5,7 @@
   ...
 }:
 {
-  wayland.windowManager.hyprland.settings = import ./hyprland/settings.nix {
+  wayland.windowManager.hyprland.settings = import ./_hyprland/settings.nix {
     inherit pkgs osConfig lib;
   };
 }

@@ -2,6 +2,7 @@
   lib,
   inputs,
   system,
+  ...
 }:
 let
   inherit (builtins) map listToAttrs;
