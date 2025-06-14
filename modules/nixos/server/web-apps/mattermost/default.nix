@@ -33,7 +33,7 @@ in
         message = "You must enable a local instance of postgresql.";
       }
     ];
-    environment.persistence."/persist".directories = [
+    persistDirs = [
       (mkDir cfg.configDir)
       (mkDir cfg.logDir)
       (mkDir cfg.dataDir)

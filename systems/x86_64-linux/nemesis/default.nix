@@ -38,11 +38,5 @@
     };
   };
 
-  services = {
-    sd-webui-forge = {
-      enable = true;
-      listen = true;
-      extraArgs = "--cuda-malloc";
-    };
-  };
+  server.sd-webui-forge.enable = true;
 }

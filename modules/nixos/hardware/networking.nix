@@ -1,4 +1,7 @@
 { config, lib, ... }:
+let
+  inherit (lib) singleton;
+in
 {
   config = {
     networking = {
@@ -19,6 +22,6 @@
       enable = true;
       authKeyFile = config.sops.secrets."keys/tailscale".path;
     };
-    environment.persistence."/persist".directories = [ "/var/lib/tailscale" ];
+    persistDirs = singleton "/var/lib/tailscale";
   };
 }

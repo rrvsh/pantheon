@@ -84,12 +84,9 @@ in
           	  '';
         programs.fuse.userAllowOther = true;
         fileSystems."/persist".neededForBoot = true;
+        #FIXME: below should be in module or something
         environment.persistence."/persist" = {
           hideMounts = true;
-          directories = [
-            "/var/lib/systemd"
-            "/var/lib/nixos"
-          ];
           files = [
             "/etc/ssh/ssh_host_ed25519_key"
             "/etc/ssh/ssh_host_ed25519_key.pub"

@@ -5,6 +5,7 @@
   ...
 }:
 let
+  inherit (lib) singleton;
   cfg = config.server.databases;
 in
 {
@@ -26,13 +27,11 @@ in
   config = lib.mkMerge [
     (lib.mkIf cfg.postgresql.enable {
       networking.firewall.allowedTCPPorts = lib.singleton cfg.postgresql.port;
-      environment.persistence."/persist".directories = [
-        {
-          directory = builtins.toString config.services.postgresql.dataDir;
-          user = "postgres";
-          group = "postgres";
-        }
-      ];
+      persistDirs = singleton {
+        directory = builtins.toString config.services.postgresql.dataDir;
+        user = "postgres";
+        group = "postgres";
+      };
       services.postgresql = {
         enable = true;
         enableTCPIP = true;
@@ -48,13 +47,11 @@ in
     })
     (lib.mkIf cfg.mongodb.enable {
       networking.firewall.allowedTCPPorts = [ cfg.mongodb.port ];
-      environment.persistence."/persist".directories = [
-        {
-          directory = builtins.toString config.services.mongodb.dbpath;
-          user = "mongodb";
-          group = "mongodb";
-        }
-      ];
+      persistDirs = singleton {
+        directory = builtins.toString config.services.mongodb.dbpath;
+        user = "mongodb";
+        group = "mongodb";
+      };
       services.mongodb = {
         enable = true;
         bind_ip = "0.0.0.0";
@@ -65,13 +62,11 @@ in
     })
     (lib.mkIf cfg.mysql.enable {
       networking.firewall.allowedTCPPorts = [ cfg.mysql.port ];
-      environment.persistence."/persist".directories = [
-        {
-          directory = builtins.toString config.services.mysql.dataDir;
-          user = "mysql";
-          group = "mysql";
-        }
-      ];
+      persistDirs = singleton {
+        directory = builtins.toString config.services.mysql.dataDir;
+        user = "mysql";
+        group = "mysql";
+      };
       services.mysql = {
         enable = true;
         package = pkgs.mariadb;

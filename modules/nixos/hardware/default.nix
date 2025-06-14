@@ -52,7 +52,7 @@ in
         ];
       };
       services.fwupd.enable = true;
-      environment.persistence."/persist".directories = lib.singleton "/var/lib/bluetooth";
+      persistDirs = singleton "/var/lib/bluetooth";
       hardware.bluetooth = {
         enable = true;
         settings.General.Experimental = true;

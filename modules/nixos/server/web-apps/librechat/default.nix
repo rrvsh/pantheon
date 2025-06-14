@@ -23,7 +23,7 @@ in
   };
 
   config = mkIf cfg.enable {
-    environment.persistence."/persist".directories = singleton {
+    persistDirs = singleton {
       directory = upstreamCfg.logDir;
       inherit (upstreamCfg) user group;
     };
