@@ -1,6 +1,11 @@
 { config, lib, ... }:
 let
-  inherit (lib) mkEnableOption mkIf mkMerge;
+  inherit (lib)
+    mkEnableOption
+    mkIf
+    mkMerge
+    singleton
+    ;
   cfg = config.desktop.lockscreen;
 in
 {
@@ -11,6 +16,7 @@ in
   config = mkMerge [
     (mkIf cfg.hyprlock.enable {
       security.pam.services.hyprlock = { };
+      home-manager.sharedModules = singleton { programs.hyprlock.enable = true; };
     })
   ];
 }
