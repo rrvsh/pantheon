@@ -23,7 +23,6 @@
     networking.ddns = {
       enable = true;
       domains = [
-        "rrv.sh"
         "aenyrathia.wiki"
         "slayment.com"
       ];
@@ -38,6 +37,8 @@
       librechat.url = "chat.bwfiq.com";
       mattermost.enable = true;
       mattermost.url = "mm.bwfiq.com";
+      forgejo.enable = true;
+      forgejo.url = "git.rrv.sh";
     };
     web-servers = {
       enableSSL = true;
