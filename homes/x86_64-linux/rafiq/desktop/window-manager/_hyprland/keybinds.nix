@@ -30,7 +30,7 @@
   bindle = [
     "SUPER, 6, exec, wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%-"
     "SUPER, 7, exec, ${pkgs.playerctl}/bin/playerctl previous"
-    "SUPER, 8, exec, ${pkgs.playerctl}/bin/playerctl play-pause"
+    "SUPER, 8, exec, ${pkgs.playerctl}/bin/playerctl -a play-pause"
     "SUPER, 9, exec, ${pkgs.playerctl}/bin/playerctl next"
     "SUPER, 0, exec, wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%+"
     "$meh, mouse_up, resizeactive, 10% 10%"
