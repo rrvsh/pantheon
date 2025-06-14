@@ -1,11 +1,7 @@
-{
-  config,
-  pkgs,
-  osConfig,
-}:
+{ pkgs, osConfig, ... }:
 {
   home.sessionVariables.MULTIPLEXER = "zellij";
-  home.persistence."/persist/home/${config.snowfallorg.user.name}".directories = [ "/.cache/zellij" ];
+  persistDirs = [ "/.cache/zellij" ];
   programs.zellij = {
     enable = true;
     enableZshIntegration = true;
