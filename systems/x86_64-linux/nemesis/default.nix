@@ -17,6 +17,7 @@
     };
     platform = "amd";
     gpu = "nvidia";
+    usb.automount = true;
   };
 
   services = {

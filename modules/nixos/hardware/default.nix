@@ -4,6 +4,10 @@
   pkgs,
   ...
 }:
+let
+  inherit (lib) mkIf mkEnableOption singleton;
+  cfg = config.hardware;
+in
 {
   imports = [
     ./btrfs.nix
@@ -20,9 +24,22 @@
     };
     gpu = lib.pantheon.mkStrOption;
     platform = lib.pantheon.mkStrOption;
+    usb = {
+      automount = mkEnableOption "";
+    };
   };
 
   config = lib.mkMerge [
+    (mkIf cfg.usb.automount {
+      services.udisks2.enable = true;
+      home-manager.sharedModules = singleton {
+        services.udiskie = {
+          enable = true;
+          automount = true;
+          notify = true;
+        };
+      };
+    })
     {
       hardware.keyboard.qmk.enable = true;
       services.udev = {
