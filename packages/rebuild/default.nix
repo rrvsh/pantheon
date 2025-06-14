@@ -13,20 +13,20 @@ pkgs.writeShellScriptBin "rebuild" # sh
       fi
     }
 
-    if [ ! -f "flake.nix" ]; then
-      echo "Error: flake.nix not found in the current directory. Exiting."
-      exit 1  # Indicate an error
-    fi
-    #TODO: get hostnames from flake nixosConfigurations
-
     QUICK=false
     NO_GENERATION_CHECK=false
     TEST_SHELL=false
     REMOTE_HOSTS=()
     ALL_HOSTS=("nemesis" "mellinoe" "apollo")
     REBUILDING_ALL=false
-
     CURRENT_GENERATION=$(readlink /nix/var/nix/profiles/system | cut -d- -f2)
+
+    if [ ! -f "flake.nix" ]; then
+      echo "Error: flake.nix not found in the current directory. Exiting."
+      exit 1  # Indicate an error
+    fi
+
+    #TODO: get hostnames from flake nixosConfigurations
 
     while [[ $# -gt 0 ]]; do
       case "$1" in
@@ -67,8 +67,7 @@ pkgs.writeShellScriptBin "rebuild" # sh
     if [ ''${#REMOTE_HOSTS[@]} -gt 0 ]; then
       for host in "''${REMOTE_HOSTS[@]}"; do
         echo "Rebuilding $host..."
-        nixos-rebuild switch --flake .#"$host" --target-host "$host" --use-remote-sudo || {
-          echo "Error: nixos-rebuild switch failed for $host. Check the output."
+        nh os switch .#nixosConfigurations."$host" --target-host "$host" || {
           exit 1
         }
       done
