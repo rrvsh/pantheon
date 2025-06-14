@@ -3,10 +3,10 @@
     enable = true;
     browser.firefox.enable = true;
     lockscreen.hyprlock.enable = true;
+    launcher.fuzzel.enable = true;
     windowManager = "hyprland";
     terminal = "ghostty";
     notification-daemon = "mako";
-    launcher = "fuzzel";
     status-bar = "waybar";
     media-player = "vlc";
     mainMonitor = {
