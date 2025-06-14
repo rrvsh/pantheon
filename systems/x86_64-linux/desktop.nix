@@ -4,11 +4,11 @@
     browser.firefox.enable = true;
     lockscreen.hyprlock.enable = true;
     launcher.fuzzel.enable = true;
+    media-player.vlc.enable = true;
     windowManager = "hyprland";
     terminal = "ghostty";
     notification-daemon = "mako";
     status-bar = "waybar";
-    media-player = "vlc";
     mainMonitor = {
       id = "desc:OOO AN-270W04K";
       scale = "2";
