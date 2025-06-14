@@ -54,14 +54,14 @@ pkgs.writeShellScriptBin "rebuild" # sh
 
       if "$TEST_SHELL"; then
         info "Testing $1..."
-        nh os test "''${args[@]}"
+        nh os test "''${args[@]}" || exit 1
         git diff HEAD --color=always --stat --patch
         spawn_test_shell "$1"
         info "Rebuilding $1..."
-        nh os boot "''${args[@]}"
+        nh os boot "''${args[@]}" || exit 1
       else
         info "Rebuilding $1 on $HOSTNAME..."
-        nh os switch "''${args[@]}"
+        nh os switch "''${args[@]}" || exit 1
       fi
 
       if ! "$NO_GENERATION_CHECK"; then
