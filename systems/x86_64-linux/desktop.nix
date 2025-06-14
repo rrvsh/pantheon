@@ -1,13 +1,7 @@
 {
   desktop = {
     enable = true;
-    browser.firefox = {
-      enable = true;
-      syncedProfiles = [
-        "rafiq"
-        "test"
-      ];
-    };
+    browser.firefox.enable = true;
     lockscreen.hyprlock.enable = true;
     windowManager = "hyprland";
     terminal = "ghostty";

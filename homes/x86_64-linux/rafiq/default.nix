@@ -3,6 +3,7 @@
   inputs,
   osConfig,
   lib,
+  system,
   ...
 }:
 let
@@ -26,6 +27,7 @@ let
 in
 {
   config = mkMerge [
+    (mkIf osConfig.desktop.enable (import ./desktop { inherit lib inputs system; }))
     (mkIf osConfig.desktop.enable {
       home.persistence."/persist/home/rafiq".directories = [
         "docs"
