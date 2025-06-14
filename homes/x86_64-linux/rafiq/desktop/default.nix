@@ -14,4 +14,5 @@ mkMerge [
   (import ./launcher.nix)
   (import ./media-player.nix)
   (import ./status-bar.nix { inherit pkgs; })
+  (import ./terminal.nix)
 ]
