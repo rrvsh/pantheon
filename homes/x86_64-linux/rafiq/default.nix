@@ -6,7 +6,7 @@
   ...
 }:
 let
-  inherit (lib) optional;
+  inherit (lib) singleton optional;
   inherit (inputs) import-tree;
   mkEmailAccount = address: {
     inherit address;
@@ -26,7 +26,7 @@ let
   };
 in
 {
-  imports = optional osConfig.desktop.enable (import-tree ./desktop);
+  imports = (optional osConfig.desktop.enable (import-tree ./desktop)) ++ singleton (import-tree ./cli);
 
   config = {
     accounts = {
@@ -46,7 +46,6 @@ in
       screensaver.enable = true;
       screensaver.timeout = "100";
       screensaver.command = "cbonsai -S -w 0.1 -L 40 -M 2 -b 2";
-      editor = "nvf";
       file-browser = "yazi";
       multiplexer = "zellij";
       fetch = "hyfetch";
