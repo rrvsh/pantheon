@@ -1,8 +1,6 @@
 {
 
   inputs = {
-    import-tree.url = "github:vic/import-tree";
-    rrvsh-nixpkgs.url = "github:rrvsh/nixpkgs/librechat-module";
     crane.url = "github:ipetkov/crane";
     disko.inputs.nixpkgs.follows = "nixpkgs";
     disko.url = "github:nix-community/disko";
@@ -15,10 +13,9 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     home-manager.url = "github:nix-community/home-manager";
     impermanence.url = "github:nix-community/impermanence";
+    import-tree.url = "github:vic/import-tree";
     mnw.url = "github:Gerg-L/mnw";
-    nil.inputs.flake-utils.follows = "flake-utils";
     nil.inputs.nixpkgs.follows = "nixpkgs";
-    nil.inputs.rust-overlay.follows = "rust-overlay";
     nil.url = "github:oxalica/nil";
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
     nix-index-database.url = "github:nix-community/nix-index-database";
@@ -38,6 +35,7 @@
     python-flexseal.inputs.flake-utils.follows = "flake-utils";
     python-flexseal.inputs.nixpkgs.follows = "nixpkgs";
     python-flexseal.url = "github:Janrupf/python-flexseal";
+    rrvsh-nixpkgs.url = "github:rrvsh/nixpkgs/librechat-module";
     rust-overlay.inputs.nixpkgs.follows = "nixpkgs";
     rust-overlay.url = "github:oxalica/rust-overlay";
     snowfall-lib.inputs.flake-compat.follows = "flake-compat";
@@ -49,12 +47,12 @@
     stable-diffusion-webui-nix.inputs.flake-utils.follows = "flake-utils";
     stable-diffusion-webui-nix.inputs.nixpkgs.follows = "nixpkgs";
     stable-diffusion-webui-nix.inputs.python-flexseal.follows = "python-flexseal";
-    stable-diffusion-webui-nix.url = "github:rrvsh/stable-diffusion-webui-nix/add-forge-module";
+    stable-diffusion-webui-nix.url = "github:janrupf/stable-diffusion-webui-nix";
     stylix.inputs.flake-compat.follows = "flake-compat";
     stylix.inputs.flake-parts.follows = "flake-parts";
-    stylix.inputs.nur.follows = "nur";
     stylix.inputs.home-manager.follows = "home-manager";
     stylix.inputs.nixpkgs.follows = "nixpkgs";
+    stylix.inputs.nur.follows = "nur";
     stylix.inputs.systems.follows = "systems";
     stylix.url = "github:nix-community/stylix";
     systems.url = "github:nix-systems/default";
