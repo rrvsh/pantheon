@@ -11,24 +11,9 @@ in
 {
   options.desktop.services = {
     spotifyd.enable = mkEnableOption "";
-    sunshine.enable = mkEnableOption "";
-    steam.enable = mkEnableOption "";
   };
 
   config = mkMerge [
-    (mkIf cfg.sunshine.enable {
-      services.sunshine = {
-        enable = true;
-        capSysAdmin = true;
-        openFirewall = true;
-        settings = {
-          sunshine_name = config.hostname;
-          origin_web_ui_allowed = "wan";
-        };
-        applications = { };
-      };
-      home-manager.sharedModules = singleton { persistDirs = singleton ".config/sunshine"; };
-    })
     (mkIf cfg.spotifyd.enable {
       networking.firewall.allowedTCPPorts = [ 5353 ];
       networking.firewall.allowedUDPPorts = [ 5353 ];
