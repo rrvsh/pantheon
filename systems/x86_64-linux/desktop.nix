@@ -10,4 +10,9 @@
     terminal.ghostty.enable = true;
     window-manager.hyprland.enable = true;
   };
+
+  hardware.usb = {
+    automount = true;
+    enableQmk = true;
+  };
 }
