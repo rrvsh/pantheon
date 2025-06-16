@@ -8,12 +8,10 @@ let
 in
 {
   imports = [
-    ./nvidia.nix
     ./audio.nix
   ];
 
   options.hardware = {
-    gpu = lib.pantheon.mkStrOption;
     platform = lib.pantheon.mkStrOption;
   };
 

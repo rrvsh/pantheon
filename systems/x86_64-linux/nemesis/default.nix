@@ -16,7 +16,7 @@
       ephemeralRoot = true;
     };
     platform = "amd";
-    gpu = "nvidia";
+    gpu.nvidia.enable = true;
   };
 
   desktop = {
