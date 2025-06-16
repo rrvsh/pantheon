@@ -4,17 +4,15 @@
     "body": [
       "{ config, lib, ... }:",
       "let",
-      "  inherit (lib) mkEnableOption mkIf;",
+      "  inherit (lib) mkIf mkEnableOption;",
       "  cfg = config.$1;",
       "in",
       "{",
-      "  options.$2 = {",
-      "    enable = mkEnableOption \"$3\";",
+      "  options.$1 = {",
+      "    enable = mkEnableOption \"$2\";",
+      "    $3",
       "  };",
-      "",
-      "  config = mkIf cfg.enable {",
-      "    $4",
-      "  };",
+      "  config = mkIf cfg.enable {$4};",
       "}"
     ],
     "description": "empty module"
