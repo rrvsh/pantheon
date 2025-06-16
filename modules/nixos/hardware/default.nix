@@ -10,7 +10,6 @@ in
   imports = [
     ./nvidia.nix
     ./audio.nix
-    ./networking.nix
   ];
 
   options.hardware = {
