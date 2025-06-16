@@ -7,7 +7,12 @@ let
     singleton
     mkIf
     ;
-  inherit (lib.pantheon) mkRootDomain mkPortOption mkStrOption;
+  inherit (lib.pantheon)
+    mkAttrOption
+    mkRootDomain
+    mkPortOption
+    mkStrOption
+    ;
   networkingConfig =
     {
       config,
@@ -45,6 +50,7 @@ in
         port = mkPortOption defaultPort;
         domain = mkStrOption;
         openFirewall = mkEnableOption "";
+        extraCfg = mkAttrOption;
       } // extraOptions;
 
       config = mkIf cfg.enable (mkMerge [

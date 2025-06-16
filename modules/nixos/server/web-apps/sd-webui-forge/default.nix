@@ -1,26 +1,26 @@
 { config, lib, ... }:
 let
-  inherit (lib) singleton mkEnableOption mkIf;
-  cfg = config.server.sd-webui-forge;
+  inherit (lib) singleton;
+  inherit (lib.pantheon.modules) mkWebApp;
+  cfg = config.server.web-apps.sd-webui-forge;
   upstreamCfg = config.services.sd-webui-forge;
 in
-{
-  options.server.sd-webui-forge = {
-    enable = mkEnableOption "";
+mkWebApp {
+  inherit config;
+  name = "sd-webui-forge";
+  defaultPort = 7860;
+  persistDirs = singleton {
+    directory = upstreamCfg.dataDir;
+    inherit (upstreamCfg) user group;
   };
-
-  config = mkIf cfg.enable {
+  extraConfig = {
     assertions = singleton {
       assertion = config.hardware.gpu == "nvidia";
       message = "You must run the sd-webui-forge service only with an nvidia gpu.";
     };
-    persistDirs = singleton {
-      directory = upstreamCfg.dataDir;
-      inherit (upstreamCfg) user group;
-    };
     services.sd-webui-forge = {
       enable = true;
-      listen = true;
+      listen = cfg.openFirewall;
       extraArgs = "--cuda-malloc";
     };
   };

@@ -1,7 +1,8 @@
 { config, lib, ... }:
 let
   inherit (lib) singleton;
-  inherit (lib.pantheon) mkRootDomain;
+  inherit (lib.pantheon) mkStrOption;
+  inherit (lib.pantheon.modules) mkWebApp;
   cfg = config.server.web-apps.mattermost;
   upstreamCfg = config.services.mattermost;
   mkDir = directory: {
@@ -10,36 +11,33 @@ let
     mode = "0750";
   };
 in
-{
-  options.server.web-apps.mattermost = {
-    enable = lib.mkEnableOption "the Mattermost service";
-    port = lib.pantheon.mkPortOption 8065;
-    url = lib.pantheon.mkStrOption;
-    configDir = lib.pantheon.mkStrOption // {
+mkWebApp {
+  inherit config;
+  name = "mattermost";
+  defaultPort = 8065;
+  persistDirs = [
+    (mkDir cfg.configDir)
+    (mkDir cfg.logDir)
+    (mkDir cfg.dataDir)
+  ];
+  extraOptions = {
+    configDir = mkStrOption // {
       default = "/etc/mattermost";
     };
-    dataDir = lib.pantheon.mkStrOption // {
+    dataDir = mkStrOption // {
       default = "/var/lib/mattermost";
     };
-    logDir = lib.pantheon.mkStrOption // {
+    logDir = mkStrOption // {
       default = "/var/log/mattermost";
     };
   };
-
-  config = lib.mkIf cfg.enable {
+  extraConfig = {
     assertions = [
       {
         assertion = config.services.postgresql.enable;
         message = "You must enable a local instance of postgresql.";
       }
     ];
-    persistDirs = [
-      (mkDir cfg.configDir)
-      (mkDir cfg.logDir)
-      (mkDir cfg.dataDir)
-    ];
-    networking.firewall.allowedTCPPorts = lib.singleton cfg.port;
-    server.networking.ddns.domains = singleton (mkRootDomain cfg.url);
     services.mattermost = {
       enable = true;
       inherit (cfg)
@@ -49,21 +47,14 @@ in
         port
         ;
       host = "0.0.0.0";
-      siteName = "pantheon";
-      siteUrl = "https://${cfg.url}";
+      siteUrl = "https://${cfg.domain}";
     };
     services.postgresql = {
-      ensureDatabases = lib.singleton upstreamCfg.database.name;
-      ensureUsers = lib.singleton {
+      ensureDatabases = singleton upstreamCfg.database.name;
+      ensureUsers = singleton {
         name = upstreamCfg.database.user;
         ensureDBOwnership = true;
       };
     };
-    server.web-servers.nginx.proxies = lib.mkIf config.server.web-servers.nginx.enable (
-      lib.singleton {
-        source = cfg.url;
-        target = "http://${config.system.hostname}:${builtins.toString cfg.port}";
-      }
-    );
   };
 }

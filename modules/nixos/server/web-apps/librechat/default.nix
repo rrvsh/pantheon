@@ -5,33 +5,24 @@
   ...
 }:
 let
-  inherit (lib) singleton mkEnableOption mkIf;
-  inherit (lib.pantheon) mkRootDomain mkPortOption mkStrOption;
+  inherit (lib) singleton;
+  inherit (lib.pantheon) mkStrOption;
+  inherit (lib.pantheon.modules) mkWebApp;
   cfg = config.server.web-apps.librechat;
   upstreamCfg = config.services.librechat;
 in
-{
-  imports = singleton "${inputs.rrvsh-nixpkgs}/nixos/modules/services/web-apps/librechat.nix";
-
-  options.server.web-apps.librechat = {
-    enable = mkEnableOption "";
-    port = mkPortOption 3080;
-    url = mkStrOption;
-    mongodbURI = mkStrOption // {
-      default = "mongodb://${config.system.hostname}:27017/LibreChat";
-    };
+mkWebApp {
+  inherit config;
+  name = "librechat";
+  defaultPort = 3080;
+  persistDirs = singleton {
+    directory = upstreamCfg.logDir;
+    inherit (upstreamCfg) user group;
   };
-
-  config = mkIf cfg.enable {
-    persistDirs = singleton {
-      directory = upstreamCfg.logDir;
-      inherit (upstreamCfg) user group;
-    };
-    server.networking.ddns.domains = singleton (mkRootDomain cfg.url);
-    server.web-servers.nginx.proxies = lib.mkIf config.server.web-servers.nginx.enable (singleton {
-      source = cfg.url;
-      target = "http://${config.system.hostname}:${builtins.toString cfg.port}";
-    });
+  extraOptions.mongodbURI = mkStrOption // {
+    default = "mongodb://${config.system.hostname}:27017/LibreChat";
+  };
+  extraConfig = {
     services.librechat = {
       enable = true;
       openFirewall = true;
@@ -41,8 +32,8 @@ in
         ALLOW_REGISTRATION = "true";
         NO_INDEX = "true";
         MONGO_URI = cfg.mongodbURI;
-        DOMAIN_CLIENT = cfg.url;
-        DOMAIN_SERVER = cfg.url;
+        DOMAIN_CLIENT = cfg.domain;
+        DOMAIN_SERVER = cfg.domain;
         ENDPOINTS = "anthropic,agents,google";
       };
       credentials = {
@@ -77,4 +68,7 @@ in
       };
     };
   };
+}
+// {
+  imports = singleton "${inputs.rrvsh-nixpkgs}/nixos/modules/services/web-apps/librechat.nix";
 }

@@ -34,13 +34,16 @@
     };
     web-apps = {
       librechat.enable = true;
-      librechat.url = "chat.bwfiq.com";
-      mattermost.enable = true;
-      mattermost.url = "mm.bwfiq.com";
+      librechat.domain = "chat.bwfiq.com";
       forgejo.enable = true;
-      forgejo.url = "git.rrv.sh";
+      forgejo.domain = "git.rrv.sh";
       glance.enable = true;
       glance.domain = "glance.bwfiq.com";
+      mattermost = {
+        enable = true;
+        domain = "mm.bwfiq.com";
+        extraCfg.siteName = "pantheon";
+      };
     };
     web-servers = {
       enableSSL = true;

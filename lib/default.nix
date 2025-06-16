@@ -15,6 +15,10 @@ rec {
     if len <= count then list else (shortenList count (tail list));
 
   # Modules
+  mkAttrOption = lib.mkOption {
+    type = lib.types.attrs;
+    default = { };
+  };
   mkStrOption = lib.mkOption {
     type = lib.types.str;
     default = "";
