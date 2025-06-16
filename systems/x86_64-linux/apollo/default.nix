@@ -39,6 +39,8 @@
       mattermost.url = "mm.bwfiq.com";
       forgejo.enable = true;
       forgejo.url = "git.rrv.sh";
+      glance.enable = true;
+      glance.domain = "glance.bwfiq.com";
     };
     web-servers = {
       enableSSL = true;
