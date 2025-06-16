@@ -1,13 +1,16 @@
 {
   config,
   lib,
-  modulesPath,
   ...
 }:
+let
+  inherit (lib.pantheon) mkStrOption;
+  cfg = config.machine.bootloader;
+in
 {
-  imports = [
-    (modulesPath + "/installer/scan/not-detected.nix")
-  ];
+  options.machine.bootloader = {
+    type = mkStrOption;
+  };
   config = lib.mkMerge [
     {
       boot.initrd.availableKernelModules = [
@@ -20,7 +23,7 @@
       ];
       boot.loader.efi.canTouchEfiVariables = true;
     }
-    (lib.mkIf (config.system.bootloader == "systemd-boot") {
+    (lib.mkIf (config.machine.bootloader.type == "systemd-boot") {
       boot.loader.systemd-boot.enable = true;
     })
   ];

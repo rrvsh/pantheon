@@ -6,12 +6,9 @@
   imports = lib.singleton ../common.nix;
   hostname = "apollo";
 
-  system = {
-    bootloader = "systemd-boot";
-  };
-
-  hardware = {
-    platform = "intel";
+  machine = {
+    platform.type = "intel";
+    bootloader.type = "systemd-boot";
     drives.btrfs = {
       enable = true;
       drive = "/dev/disk/by-id/nvme-eui.002538d221b47b01";

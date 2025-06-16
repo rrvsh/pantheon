@@ -11,10 +11,10 @@ let
     mkEnableOption
     singleton
     ;
-  cfg = config.hardware.gpu;
+  cfg = config.machine.gpu;
 in
 {
-  options.hardware.gpu = {
+  options.machine.gpu = {
     nvidia.enable = mkEnableOption "";
   };
   config = mkMerge [

@@ -11,10 +11,10 @@ let
     mkMerge
     singleton
     ;
-  cfg = config.hardware.usb;
+  cfg = config.machine.usb;
 in
 {
-  options.hardware.usb = {
+  options.machine.usb = {
     automount = mkEnableOption "";
     enableQmk = mkEnableOption "";
   };

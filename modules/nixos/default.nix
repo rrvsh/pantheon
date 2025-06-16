@@ -6,7 +6,7 @@
   ...
 }:
 let
-  inherit (lib) mkOption;
+  inherit (lib) mkOption singleton;
   inherit (lib.types)
     listOf
     str
@@ -14,6 +14,7 @@ let
     submodule
     ;
   inherit (lib.pantheon) mkStrOption;
+  inherit (lib.snowfall.fs) get-file;
   rootDir = submodule {
     options = {
       directory = mkOption { type = str; };
@@ -73,24 +74,26 @@ in
     };
     time.timeZone = "Asia/Singapore";
     i18n.defaultLocale = "en_US.UTF-8";
-    users.mutableUsers = false;
-    users.groups.users = {
-      gid = 100;
-      members = [ "${config.mainUser.name}" ];
+    users = {
+      mutableUsers = false;
+      groups.users = {
+        gid = 100;
+        members = [ "${config.mainUser.name}" ];
+      };
+      users."${config.mainUser.name}" = {
+        linger = true;
+        uid = 1000;
+        isNormalUser = true;
+        hashedPasswordFile = config.sops.secrets."${config.mainUser.name}/hashedPassword".path;
+        extraGroups = [ "wheel" ];
+        openssh.authorizedKeys.keys = [ config.mainUser.publicKey ];
+      };
+      users.root.openssh.authorizedKeys.keys = singleton config.mainUser.publicKey;
     };
-    users.users."${config.mainUser.name}" = {
-      linger = true;
-      uid = 1000;
-      isNormalUser = true;
-      hashedPasswordFile = config.sops.secrets."${config.mainUser.name}/hashedPassword".path;
-      extraGroups = [ "wheel" ];
-      openssh.authorizedKeys.keys = [ config.mainUser.publicKey ];
-    };
-    users.users.root.openssh.authorizedKeys.keys = lib.singleton config.mainUser.publicKey;
     services.getty.autologinUser = config.mainUser.name;
     security.sudo.wheelNeedsPassword = false;
     sops = {
-      defaultSopsFile = lib.snowfall.fs.get-file "secrets/secrets.yaml";
+      defaultSopsFile = get-file "secrets/secrets.yaml";
       age.sshKeyPaths = [ "/persist/home/rafiq/.ssh/id_ed25519" ];
       secrets = {
         "keys/openrouter" = { };

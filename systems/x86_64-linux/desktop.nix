@@ -11,7 +11,7 @@
     window-manager.hyprland.enable = true;
   };
 
-  hardware.usb = {
+  machine.usb = {
     automount = true;
     enableQmk = true;
   };

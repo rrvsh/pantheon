@@ -2,7 +2,7 @@
 let
   inherit (lib) mkIf mkEnableOption;
   inherit (lib.pantheon) mkStrOption;
-  cfg = config.hardware.drives.btrfs;
+  cfg = config.machine.drives.btrfs;
   ephemeralRootCfg = {
     boot.initrd.postDeviceCommands = lib.mkAfter ''
       	    mkdir /btrfs_tmp
@@ -44,7 +44,7 @@ let
   };
 in
 {
-  options.hardware.drives.btrfs = {
+  options.machine.drives.btrfs = {
     enable = mkEnableOption "";
     drive = mkStrOption;
     ephemeralRoot = mkEnableOption "";

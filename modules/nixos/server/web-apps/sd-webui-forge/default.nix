@@ -15,7 +15,7 @@ mkWebApp {
   };
   extraConfig = {
     assertions = singleton {
-      assertion = config.hardware.gpu.nvidia.enable;
+      assertion = config.machine.gpu.nvidia.enable;
       message = "You must run the sd-webui-forge service only with an nvidia gpu.";
     };
     services.sd-webui-forge = {

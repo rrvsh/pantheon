@@ -5,18 +5,15 @@
   ];
   hostname = "nemesis";
 
-  system = {
-    bootloader = "systemd-boot";
-  };
-
-  hardware = {
+  machine = {
+    platform.type = "amd";
+    gpu.nvidia.enable = true;
+    bootloader.type = "systemd-boot";
     drives.btrfs = {
       enable = true;
       drive = "/dev/disk/by-id/nvme-CT2000P3SSD8_2325E6E77434";
       ephemeralRoot = true;
     };
-    platform = "amd";
-    gpu.nvidia.enable = true;
   };
 
   desktop = {

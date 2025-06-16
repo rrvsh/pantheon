@@ -5,17 +5,14 @@
   ];
   hostname = "mellinoe";
 
-  system = {
-    bootloader = "systemd-boot";
-  };
-
-  hardware = {
+  machine = {
+    platform.type = "intel";
+    bootloader.type = "systemd-boot";
     drives.btrfs = {
       enable = true;
       drive = "/dev/disk/by-id/nvme-KBG40ZPZ128G_TOSHIBA_MEMORY_Z0U103PCNCDL";
       ephemeralRoot = true;
     };
-    platform = "intel";
   };
 
   desktop.mainMonitor = {
