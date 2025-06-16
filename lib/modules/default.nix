@@ -27,7 +27,7 @@ let
       server.networking.ddns.domains = singleton (mkRootDomain cfg.domain);
       server.web-servers.nginx.proxies = singleton {
         source = cfg.domain;
-        target = "http://${config.system.hostname}:${toString cfg.port}";
+        target = "http://${config.hostname}:${toString cfg.port}";
       };
     };
 in

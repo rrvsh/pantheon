@@ -3,9 +3,9 @@
     ../common.nix
     ../desktop.nix
   ];
+  hostname = "nemesis";
 
   system = {
-    hostname = "nemesis";
     bootloader = "systemd-boot";
   };
 

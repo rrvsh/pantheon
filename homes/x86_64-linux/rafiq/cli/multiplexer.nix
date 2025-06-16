@@ -17,7 +17,7 @@
           default_tab_template {
               pane size=1 borderless=true {
                   plugin location="file:${pkgs.zjstatus}/bin/zjstatus.wasm" {
-                      format_left   "{mode} ${osConfig.system.hostname}"
+                      format_left   "{mode} ${osConfig.hostname}"
                       format_center "{tabs}"
                       format_right  "{datetime}"
                       format_space  ""

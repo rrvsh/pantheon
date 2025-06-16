@@ -20,7 +20,7 @@ mkWebApp {
     inherit (upstreamCfg) user group;
   };
   extraOptions.mongodbURI = mkStrOption // {
-    default = "mongodb://${config.system.hostname}:27017/LibreChat";
+    default = "mongodb://${config.hostname}:27017/LibreChat";
   };
   extraConfig = {
     services.librechat = {

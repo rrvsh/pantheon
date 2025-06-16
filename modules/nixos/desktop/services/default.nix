@@ -22,7 +22,7 @@ in
         capSysAdmin = true;
         openFirewall = true;
         settings = {
-          sunshine_name = config.system.hostname;
+          sunshine_name = config.hostname;
           origin_web_ui_allowed = "wan";
         };
         applications = { };
@@ -35,7 +35,7 @@ in
       home-manager.sharedModules = singleton {
         services.spotifyd.enable = true;
         services.spotifyd.settings.global = {
-          device_name = "${config.system.hostname}";
+          device_name = "${config.hostname}";
           device_type = "computer";
           zeroconf_port = 5353;
         };

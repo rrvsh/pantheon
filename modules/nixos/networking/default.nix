@@ -6,7 +6,7 @@ in
   networking = {
     enableIPv6 = false;
     useDHCP = mkDefault true;
-    hostName = config.system.hostname;
+    hostName = config.hostname;
     networkmanager.enable = true;
   };
 

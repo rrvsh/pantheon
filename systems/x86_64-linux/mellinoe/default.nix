@@ -3,9 +3,9 @@
     ../common.nix
     ../desktop.nix
   ];
+  hostname = "mellinoe";
 
   system = {
-    hostname = "mellinoe";
     bootloader = "systemd-boot";
   };
 

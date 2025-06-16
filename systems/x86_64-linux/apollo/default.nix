@@ -4,9 +4,9 @@
 }:
 {
   imports = lib.singleton ../common.nix;
+  hostname = "apollo";
 
   system = {
-    hostname = "apollo";
     bootloader = "systemd-boot";
   };
 

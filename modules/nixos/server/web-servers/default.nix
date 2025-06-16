@@ -18,7 +18,7 @@ in
       security.acme = {
         acceptTerms = true;
         defaults = {
-          inherit (config.system.mainUser) email;
+          inherit (config.mainUser) email;
           dnsProvider = "cloudflare";
           credentialFiles."CLOUDFLARE_DNS_API_TOKEN_FILE" = config.sops.secrets."keys/cloudflare".path;
         };
