@@ -1,27 +1,19 @@
 {
   lib,
   config,
-  pkgs,
   ...
 }:
 let
-  inherit (lib) mkIf mkEnableOption singleton;
-  cfg = config.hardware;
+  inherit (lib) singleton;
 in
 {
   imports = [
-    ./btrfs.nix
     ./nvidia.nix
     ./audio.nix
     ./networking.nix
   ];
 
   options.hardware = {
-    drives.btrfs = {
-      enable = lib.mkEnableOption "";
-      drive = lib.pantheon.mkStrOption;
-      ephemeralRoot = lib.mkEnableOption "";
-    };
     gpu = lib.pantheon.mkStrOption;
     platform = lib.pantheon.mkStrOption;
   };
