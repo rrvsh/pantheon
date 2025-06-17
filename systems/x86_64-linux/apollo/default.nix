@@ -36,11 +36,6 @@
       forgejo.domain = "git.rrv.sh";
       glance.enable = true;
       glance.domain = "glance.bwfiq.com";
-      mattermost = {
-        enable = true;
-        domain = "mm.bwfiq.com";
-        extraCfg.siteName = "pantheon";
-      };
     };
     web-servers = {
       enableSSL = true;
