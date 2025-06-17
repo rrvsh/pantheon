@@ -1,16 +1,15 @@
+{ lib, config, ... }:
 {
-  lib,
-  config,
-  ...
-}:
-{
-  options.server = {
-    mountHelios = lib.mkEnableOption "";
-  };
+  options.server.mountHelios = lib.mkEnableOption "";
 
-  config = lib.mkMerge [
-    (lib.mkIf config.server.mountHelios {
-      fileSystems."/media/helios/data" = {
+  config = lib.mkIf config.server.mountHelios {
+    sops.secrets."rafiq/oldSMBCredentials" = { };
+    sops.templates."smb-credentials".content = ''
+      username=rafiq
+      password=${config.sops.placeholder."rafiq/oldSMBCredentials"}
+    '';
+    fileSystems = {
+      "/media/helios/data" = {
         device = "//helios/data";
         fsType = "cifs";
         options = [
@@ -19,7 +18,7 @@
           "x-systemd.mount-timeout=0"
         ];
       };
-      fileSystems."/media/helios/rafiqcloud" = {
+      "/media/helios/rafiqcloud" = {
         device = "//helios/rafiqcloud";
         fsType = "cifs";
         options = [
@@ -29,7 +28,7 @@
           "credentials=${config.sops.templates."smb-credentials".path}"
         ];
       };
-      fileSystems."/media/helios/rafiqmedia" = {
+      "/media/helios/rafiqmedia" = {
         device = "//helios/rafiqmedia";
         fsType = "cifs";
         options = [
@@ -39,6 +38,6 @@
           "credentials=${config.sops.templates."smb-credentials".path}"
         ];
       };
-    })
-  ];
+    };
+  };
 }

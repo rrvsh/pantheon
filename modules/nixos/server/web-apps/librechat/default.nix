@@ -23,6 +23,12 @@ mkWebApp {
     default = "mongodb://${config.hostname}:27017/LibreChat";
   };
   extraConfig = {
+    sops.secrets = {
+      "librechat/creds_key" = { };
+      "librechat/creds_iv" = { };
+      "librechat/jwt_secret" = { };
+      "librechat/jwt_refresh_secret" = { };
+    };
     services.librechat = {
       enable = true;
       openFirewall = true;

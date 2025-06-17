@@ -9,12 +9,10 @@ in
     email = "rafiq@rrv.sh";
   };
   server.mountHelios = true;
-
+  stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/atelier-cave.yaml";
   users.defaultUserShell = zsh;
   programs = {
     zsh.enable = true;
     zsh.enableCompletion = true;
   };
-
-  nixpkgs.hostPlatform = "x86_64-linux";
 }
