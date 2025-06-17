@@ -61,6 +61,10 @@ sudo passwd
 deploy --user "rafiq" --ip "10.10.0.102" --hostname "apollo"
 ```
 
+### From a Local NixOS Installer
+
+The installation may run out of space when installing from an install ISO. In that case, use Disko to format the drives first, then create a `/mnt/tmp` directory and set it as TMPDIR for nixos-install.
+
 # Impermanence
 
 System and user state is stored under /persist. Anything not declared under
