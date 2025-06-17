@@ -31,7 +31,7 @@
     nvf.inputs.nil.follows = "nil";
     nvf.inputs.nixpkgs.follows = "nixpkgs";
     nvf.inputs.systems.follows = "systems";
-    nvf.url = "github:notashelf/nvf";
+    nvf.url = "github:rrvsh/nvf/luasnip-customsnippets-stg";
     python-flexseal.inputs.flake-utils.follows = "flake-utils";
     python-flexseal.inputs.nixpkgs.follows = "nixpkgs";
     python-flexseal.url = "github:Janrupf/python-flexseal";
