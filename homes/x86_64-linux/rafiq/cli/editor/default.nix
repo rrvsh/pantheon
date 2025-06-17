@@ -28,7 +28,7 @@ in
     notes = import ./_nvf/notes.nix;
     options = import ./_nvf/options.nix;
     notify = import ./_nvf/notify.nix;
-    snippets = import ./_nvf/snippets.nix;
+    snippets = import ./_nvf/snippets.nix { inherit pkgs; };
     statusline = import ./_nvf/statusline.nix;
     treesitter = import ./_nvf/treesitter.nix;
     ui = import ./_nvf/ui.nix;
