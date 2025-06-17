@@ -81,12 +81,6 @@
         sops-nix.nixosModules.sops
         stylix.nixosModules.stylix
         stable-diffusion-webui-nix.nixosModules.default
-        {
-          nix.settings.substituters = [ "https://nvf.cachix.org" ];
-          nix.settings.trusted-public-keys = [
-            "nvf.cachix.org-1:GMQWiUhZ6ux9D5CvFFMwnc2nFrUHTeGaXRlVBXo+naI="
-          ];
-        }
       ];
       homes.modules = with inputs; [
         impermanence.homeManagerModules.impermanence

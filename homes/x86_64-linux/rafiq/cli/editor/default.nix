@@ -1,66 +1,13 @@
 { lib, pkgs, ... }:
 let
-  inherit (lib) singleton replicate;
-  inherit (lib.strings)
-    concatMapStringsSep
-    removeSuffix
-    concatStrings
-    stringAsChars
-    ;
-  inherit (lib.attrsets) mapAttrsToList;
-  inherit (pkgs) writeTextFile;
-  indent =
-    n: s:
-    let
-      indentString = concatStrings (replicate n " ");
-      sep = "\n" + indentString;
-    in
-    indentString + stringAsChars (c: if c == "\n" then sep else c) (removeSuffix "\n" s);
-
+  inherit (lib) singleton;
 in
 {
   home.sessionVariables.EDITOR = "nvim";
   persistDirs = singleton ".local/share/nvf";
   programs.nvf.enable = true;
   programs.nvf.settings.vim = {
-    startPlugins =
-      [ pkgs.pantheon.snippets ]
-      ++ (mapAttrsToList
-        (
-          name: value:
-          writeTextFile {
-            name = "${name}.snippets";
-            text = concatMapStringsSep "\n" (x: ''
-              snippet ${x.trigger} ${x.description}
-              ${indent 2 x.body}
-            '') value;
-            destination = "/snippets/${name}.snippets";
-          }
-        )
-        {
-          all = [
-            {
-              trigger = "if";
-              description = "";
-              body = "if $1 else $2";
-            }
-          ];
-          nix = [
-            {
-              trigger = "mkOption";
-              description = "";
-              body = ''
-                mkOption {
-                  type = $1;
-                  default = $2;
-                  description = $3;
-                  example = $4;
-                }
-              '';
-            }
-          ];
-        }
-      );
+    startPlugins = [ pkgs.pantheon.snippets ];
 
     hideSearchHighlight = true;
     syntaxHighlighting = true;
