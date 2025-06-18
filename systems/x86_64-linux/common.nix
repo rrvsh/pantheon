@@ -14,5 +14,9 @@ in
   programs = {
     zsh.enable = true;
     zsh.enableCompletion = true;
+    nix-ld = {
+      enable = true;
+      libraries = with pkgs; [ ];
+    };
   };
 }
