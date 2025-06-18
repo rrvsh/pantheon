@@ -7,8 +7,6 @@ in
   persistDirs = singleton ".local/share/nvf";
   programs.nvf.enable = true;
   programs.nvf.settings.vim = {
-    startPlugins = [ pkgs.pantheon.snippets ];
-
     hideSearchHighlight = true;
     syntaxHighlighting = true;
     telescope.enable = true;

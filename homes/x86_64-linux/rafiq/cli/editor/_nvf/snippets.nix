@@ -5,23 +5,21 @@
     setupOpts.enable_autosnippets = true;
     providers = with pkgs.vimPlugins; [ vim-snippets ];
     customSnippets.snipmate = {
-      all = [
-        {
-          trigger = "if";
-          body = "if $1 else $2";
-        }
-      ];
       nix = [
         {
-          trigger = "mkOption";
-          body = ''
-            mkOption {
-              type = $1;
-              default = $2;
-              description = $3;
-              example = $4;
-            }
-          '';
+          trigger = "mod";
+          description = "empty module";
+          body = # nix
+            ''
+              {config, lib}:
+              let
+                cfg = config.$1;
+              in
+              {
+                options.$1 = { $2 };
+                config = $3;
+              }
+            '';
         }
       ];
     };
