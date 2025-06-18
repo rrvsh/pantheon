@@ -19,6 +19,12 @@ rec {
     type = lib.types.attrs;
     default = { };
   };
+  mkIntOption =
+    default:
+    lib.mkOption {
+      type = lib.types.int;
+      inherit default;
+    };
   mkStrOption = lib.mkOption {
     type = lib.types.str;
     default = "";

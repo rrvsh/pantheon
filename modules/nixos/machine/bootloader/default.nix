@@ -4,27 +4,27 @@
   ...
 }:
 let
-  inherit (lib.pantheon) mkStrOption;
+  inherit (lib.pantheon) mkIntOption mkStrOption;
   cfg = config.machine.bootloader;
 in
 {
   options.machine.bootloader = {
     type = mkStrOption;
+    configurationLimit = mkIntOption 5;
   };
-  config = lib.mkMerge [
-    {
-      boot.initrd.availableKernelModules = [
-        "nvme"
-        "xhci_pci"
-        "ahci"
-        "usbhid"
-        "usb_storage"
-        "sd_mod"
-      ];
-      boot.loader.efi.canTouchEfiVariables = true;
-    }
-    (lib.mkIf (config.machine.bootloader.type == "systemd-boot") {
-      boot.loader.systemd-boot.enable = true;
-    })
-  ];
+  config.boot = {
+    initrd.availableKernelModules = [
+      "nvme"
+      "xhci_pci"
+      "ahci"
+      "usbhid"
+      "usb_storage"
+      "sd_mod"
+    ];
+    loader.efi.canTouchEfiVariables = true;
+    loader.systemd-boot = {
+      enable = cfg.type == "systemd-boot";
+      inherit (cfg) configurationLimit;
+    };
+  };
 }
