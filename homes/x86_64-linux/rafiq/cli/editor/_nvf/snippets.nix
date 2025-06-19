@@ -4,6 +4,7 @@
     enable = true;
     setupOpts.enable_autosnippets = true;
     providers = with pkgs.vimPlugins; [ vim-snippets ];
+    loaders = "require('luasnip.loaders.from_vscode').lazy_load()";
     customSnippets.snipmate = {
       nix = [
         {
