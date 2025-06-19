@@ -6,13 +6,18 @@
 - [ ] Migrate immich to apollo, point to helios
 - [x] Migrate LibreChat to apollo, maintain db
 - [ ] Figure out wakapi
-- [ ] Add forgejo
+- [x] Add forgejo
 - [ ] Add simple blog
 
 ## Versions
 
 - 1.0.0
-  - Replicate old zagreus wholly
+  - Setup desktop as hypervisor with nixos and win11
+    - Spare drive as steam library
+    - GPU passthrough to either system
+    - Always running, VMs spun down except when in use
+  - Apollo as hypervisor
+    - VMs for docker host, home-assistant, bare metal or containerised services
   - Automated backups for home and state directories
   - Ability to build VMs of all systems and implement integration tests
     - Staging VMs for ad-hoc testing
@@ -26,8 +31,6 @@
   - helios as file and db server, apollo as services and reverse proxy
 - 0.3.0
   - Integration tests for all services
-  - Set directory permissions properly for impermanence
-  - Easier way to add proxyPass, web server independent
   - Migrate services from helios
 
 # Modules
