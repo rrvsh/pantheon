@@ -12,7 +12,7 @@
           description = "empty module";
           body = # nix
             ''
-              {config, lib}:
+              {config, lib, ...}:
               let
                 cfg = config.$1;
               in
