@@ -1,6 +1,7 @@
 { config, lib, ... }:
 let
   inherit (lib) singleton;
+  inherit (lib.pantheon) mkPortOption;
   inherit (lib.pantheon.modules) mkWebApp;
   cfg = config.server.web-apps.forgejo;
   upstreamCfg = config.services.forgejo;
@@ -13,6 +14,9 @@ mkWebApp {
     directory = upstreamCfg.stateDir;
     inherit (upstreamCfg) user group;
   };
+  extraOptions = {
+    sshPort = mkPortOption 2222;
+  };
   extraConfig = {
     services.forgejo = {
       enable = true;
@@ -21,7 +25,10 @@ mkWebApp {
           DOMAIN = cfg.domain;
           ROOT_URL = "https://${cfg.domain}/";
           HTTP_PORT = cfg.port;
+          START_SSH_SERVER = true;
+          SSH_PORT = cfg.sshPort;
         };
+        repository.USE_COMPAT_SSH_URI = false;
         "repository.signing".FORMAT = "ssh";
       };
     };
