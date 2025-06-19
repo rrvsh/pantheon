@@ -14,7 +14,7 @@
       drive = "/dev/disk/by-id/nvme-CT2000P3SSD8_2325E6E77434";
       ephemeralRoot = true;
     };
-    virtualisation.podman.enable = true;
+    virtualisation.distrobox.enable = true;
   };
 
   desktop = {

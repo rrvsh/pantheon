@@ -16,6 +16,17 @@ in
         defaultNetwork.settings.dns_enabled = true;
       };
     };
-    users.users."${config.mainUser.name}".extraGroups = [ "podman" ];
+    users.users."${config.mainUser.name}" = {
+      extraGroups = [ "podman" ];
+      # https://wiki.nixos.org/wiki/Distrobox
+      # subGidRanges = singleton {
+      #   count = 65536;
+      #   startGid = 1000;
+      # };
+      # subUidRanges = singleton {
+      #   count = 65536;
+      #   startUid = 1000;
+      # };
+    };
   };
 }
