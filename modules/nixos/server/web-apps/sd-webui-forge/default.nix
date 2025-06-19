@@ -20,7 +20,7 @@ mkWebApp {
     };
     services.sd-webui-forge = {
       enable = true;
-      listen = cfg.openFirewall;
+      listen = true;
       extraArgs = "--cuda-malloc";
     };
   };
