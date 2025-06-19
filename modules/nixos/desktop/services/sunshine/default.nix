@@ -14,6 +14,7 @@ in
       openFirewall = true;
       settings = {
         sunshine_name = config.hostname;
+        origin_pin_allowed = "wan";
         origin_web_ui_allowed = "wan";
       };
       applications = { };
