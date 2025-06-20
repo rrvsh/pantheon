@@ -34,6 +34,7 @@
       librechat.domain = "chat.bwfiq.com";
       forgejo.enable = true;
       forgejo.domain = "git.rrv.sh";
+      forgejo.openFirewall = true;
       glance.enable = true;
       glance.domain = "glance.bwfiq.com";
     };

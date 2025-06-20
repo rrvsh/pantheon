@@ -1,6 +1,6 @@
 { config, lib, ... }:
 let
-  inherit (lib) singleton;
+  inherit (lib) singleton optional;
   inherit (lib.pantheon) mkPortOption;
   inherit (lib.pantheon.modules) mkWebApp;
   cfg = config.server.web-apps.forgejo;
@@ -18,6 +18,7 @@ mkWebApp {
     sshPort = mkPortOption 2222;
   };
   extraConfig = {
+    networking.firewall.allowedTCPPorts = optional cfg.openFirewall cfg.sshPort;
     services.forgejo = {
       enable = true;
       settings = {
