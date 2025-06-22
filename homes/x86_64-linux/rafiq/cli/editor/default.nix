@@ -26,6 +26,7 @@ in
     git.enable = true;
     git.gitsigns.enable = false;
     autopairs.nvim-autopairs.enable = true;
+    assistant = import ./_nvf/assistant.nix;
     autocomplete = import ./_nvf/autocomplete.nix { inherit lib; };
     binds = import ./_nvf/binds.nix;
     clipboard = import ./_nvf/clipboard.nix;
