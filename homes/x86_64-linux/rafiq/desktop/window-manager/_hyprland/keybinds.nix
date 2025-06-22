@@ -9,7 +9,6 @@
     "SUPER, return, exec, uwsm app -- $TERMINAL $MULTIPLEXER"
     "SUPER, O, exec, uwsm app -- $BROWSER"
     "SUPER, Escape, exec, uwsm app -- $LOCKSCREEN"
-    "SUPER, space, exec, uwsm app -- $($LAUNCHER --launch-prefix=\"uwsm app -- \")"
 
     "SUPER, H, cyclenext, visible"
     "SUPER, L, cyclenext, visible prev"
@@ -25,6 +24,10 @@
     "SUPER_CTRL, L, workspace, r+1"
     "$hypr, H, movetoworkspace, r-1"
     "$hypr, L, movetoworkspace, r+1"
+  ];
+
+  bindr = [
+    "SUPER, Super_L, exec, uwsm app -- $($LAUNCHER --launch-prefix=\"uwsm app -- \")"
   ];
 
   bindle = [
