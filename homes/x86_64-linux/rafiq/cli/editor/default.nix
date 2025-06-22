@@ -7,6 +7,16 @@ in
   persistDirs = singleton ".local/share/nvf";
   programs.nvf.enable = true;
   programs.nvf.settings.vim = {
+    lazy.plugins = {
+      "uv.nvim" = {
+        # TODO: upstream this
+        package = pkgs.vimPlugins.uv-nvim;
+        setupModule = "uv";
+        setupOpts.picker_integration = true;
+        event = [ "BufEnter" ];
+        after = "print('uv.nvim loaded')";
+      };
+    };
     hideSearchHighlight = true;
     syntaxHighlighting = true;
     telescope.enable = true;
