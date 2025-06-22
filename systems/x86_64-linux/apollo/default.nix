@@ -1,5 +1,6 @@
 {
   lib,
+  pkgs,
   ...
 }:
 {
@@ -45,7 +46,7 @@
         pages = [
           {
             domain = "rrv.sh";
-            root = ./root;
+            root = pkgs.pantheon."rrv.sh";
           }
         ];
         proxies = [
