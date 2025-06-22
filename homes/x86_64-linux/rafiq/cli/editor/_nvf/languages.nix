@@ -9,16 +9,21 @@
   go.enable = true;
   html.enable = true;
   lua.enable = true;
-  markdown.enable = true;
-  markdown.extensions.markview-nvim.enable = true;
-  markdown.format.type = "prettierd";
+  markdown = {
+    enable = true;
+    extensions.markview-nvim.enable = true;
+    format.type = "prettierd";
+  };
   nix = {
     enable = true;
     format.type = "nixfmt";
     lsp.server = "nil";
   };
-  python.enable = true;
-  python.lsp.server = "python-lsp-server";
+  python = {
+    enable = true;
+    format.type = "ruff";
+    lsp.server = "pyright";
+  };
   rust.enable = true;
   rust.crates.enable = true;
   ts.enable = true;
