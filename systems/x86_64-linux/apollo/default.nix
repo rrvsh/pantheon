@@ -42,6 +42,12 @@
       enableSSL = true;
       nginx = {
         enable = true;
+        pages = [
+          {
+            domain = "rrv.sh";
+            root = ./root;
+          }
+        ];
         proxies = [
           {
             source = "aenyrathia.wiki";

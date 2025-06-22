@@ -8,7 +8,7 @@ let
     singleton
     ;
   inherit (lib.types) listOf submodule attrs;
-  inherit (lib.pantheon) mkStrOption mkRootDomain;
+  inherit (lib.pantheon) mkStrOption mkPathOption mkRootDomain;
   inherit (builtins) listToAttrs map;
   cfg = config.server.web-servers.nginx;
   sslCheck = good: bad: if config.server.web-servers.enableSSL then good else bad;
@@ -21,6 +21,21 @@ let
       };
     };
   };
+  pages = listToAttrs (
+    map (page: {
+      name = page.domain;
+      value = {
+        addSSL = sslCheck true false;
+        useACMEHost = sslCheck (mkRootDomain page.domain) null;
+        acmeRoot = null; # needed for DNS validation
+        locations = {
+          "/" = {
+            inherit (page) root;
+          } // page.extraConfig;
+        } // page.locations;
+      };
+    }) cfg.pages
+  );
   proxyPasses = listToAttrs (
     map (proxy: {
       name = proxy.source;
@@ -45,6 +60,23 @@ in
     };
     enableDefaultSink = mkEnableOption "" // {
       default = true;
+    };
+    pages = mkOption {
+      default = [ ];
+      type = listOf (submodule {
+        options = {
+          domain = mkStrOption;
+          root = mkPathOption "";
+          extraConfig = lib.mkOption {
+            type = attrs;
+            default = { };
+          };
+          locations = lib.mkOption {
+            type = attrs;
+            default = { };
+          };
+        };
+      });
     };
     proxies = mkOption {
       default = [ ];
@@ -80,6 +112,7 @@ in
       virtualHosts = mkMerge [
         defaultSink
         proxyPasses
+        pages
       ];
     };
   };
