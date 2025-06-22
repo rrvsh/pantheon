@@ -41,8 +41,13 @@ in
           local all all trust
 
           # ipv4
-          host all all 0.0.0.0/32 trust
+          host all all 0.0.0.0/0 trust
         '';
+        ensureDatabases = singleton "alphastory";
+        ensureUsers = singleton {
+          name = "alphastory";
+          ensureDBOwnership = true;
+        };
       };
     })
     (lib.mkIf cfg.mongodb.enable {
