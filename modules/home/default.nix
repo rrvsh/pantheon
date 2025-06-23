@@ -1,9 +1,4 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}:
+{ config, lib, ... }:
 let
   inherit (lib) mkOption;
   inherit (lib.types) listOf str;
@@ -27,13 +22,9 @@ in
     persistDirs = [
       ".ssh"
       ".config/sops/age"
-      ".local/share/zoxide"
     ];
-    home.packages = with pkgs; [ ripgrep ];
+
     programs = {
-      zoxide.enable = true;
-      nix-index.enable = true;
-      nix-index-database.comma.enable = true;
       ssh = {
         enable = true;
         extraConfig = ''

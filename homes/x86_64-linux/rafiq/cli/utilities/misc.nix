@@ -12,7 +12,13 @@
       enable = true;
       nix-direnv.enable = true;
     };
+    zoxide.enable = true;
+    nix-index.enable = true;
+    nix-index-database.comma.enable = true;
   };
+  persistDirs = [
+    ".local/share/zoxide"
+  ];
   home = {
     shellAliases = {
       windows = "systemctl reboot --boot-loader-entry=auto-windows";
@@ -22,6 +28,7 @@
       ai = "aichat -r %shell% -e";
     };
     packages = with pkgs; [
+      ripgrep
       aichat
       devenv
       pantheon.rebuild
