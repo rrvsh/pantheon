@@ -29,7 +29,11 @@ mkWebApp {
           START_SSH_SERVER = true;
           SSH_PORT = cfg.sshPort;
         };
-        repository.USE_COMPAT_SSH_URI = false;
+        repository = {
+          USE_COMPAT_SSH_URI = false;
+          ENABLE_PUSH_CREATE_USER = true;
+          ENABLE_PUSH_CREATE_ORG = true;
+        };
         "repository.signing".FORMAT = "ssh";
       };
     };
