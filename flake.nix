@@ -2,6 +2,7 @@
 
   inputs = {
     crane.url = "github:ipetkov/crane";
+    rrv-sh.url = "git+ssh://forgejo@git.rrv.sh/rrvsh/rrv.sh";
     disko.inputs.nixpkgs.follows = "nixpkgs";
     disko.url = "github:nix-community/disko";
     flake-compat.url = "github:edolstra/flake-compat";

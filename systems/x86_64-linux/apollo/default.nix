@@ -1,6 +1,7 @@
 {
   lib,
   pkgs,
+  inputs,
   ...
 }:
 {
@@ -46,7 +47,7 @@
         pages = [
           {
             domain = "rrv.sh";
-            root = pkgs.pantheon."rrv.sh";
+            root = inputs.rrv-sh.packages.x86_64-linux.default;
           }
         ];
         proxies = [
