@@ -20,6 +20,7 @@
     "ALT_SHIFT, J, resizeactive, 0 -10%"
     "ALT_SHIFT, K, resizeactive, 0 10%"
     "ALT_SHIFT, L, resizeactive, 10% 0"
+    "$hypr, V, togglefloating"
     "SUPER_CTRL, H, workspace, r-1"
     "SUPER_CTRL, L, workspace, r+1"
     "$hypr, H, movetoworkspace, r-1"
