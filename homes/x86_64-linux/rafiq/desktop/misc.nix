@@ -5,6 +5,8 @@
     "repos"
     "vids"
     "tmp"
+    ".cache/Smart Code ltd/Stremio"
+    ".local/share/Smart Code ltd/Stremio"
   ];
   programs = {
     obs-studio.enable = true;
