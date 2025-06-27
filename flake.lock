@@ -933,11 +933,11 @@
         "systems": "systems_2"
       },
       "locked": {
-        "lastModified": 1750770978,
-        "narHash": "sha256-b+KmHA78k9KzMPrurvbHEfB+ezezPOls0g/idYYsl+o=",
+        "lastModified": 1751063358,
+        "narHash": "sha256-j5wlUaZ9I68naN5s8Qp8nk724ifS0Xa5lHK0djhSX/Q=",
         "ref": "refs/heads/prime",
-        "rev": "fc489e80f074464802fff4d4bb2319aa786661ea",
-        "revCount": 1,
+        "rev": "e4f7512702bf4fca25b4b80d53dcb726799bd76d",
+        "revCount": 2,
         "type": "git",
         "url": "ssh://forgejo@git.rrv.sh/rrvsh/rrv.sh"
       },
