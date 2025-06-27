@@ -30,6 +30,7 @@ in
     ++ singleton (import-tree ./cli);
 
   config = {
+    stylix.image = ./desktop/wallpaper.png;
     accounts = {
       email = {
         maildirBasePath = "mail";
