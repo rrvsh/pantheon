@@ -16,7 +16,7 @@ mkWebApp {
   name = "librechat";
   defaultPort = 3080;
   persistDirs = singleton {
-    directory = upstreamCfg.logDir;
+    directory = upstreamCfg.dataDir;
     inherit (upstreamCfg) user group;
   };
   extraOptions.mongodbURI = mkStrOption // {
