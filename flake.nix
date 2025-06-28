@@ -83,6 +83,7 @@
         sops-nix.nixosModules.sops
         stylix.nixosModules.stylix
         stable-diffusion-webui-nix.nixosModules.default
+        rrv-sh.nixosModules.default
       ];
       homes.modules = with inputs; [
         impermanence.homeManagerModules.impermanence

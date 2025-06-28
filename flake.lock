@@ -923,21 +923,20 @@
         "sops-nix": "sops-nix",
         "stable-diffusion-webui-nix": "stable-diffusion-webui-nix",
         "stylix": "stylix",
-        "systems": "systems_3",
+        "systems": "systems_2",
         "zjstatus": "zjstatus"
       }
     },
     "rrv-sh": {
       "inputs": {
-        "nixpkgs": "nixpkgs_3",
-        "systems": "systems_2"
+        "nixpkgs": "nixpkgs_3"
       },
       "locked": {
-        "lastModified": 1751063358,
-        "narHash": "sha256-j5wlUaZ9I68naN5s8Qp8nk724ifS0Xa5lHK0djhSX/Q=",
+        "lastModified": 1751096589,
+        "narHash": "sha256-/oqIAR0C2OlHeu/+2qCYbHIRR/CwIUh2AuGu3wGbm3Q=",
         "ref": "refs/heads/prime",
-        "rev": "e4f7512702bf4fca25b4b80d53dcb726799bd76d",
-        "revCount": 2,
+        "rev": "c7922e3bf2cffc5a67a55c1667431bab8eb155c9",
+        "revCount": 11,
         "type": "git",
         "url": "ssh://forgejo@git.rrv.sh/rrvsh/rrv.sh"
       },
@@ -1117,21 +1116,6 @@
       }
     },
     "systems_2": {
-      "locked": {
-        "lastModified": 1689347949,
-        "narHash": "sha256-12tWmuL2zgBgZkdoB6qXZsgJEH9LR3oUgpaQq2RbI80=",
-        "owner": "nix-systems",
-        "repo": "default-linux",
-        "rev": "31732fcf5e8fea42e59c2488ad31a0e651500f68",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nix-systems",
-        "repo": "default-linux",
-        "type": "github"
-      }
-    },
-    "systems_3": {
       "locked": {
         "lastModified": 1681028828,
         "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",

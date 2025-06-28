@@ -39,17 +39,13 @@
       forgejo.openFirewall = true;
       glance.enable = true;
       glance.domain = "glance.bwfiq.com";
+      rrv-sh.enable = true;
+      rrv-sh.domain = "rrv.sh";
     };
     web-servers = {
       enableSSL = true;
       nginx = {
         enable = true;
-        pages = [
-          {
-            domain = "rrv.sh";
-            root = inputs.rrv-sh.packages.x86_64-linux.default;
-          }
-        ];
         proxies = [
           {
             source = "aenyrathia.wiki";
