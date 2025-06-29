@@ -68,6 +68,15 @@ deploy --user "rafiq" --ip "10.10.0.102" --hostname "apollo"
 
 The installation may run out of space when installing from an install ISO. In that case, use Disko to format the drives first, then create a `/mnt/tmp` directory and set it as TMPDIR for nixos-install.
 
+```bash
+sudo su
+nix --extra-experimental-features "nix-command flakes" run github:nix-community/disko/master -- --mode destroy,format,mount --flake github:rrvsh/pantheon#<HOSTNAME>
+# Copy SSH key to /persist/home/rafiq/.ssh
+mkdir /mnt/tmp
+TMPDIR=/mnt/tmp nixos-install --flake github:rrvsh/pantheon#<HOSTNAME> --no-root-password
+reboot
+```
+
 # Impermanence
 
 System and user state is stored under /persist. Anything not declared under
