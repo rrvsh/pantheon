@@ -1,6 +1,5 @@
 {
   ccc.enable = true;
-  leetcode-nvim.enable = true;
   mkdir.enable = true;
   motion.hop.enable = true;
   yazi-nvim = {

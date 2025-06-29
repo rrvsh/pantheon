@@ -5,8 +5,6 @@
       statusline = 10;
       winbar = 10;
     };
-    activeSection = {
-
-    };
+    #TODO: rice lualine
   };
 }

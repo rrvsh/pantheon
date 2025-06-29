@@ -1,5 +1,4 @@
 {
-  scroll = 1;
   autoindent = true;
   backspace = "indent,eol,start";
   cursorline = true;
@@ -7,5 +6,4 @@
   shiftwidth = 2;
   smartindent = true;
   tabstop = 2;
-  updatetime = 0;
 }

@@ -1,6 +1,5 @@
 {
   enable = true;
-  formatOnSave = true;
   inlayHints.enable = true;
   lightbulb.enable = true;
   lspkind.enable = true;

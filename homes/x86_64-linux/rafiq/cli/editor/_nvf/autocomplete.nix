@@ -5,7 +5,6 @@
     friendly-snippets.enable = true;
     sourcePlugins = {
       ripgrep.enable = true;
-      spell.enable = true;
     };
     setupOpts = {
       completion.documentation.auto_show_delay_ms = 0;
