@@ -22,6 +22,7 @@ let
   profileCfg = id: {
     inherit id;
     settings."extensions.autoDisableScopes" = 0; # Auto enable extensions
+    #TODO: add default seach unduck and add rest of extensions
     extensions = {
       force = true;
       packages = with firefox-addons; [

@@ -22,8 +22,6 @@
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
     nix-index-database.url = "github:nix-community/nix-index-database";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixspect.inputs.nixpkgs.follows = "nixpkgs";
-    nixspect.url = "github:rrvsh/nixspect";
     nur.inputs.flake-parts.follows = "flake-parts";
     nur.inputs.nixpkgs.follows = "nixpkgs";
     nur.url = "github:nix-community/NUR";

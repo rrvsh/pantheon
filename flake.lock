@@ -770,26 +770,6 @@
         "type": "github"
       }
     },
-    "nixspect": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1747725629,
-        "narHash": "sha256-jEdIW5+SMfX6jVvx/MkMbpXLX9S2b+zsayIC1YJNAaY=",
-        "owner": "rrvsh",
-        "repo": "nixspect",
-        "rev": "28deacc6adeaef69f45af5c8139961a774e1600b",
-        "type": "github"
-      },
-      "original": {
-        "owner": "rrvsh",
-        "repo": "nixspect",
-        "type": "github"
-      }
-    },
     "nur": {
       "inputs": {
         "flake-parts": [
@@ -912,7 +892,6 @@
         "nil": "nil",
         "nix-index-database": "nix-index-database",
         "nixpkgs": "nixpkgs_2",
-        "nixspect": "nixspect",
         "nur": "nur",
         "nvf": "nvf",
         "python-flexseal": "python-flexseal",

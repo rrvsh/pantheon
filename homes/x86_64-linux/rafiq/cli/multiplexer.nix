@@ -42,6 +42,7 @@
                       tab_truncate_start_format "..."
                       tab_truncate_end_format   "..."
 
+                      //TODO: disable if we are not on ssh
                       datetime        "#[fg=#6C7086,bold] {format}"
                       datetime_format "%H:%M:%S"
                       datetime_timezone "Asia/Singapore"

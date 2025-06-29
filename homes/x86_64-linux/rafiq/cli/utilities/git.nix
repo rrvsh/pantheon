@@ -6,6 +6,7 @@
     gcam = "git commit -am";
     gu = "git push";
     gy = "git pull";
+    gdh = "git diff HEAD";
   };
   programs.git = {
     enable = true;

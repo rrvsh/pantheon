@@ -2,7 +2,6 @@
 {
   programs = {
     nh.enable = true;
-    pay-respects.enable = true;
     tealdeer = {
       enable = true;
       enableAutoUpdates = true;
@@ -16,12 +15,10 @@
     nix-index.enable = true;
     nix-index-database.comma.enable = true;
   };
-  persistDirs = [
-    ".local/share/zoxide"
-  ];
+  persistDirs = [ ".local/share/zoxide" ];
   home = {
     shellAliases = {
-      windows = "systemctl reboot --boot-loader-entry=auto-windows";
+      windows = "sudo systemctl reboot --boot-loader-entry=auto-windows";
       v = "nvim";
       e = "edit";
       cd = "z";
@@ -35,8 +32,6 @@
       pantheon.deploy
       pantheon.edit
       pantheon.commit
-      pantheon.check
-      inputs.nixspect.packages."x86_64-linux".nixspect
     ];
   };
 

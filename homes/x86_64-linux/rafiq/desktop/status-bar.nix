@@ -5,6 +5,7 @@
   programs.waybar = {
     settings = [
       {
+        #TODO: review the rest of the modules to see what else can be added
         layer = "top";
         modules-left = [
           "pulseaudio"
