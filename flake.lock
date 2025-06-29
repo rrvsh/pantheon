@@ -934,15 +934,15 @@
       "locked": {
         "lastModified": 1751104218,
         "narHash": "sha256-x2jJambQHw24hfb3sm9Wnxw2GdKj+S0MGH+DGBis4Rs=",
-        "ref": "refs/heads/prime",
+        "owner": "rrvsh",
+        "repo": "rrv.sh",
         "rev": "9010adc01a7cfe44ab468b2463f0f579f0952fe2",
-        "revCount": 14,
-        "type": "git",
-        "url": "ssh://forgejo@git.rrv.sh/rrvsh/rrv.sh"
+        "type": "github"
       },
       "original": {
-        "type": "git",
-        "url": "ssh://forgejo@git.rrv.sh/rrvsh/rrv.sh"
+        "owner": "rrvsh",
+        "repo": "rrv.sh",
+        "type": "github"
       }
     },
     "rrvsh-nixpkgs": {
