@@ -17,7 +17,8 @@ in
 
   services.tailscale = {
     enable = true;
-    authKeyFile = config.sops.secrets."keys/tailscale".path;
+    authKeyFile = config.sops.secrets."tailscale/client-secret".path;
+    authKeyParameters.preauthorized = true;
   };
   persistDirs = singleton "/var/lib/tailscale";
 }

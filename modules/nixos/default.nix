@@ -95,7 +95,6 @@ in
       age.sshKeyPaths = [ "/persist/home/rafiq/.ssh/id_ed25519" ];
       secrets = {
         "keys/openrouter" = { };
-        "keys/tailscale" = { };
         "keys/gemini" = { };
         "keys/cvt-jira" = { };
         "keys/cloudflare" = { };
@@ -104,6 +103,8 @@ in
         "rafiq/hashedPassword".neededForUsers = true;
         "rafiq/personalEmailPassword" = { };
         "rafiq/workEmailPassword" = { };
+        "tailscale/client-id" = { };
+        "tailscale/client-secret" = { };
       };
     };
     environment.shellInit = # sh
