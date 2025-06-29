@@ -23,6 +23,8 @@
     enable = true;
     format.type = "ruff";
     lsp.server = "pyright";
+    uv.enable = true;
+    uv.setupOpts.picker_integration = true;
   };
   rust.enable = true;
   rust.crates.enable = true;
