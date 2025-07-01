@@ -1,5 +1,5 @@
 {
   home.sessionVariables.TERMINAL = "ghostty -e";
-  #TODO: fix image preview
+  programs.ghostty.enable = true;
   programs.ghostty.settings.confirm-close-surface = false;
 }

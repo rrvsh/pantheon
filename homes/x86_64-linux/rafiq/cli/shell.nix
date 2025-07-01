@@ -1,12 +1,13 @@
 { lib, pkgs, ... }:
 let
   inherit (builtins) toString;
-  inherit (lib) mkOrder;
+  inherit (lib) getExe mkOrder;
   screensaverTimeout = toString 100;
-  screensaverCommand = "${pkgs.cbonsai}/bin/cbonsai -S -w 0.1 -L 40 -M 2 -b 2";
+  screensaverCommand = "${getExe pkgs.cbonsai} -S -w 0.1 -L 40 -M 2 -b 2";
 in
 {
   home.shell.enableShellIntegration = true;
+  #TODO: change to fish
   home.sessionVariables.SHELL = "zsh";
   programs.zsh = {
     enable = true;

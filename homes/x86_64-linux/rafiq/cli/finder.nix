@@ -1,6 +1,5 @@
 {
-  programs.fzf = {
-    enable = true;
-    enableZshIntegration = true;
-  };
+  programs.fzf.enable = true;
+  #TODO: fish
+  programs.fzf.enableZshIntegration = true;
 }

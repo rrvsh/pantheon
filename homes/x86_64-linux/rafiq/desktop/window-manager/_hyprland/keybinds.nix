@@ -6,10 +6,12 @@
     "$hypr, Q, exec, uwsm stop"
     "SUPER, W, killactive"
 
-    "SUPER, return, exec, uwsm app -- $TERMINAL $MULTIPLEXER"
+    "SUPER, return, exec, uwsm app -- $TERMINAL"
     "SUPER, O, exec, uwsm app -- $BROWSER"
     "SUPER, Escape, exec, uwsm app -- $LOCKSCREEN"
+    #TODO:add file browser
 
+    #TODO: make it directional
     "SUPER, H, cyclenext, visible"
     "SUPER, L, cyclenext, visible prev"
     "SUPER_ALT, H, movewindow, l"
@@ -20,25 +22,28 @@
     "ALT_SHIFT, J, resizeactive, 0 -10%"
     "ALT_SHIFT, K, resizeactive, 0 10%"
     "ALT_SHIFT, L, resizeactive, 10% 0"
-    "$hypr, V, togglefloating"
     "SUPER_CTRL, H, workspace, r-1"
     "SUPER_CTRL, L, workspace, r+1"
     "$hypr, H, movetoworkspace, r-1"
     "$hypr, L, movetoworkspace, r+1"
+
+    "$hypr, V, togglefloating"
   ];
 
   bindr = [
+    # Activates on SUPER without any other modifier
     "SUPER, Super_L, exec, uwsm app -- $($LAUNCHER --launch-prefix=\"uwsm app -- \")"
   ];
 
   bindle = [
-    "SUPER, 6, exec, wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%-"
+    "SUPER, 6, exec, ${pkgs.wireplumber}/bin/wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%-"
     "SUPER, 7, exec, ${pkgs.playerctl}/bin/playerctl previous"
     "SUPER, 8, exec, ${pkgs.playerctl}/bin/playerctl -a play-pause"
     "SUPER, 9, exec, ${pkgs.playerctl}/bin/playerctl next"
-    "SUPER, 0, exec, wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%+"
-    "$meh, mouse_up, resizeactive, 10% 10%"
-    "$meh, mouse_down, resizeactive, -10% -10%"
+    "SUPER, 0, exec, ${pkgs.wireplumber}/bin/wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%+"
+
+    "ALT, mouse_up, resizeactive, 10% 10%"
+    "ALT, mouse_down, resizeactive, -10% -10%"
   ];
 
   bindm = [

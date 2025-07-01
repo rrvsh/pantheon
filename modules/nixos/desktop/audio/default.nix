@@ -1,9 +1,6 @@
-{ config, ... }:
 {
-  config = {
-    services.pipewire = {
-      enable = true;
-      pulse.enable = true;
-    };
+  services.pipewire = {
+    enable = true;
+    pulse.enable = true;
   };
 }

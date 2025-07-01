@@ -38,6 +38,7 @@ in
       name,
       defaultPort,
       persistDirs ? [ ],
+      #TODO: specify required secrets
       extraOptions ? { },
       extraConfig ? { },
     }:

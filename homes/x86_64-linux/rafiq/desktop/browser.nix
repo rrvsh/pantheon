@@ -1,13 +1,13 @@
 {
   lib,
   inputs,
-  system,
+  pkgs,
   ...
 }:
 let
   inherit (builtins) map listToAttrs;
   inherit (lib.lists) findFirstIndex;
-  inherit (inputs.nur.legacyPackages.${system}.repos.rycee) firefox-addons;
+  inherit (inputs.nur.legacyPackages.${pkgs.stdenv.hostPlatform.system}.repos.rycee) firefox-addons;
   profiles = listToAttrs (
     map (name: {
       inherit name;
@@ -36,6 +36,11 @@ let
 in
 {
   home.sessionVariables.BROWSER = "firefox";
-  programs.firefox = { inherit profiles; };
+  persistDirs = [ ".mozilla/firefox" ];
+  programs.firefox = {
+    enable = true;
+    inherit profiles;
+  };
+  stylix.targets.firefox.colorTheme.enable = true;
   stylix.targets.firefox.profileNames = syncedProfiles;
 }

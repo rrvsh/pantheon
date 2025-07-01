@@ -1,6 +1,13 @@
 { lib, ... }:
 let
-  inherit (lib) singleton;
+  inherit (lib) mkOption singleton;
+  inherit (lib.types)
+    int
+    str
+    port
+    path
+    attrs
+    ;
   inherit (lib.strings) splitString;
   inherit (builtins) length concatStringsSep tail;
 in
@@ -15,31 +22,31 @@ rec {
     if len <= count then list else (shortenList count (tail list));
 
   # Modules
-  mkAttrOption = lib.mkOption {
-    type = lib.types.attrs;
+  mkAttrOption = mkOption {
+    type = attrs;
     default = { };
   };
   mkIntOption =
     default:
-    lib.mkOption {
-      type = lib.types.int;
+    mkOption {
+      type = int;
       inherit default;
     };
-  mkStrOption = lib.mkOption {
-    type = lib.types.str;
+  mkStrOption = mkOption {
+    type = str;
     default = "";
   };
   mkPortOption =
-    port:
-    lib.mkOption {
-      type = lib.types.port;
-      default = port;
+    default:
+    mkOption {
+      type = port;
+      inherit default;
     };
   mkPathOption =
-    path:
-    lib.mkOption {
-      type = lib.types.path;
-      default = path;
+    default:
+    mkOption {
+      type = path;
+      inherit default;
     };
 
   # Domains

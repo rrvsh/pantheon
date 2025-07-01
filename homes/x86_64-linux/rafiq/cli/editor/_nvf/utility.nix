@@ -1,6 +1,4 @@
 {
-  ccc.enable = true;
-  mkdir.enable = true;
   motion.hop.enable = true;
   yazi-nvim = {
     enable = true;

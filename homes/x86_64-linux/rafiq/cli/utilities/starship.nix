@@ -4,6 +4,7 @@ let
 in
 {
   programs.starship = {
+    #TODO: enable after switching to fish
     enable = false;
     # settings = {
     #   add_newline = false;

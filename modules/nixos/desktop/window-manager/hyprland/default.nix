@@ -37,6 +37,7 @@ in
         # Null the packages since we use them system wide
         package = null;
         portalPackage = null;
+        settings.monitor = [ "${mainMonitor.id}, ${mainMonitor.resolution}@${mainMonitor.refresh-rate}, auto, ${mainMonitor.scale}" ];
       };
       xdg.configFile."uwsm/env".text = # sh
         ''

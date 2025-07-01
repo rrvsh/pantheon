@@ -9,17 +9,11 @@ let
   inherit (lib.types) listOf str;
 in
 {
-  imports = [
-    inputs.impermanence.homeManagerModules.impermanence
-  ];
-
-  options = {
-    persistDirs = mkOption {
-      type = listOf str;
-      default = [ ];
-    };
+  imports = [ inputs.impermanence.homeManagerModules.impermanence ];
+  options.persistDirs = mkOption {
+    type = listOf str;
+    default = [ ];
   };
-
   config = {
     # Helper options
     home.persistence."/persist/home/${config.home.username}" = {
@@ -29,20 +23,16 @@ in
 
     # Global options
     persistDirs = [
+      # For system activation
       ".ssh"
       ".config/sops/age"
     ];
-
-    programs = {
-      ssh = {
-        enable = true;
-        extraConfig = ''
-          Host *
-            SetEnv TERM=xterm-256color
-        '';
-      };
-    };
-
+    programs.ssh.enable = true;
+    # To set colors properly when on ssh
+    programs.ssh.extraConfig = ''
+      Host *
+        SetEnv TERM=xterm-256color
+    '';
     home.stateVersion = "24.11";
   };
 }

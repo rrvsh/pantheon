@@ -1,3 +1,0 @@
-{
-  todo-comments.enable = true;
-}

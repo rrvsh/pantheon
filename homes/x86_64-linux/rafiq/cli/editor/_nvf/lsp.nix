@@ -1,7 +1,9 @@
 {
   enable = true;
+  # Show virtual text hints
   inlayHints.enable = true;
   lightbulb.enable = true;
+  # Show icons for lsp actions
   lspkind.enable = true;
   null-ls.enable = true;
   otter-nvim = {

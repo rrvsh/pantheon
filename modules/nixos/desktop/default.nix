@@ -29,6 +29,7 @@ in
 
   config = mkIf cfg.enable {
     fonts.packages = singleton font-awesome;
+    services.getty.autologinUser = config.mainUser.name;
     home-manager.sharedModules = optional cfg.enableWaylandUtilities {
       home.packages = [ wl-clipboard-rs ];
     };

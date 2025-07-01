@@ -3,6 +3,7 @@
   home.sessionVariables.STATUS_BAR = "waybar";
   stylix.targets.waybar.addCss = false;
   programs.waybar = {
+    enable = true;
     settings = [
       {
         #TODO: review the rest of the modules to see what else can be added

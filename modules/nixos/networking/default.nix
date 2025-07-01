@@ -3,6 +3,10 @@ let
   inherit (lib) mkDefault singleton;
 in
 {
+  sops.secrets = {
+    "tailscale/client-id".sopsFile = ./tailscale.yaml;
+    "tailscale/client-secret".sopsFile = ./tailscale.yaml;
+  };
   networking = {
     enableIPv6 = false;
     useDHCP = mkDefault true;

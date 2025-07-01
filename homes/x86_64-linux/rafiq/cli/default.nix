@@ -1,12 +1,8 @@
-{ inputs, pkgs, ... }:
+{ pkgs, inputs, ... }:
 {
+  imports = [ inputs.nix-index-database.hmModules.nix-index ];
   programs = {
-    nh.enable = true;
-    tealdeer = {
-      enable = true;
-      enableAutoUpdates = true;
-      settings.updates.auto_update = true;
-    };
+    tealdeer.enable = true;
     direnv = {
       enable = true;
       nix-direnv.enable = true;
@@ -19,22 +15,20 @@
   home = {
     shellAliases = {
       windows = "sudo systemctl reboot --boot-loader-entry=auto-windows";
-      v = "nvim";
+      v = "$EDITOR";
       e = "edit";
-      cd = "z";
+      cd = "z"; # zoxide
       ai = "aichat -r %shell% -e";
     };
     packages = with pkgs; [
       ripgrep
       aichat
-      devenv
       pantheon.rebuild
       pantheon.deploy
       pantheon.edit
       pantheon.commit
     ];
   };
-
   xdg.configFile."aichat/config.yaml".text = ''
     model: gemini:gemini-2.0-flash
     clients:

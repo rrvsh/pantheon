@@ -1,4 +1,5 @@
 {
+  # TODO: use flake-parts and remove snowfall-lib
   outputs =
     inputs:
     inputs.snowfall-lib.mkFlake {
@@ -17,6 +18,7 @@
 
     # The following are used for less boilerplate.
     flake-parts.url = "github:hercules-ci/flake-parts";
+    #TODO: remove snowfall
     snowfall-lib = {
       url = "github:snowfallorg/lib";
       inputs.nixpkgs.follows = "nixpkgs";

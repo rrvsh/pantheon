@@ -1,15 +1,6 @@
 {
-  hardtime-nvim = {
-    enable = true;
-    setupOpts = {
-      max_count = 1;
-      disabled_keys = {
-        "<Up>" = [ ];
-        "<Down>" = [ ];
-        "<Right>" = [ ];
-        "<Left>" = [ ];
-      };
-    };
-  };
+  hardtime-nvim.enable = true;
+  # Hint when movements are inefficient but don't block
+  hardtime-nvim.setupOpts.restriction_mode = "hint";
   whichKey.enable = true;
 }
