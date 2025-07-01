@@ -13,6 +13,7 @@ in
     searchCase = "ignore";
     fzf-lua.enable = true;
     git.enable = true;
+    undoFile.enable = true;
     autopairs.nvim-autopairs.enable = true;
     autocomplete = import ./_nvf/autocomplete.nix { inherit lib; };
     binds = import ./_nvf/binds.nix;
