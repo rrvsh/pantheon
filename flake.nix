@@ -1,5 +1,11 @@
 {
-
+  outputs =
+    inputs:
+    inputs.snowfall-lib.mkFlake {
+      inherit inputs;
+      src = ./.;
+      snowfall.namespace = "pantheon";
+    };
   inputs = {
     crane.url = "github:ipetkov/crane";
     rrv-sh.url = "github:rrvsh/rrv.sh";
@@ -62,35 +68,4 @@
     zjstatus.inputs.rust-overlay.follows = "rust-overlay";
     zjstatus.url = "github:dj95/zjstatus";
   };
-
-  outputs =
-    inputs:
-    inputs.snowfall-lib.mkFlake {
-      inherit inputs;
-      src = ./.;
-      snowfall.namespace = "pantheon";
-      overlays = with inputs; [
-        stable-diffusion-webui-nix.overlays.default
-        (_final: prev: {
-          zjstatus = zjstatus.packages.${prev.system}.default;
-        })
-      ];
-      systems.modules.nixos = with inputs; [
-        disko.nixosModules.disko
-        impermanence.nixosModules.impermanence
-        sops-nix.nixosModules.sops
-        stylix.nixosModules.stylix
-        stable-diffusion-webui-nix.nixosModules.default
-        rrv-sh.nixosModules.default
-      ];
-      homes.modules = with inputs; [
-        impermanence.homeManagerModules.impermanence
-        nix-index-database.hmModules.nix-index
-        nvf.homeManagerModules.default
-      ];
-      outputs-builder = channels: {
-        formatter = channels.nixpkgs.nixfmt-rfc-style;
-      };
-    };
-
 }

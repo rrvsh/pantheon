@@ -1,4 +1,5 @@
 {
+  inputs,
   lib,
   config,
   system,
@@ -33,6 +34,10 @@ let
   };
 in
 {
+  imports = [
+    inputs.sops-nix.nixosModules.sops
+    inputs.stylix.nixosModules.stylix
+  ];
   options = {
     hostname = mkStrOption;
     mainUser = {

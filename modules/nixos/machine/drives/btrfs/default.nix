@@ -1,4 +1,9 @@
-{ config, lib, ... }:
+{
+  config,
+  lib,
+  inputs,
+  ...
+}:
 let
   inherit (lib) mkIf mkEnableOption;
   inherit (lib.pantheon) mkStrOption;
@@ -44,6 +49,10 @@ let
   };
 in
 {
+  imports = [
+    inputs.disko.nixosModules.disko
+    inputs.impermanence.nixosModules.impermanence
+  ];
   options.machine.drives.btrfs = {
     enable = mkEnableOption "";
     drive = mkStrOption;

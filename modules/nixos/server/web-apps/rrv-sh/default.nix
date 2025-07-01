@@ -1,4 +1,9 @@
-{ config, lib, ... }:
+{
+  config,
+  lib,
+  inputs,
+  ...
+}:
 let
   inherit (lib.pantheon.modules) mkWebApp;
   cfg = config.server.web-apps.rrv-sh;
@@ -13,4 +18,7 @@ mkWebApp {
       inherit (cfg) port;
     };
   };
+}
+// {
+  imports = [ inputs.rrv-sh.nixosModules.default ];
 }

@@ -1,8 +1,12 @@
-{ config, lib, ... }:
+{
+  config,
+  lib,
+  inputs,
+  ...
+}:
 let
   inherit (lib) singleton;
   inherit (lib.pantheon.modules) mkWebApp;
-  cfg = config.server.web-apps.sd-webui-forge;
   upstreamCfg = config.services.sd-webui-forge;
 in
 mkWebApp {
@@ -24,4 +28,7 @@ mkWebApp {
       extraArgs = "--cuda-malloc";
     };
   };
+}
+// {
+  imports = [ inputs.stable-diffusion-webui-nix.nixosModules.default ];
 }

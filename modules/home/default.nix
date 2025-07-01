@@ -1,9 +1,18 @@
-{ config, lib, ... }:
+{
+  config,
+  lib,
+  inputs,
+  ...
+}:
 let
   inherit (lib) mkOption;
   inherit (lib.types) listOf str;
 in
 {
+  imports = [
+    inputs.impermanence.homeManagerModules.impermanence
+  ];
+
   options = {
     persistDirs = mkOption {
       type = listOf str;
@@ -13,7 +22,7 @@ in
 
   config = {
     # Helper options
-    home.persistence."/persist/home/${config.snowfallorg.user.name}" = {
+    home.persistence."/persist/home/${config.home.username}" = {
       directories = config.persistDirs;
       allowOther = true;
     };
