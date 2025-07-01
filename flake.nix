@@ -54,12 +54,6 @@
     stable-diffusion-webui-nix.inputs.nixpkgs.follows = "nixpkgs";
     stable-diffusion-webui-nix.inputs.python-flexseal.follows = "python-flexseal";
     stable-diffusion-webui-nix.url = "github:janrupf/stable-diffusion-webui-nix";
-    stylix.inputs.flake-compat.follows = "flake-compat";
-    stylix.inputs.flake-parts.follows = "flake-parts";
-    stylix.inputs.home-manager.follows = "home-manager";
-    stylix.inputs.nixpkgs.follows = "nixpkgs";
-    stylix.inputs.nur.follows = "nur";
-    stylix.inputs.systems.follows = "systems";
     stylix.url = "github:nix-community/stylix";
     systems.url = "github:nix-systems/default";
     zjstatus.inputs.crane.follows = "crane";
