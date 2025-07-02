@@ -1,8 +1,8 @@
 { pkgs, ... }:
 pkgs.writeShellScriptBin "commit" # bash
   ''
-    PROMPT="Please generate a one-line commit message using conventional commit syntax, following the context."
-    GUIDELINES="1. Use conventional commit syntax, following the context. "
+    PROMPT="Please generate a commit message for this diff."
+    GUIDELINES="1. Use conventional commit syntax, following the context. 2. Cap the commit message at 80 characters, preferably less. You must not go beyond this limit. 3. Do not include backticks. Only generate the raw text."
     NUM_ANCESTORS=0
 
     # Parse arguments
