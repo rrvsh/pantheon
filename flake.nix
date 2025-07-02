@@ -2,11 +2,40 @@
   # TODO: use flake-parts and remove snowfall-lib
   outputs =
     inputs:
-    inputs.snowfall-lib.mkFlake {
-      inherit inputs;
-      src = ./.;
-      snowfall.namespace = "pantheon";
-    };
+    inputs.flake-parts.lib.mkFlake { inherit inputs; } (
+      top@{
+        config,
+        withSystem,
+        moduleWithSystem,
+        ...
+      }:
+      {
+        imports = [
+          # Optional: use external flake logic, e.g.
+          # inputs.foo.flakeModules.default
+        ];
+        flake = inputs.snowfall-lib.mkFlake {
+          inherit inputs;
+          src = ./.;
+          snowfall.namespace = "pantheon";
+        };
+        systems = [
+          # systems for which you want to build the `perSystem` attributes
+          "x86_64-linux"
+          # ...
+        ];
+        perSystem =
+          { config, pkgs, ... }:
+          {
+            # Recommended: move all package definitions here.
+            # e.g. (assuming you have a nixpkgs input)
+            # packages.foo = pkgs.callPackage ./foo/package.nix { };
+            # packages.bar = pkgs.callPackage ./bar/package.nix {
+            #   foo = config.packages.foo;
+            # };
+          };
+      }
+    );
   inputs = {
     # We use nixos-unstable as everything is cached.
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
