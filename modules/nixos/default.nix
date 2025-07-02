@@ -11,6 +11,7 @@ let
     str
     coercedTo
     submodule
+    shellPackage
     ;
   inherit (lib.pantheon) mkStrOption;
   inherit (lib.snowfall.fs) get-file;
@@ -43,6 +44,9 @@ in
       name = mkStrOption;
       publicKey = mkStrOption;
       email = mkStrOption;
+      shell = mkOption {
+        type = shellPackage;
+      };
     };
     persistDirs = mkOption {
       type = listOf (coercedTo str (d: { directory = d; }) rootDir);
@@ -78,6 +82,7 @@ in
         members = [ "${config.mainUser.name}" ];
       };
       users."${config.mainUser.name}" = {
+        inherit (config.mainUser) shell;
         uid = 1000;
         isNormalUser = true;
         hashedPasswordFile = config.sops.secrets."${config.mainUser.name}/hashedPassword".path;

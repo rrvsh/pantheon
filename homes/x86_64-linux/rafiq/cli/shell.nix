@@ -7,23 +7,8 @@ let
 in
 {
   home.shell.enableShellIntegration = true;
-  #TODO: change to fish
-  home.sessionVariables.SHELL = "zsh";
-  programs.zsh = {
-    enable = true;
-    enableVteIntegration = true;
-    syntaxHighlighting.enable = true;
-    historySubstringSearch.enable = true;
-    history = {
-      append = true;
-      extended = true;
-      ignoreDups = true;
-      ignoreSpace = true;
-      save = 10000;
-      share = true;
-      size = 10000;
-    };
-  };
+  home.sessionVariables.SHELL = "fish";
+  programs.fish.enable = true;
   programs.zsh.initContent =
     mkOrder 1200
       # zsh
