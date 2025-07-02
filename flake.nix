@@ -16,9 +16,22 @@
       url = "github:nicknovitski/make-shell";
       inputs.flake-compat.follows = "dedupe_flake-compat";
     };
+    # git-hooks ensures nix flake check is ran before commits
+    git-hooks = {
+      url = "github:cachix/git-hooks.nix";
+      inputs = {
+        flake-compat.follows = "dedupe_flake-compat";
+        nixpkgs.follows = "nixpkgs";
+        gitignore.follows = "dedupe_gitignore";
+      };
+    };
 
     # The following are not used but are here for deduplication.
     dedupe_flake-compat.url = "github:edolstra/flake-compat";
+    dedupe_gitignore = {
+      url = "github:hercules-ci/gitignore.nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs: inputs.flake-parts.lib.mkFlake { inherit inputs; } (inputs.import-tree ./modules);
