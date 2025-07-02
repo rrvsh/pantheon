@@ -25,14 +25,9 @@
           # ...
         ];
         perSystem =
-          { config, pkgs, ... }:
+          { config, pkgs, lib, ... }:
           {
-            # Recommended: move all package definitions here.
-            # e.g. (assuming you have a nixpkgs input)
-            # packages.foo = pkgs.callPackage ./foo/package.nix { };
-            # packages.bar = pkgs.callPackage ./bar/package.nix {
-            #   foo = config.packages.foo;
-            # };
+            packages.default = pkgs.callPackage ./packages/rebuild {inherit pkgs lib;};
           };
       }
     );
