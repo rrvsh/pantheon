@@ -1,6 +1,10 @@
-# Planning
+# Pantheon
 
-## To-do
+This repository serves as a flake for storing nixos and nix-darwin configurations.
+
+## Planning
+
+### To-do
 
 - [ ] Copy over ~/.ssh/id_ed25519 and zellij status bar plugin confirmation
 - [ ] Migrate immich to apollo, point to helios
@@ -9,7 +13,7 @@
 - [x] Add forgejo
 - [ ] Add simple blog
 
-## Versions
+### Versions
 
 - 1.0.0
   - Setup desktop as hypervisor with nixos and win11
@@ -43,8 +47,9 @@
 - CI should be set up for updating packages and testing in VMs
 - Home configurations should work across darwin and nixos
 - Home configurations should be dotfiles only, and packages should be configured from the system config (tentative)
+- Packages should only be installed to the path if they are actively used. One use programs should be used via comma or scripts calling their packages.
 
-# Modules
+## Modules
 
 The nixosModules and homeModules exposed by this flake are slightly out of the norm.
 
@@ -57,7 +62,7 @@ System configurations, to this end, should include the window manager, lockscree
 
 These desktop programs will be **configured** in home-manager for each user, but those configurations consult the osConfig variable passed in by home-manager.
 
-# System Setup
+## System Setup
 
 The following files are **required** for system activation:
 
@@ -88,7 +93,7 @@ TMPDIR=/mnt/tmp nixos-install --flake github:rrvsh/pantheon#<HOSTNAME> --no-root
 reboot
 ```
 
-# Impermanence
+## Impermanence
 
 System and user state is stored under /persist. Anything not declared under
 `{environment,home}.persistence` is deleted on system boot.
