@@ -33,6 +33,17 @@
   - Integration tests for all services
   - Migrate services from helios
 
+## Structure
+
+- Each system configuration should be defined by a list of profiles, e.g. desktop, docker, server, etc.
+- Each service should work with contracts e.g. reverse proxy provider and subscriber, databases, etc.
+- Each system configuration should have an ephemeral root directory built from the nixosConfiguration at boot.
+- Servers should be as minimal as possible (to reduce attack surface)
+- All systems should be able to build as VMs
+- CI should be set up for updating packages and testing in VMs
+- Home configurations should work across darwin and nixos
+- Home configurations should be dotfiles only, and packages should be configured from the system config (tentative)
+
 # Modules
 
 The nixosModules and homeModules exposed by this flake are slightly out of the norm.
