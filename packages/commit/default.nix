@@ -6,6 +6,7 @@ pkgs.writeShellScriptBin "commit" # bash
     PROMPT="Please generate a commit message for this diff."
     GUIDELINES="1. Use conventional commit syntax, following the context. 2. Cap the commit message at 80 characters, preferably less. You must not go beyond this limit. 3. Do not include backticks. Only generate the raw text. 4. Be as succint as possible. Each commit should be atomic. You may throw a warning if it is not."
     NUM_ANCESTORS=0
+    PUSH=false
 
     # Parse arguments
     while [[ $# -gt 0 ]]; do
@@ -13,6 +14,10 @@ pkgs.writeShellScriptBin "commit" # bash
         --num-ancestors | -n)
           NUM_ANCESTORS="$2"
           shift 2
+          ;;
+        --push | -u)
+          PUSH=true
+          shift
           ;;
         *)
           echo "Unrecognised argument: $1. Exiting..."
@@ -39,6 +44,10 @@ pkgs.writeShellScriptBin "commit" # bash
         y | yes)
           git commit -am "$RESPONSE"
           echo "Committed successfully."
+          if $PUSH; then
+            git push
+            echo "Pushed successfully."
+          fi
           exit 0
           ;;
         r | reroll)

@@ -11,7 +11,7 @@
         zk edit -i
         pushd ~/notebook > /dev/null
         git add .
-        commit
+        commit -u
         popd > /dev/null
       ''
     )
