@@ -1,6 +1,7 @@
 { lib, ... }:
 let
   inherit (lib)
+    mapAttrsToList
     optional
     concatStrings
     flatten
@@ -31,7 +32,10 @@ let
           type = str;
           default = "";
         };
-        order = mkOption { type = listOf str; };
+        order = mkOption {
+          type = listOf str;
+          default = [ ];
+        };
         parts = mkOption { type = lazyAttrsOf textType; };
       };
     })
@@ -55,10 +59,13 @@ let
         ]
         (optional (value.description != "") value.description)
         (map (mkListFromAttrs (prefix + 1)) (
-          map (x: {
-            name = x;
-            value = flip getAttr value.parts x;
-          }) value.order
+          if value.order == [ ] then
+            mapAttrsToList (name: value: { inherit name value; }) value.parts
+          else
+            map (x: {
+              name = x;
+              value = flip getAttr value.parts x;
+            }) value.order
         ))
       ];
 in
