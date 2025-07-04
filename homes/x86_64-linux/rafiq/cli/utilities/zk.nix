@@ -9,10 +9,10 @@
     (pkgs.writeShellScriptBin "note" # bash
       ''
         zk edit -i
-        pushd ~/notebook
+        pushd ~/notebook > /dev/null
         git add .
         commit
-        popd
+        popd > /dev/null
       ''
     )
   ];
