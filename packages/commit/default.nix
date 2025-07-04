@@ -1,6 +1,8 @@
 { pkgs, ... }:
 pkgs.writeShellScriptBin "commit" # bash
   ''
+    if git diff-index --quiet HEAD --; then exit 0; fi
+
     PROMPT="Please generate a commit message for this diff."
     GUIDELINES="1. Use conventional commit syntax, following the context. 2. Cap the commit message at 80 characters, preferably less. You must not go beyond this limit. 3. Do not include backticks. Only generate the raw text. 4. Be as succint as possible. Each commit should be atomic. You may throw a warning if it is not."
     NUM_ANCESTORS=0
