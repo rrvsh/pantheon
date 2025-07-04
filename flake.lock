@@ -944,15 +944,16 @@
         "python-flexseal": "python-flexseal"
       },
       "locked": {
-        "lastModified": 1750702421,
-        "narHash": "sha256-YqcUdBULlDDbRPo6bKM6GbmjnvKM++Sq+U2sgKY8/wc=",
-        "owner": "janrupf",
+        "lastModified": 1751651278,
+        "narHash": "sha256-RFP58g7aWQE9LW+Av0ljtOuuvwThICBikAx+l+cYL+4=",
+        "owner": "rrvsh",
         "repo": "stable-diffusion-webui-nix",
-        "rev": "144487fbf9757f157833d0272d226d69e5bb3741",
+        "rev": "e7d156aef717cdeb1a98c7fe77cbd76c6e437c05",
         "type": "github"
       },
       "original": {
-        "owner": "janrupf",
+        "owner": "rrvsh",
+        "ref": "fix/comfy-ui-data-directory",
         "repo": "stable-diffusion-webui-nix",
         "type": "github"
       }

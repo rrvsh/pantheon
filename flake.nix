@@ -37,7 +37,7 @@
     # Packages and services that we don't use nixpkgs for.
     rrv-sh.url = "github:rrvsh/rrv.sh";
     nvf.url = "github:rrvsh/nvf/uv-nvim";
-    stable-diffusion-webui-nix.url = "github:janrupf/stable-diffusion-webui-nix";
+    stable-diffusion-webui-nix.url = "github:rrvsh/stable-diffusion-webui-nix/fix/comfy-ui-data-directory";
     zjstatus.url = "github:dj95/zjstatus";
   };
 }

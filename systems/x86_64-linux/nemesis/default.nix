@@ -36,4 +36,5 @@
   };
 
   server.web-apps.sd-webui-forge.enable = true;
+  server.web-apps.comfy-ui.enable = true;
 }
