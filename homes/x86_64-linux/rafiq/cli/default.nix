@@ -3,6 +3,7 @@
   imports = [ inputs.nix-index-database.hmModules.nix-index ];
   programs = {
     tealdeer.enable = true;
+    tealdeer.enableAutoUpdates = true;
     direnv = {
       enable = true;
       nix-direnv.enable = true;
