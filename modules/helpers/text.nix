@@ -1,10 +1,13 @@
 { lib, ... }:
 let
   inherit (lib)
+    optional
+    concatStrings
+    flatten
     mkOption
     mapAttrs
     isString
-    pipe
+    replicate
     flip
     getAttr
     concatStringsSep
@@ -20,29 +23,52 @@ let
     str
     (submodule {
       options = {
+        heading = mkOption {
+          type = str;
+          default = "";
+        };
+        description = mkOption {
+          type = str;
+          default = "";
+        };
         order = mkOption { type = listOf str; };
         parts = mkOption { type = lazyAttrsOf textType; };
       };
     })
   ];
-  recurseAttrs =
-    value:
+  mkListFromAttrs =
+    prefix:
+    { name, value }:
+    let
+      sectionHeading = result: "${concatStrings (replicate prefix "#")} ${result}";
+    in
     if isString value then
-      value
+      [
+        (sectionHeading name)
+        value
+      ]
     else
       # TODO: handle order being empty
-      # TODO: add headings for each part with possible option to disable
-      pipe value.order [
-        (map (flip getAttr value.parts))
-        (map recurseAttrs)
-        (concatStringsSep "\n")
+      flatten [
+        [
+          (sectionHeading (if value.heading == "" then name else value.heading))
+        ]
+        (optional (value.description != "") value.description)
+        (map (mkListFromAttrs (prefix + 1)) (
+          map (x: {
+            name = x;
+            value = flip getAttr value.parts x;
+          }) value.order
+        ))
       ];
 in
 {
   options.text = mkOption {
     default = { };
     type = lazyAttrsOf textType;
-    apply = mapAttrs (_: recurseAttrs);
+    apply = mapAttrs (
+      name: value: concatStringsSep "\n" (flatten (mkListFromAttrs 1 { inherit name value; }))
+    );
   };
   config.text.readme.parts.helpers.parts.text-helper =
     "The option `text.<name> supports either a string or a submodule with attributes order and parts. The parts attribute can either be a string, which will get concatenated in the order laid out in `text.<name>.order`, or can itself have the attributes order and parts, in which case it will be evaluated recursively.";
