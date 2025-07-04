@@ -1,5 +1,5 @@
 {
-  home.sessionVariables.TERMINAL = "ghostty -e";
+  home.sessionVariables.TERMINAL = "ghostty";
   programs.ghostty = {
     enable = true;
     settings = {
