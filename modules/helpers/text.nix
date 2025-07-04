@@ -52,7 +52,6 @@ let
         value
       ]
     else
-      # TODO: handle order being empty
       flatten [
         [
           (sectionHeading (if value.heading == "" then name else value.heading))

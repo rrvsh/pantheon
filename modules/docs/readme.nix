@@ -8,14 +8,9 @@ in
     description = ''
       This flake serves as a monorepo for my systems (using IaC), dotfiles, and scripts.
     '';
-    order = [
-      "Generated Files"
-      "helpers"
-    ];
     parts.helpers = {
       heading = "Helpers";
       description = "The following are some helpers for the repo as a whole.";
-      order = [ "Generating Text" ];
     };
   };
 
