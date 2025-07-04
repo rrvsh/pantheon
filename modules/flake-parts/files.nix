@@ -8,7 +8,6 @@
 let
   inherit (builtins) map head;
   inherit (lib) concatStringsSep;
-  #TODO: add the .nix file its generated from
   mkListEntry = x: "- [" + x.path_ + "](" + x.path_ + ")";
   listOfGeneratedFiles = withSystem (head config.systems) (psArgs: psArgs.config.files.files);
 in
