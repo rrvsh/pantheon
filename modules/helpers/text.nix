@@ -70,6 +70,8 @@ in
       name: value: concatStringsSep "\n" (flatten (mkListFromAttrs 1 { inherit name value; }))
     );
   };
-  config.text.readme.parts.helpers.parts.text-helper =
-    "The option `text.<name> supports either a string or a submodule with attributes order and parts. The parts attribute can either be a string, which will get concatenated in the order laid out in `text.<name>.order`, or can itself have the attributes order and parts, in which case it will be evaluated recursively.";
+  config.text.readme.parts.helpers.parts."Generating Text" =
+    ''
+      The option `text.<name>` supports either a string or a submodule with attributes order and parts.
+      The parts attribute can either be a string, which will get concatenated in the order laid out in `text.<name>.order`, or can itself have the attributes order and parts, in which case it will be evaluated recursively.'';
 }

@@ -17,7 +17,7 @@ in
   perSystem = psArgs: {
     make-shells.default.packages = [ psArgs.config.files.writer.drv ];
   };
-  text.readme.parts.generated-files = concatStringsSep "\n" (
+  text.readme.parts."Generated Files" = concatStringsSep "\n" (
     [
       "This flake uses the [files flake-parts module](https://flake.parts/options/files.html) to generate documentation."
 
