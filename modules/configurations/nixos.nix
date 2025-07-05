@@ -14,12 +14,12 @@ let
     name: value:
     let
       hostName = removePrefix prefix name;
+      hostConfig = value;
     in
     {
       name = hostName;
       value = lib.nixosSystem {
-        specialArgs = { inherit inputs hostName; };
-        #TODO: add profiles system
+        specialArgs = { inherit inputs hostName hostConfig; };
         modules = [
           config.flake.profiles.nixos.common
           (value.extraCfg or { })
