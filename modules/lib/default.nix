@@ -1,10 +1,9 @@
 { lib, ... }:
 let
-  inherit (lib.modules) mkMerge;
-  inherit (lib.attrsets) mapAttrsToList;
+  inherit (lib.attrsets) concatMapAttrs;
 in
 {
   flake.lib = {
-    flattenAttrs = attrset: mkMerge (mapAttrsToList (_: v: v) attrset);
+    flattenAttrs = attrset: concatMapAttrs (_: v: v) attrset;
   };
 }

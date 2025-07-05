@@ -8,20 +8,29 @@ let
   inherit (lib.trivial) pipe;
   inherit (lib.attrsets) filterAttrs mapAttrs';
   inherit (lib.strings) removePrefix hasPrefix;
+  cfg = config.flake;
   prefix = "nixos/";
-  hosts = config.flake.hostSpec.hosts or { };
+  hosts = cfg.hostSpec.hosts or { };
   mkSystem =
     name: value:
     let
       hostName = removePrefix prefix name;
       hostConfig = value;
+      flakeConfig = config;
     in
     {
       name = hostName;
       value = lib.nixosSystem {
-        specialArgs = { inherit inputs hostName hostConfig; };
+        specialArgs = {
+          inherit
+            inputs
+            hostName
+            hostConfig
+            flakeConfig
+            ;
+        };
         modules = [
-          config.flake.profiles.nixos.common
+          cfg.profiles.nixos.common
           (value.extraCfg or { })
         ] ++ (value.profiles or [ ]);
       };
