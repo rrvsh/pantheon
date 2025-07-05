@@ -156,7 +156,23 @@
         "git-hooks": "git-hooks",
         "import-tree": "import-tree",
         "make-shell": "make-shell",
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": "nixpkgs",
+        "text": "text"
+      }
+    },
+    "text": {
+      "locked": {
+        "lastModified": 1751749699,
+        "narHash": "sha256-eSeb0ERcdldtV1YLzVqi9NxITr4OLiuiGDS6T0t3Yh4=",
+        "owner": "rrvsh",
+        "repo": "text.nix",
+        "rev": "929c8863a1c323e1264887501e9a7914571654db",
+        "type": "github"
+      },
+      "original": {
+        "owner": "rrvsh",
+        "repo": "text.nix",
+        "type": "github"
       }
     }
   },
