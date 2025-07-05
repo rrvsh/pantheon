@@ -847,11 +847,11 @@
         "nixpkgs": "nixpkgs_7"
       },
       "locked": {
-        "lastModified": 1751104218,
-        "narHash": "sha256-x2jJambQHw24hfb3sm9Wnxw2GdKj+S0MGH+DGBis4Rs=",
+        "lastModified": 1751721838,
+        "narHash": "sha256-702c0fbgpUuEuQsduGJ9I5bSrCLYEG88SPuZXcSQqTs=",
         "owner": "rrvsh",
         "repo": "rrv.sh",
-        "rev": "9010adc01a7cfe44ab468b2463f0f579f0952fe2",
+        "rev": "e00c1c2607b55f43ef74b5f555f62838f4fe5963",
         "type": "github"
       },
       "original": {
