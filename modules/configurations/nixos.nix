@@ -1,4 +1,9 @@
-{ config, lib, ... }:
+{
+  config,
+  lib,
+  inputs,
+  ...
+}:
 let
   inherit (lib.trivial) pipe;
   inherit (lib.attrsets) filterAttrs mapAttrs';
@@ -13,10 +18,8 @@ let
     {
       name = hostName;
       value = lib.nixosSystem {
-        modules = [
-          value
-          { networking = { inherit hostName; }; }
-        ];
+        specialArgs = { inherit inputs hostName; };
+        modules = [ value ];
       };
     };
 in
