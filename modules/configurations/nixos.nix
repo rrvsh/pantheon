@@ -20,7 +20,10 @@ let
       value = lib.nixosSystem {
         specialArgs = { inherit inputs hostName; };
         #TODO: add profiles system
-        modules = [ value.extraCfg or { } ];
+        modules = [
+          config.flake.profiles.nixos.common
+          (value.extraCfg or { })
+        ] ++ (value.profiles or [ ]);
       };
     };
 in
