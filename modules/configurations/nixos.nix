@@ -19,7 +19,8 @@ let
       name = hostName;
       value = lib.nixosSystem {
         specialArgs = { inherit inputs hostName; };
-        modules = [ value ];
+        #TODO: add profiles system
+        modules = [ value.extraCfg or { } ];
       };
     };
 in
