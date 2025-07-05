@@ -2,6 +2,8 @@
   inputs = {
     # nixos-unstable provides a binary cache for all packages.
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    # systems provides a list of supported nix systems.
+    systems.url = "github:nix-systems/default";
     # flake-parts lets us define flake modules.
     flake-parts = {
       url = "github:hercules-ci/flake-parts";
@@ -36,5 +38,12 @@
     };
   };
 
-  outputs = inputs: inputs.flake-parts.lib.mkFlake { inherit inputs; } (inputs.import-tree ./modules);
+  outputs =
+    inputs:
+    inputs.flake-parts.lib.mkFlake { inherit inputs; } (
+      (inputs.import-tree ./modules)
+      // {
+        systems = import inputs.systems;
+      }
+    );
 }
