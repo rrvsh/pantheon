@@ -8,7 +8,7 @@
       '';
     parts."Structure" = # markdown
       ''
-        The system configurations are defined in [`flake.hostSpec`](nix/hostSpec.nix).
+        The system configurations are defined in [`flake.manifest`](nix/manifest.nix).
       '';
   };
 

@@ -8,7 +8,7 @@ let
   };
 in
 {
-  flake.hostSpec.hosts = {
+  flake.manifest.hosts = {
     "nixos/test".extraCfg = testCfg;
     "nixos/nemesis" = {
       machine = {
