@@ -6,3 +6,5 @@ This flake uses the [files flake-parts module](https://flake.parts/options/files
 The list of generated files are:
 - [docs/cheatsheet.md](docs/cheatsheet.md)
 - [README.md](README.md)
+## Structure
+The system configurations are defined in [`flake.hostSpec`](nix/hostSpec.nix).
