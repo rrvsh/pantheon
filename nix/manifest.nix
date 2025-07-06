@@ -8,7 +8,6 @@ let
       };
       nixpkgs.hostPlatform = "x86_64-linux";
       boot.loader.systemd-boot.enable = true;
-      system.stateVersion = "25.05";
       networking = { inherit hostName; };
     };
 in

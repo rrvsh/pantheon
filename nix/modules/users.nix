@@ -1,12 +1,13 @@
 { config, lib, ... }:
 let
-  inherit (config.flake.lib) flattenAttrs;
+  cfg = config.flake;
+  inherit (config.flake.lib) forAllUsers flattenAttrs;
   inherit (lib.attrsets) filterAttrs;
-  owner = flattenAttrs (filterAttrs (_: v: (v.primary or false)) config.flake.manifest.users);
+  owner = flattenAttrs (filterAttrs (_: v: (v.primary or false)) cfg.manifest.users);
 in
 {
   flake.modules.nixos.default =
-    { pkgs, ... }:
+    { pkgs, config, ... }:
     {
       #TODO: move sudo/security options elsewhere
       security.sudo.wheelNeedsPassword = false;
@@ -26,5 +27,12 @@ in
           openssh.authorizedKeys.keys = [ owner.pubkey ];
         };
       };
+      home-manager.users = forAllUsers (
+        name: _: {
+          #TODO: move into nixos/darwin config - should not apply to homeConfigurations
+          home.username = name;
+          home.homeDirectory = config.users.users.${name}.home;
+        }
+      );
     };
 }
