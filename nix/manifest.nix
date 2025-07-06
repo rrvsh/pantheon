@@ -8,45 +8,53 @@ let
   };
 in
 {
-  flake.manifest.hosts = {
-    "nixos/test".extraCfg = testCfg;
-    "nixos/nemesis" = {
-      machine = {
-        platform = "amd";
-        gpu = "nvidia";
-        root.drive = "/dev/disk/by-id/nvme-CT2000P3SSD8_2325E6E77434";
-        monitors = [
-          {
-            id = "desc:OOO AN-270W04K";
-            scale = "2";
-            resolution = "3840x2160";
-            refresh-rate = "60";
-          }
-        ];
-      };
-      # profiles = with config.flake.profiles.nixos; [
-      #   graphical
-      #   development
-      # ];
-      # extraModules = with config.flakes.modules.nixos; [
-      #   sunshine
-      #   sd-webui-forge
-      #   comfy-ui
-      # ];
-      extraCfg = testCfg;
+  flake.manifest = {
+    owner = {
+      username = "rafiq";
+      email = "rafiq@rrv.sh";
+      shell = "fish";
+      pubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILdsZyY3gu8IGB8MzMnLdh+ClDxQQ2RYG9rkeetIKq8n rafiq";
     };
-    "nixos/apollo" = {
-      machine = {
-        platform = "intel";
-        root.drive = "/dev/disk/by-id/nvme-eui.002538d221b47b01";
+    hosts = {
+      "nixos/test".extraCfg = testCfg;
+      "nixos/nemesis" = {
+        machine = {
+          platform = "amd";
+          gpu = "nvidia";
+          root.drive = "/dev/disk/by-id/nvme-CT2000P3SSD8_2325E6E77434";
+          monitors = [
+            {
+              id = "desc:OOO AN-270W04K";
+              scale = "2";
+              resolution = "3840x2160";
+              refresh-rate = "60";
+            }
+          ];
+        };
+        # profiles = with config.flake.profiles.nixos; [
+        #   graphical
+        #   development
+        # ];
+        # extraModules = with config.flakes.modules.nixos; [
+        #   sunshine
+        #   sd-webui-forge
+        #   comfy-ui
+        # ];
+        extraCfg = testCfg;
       };
-      # profiles = with config.flake.profiles.nixos; [ headless ];
-      # extraModules = with config.flakes.modules.nixos; [
-      #   librechat
-      #   forgejo
-      #   rrv-sh
-      # ];
-      extraCfg = testCfg;
+      "nixos/apollo" = {
+        machine = {
+          platform = "intel";
+          root.drive = "/dev/disk/by-id/nvme-eui.002538d221b47b01";
+        };
+        # profiles = with config.flake.profiles.nixos; [ headless ];
+        # extraModules = with config.flakes.modules.nixos; [
+        #   librechat
+        #   forgejo
+        #   rrv-sh
+        # ];
+        extraCfg = testCfg;
+      };
     };
   };
 }
