@@ -1,13 +1,18 @@
-{ inputs, ... }:
+{ inputs, config, ... }:
 let
+  inherit (cfg.lib) flattenAttrs;
+  cfg = config.flake;
   hm = inputs.home-manager;
   globalCfg = {
-    home-manager.useGlobalPkgs = true;
-    home-manager.useUserPackages = true;
+    useGlobalPkgs = true;
+    useUserPackages = true;
+    sharedModules = [
+      (flattenAttrs (cfg.modules.homeManager or { }))
+    ];
   };
 in
 {
   imports = [ hm.flakeModules.home-manager ];
   flake.modules.nixos.default.imports = [ hm.nixosModules.home-manager ];
-  flake.modules.nixos.default.config = globalCfg;
+  flake.modules.nixos.default.config.home-manager = globalCfg;
 }
