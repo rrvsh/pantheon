@@ -1,6 +1,8 @@
-{ config, ... }:
+{ config, lib, ... }:
 let
-  inherit (config.flake.manifest) owner;
+  inherit (config.flake.lib) flattenAttrs;
+  inherit (lib.attrsets) filterAttrs;
+  owner = flattenAttrs (filterAttrs (_: v: (v.primary or false)) config.flake.manifest.users);
 in
 {
   flake.modules.nixos.default =

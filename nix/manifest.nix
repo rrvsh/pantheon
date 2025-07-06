@@ -14,8 +14,9 @@ let
 in
 {
   flake.manifest = {
-    owner = {
-      username = "rafiq";
+    users.rafiq = {
+      primary = true;
+      username = "rafiq"; # If we don't set this here we have to do some weird shit
       email = "rafiq@rrv.sh";
       shell = "fish";
       pubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILdsZyY3gu8IGB8MzMnLdh+ClDxQQ2RYG9rkeetIKq8n rafiq";
