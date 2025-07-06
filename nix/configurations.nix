@@ -13,10 +13,13 @@ let
   mkConfigurations =
     class: hosts:
     mapAttrs (
-      _: value:
+      name: value:
       if class == "nixos" then
         nixosSystem {
-          specialArgs = { inherit inputs; };
+          specialArgs = {
+            inherit inputs;
+            hostName = name;
+          };
           modules = [
             (flattenAttrs cfg.modules.nixos)
             (value.extraCfg or { })
