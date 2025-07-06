@@ -1,11 +1,16 @@
 let
-  testCfg = {
-    fileSystems."/" = {
-      device = "/dev/sda1";
-      fsType = "ext4";
+  testCfg =
+    { hostName, ... }:
+    {
+      fileSystems."/" = {
+        device = "/dev/sda1";
+        fsType = "ext4";
+      };
+      nixpkgs.hostPlatform = "x86_64-linux";
+      boot.loader.systemd-boot.enable = true;
+      system.stateVersion = "25.05";
+      networking = { inherit hostName; };
     };
-    nixpkgs.hostPlatform = "x86_64-linux";
-  };
 in
 {
   flake.manifest = {
@@ -16,7 +21,6 @@ in
       pubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILdsZyY3gu8IGB8MzMnLdh+ClDxQQ2RYG9rkeetIKq8n rafiq";
     };
     hosts = {
-      "nixos/test".extraCfg = testCfg;
       "nixos/nemesis" = {
         machine = {
           platform = "amd";
@@ -31,15 +35,6 @@ in
             }
           ];
         };
-        # profiles = with config.flake.profiles.nixos; [
-        #   graphical
-        #   development
-        # ];
-        # extraModules = with config.flakes.modules.nixos; [
-        #   sunshine
-        #   sd-webui-forge
-        #   comfy-ui
-        # ];
         extraCfg = testCfg;
       };
       "nixos/apollo" = {
@@ -47,12 +42,6 @@ in
           platform = "intel";
           root.drive = "/dev/disk/by-id/nvme-eui.002538d221b47b01";
         };
-        # profiles = with config.flake.profiles.nixos; [ headless ];
-        # extraModules = with config.flakes.modules.nixos; [
-        #   librechat
-        #   forgejo
-        #   rrv-sh
-        # ];
         extraCfg = testCfg;
       };
     };

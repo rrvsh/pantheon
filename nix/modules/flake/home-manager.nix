@@ -9,5 +9,5 @@ let
 in
 {
   imports = [ hm.flakeModules.home-manager ];
-  flake.modules.nixos.common = globalCfg;
+  flake.modules.nixos.default = globalCfg;
 }

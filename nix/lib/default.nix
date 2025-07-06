@@ -5,6 +5,7 @@
   ...
 }:
 let
+  cfg = config.flake;
   inherit (lib.trivial) pipe;
   inherit (lib.strings) removePrefix hasPrefix;
   inherit (lib.attrsets)
@@ -42,7 +43,7 @@ in
               ;
           };
           modules = [
-            config.flake.profiles.nixos.common
+            (flattenAttrs cfg.modules.nixos)
             (mkProfileCfg (value.profiles or [ ]))
             (value.extraCfg or { })
           ];
