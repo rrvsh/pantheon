@@ -1,3 +1,4 @@
+
 let
   testCfg =
     { hostName, ... }:
@@ -21,8 +22,8 @@ in
       shell = "fish";
       pubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILdsZyY3gu8IGB8MzMnLdh+ClDxQQ2RYG9rkeetIKq8n rafiq";
     };
-    hosts = {
-      "nixos/nemesis" = {
+    hosts.nixos = {
+      nemesis = {
         machine = {
           platform = "amd";
           gpu = "nvidia";
@@ -38,7 +39,7 @@ in
         };
         extraCfg = testCfg;
       };
-      "nixos/apollo" = {
+      apollo = {
         machine = {
           platform = "intel";
           root.drive = "/dev/disk/by-id/nvme-eui.002538d221b47b01";
