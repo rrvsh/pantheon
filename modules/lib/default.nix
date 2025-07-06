@@ -7,35 +7,47 @@
 let
   inherit (lib.trivial) pipe;
   inherit (lib.strings) removePrefix hasPrefix;
-  inherit (lib.attrsets) concatMapAttrs mapAttrs' filterAttrs;
-  mkSystem =
-    prefix: name: value:
-    let
-      hostName = removePrefix prefix name;
-      hostConfig = value;
-      flakeConfig = config;
-    in
-    {
-      name = hostName;
-      value = lib.nixosSystem {
-        specialArgs = {
-          inherit
-            inputs
-            hostName
-            hostConfig
-            flakeConfig
-            ;
-        };
-        modules = [
-          config.flake.profiles.nixos.common
-          (value.extraCfg or { })
-        ] ++ (value.profiles or [ ]);
-      };
-    };
+  inherit (lib.attrsets)
+    concatMapAttrs
+    mapAttrs'
+    filterAttrs
+    mergeAttrsList
+    ;
 in
 {
-  flake.lib = {
+  flake.lib = rec {
     flattenAttrs = attrset: concatMapAttrs (_: v: v) attrset;
+    mkSystem =
+      prefix: name: value:
+      let
+        hostName = removePrefix prefix name;
+        hostConfig = value;
+        flakeConfig = config;
+        mkProfileCfg =
+          profileList: # List of attrsets of nixos configs
+          pipe profileList [
+            (map flattenAttrs) # List of nixos configs
+            mergeAttrsList
+          ];
+      in
+      {
+        name = hostName;
+        value = lib.nixosSystem {
+          specialArgs = {
+            inherit
+              inputs
+              hostName
+              hostConfig
+              flakeConfig
+              ;
+          };
+          modules = [
+            config.flake.profiles.nixos.common
+            (mkProfileCfg (value.profiles or [ ]))
+            (value.extraCfg or { })
+          ];
+        };
+      };
     extractConfigurations =
       prefix: hosts:
       pipe hosts [
