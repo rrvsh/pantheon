@@ -46,7 +46,7 @@
     {
       files.files = [
         {
-          path_ = "README.md";
+          path_ = "docs/README.md";
           drv = pkgs.writeText "README.md" config.text.readme;
         }
       ];
