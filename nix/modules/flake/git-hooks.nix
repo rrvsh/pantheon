@@ -1,6 +1,7 @@
 { inputs, ... }:
 {
   imports = [ inputs.git-hooks.flakeModule ];
+  text.gitignore = ".pre-commit-config.*";
   perSystem = psArgs: {
     pre-commit.settings.hooks = {
       # Nix Linters
