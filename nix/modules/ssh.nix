@@ -17,4 +17,12 @@ in
     }
     { users.users.root.openssh.authorizedKeys.keys = [ cfg.admin.pubkey ]; }
   ];
+  flake.modules.homeManager.default = {
+    persistDirs = [ ".ssh" ];
+    programs.ssh.enable = true;
+    programs.ssh.extraConfig = ''
+      Host *
+        SetEnv TERM=xterm-256color
+    '';
+  };
 }
