@@ -19,6 +19,8 @@
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    # impermanence provides a nice abstraction over linking files from /persist
+    impermanence.url = "github:nix-community/impermanence";
     # import-tree imports all nix files in a given directory.
     import-tree.url = "github:vic/import-tree";
     # files lets us write text files and automatically add checks for them
