@@ -20,6 +20,7 @@ in
         "/persist${config.users.defaultUserHome}/${username}/.ssh/id_ed25519"
       ];
     };
+  flake.modules.homeManager.default.persistDirs = [ ".config/sops/age" ];
   perSystem =
     { pkgs, ... }:
     {
