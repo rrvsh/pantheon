@@ -1,0 +1,3 @@
+{
+  whichKey.enable = true;
+}

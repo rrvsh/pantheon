@@ -6,7 +6,12 @@
 }:
 let
   inherit (lib.options) mkOption;
-  inherit (lib.types) path lazyAttrsOf raw;
+  inherit (lib.types)
+    path
+    lazyAttrsOf
+    raw
+    deferredModule
+    ;
   inherit (inputs.flake-parts.lib) mkSubmoduleOptions;
   inherit (cfg.lib.attrsets) firstAttrNameMatching;
   cfg = config.flake;
@@ -27,6 +32,10 @@ in
     };
     admin = mkOption {
       type = lazyAttrsOf raw;
+      default = { };
+    };
+    homes = mkOption {
+      type = lazyAttrsOf deferredModule;
       default = { };
     };
   };

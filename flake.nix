@@ -21,6 +21,9 @@
     };
     # impermanence provides a nice abstraction over linking files from /persist
     impermanence.url = "github:nix-community/impermanence";
+
+    ### FLAKE PARTS MODULES ###
+
     # sops-nix lets us version control secrets like passwords and api keys
     sops-nix = {
       url = "github:Mic92/sops-nix";
@@ -47,8 +50,32 @@
       };
     };
 
-    # The following are not used but are here for deduplication.
+    ### PROGRAMS ###
+    # nix-index-database indexes the nixpkgs binaries for use with comma
+    nix-index-database = {
+      url = "github:nix-community/nix-index-database";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    # nvf provides modules to wrap neovim
+    nvf = {
+      url = "github:notashelf/nvf";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        flake-parts.follows = "flake-parts";
+        systems.follows = "systems";
+        flake-utils.follows = "dedupe_flake-utils";
+        mnw.follows = "dedupe_mnw";
+      };
+    };
+
+    ### DEDUPE ###
+    # The following are not used in the flake
     dedupe_flake-compat.url = "github:edolstra/flake-compat";
+    dedupe_flake-utils = {
+      url = "github:numtide/flake-utils";
+      inputs.systems.follows = "systems";
+    };
+    dedupe_mnw.url = "github:gerg-l/mnw";
     dedupe_gitignore = {
       url = "github:hercules-ci/gitignore.nix";
       inputs.nixpkgs.follows = "nixpkgs";

@@ -18,5 +18,6 @@ in
     { config, ... }:
     {
       programs.${cfg.manifest.users.${config.home.username}.shell}.enable = true;
+      home.shell.enableShellIntegration = true;
     };
 }
