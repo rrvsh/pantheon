@@ -14,6 +14,11 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    # disko provides declarative drive partitioning
+    disko = {
+      url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     # import-tree imports all nix files in a given directory.
     import-tree.url = "github:vic/import-tree";
     # files lets us write text files and automatically add checks for them

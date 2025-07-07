@@ -2,10 +2,6 @@ let
   testCfg =
     { hostName, ... }:
     {
-      fileSystems."/" = {
-        device = "/dev/sda1";
-        fsType = "ext4";
-      };
       boot.loader.systemd-boot.enable = true;
       networking = { inherit hostName; };
     };
