@@ -1,17 +1,14 @@
 let
-  testCfg =
-    { hostName, ... }:
-    {
-      networking = { inherit hostName; };
-      machine = {
-        bluetooth.enable = true;
-        usb.automount = true;
-        virtualisation.podman = {
-          enable = true;
-          distrobox.enable = true;
-        };
+  testCfg = {
+    machine = {
+      bluetooth.enable = true;
+      usb.automount = true;
+      virtualisation.podman = {
+        enable = true;
+        distrobox.enable = true;
       };
     };
+  };
 in
 {
   flake.manifest = {
