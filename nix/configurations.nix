@@ -6,7 +6,6 @@
 }:
 let
   inherit (lib) nixosSystem;
-  inherit (cfg.lib) flattenAttrs;
   inherit (lib.attrsets) mapAttrs;
   cfg = config.flake;
   hosts = cfg.manifest.hosts or { };
@@ -22,7 +21,7 @@ let
             hostName = name;
           };
           modules = [
-            (flattenAttrs cfg.modules.nixos)
+            cfg.modules.nixos.default
             (value.extraCfg or { })
           ];
         }

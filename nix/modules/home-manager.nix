@@ -1,15 +1,13 @@
 { inputs, config, ... }:
 let
-  inherit (cfg.lib) forAllUsers' flattenAttrs;
+  inherit (cfg.lib) forAllUsers';
   cfg = config.flake;
   hm = inputs.home-manager;
   globalCfg = {
     useGlobalPkgs = true;
     useUserPackages = true;
     extraSpecialArgs = { inherit (cfg) manifest; };
-    sharedModules = [
-      (flattenAttrs (cfg.modules.homeManager or { }))
-    ];
+    sharedModules = [ cfg.modules.homeManager.default ];
     users = forAllUsers' (name: _: cfg.homes.${name});
   };
 in

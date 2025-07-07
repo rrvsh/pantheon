@@ -1,36 +1,10 @@
 { lib, config, ... }:
 let
   cfg = config.flake;
-  inherit (lib.attrsets) mapAttrs concatMapAttrs;
+  inherit (lib.attrsets) mapAttrs;
 in
 {
   flake.lib = {
-    /**
-      Remove the top level attributes from an attribute set and return the merged attributes.
-
-      # Inputs
-
-      `attrset`
-
-      : An attribute set to flatten.
-
-      # Type
-
-      ```
-      flattenAttrs :: AttrSet -> AttrSet
-      ```
-
-      # Examples
-      :::{.example}
-      ## `flattenAttrs` usage example
-
-      ```nix
-      flattenAttrs { x = { a = 1; b = 2; }; y = { c = 3; d = 4; }; }
-      => { a = 1; b = 2; c = 3; d = 4; }
-      ```
-    */
-    flattenAttrs = attrset: concatMapAttrs (_: v: v) attrset;
-
     /**
       Return an attribute set for use with a option that needs to be used for all users.
 
