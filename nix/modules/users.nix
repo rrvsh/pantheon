@@ -1,7 +1,7 @@
 { config, lib, ... }:
 let
   cfg = config.flake;
-  inherit (cfg.lib) forAllUsers';
+  inherit (cfg.lib.modules) forAllUsers';
   inherit (lib.lists) optional;
 in
 {

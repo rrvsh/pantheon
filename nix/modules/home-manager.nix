@@ -1,6 +1,6 @@
 { inputs, config, ... }:
 let
-  inherit (cfg.lib) forAllUsers';
+  inherit (cfg.lib.modules) forAllUsers';
   cfg = config.flake;
   hm = inputs.home-manager;
   globalCfg = {

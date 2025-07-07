@@ -4,7 +4,7 @@ let
   inherit (lib.attrsets) mapAttrs;
 in
 {
-  flake.lib = {
+  flake.lib.modules = {
     /**
       Return an attribute set for use with a option that needs to be used for all users.
 
