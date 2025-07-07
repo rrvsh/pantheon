@@ -1,7 +1,8 @@
 { lib, config, ... }:
 let
   inherit (builtins) elem;
-  inherit (lib) mkOption getName;
+  inherit (lib.options) mkOption;
+  inherit (lib.strings) getName;
   inherit (lib.types) listOf str;
   predicate = pkg: elem (getName pkg) config.allowedUnfreePackages;
 in
