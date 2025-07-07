@@ -22,7 +22,10 @@ let
       name: value:
       if class == "nixos" then
         nixosSystem {
-          specialArgs.hostName = name;
+          specialArgs = {
+            inherit (value) graphical;
+            hostName = name;
+          };
           modules = [
             cfg.modules.nixos.default
             inputs.home-manager.nixosModules.home-manager

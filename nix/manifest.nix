@@ -9,6 +9,7 @@
     };
     hosts.nixos = {
       nemesis = {
+        graphical = true;
         machine = {
           platform = "amd";
           gpu = "nvidia";
@@ -22,9 +23,9 @@
             }
           ];
         };
-        extraCfg.desktop.enable = true;
       };
       apollo = {
+        graphical = false;
         machine = {
           platform = "intel";
           root.drive = "/dev/disk/by-id/nvme-eui.002538d221b47b01";

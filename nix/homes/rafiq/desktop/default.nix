@@ -5,7 +5,7 @@
     "stremio-server"
   ];
   flake.homes.rafiq =
-    { osConfig, pkgs, ... }:
+    { pkgs, config, ... }:
     let
       inherit (lib.modules) mkMerge mkIf;
       inherit (builtins) map listToAttrs;
@@ -25,7 +25,6 @@
       profileCfg = id: {
         inherit id;
         settings."extensions.autoDisableScopes" = 0; # Auto enable extensions
-        #TODO: add default seach unduck and add rest of extensions
         extensions = {
           force = true;
           packages = with firefox-addons; [
@@ -37,7 +36,7 @@
         };
       };
     in
-    mkIf osConfig.desktop.enable {
+    mkIf config.graphical {
       persistDirs = [
         "docs"
         "repos"
@@ -46,9 +45,15 @@
         ".cache/Smart Code ltd/Stremio"
         ".local/share/Smart Code ltd/Stremio"
         ".mozilla/firefox"
+        ".tor project"
       ];
       home = {
-        packages = with pkgs; [ stremio ];
+        packages = with pkgs; [
+          stremio
+          tor-browser
+          vlc
+          wl-clipboard-rs
+        ];
         sessionVariables = {
           BROWSER = "firefox";
           LAUNCHER = "fuzzel";
@@ -58,8 +63,8 @@
           STATUS_BAR = "waybar";
         };
       };
-      # TODO: add gamescope here or in nixos desktop module
       programs = {
+        fuzzel.enable = true;
         obs-studio.enable = true;
         vesktop.enable = true;
         thunderbird.enable = true;
@@ -105,7 +110,6 @@
           enable = true;
           settings = [
             {
-              #TODO: review the rest of the modules to see what else can be added
               layer = "top";
               modules-left = [
                 "pulseaudio"
@@ -149,24 +153,48 @@
               }
             '';
         };
+
       };
       services = {
         mako.enable = true;
         mako.settings.default-timeout = 10000;
       };
-      wayland.windowManager.hyprland.settings = mkMerge [
-        (import ./_hyprland/decoration.nix)
-        (import ./_hyprland/keybinds.nix { inherit pkgs; })
-        {
-          ecosystem.no_update_news = true;
-          xwayland.force_zero_scaling = true;
-          monitor = [ ", preferred, auto, 1" ];
-          exec-once = [
-            "uwsm app -- $LOCKSCREEN"
-            "uwsm app -- $NOTIFICATION_DAEMON"
-            "uwsm app -- $STATUS_BAR"
-          ];
-        }
-      ];
+      wayland.windowManager.hyprland = {
+        enable = true;
+        # This is needed for UWSM
+        systemd.enable = false;
+        # Null the packages since we use them system wide
+        package = null;
+        portalPackage = null;
+        # settings.monitor = [
+        #   "${mainMonitor.id}, ${mainMonitor.resolution}@${mainMonitor.refresh-rate}, auto, ${mainMonitor.scale}"
+        # ];
+
+        settings = mkMerge [
+          (import ./_hyprland/decoration.nix)
+          (import ./_hyprland/keybinds.nix { inherit pkgs; })
+          {
+            ecosystem.no_update_news = true;
+            xwayland.force_zero_scaling = true;
+            monitor = [ ", preferred, auto, 1" ];
+            exec-once = [
+              "uwsm app -- $LOCKSCREEN"
+              "uwsm app -- $NOTIFICATION_DAEMON"
+              "uwsm app -- $STATUS_BAR"
+            ];
+          }
+        ];
+      };
+      # xdg.configFile."uwsm/env".text = # sh
+      #   ''
+      #     # Force apps to scale right with Wayland
+      #     export GDK_SCALE=${mainMonitor.scale}
+      #     export STEAM_FORCE_DESKTOPUI_SCALING=${mainMonitor.scale}
+      #   '';
+      # xdg.configFile."uwsm/env-hyprland".text = # sh
+      #   ''
+      #     export GDK_SCALE=${mainMonitor.scale}
+      #     export STEAM_FORCE_DESKTOPUI_SCALING=${mainMonitor.scale}
+      #   '';
     };
 }
