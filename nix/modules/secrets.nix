@@ -16,12 +16,9 @@ in
     { config, ... }:
     {
       imports = [ inputs.sops-nix.nixosModules.sops ];
-      config.sops = {
-        defaultSopsFile = "${cfg.root}/secrets/secrets.yaml";
-        age.sshKeyPaths = [
-          "/persist${config.users.defaultUserHome}/${username}/.ssh/id_ed25519"
-        ];
-      };
+      config.sops.age.sshKeyPaths = [
+        "/persist${config.users.defaultUserHome}/${username}/.ssh/id_ed25519"
+      ];
     };
   perSystem =
     { pkgs, ... }:

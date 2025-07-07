@@ -18,17 +18,22 @@ in
       type = lazyAttrsOf raw;
       default = { };
     };
-    root = mkOption {
-      type = path;
-      default = "";
+    paths = {
+      root = mkOption { type = path; };
+      secrets = mkOption {
+        type = path;
+        readOnly = true;
+      };
     };
     admin = mkOption {
       type = lazyAttrsOf raw;
       default = { };
     };
   };
-
-  config.flake.admin = cfg.manifest.users.${username} // {
-    inherit username;
+  config.flake = {
+    paths.secrets = cfg.paths.root + "/secrets";
+    admin = cfg.manifest.users.${username} // {
+      inherit username;
+    };
   };
 }
