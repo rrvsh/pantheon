@@ -13,6 +13,8 @@ in
       # nix.settings.trusted-users = [ "@wheel" ];
       #TODO: move ssh key settings elsewhere
       # users.users.root.openssh.authorizedKeys.keys = [ owner.pubkey ];
+      # persist uids and gids
+      persistDirs = [ "/var/lib/nixos" ];
       users = {
         mutableUsers = false;
         groups.users.gid = 100;
