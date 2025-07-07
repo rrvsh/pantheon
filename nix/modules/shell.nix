@@ -14,4 +14,9 @@ in
       }) cfg.manifest.users;
       users.users = forAllUsers' (_: value: { shell = pkgs.${value.shell}; });
     };
+  flake.modules.homeManager.default =
+    { config, ... }:
+    {
+      programs.${cfg.manifest.users.${config.home.username}.shell}.enable = true;
+    };
 }
