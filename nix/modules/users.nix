@@ -11,8 +11,6 @@ in
       #TODO: move sudo/security options elsewhere
       # security.sudo.wheelNeedsPassword = false;
       # nix.settings.trusted-users = [ "@wheel" ];
-      #TODO: move ssh key settings elsewhere
-      # users.users.root.openssh.authorizedKeys.keys = [ owner.pubkey ];
       # persist uids and gids
       persistDirs = [ "/var/lib/nixos" ];
       users = {
@@ -23,7 +21,6 @@ in
             isNormalUser = true;
             hashedPasswordFile = config.sops.secrets."${name}/hashedPassword".path;
             extraGroups = optional (value.primary or false) "wheel";
-            openssh.authorizedKeys.keys = [ value.pubkey ];
           }
         );
       };
