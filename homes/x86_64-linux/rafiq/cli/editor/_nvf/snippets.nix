@@ -22,6 +22,31 @@
               }
             '';
         }
+        {
+          trigger = "flake";
+          body = # nix
+            ''
+              { config, ... }:
+              let
+                cfg = config.flake;
+              in
+              {
+                flake.modules.nixos.default =
+                  { config, ...}:
+                  {
+                    imports = [
+                      $1
+                    ];
+                    options = {
+                      $2
+                    };
+                    config = {
+                      $3
+                    };
+                  };
+              }
+            '';
+        }
       ];
     };
   };
