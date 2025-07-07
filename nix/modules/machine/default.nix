@@ -11,8 +11,10 @@ in
     in
     {
       imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
-      options.machine.bluetooth.enable = mkEnableOption "";
-      options.machine.usb.automount = mkEnableOption "";
+      options.machine = {
+        bluetooth.enable = mkEnableOption "";
+        usb.automount = mkEnableOption "";
+      };
       config = mkMerge [
         (mkIf cfg.usb.automount {
           services.udisks2.enable = true;

@@ -1,15 +1,3 @@
-let
-  testCfg = {
-    machine = {
-      bluetooth.enable = true;
-      usb.automount = true;
-      virtualisation.podman = {
-        enable = true;
-        distrobox.enable = true;
-      };
-    };
-  };
-in
 {
   flake.manifest = {
     users.rafiq = {
@@ -34,14 +22,13 @@ in
             }
           ];
         };
-        extraCfg = testCfg;
+        extraCfg.desktop.enable = true;
       };
       apollo = {
         machine = {
           platform = "intel";
           root.drive = "/dev/disk/by-id/nvme-eui.002538d221b47b01";
         };
-        extraCfg = testCfg;
       };
     };
   };
