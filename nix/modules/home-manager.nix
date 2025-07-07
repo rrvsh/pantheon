@@ -1,6 +1,6 @@
 { inputs, config, ... }:
 let
-  inherit (cfg.lib) flattenAttrs;
+  inherit (cfg.lib) forAllUsers' flattenAttrs;
   cfg = config.flake;
   hm = inputs.home-manager;
   globalCfg = {
@@ -9,6 +9,7 @@ let
     sharedModules = [
       (flattenAttrs (cfg.modules.homeManager or { }))
     ];
+    users = forAllUsers' (name: _: cfg.homes.${name});
   };
 in
 {
