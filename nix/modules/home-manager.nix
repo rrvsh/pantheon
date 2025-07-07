@@ -6,6 +6,7 @@ let
   globalCfg = {
     useGlobalPkgs = true;
     useUserPackages = true;
+    extraSpecialArgs = { inherit (cfg) manifest; };
     sharedModules = [
       (flattenAttrs (cfg.modules.homeManager or { }))
     ];

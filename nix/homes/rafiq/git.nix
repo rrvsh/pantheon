@@ -1,6 +1,5 @@
 {
   flake.homes.rafiq = {
-    # Testing the import in home-manager.nix
     home.shellAliases = {
       gs = "git status";
       gc = "git commit";

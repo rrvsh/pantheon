@@ -18,6 +18,7 @@ let
         nixosSystem {
           specialArgs = {
             inherit inputs;
+            inherit (cfg) manifest;
             hostName = name;
           };
           modules = [
