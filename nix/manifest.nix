@@ -2,8 +2,15 @@ let
   testCfg =
     { hostName, ... }:
     {
-      boot.loader.systemd-boot.enable = true;
       networking = { inherit hostName; };
+      machine = {
+        bluetooth.enable = true;
+        usb.automount = true;
+        virtualisation.podman = {
+          enable = true;
+          distrobox.enable = true;
+        };
+      };
     };
 in
 {
