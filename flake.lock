@@ -257,6 +257,29 @@
         "type": "github"
       }
     },
+    "nur": {
+      "inputs": {
+        "flake-parts": [
+          "flake-parts"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1751894474,
+        "narHash": "sha256-0TIIRikLAi042jNgd+gLKYCji1p4uetlmm4gROjrlEw=",
+        "owner": "nix-community",
+        "repo": "NUR",
+        "rev": "85c0c20851e9250e587c33023b788f66b608ca36",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "NUR",
+        "type": "github"
+      }
+    },
     "nvf": {
       "inputs": {
         "flake-parts": [
@@ -305,6 +328,7 @@
         "make-shell": "make-shell",
         "nix-index-database": "nix-index-database",
         "nixpkgs": "nixpkgs",
+        "nur": "nur",
         "nvf": "nvf",
         "sops-nix": "sops-nix",
         "systems": "systems",
