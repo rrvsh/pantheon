@@ -21,6 +21,11 @@
     };
     # impermanence provides a nice abstraction over linking files from /persist
     impermanence.url = "github:nix-community/impermanence";
+    # sops-nix lets us version control secrets like passwords and api keys
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     # import-tree imports all nix files in a given directory.
     import-tree.url = "github:vic/import-tree";
     # files lets us write text files and automatically add checks for them
