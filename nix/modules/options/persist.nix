@@ -48,4 +48,16 @@ in
         };
       };
     };
+  flake.modules.homeManager.default =
+    { config, ... }:
+    {
+      imports = [ inputs.impermanence.homeManagerModules.impermanence ];
+      options.persistDirs = mkOpts "directory" { };
+      options.persistFiles = mkOpts "file" { };
+      config.home.persistence."/persist${config.home.homeDirectory}" = {
+        allowOther = true;
+        directories = config.persistDirs;
+        files = config.persistFiles;
+      };
+    };
 }
