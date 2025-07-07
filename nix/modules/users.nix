@@ -1,7 +1,7 @@
 { config, lib, ... }:
 let
   cfg = config.flake;
-  inherit (config.flake.lib) forAllUsers flattenAttrs;
+  inherit (config.flake.lib) forAllUsers' flattenAttrs;
   inherit (lib.attrsets) filterAttrs;
   owner = flattenAttrs (filterAttrs (_: v: (v.primary or false)) cfg.manifest.users);
 in
@@ -27,7 +27,7 @@ in
           openssh.authorizedKeys.keys = [ owner.pubkey ];
         };
       };
-      home-manager.users = forAllUsers (
+      home-manager.users = forAllUsers' (
         name: _: {
           #TODO: move into nixos/darwin config - should not apply to homeConfigurations
           home.username = name;
