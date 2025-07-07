@@ -1,7 +1,7 @@
 { lib, inputs, ... }:
 let
   inherit (lib.options) mkOption;
-  inherit (lib.types) lazyAttrsOf raw;
+  inherit (lib.types) path lazyAttrsOf raw;
   inherit (inputs.flake-parts.lib) mkSubmoduleOptions;
 in
 {
@@ -9,6 +9,10 @@ in
     lib = mkOption {
       type = lazyAttrsOf raw;
       default = { };
+    };
+    root = mkOption {
+      type = path;
+      default = "";
     };
   };
 }

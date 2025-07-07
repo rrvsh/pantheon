@@ -56,6 +56,7 @@
       (inputs.import-tree ./nix)
       // {
         systems = import inputs.systems;
+        flake.root = ./.;
       }
     );
 }
