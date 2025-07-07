@@ -1,10 +1,41 @@
 { lib, config, ... }:
 let
   cfg = config.flake;
+  inherit (builtins) foldl' attrNames;
   inherit (lib.attrsets) mapAttrs;
 in
 {
   flake.lib.modules = {
+    /**
+      Fold over the users list and create an attribute set.
+
+      # Inputs
+
+      `f`
+
+      : A function that takes the name of a user and returns an attribute set.
+
+      # Type
+
+      ```
+      userListToAttrs :: (String -> AttrSet) -> AttrSet
+      ```
+
+      # Examples
+      :::{.example}
+      ## `userListToAttrs` usage example
+
+      ```nix
+      flake.manifest.users.rafiq = { ... };
+      flake.modules.homeManager.users = userListToAttrs (name: {
+        ${name}.home.username = name;
+      });
+      => flake.modules.homeManager.default.users.rafiq.home.username = "rafiq";
+      ```
+
+      :::
+    */
+    userListToAttrs = f: foldl' (acc: elem: acc // (f elem)) { } (attrNames cfg.manifest.users);
     /**
       Return an attribute set for use with a option that needs to be used for all users.
 
