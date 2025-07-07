@@ -5,7 +5,7 @@
   ...
 }:
 let
-  inherit (lib) mkOption;
+  inherit (lib.options) mkOption;
   inherit (config.flake.lib.options) mkStrOption;
   inherit (lib.types)
     listOf

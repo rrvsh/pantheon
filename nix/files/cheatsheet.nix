@@ -1,6 +1,7 @@
 { lib, config, ... }:
 let
-  inherit (lib) concatStringsSep singleton;
+  inherit (builtins) concatStringsSep;
+  inherit (lib.lists) singleton;
 in
 {
   text.cheatsheet = concatStringsSep "\n" [

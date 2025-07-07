@@ -7,7 +7,7 @@
 }:
 let
   inherit (builtins) map head;
-  inherit (lib) concatStringsSep;
+  inherit (lib.lists) concatStringsSep;
   mkListEntry = x: "- [" + x.path_ + "](" + x.path_ + ")";
   listOfGeneratedFiles = withSystem (head config.systems) (psArgs: psArgs.config.files.files);
 in

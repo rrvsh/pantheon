@@ -1,6 +1,6 @@
 { config, lib, ... }:
 let
-  inherit (lib) mkMerge mkIf mkAfter;
+  inherit (lib.modules) mkMerge mkIf mkAfter;
 in
 {
   flake.modules.nixos.default =
