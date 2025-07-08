@@ -8,7 +8,6 @@ let
   inherit (lib.options) mkOption mkEnableOption;
   inherit (cfg.lib.options) mkStrOption;
   inherit (lib.types)
-    listOf
     path
     lazyAttrsOf
     raw
@@ -18,6 +17,14 @@ let
   inherit (inputs.flake-parts.lib) mkSubmoduleOptions;
   inherit (cfg.lib.attrsets) firstAttrNameMatching;
   cfg = config.flake;
+  monitorOpts = submodule {
+    options = {
+      id = mkStrOption "";
+      resolution = mkStrOption "";
+      refresh-rate = mkStrOption "";
+      scale = mkStrOption "";
+    };
+  };
   userOpts = submodule {
     options = {
       username = mkStrOption "";
@@ -36,14 +43,8 @@ let
         gpu = mkStrOption "";
         root.drive = mkStrOption "";
         monitors = mkOption {
-          type = listOf submodule {
-            options = {
-              id = mkStrOption "";
-              scale = mkStrOption "";
-              resolution = mkStrOption "";
-              refresh-rate = mkStrOption "";
-            };
-          };
+          type = lazyAttrsOf monitorOpts;
+          default = { };
         };
       };
       extraCfg = mkOption {

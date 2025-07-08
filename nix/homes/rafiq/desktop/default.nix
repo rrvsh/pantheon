@@ -65,6 +65,7 @@ in
       pkgs,
       config,
       hostName,
+      hostConfig,
       ...
     }:
     let
@@ -250,17 +251,20 @@ in
         # Null the packages since we use them system wide
         package = null;
         portalPackage = null;
-        # settings.monitor = [
-        #   "${mainMonitor.id}, ${mainMonitor.resolution}@${mainMonitor.refresh-rate}, auto, ${mainMonitor.scale}"
-        # ];
-
         settings = mkMerge [
           (import ./_hyprland/decoration.nix)
           (import ./_hyprland/keybinds.nix { inherit pkgs; })
           {
             ecosystem.no_update_news = true;
             xwayland.force_zero_scaling = true;
-            monitor = [ ", preferred, auto, 1" ];
+            monitor =
+              let
+                mainMonitor = hostConfig.machine.monitors.main;
+              in
+              [
+                "${mainMonitor.id}, ${mainMonitor.resolution}@${mainMonitor.refresh-rate}, auto, ${mainMonitor.scale}"
+                ", preferred, auto, 1"
+              ];
             exec-once = [
               "uwsm app -- $LOCKSCREEN"
               "uwsm app -- $NOTIFICATION_DAEMON"
