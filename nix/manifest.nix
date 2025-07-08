@@ -21,9 +21,15 @@
             scale = "2";
           };
         };
-        extraCfg.server.web-apps = {
-          comfy-ui.enable = true;
-          sd-webui-forge.enable = true;
+        extraCfg = {
+          machine = {
+            bluetooth.enable = true;
+            usb.automount = true;
+          };
+          server.web-apps = {
+            comfy-ui.enable = true;
+            sd-webui-forge.enable = true;
+          };
         };
       };
       apollo = {

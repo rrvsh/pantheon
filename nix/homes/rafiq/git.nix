@@ -9,6 +9,7 @@
       gdh = "git diff HEAD";
     };
     programs.git = {
+      enable = true;
       signing.signByDefault = true;
       extraConfig = {
         init.defaultBranch = "prime";
