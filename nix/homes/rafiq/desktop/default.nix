@@ -6,16 +6,29 @@
     "steam"
     "steam-unwrapped"
   ];
-  flake.modules.nixos.graphical = {
-    security.pam.services.hyprlock = { };
-    programs.steam = {
-      enable = true;
-      gamescopeSession.enable = true;
+  flake.modules.nixos.graphical =
+    { config, ... }:
+    {
+      security.pam.services.hyprlock = { };
+      programs.steam = {
+        enable = true;
+        gamescopeSession.enable = true;
+      };
+      services.sunshine = {
+        enable = true;
+        capSysAdmin = true;
+        openFirewall = true;
+        settings = {
+          sunshine_name = config.networking.hostName;
+          origin_pin_allowed = "wan";
+          origin_web_ui_allowed = "wan";
+        };
+        applications = { };
+      };
+      # spotifyd
+      networking.firewall.allowedTCPPorts = [ 5353 ];
+      networking.firewall.allowedUDPPorts = [ 5353 ];
     };
-    # spotifyd
-    networking.firewall.allowedTCPPorts = [ 5353 ];
-    networking.firewall.allowedUDPPorts = [ 5353 ];
-  };
   flake.modules.homeManager.rafiq =
     {
       pkgs,
@@ -73,6 +86,7 @@
         ".tor project"
         ".local/share/Steam"
         ".local/share/PrismLauncher"
+        ".config/sunshine"
       ];
       home = {
         packages = with pkgs; [
