@@ -30,6 +30,13 @@
           platform = "intel";
           root.drive = "/dev/disk/by-id/nvme-eui.002538d221b47b01";
         };
+        extraCfg.server = {
+          databases = {
+            mongodb.enable = true;
+            mysql.enable = true;
+            postgresql.enable = true;
+          };
+        };
       };
     };
   };
