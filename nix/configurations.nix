@@ -10,9 +10,10 @@ let
   inherit (lib.attrsets) mapAttrs;
   inherit (cfg.lib.modules) forAllUsers';
   cfg = config.flake;
-  globalCfg = {
+  globalCfg = name: {
     useGlobalPkgs = true;
     useUserPackages = true;
+    extraSpecialArgs.hostName = name;
     sharedModules = [ cfg.modules.homeManager.default ];
     users = forAllUsers' (name: _: cfg.modules.homeManager.${name});
   };
@@ -27,7 +28,7 @@ let
           modules = [
             cfg.modules.nixos.default
             inputs.home-manager.nixosModules.home-manager
-            { home-manager = globalCfg; }
+            { home-manager = globalCfg name; }
             (value.extraCfg or { })
           ] ++ optional value.graphical cfg.modules.nixos.graphical;
         }

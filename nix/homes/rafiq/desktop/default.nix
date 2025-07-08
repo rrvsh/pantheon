@@ -12,9 +12,17 @@
       enable = true;
       gamescopeSession.enable = true;
     };
+    # spotifyd
+    networking.firewall.allowedTCPPorts = [ 5353 ];
+    networking.firewall.allowedUDPPorts = [ 5353 ];
   };
   flake.modules.homeManager.rafiq =
-    { pkgs, config, ... }:
+    {
+      pkgs,
+      config,
+      hostName,
+      ...
+    }:
     let
       inherit (lib.modules) mkMerge mkIf;
       inherit (builtins) map listToAttrs;
@@ -179,8 +187,16 @@
 
       };
       services = {
+        spotifyd.enable = true;
+        spotifyd.settings.global = {
+          device_name = "${hostName}";
+          device_type = "computer";
+          zeroconf_port = 5353;
+        };
+
         mako.enable = true;
         mako.settings.default-timeout = 10000;
+
       };
       wayland.windowManager.hyprland = {
         enable = true;
