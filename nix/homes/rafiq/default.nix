@@ -38,15 +38,10 @@ in
           fastfetch
           ripgrep
           aichat
-          (pkgs.writeShellScriptBin "note" # bash
-            ''
-              zk edit -i
-              pushd ~/notebook > /dev/null
-              git add .
-              commit -u
-              popd > /dev/null
-            ''
-          )
+          (import ./_scripts/edit.nix { inherit pkgs; })
+          (import ./_scripts/commit.nix { inherit pkgs; })
+          (import ./_scripts/note.nix { inherit pkgs; })
+          (import ./_scripts/rebuild.nix { inherit pkgs; })
         ];
       };
       programs = {
