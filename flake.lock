@@ -428,6 +428,31 @@
         "type": "github"
       }
     },
+    "python-flexseal": {
+      "inputs": {
+        "flake-utils": [
+          "stable-diffusion-webui-nix",
+          "flake-utils"
+        ],
+        "nixpkgs": [
+          "stable-diffusion-webui-nix",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1751898758,
+        "narHash": "sha256-8EmTPdfOymvvHhmHYWiyO3cwZ4gtLo5uBFm3CU5vySo=",
+        "owner": "Janrupf",
+        "repo": "python-flexseal",
+        "rev": "af318e1fd047abbefcc68d0292a4d902179c95fe",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Janrupf",
+        "repo": "python-flexseal",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "dedupe_flake-compat": "dedupe_flake-compat",
@@ -447,6 +472,7 @@
         "nur": "nur",
         "nvf": "nvf",
         "sops-nix": "sops-nix",
+        "stable-diffusion-webui-nix": "stable-diffusion-webui-nix",
         "stylix": "stylix",
         "systems": "systems",
         "text": "text"
@@ -469,6 +495,30 @@
       "original": {
         "owner": "Mic92",
         "repo": "sops-nix",
+        "type": "github"
+      }
+    },
+    "stable-diffusion-webui-nix": {
+      "inputs": {
+        "flake-utils": [
+          "dedupe_flake-utils"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "python-flexseal": "python-flexseal"
+      },
+      "locked": {
+        "lastModified": 1751899247,
+        "narHash": "sha256-bh6xwc24Rv0YE4grKXvj+kmXmydns+OrlWn4WLnJSY4=",
+        "owner": "janrupf",
+        "repo": "stable-diffusion-webui-nix",
+        "rev": "d5ba5dccd190b0ded17f9c4a23dc7665c6dc2eae",
+        "type": "github"
+      },
+      "original": {
+        "owner": "janrupf",
+        "repo": "stable-diffusion-webui-nix",
         "type": "github"
       }
     },

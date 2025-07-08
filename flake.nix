@@ -15,6 +15,17 @@
     systems.url = "github:nix-systems/default";
     # nixos-unstable provides a binary cache for all packages.
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    # home-manager manages our user packages and dotfiles
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    # the nix user repository for mainly firefox extensions
+    nur = {
+      url = "github:nix-community/NUR";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-parts.follows = "flake-parts";
+    };
     # impermanence provides a nice abstraction over linking files from /persist
     impermanence.url = "github:nix-community/impermanence";
     # flake-parts lets us define flake modules.
@@ -65,23 +76,12 @@
       };
     };
 
-    ### HOME-MANAGER ###
+    ### FLAKES ###
 
-    # home-manager manages our user packages and dotfiles
-    home-manager = {
-      url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     # nix-index-database indexes the nixpkgs binaries for use with comma
     nix-index-database = {
       url = "github:nix-community/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
-    };
-    # the nix user repository for mainly firefox extensions
-    nur = {
-      url = "github:nix-community/NUR";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.flake-parts.follows = "flake-parts";
     };
     # nvf provides modules to wrap neovim
     nvf = {
@@ -93,6 +93,12 @@
         flake-utils.follows = "dedupe_flake-utils";
         mnw.follows = "dedupe_mnw";
       };
+    };
+    # provides comfy ui and sdwebui services
+    stable-diffusion-webui-nix = {
+      url = "github:janrupf/stable-diffusion-webui-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-utils.follows = "dedupe_flake-utils";
     };
 
     ### DEDUPE ###
