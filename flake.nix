@@ -22,6 +22,11 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    # nix darwin provides declarative mac configuration
+    nix-darwin = {
+      url = "github:nix-darwin/nix-darwin/master";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     # the nix user repository for mainly firefox extensions
     nur = {
       url = "github:nix-community/NUR";
