@@ -23,6 +23,7 @@
             }
           ];
         };
+        extraCfg.server.web-apps.comfy-ui.enable = true;
       };
       apollo = {
         graphical = false;
