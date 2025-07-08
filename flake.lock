@@ -471,11 +471,28 @@
         "nixpkgs": "nixpkgs",
         "nur": "nur",
         "nvf": "nvf",
+        "rrvsh-nixpkgs": "rrvsh-nixpkgs",
         "sops-nix": "sops-nix",
         "stable-diffusion-webui-nix": "stable-diffusion-webui-nix",
         "stylix": "stylix",
         "systems": "systems",
         "text": "text"
+      }
+    },
+    "rrvsh-nixpkgs": {
+      "locked": {
+        "lastModified": 1750146550,
+        "narHash": "sha256-vFNbONVWIdYBqlKZoJScDRjnQ/euDmVqgCL2ebnsu7U=",
+        "owner": "rrvsh",
+        "repo": "nixpkgs",
+        "rev": "d7fa95990fd890bbd17ca8361f5d4e4935512c75",
+        "type": "github"
+      },
+      "original": {
+        "owner": "rrvsh",
+        "ref": "librechat-module",
+        "repo": "nixpkgs",
+        "type": "github"
       }
     },
     "sops-nix": {

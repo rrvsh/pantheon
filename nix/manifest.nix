@@ -63,6 +63,10 @@
             mysql.enable = true;
             postgresql.enable = true;
           };
+          web-apps = {
+            librechat.enable = true;
+            librechat.domain = "chat.bwfiq.com";
+          };
         };
       };
     };
