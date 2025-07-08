@@ -3,7 +3,15 @@
   allowedUnfreePackages = [
     "stremio-shell"
     "stremio-server"
+    "steam"
+    "steam-unwrapped"
   ];
+  flake.modules.nixos.graphical = {
+    programs.steam = {
+      enable = true;
+      gamescopeSession.enable = true;
+    };
+  };
   flake.modules.homeManager.rafiq =
     { pkgs, config, ... }:
     let
@@ -54,9 +62,12 @@
         ".local/share/Smart Code ltd/Stremio"
         ".mozilla/firefox"
         ".tor project"
+        ".local/share/Steam"
+        ".local/share/PrismLauncher"
       ];
       home = {
         packages = with pkgs; [
+          prismlauncher
           stremio
           tor-browser
           vlc
