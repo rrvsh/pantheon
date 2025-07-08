@@ -18,14 +18,33 @@ in
     mkHost = domain: if isRootDomain domain then domain else mkWildcardDomain (mkRootDomain domain);
     mkWebApp =
       {
+        config,
         name,
         defaultPort,
         persistDirs ? [ ],
-        serviceConfig ? { },
         extraOptions ? { },
+        extraConfig ? { },
       }:
       let
         cfg = config.server.web-apps.${name};
+        networkingConfig =
+          {
+            config,
+            cfg,
+            name,
+          }:
+          mkIf (cfg.domain != "") {
+            assertions = singleton {
+              assertion = config.server.web-servers.nginx.enable;
+              message = "You must enable a web server if you want to set server.web-apps.${name}.domain.";
+            };
+            server.ddns.domains = singleton (mkRootDomain cfg.domain);
+            server.web-servers.nginx.proxies = singleton {
+              source = cfg.domain;
+              target = "http://${config.hostname}:${toString cfg.port}";
+            };
+          };
+
       in
       {
         options.server.web-apps.${name} = {
@@ -41,20 +60,10 @@ in
             inherit persistDirs;
             networking.firewall = mkIf cfg.openFirewall { allowedTCPPorts = singleton cfg.port; };
           }
-          (mkIf (cfg.domain != "") {
-            assertions = singleton {
-              assertion = config.server.web-servers.nginx.enable;
-              message = "You must enable a web server if you want to set server.web-apps.${name}.domain.";
-            };
-            server.networking.ddns.domains = singleton (mkRootDomain cfg.domain);
-            server.web-servers.nginx.proxies = singleton {
-              source = cfg.domain;
-              target = "http://${config.hostname}:${toString cfg.port}";
-            };
-          })
-          serviceConfig
-          cfg.extraCfg
+          (networkingConfig { inherit config cfg name; })
+          extraConfig
         ]);
       };
+
   };
 }
