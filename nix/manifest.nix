@@ -38,6 +38,9 @@
               "slayment.com"
             ];
           };
+          web-servers = {
+            enableSSL = true;
+          };
           databases = {
             mongodb.enable = true;
             mysql.enable = true;
