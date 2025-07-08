@@ -40,6 +40,19 @@
           };
           web-servers = {
             enableSSL = true;
+            nginx = {
+              enable = true;
+              proxies = [
+                {
+                  source = "aenyrathia.wiki";
+                  target = "http://helios:5896";
+                }
+                {
+                  source = "il.bwfiq.com";
+                  target = "http://helios:2283";
+                }
+              ];
+            };
           };
           databases = {
             mongodb.enable = true;
