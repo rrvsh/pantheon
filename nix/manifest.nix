@@ -23,7 +23,10 @@
             }
           ];
         };
-        extraCfg.server.web-apps.comfy-ui.enable = true;
+        extraCfg.server.web-apps = {
+          comfy-ui.enable = true;
+          sd-webui-forge.enable = true;
+        };
       };
       apollo = {
         graphical = false;
