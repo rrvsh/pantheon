@@ -6,6 +6,7 @@
 }:
 let
   inherit (lib) nixosSystem;
+  inherit (lib.lists) optional;
   inherit (lib.attrsets) mapAttrs;
   inherit (cfg.lib.modules) forAllUsers';
   cfg = config.flake;
@@ -22,16 +23,13 @@ let
       name: value:
       if class == "nixos" then
         nixosSystem {
-          specialArgs = {
-            inherit (value) graphical;
-            hostName = name;
-          };
+          specialArgs.hostName = name;
           modules = [
             cfg.modules.nixos.default
             inputs.home-manager.nixosModules.home-manager
             { home-manager = globalCfg; }
             (value.extraCfg or { })
-          ];
+          ] ++ optional value.graphical cfg.modules.nixos.graphical;
         }
       else
         { }
