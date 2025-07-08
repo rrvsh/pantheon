@@ -32,6 +32,15 @@
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    stylix = {
+      url = "github:nix-community/stylix";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        flake-parts.follows = "flake-parts";
+        systems.follows = "systems";
+        nur.follows = "nur";
+      };
+    };
 
     ### FLAKE PARTS MODULES ###
 
