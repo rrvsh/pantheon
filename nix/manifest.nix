@@ -26,8 +26,10 @@
           machine = {
             bluetooth.enable = true;
             usb.automount = true;
-            podman.enable = true;
-            podman.distrobox.enable = true;
+            virtualisation = {
+              podman.enable = true;
+              podman.distrobox.enable = true;
+            };
           };
           server.web-apps = {
             comfy-ui.enable = true;
