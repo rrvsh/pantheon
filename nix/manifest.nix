@@ -22,9 +22,12 @@
           };
         };
         extraCfg = {
+          services.fwupd.enable = true; # FIXME: remove
           machine = {
             bluetooth.enable = true;
             usb.automount = true;
+            podman.enable = true;
+            podman.distrobox.enable = true;
           };
           server.web-apps = {
             comfy-ui.enable = true;
