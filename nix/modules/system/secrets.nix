@@ -10,15 +10,25 @@ let
   inherit (lib.meta) getExe;
   inherit (lib.strings) trim;
   inherit (cfg.admin) username pubkey;
+  inherit (cfg.paths) secrets;
 in
 {
   flake.modules.nixos.default =
     { config, ... }:
     {
       imports = [ inputs.sops-nix.nixosModules.sops ];
-      config.sops.age.sshKeyPaths = [
-        "/persist${config.users.defaultUserHome}/${username}/.ssh/id_ed25519"
-      ];
+      config = {
+        sops = {
+          age.sshKeyPaths = [
+            "/persist${config.users.defaultUserHome}/${username}/.ssh/id_ed25519"
+          ];
+          secrets."keys/gemini".sopsFile = secrets + "/keys.yaml";
+        };
+        environment.shellInit = # sh
+          ''
+            export GEMINI_API_KEY=$(sudo cat ${config.sops.secrets."keys/gemini".path})
+          '';
+      };
     };
   flake.modules.homeManager.default.persistDirs = [ ".config/sops/age" ];
   perSystem =
