@@ -1,4 +1,12 @@
-{ lib, inputs, ... }:
+{
+  lib,
+  inputs,
+  config,
+  ...
+}:
+let
+  cfg = config.flake;
+in
 {
   allowedUnfreePackages = [
     "stremio-shell"
@@ -7,13 +15,36 @@
     "steam-unwrapped"
   ];
   flake.modules.nixos.graphical =
-    { config, ... }:
+    { config, pkgs, ... }:
     {
-      security.pam.services.hyprlock = { };
-      programs.steam = {
-        enable = true;
-        gamescopeSession.enable = true;
+      fonts.packages = [ pkgs.font-awesome ];
+      services.getty.autologinUser = cfg.admin.username;
+      # Start Hyprland at boot only if not connecting through SSH
+      environment.loginShellInit = # sh
+        ''
+          if [[ -z "$SSH_CLIENT" && -z "$SSH_CONNECTION" ]]; then
+            if uwsm check may-start; then
+              exec uwsm start hyprland-uwsm.desktop
+            fi
+          fi
+        '';
+      environment.variables = {
+        # Get Electron apps to use Wayland
+        ELECTRON_OZONE_PLATFORM_HINT = "auto";
+        NIXOS_OZONE_WL = "1";
       };
+      programs = {
+        hyprland = {
+          enable = true;
+          # Use UWSM to have each process controlled by systemd init
+          withUWSM = true;
+        };
+        steam = {
+          enable = true;
+          gamescopeSession.enable = true;
+        };
+      };
+      security.pam.services.hyprlock = { };
       services.sunshine = {
         enable = true;
         capSysAdmin = true;
