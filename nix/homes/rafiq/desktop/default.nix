@@ -37,6 +37,14 @@
       };
     in
     mkIf config.graphical {
+      stylix = {
+        image = ./wallpaper.png;
+        targets = {
+          firefox.colorTheme.enable = true;
+          firefox.profileNames = syncedProfiles;
+          waybar.addCss = false;
+        };
+      };
       persistDirs = [
         "docs"
         "repos"
