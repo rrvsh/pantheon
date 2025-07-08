@@ -4,7 +4,7 @@
     "stremio-shell"
     "stremio-server"
   ];
-  flake.homes.rafiq =
+  flake.modules.homeManager.rafiq =
     { pkgs, config, ... }:
     let
       inherit (lib.modules) mkMerge mkIf;

@@ -3,7 +3,7 @@ let
   inherit (lib.strings) concatStrings;
 in
 {
-  flake.homes.rafiq =
+  flake.modules.homeManager.rafiq =
     { pkgs, ... }:
     {
       imports = [

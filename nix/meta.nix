@@ -66,10 +66,6 @@ in
         readOnly = true;
       };
     };
-    homes = mkOption {
-      type = lazyAttrsOf deferredModule;
-      default = { };
-    };
     manifest = mkOption {
       type = submodule {
         options = {

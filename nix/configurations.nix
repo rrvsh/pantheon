@@ -14,7 +14,7 @@ let
     useGlobalPkgs = true;
     useUserPackages = true;
     sharedModules = [ cfg.modules.homeManager.default ];
-    users = forAllUsers' (name: _: cfg.homes.${name});
+    users = forAllUsers' (name: _: cfg.modules.homeManager.${name});
   };
   hosts = cfg.manifest.hosts or { };
   mkConfigurations =

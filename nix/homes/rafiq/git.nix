@@ -1,5 +1,5 @@
 {
-  flake.homes.rafiq = {
+  flake.modules.homeManager.rafiq = {
     home.shellAliases = {
       gs = "git status";
       gc = "git commit";
