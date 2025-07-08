@@ -73,6 +73,8 @@
               domain = "git.rrv.sh";
               openFirewall = true;
             };
+            rrv-sh.enable = true;
+            rrv-sh.domain = "rrv.sh";
           };
         };
       };

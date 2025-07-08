@@ -102,6 +102,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.flake-utils.follows = "dedupe_flake-utils";
     };
+    # my website :)
+    rrv-sh = {
+      url = "github:rrvsh/rrv.sh";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     ### DEDUPE ###
 
