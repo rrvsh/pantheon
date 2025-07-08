@@ -6,6 +6,7 @@
 }:
 let
   inherit (lib) nixosSystem;
+  inherit (inputs.nix-darwin.lib) darwinSystem;
   inherit (lib.lists) optional;
   inherit (lib.attrsets) mapAttrs;
   inherit (cfg.lib.modules) forAllUsers';
@@ -35,6 +36,10 @@ let
             (value.extraCfg or { })
           ] ++ optional value.graphical cfg.modules.nixos.graphical;
         }
+      else if class == "darwin" then
+        darwinSystem {
+          modules = [ cfg.modules.darwin.default ];
+        }
       else
         { }
     ) hosts;
@@ -42,4 +47,5 @@ in
 {
   imports = [ inputs.home-manager.flakeModules.home-manager ];
   flake.nixosConfigurations = mkConfigurations "nixos" hosts.nixos;
+  flake.darwinConfigurations = mkConfigurations "darwin" hosts.darwin;
 }

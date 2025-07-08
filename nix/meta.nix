@@ -74,9 +74,12 @@ in
             type = lazyAttrsOf userOpts;
             default = { };
           };
-          hosts = mkOption {
-            # hosts.nixos, hosts.darwin, etc.
-            type = lazyAttrsOf (lazyAttrsOf hostOpts);
+          hosts.nixos = mkOption {
+            type = lazyAttrsOf hostOpts;
+            default = { };
+          };
+          hosts.darwin = mkOption {
+            type = lazyAttrsOf raw;
             default = { };
           };
         };
