@@ -64,8 +64,15 @@
             postgresql.enable = true;
           };
           web-apps = {
-            librechat.enable = true;
-            librechat.domain = "chat.bwfiq.com";
+            librechat = {
+              enable = true;
+              domain = "chat.bwfiq.com";
+            };
+            forgejo = {
+              enable = true;
+              domain = "git.rrv.sh";
+              openFirewall = true;
+            };
           };
         };
       };
