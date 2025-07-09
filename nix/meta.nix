@@ -56,6 +56,7 @@ let
 in
 {
   options.flake = mkSubmoduleOptions {
+    self = mkOption { type = raw; };
     lib = mkOption {
       type = lazyAttrsOf raw;
       default = { };

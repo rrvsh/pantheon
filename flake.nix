@@ -1,11 +1,14 @@
 {
   outputs =
-    inputs:
+    { self, ... }@inputs:
     inputs.flake-parts.lib.mkFlake { inherit inputs; } (
       (inputs.import-tree ./nix)
       // {
         systems = import inputs.systems;
-        flake.paths.root = ./.;
+        flake = {
+          inherit self;
+          paths.root = ./.;
+        };
       }
     );
   inputs = {

@@ -38,6 +38,7 @@ let
         }
       else if class == "darwin" then
         darwinSystem {
+          specialArgs = { inherit (config.flake) self; };
           modules = [ cfg.modules.darwin.default ];
         }
       else

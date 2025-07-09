@@ -12,6 +12,11 @@
       {
         home.stateVersion = osConfig.system.stateVersion;
       };
-    darwin.default.system.stateVersion = 6;
+    darwin.default =
+      { self, ... }:
+      {
+        system.configurationRevision = self.rev or self.dirtyRev or null;
+        system.stateVersion = 6;
+      };
   };
 }
