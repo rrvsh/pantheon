@@ -36,11 +36,6 @@ let
             (value.extraCfg or { })
           ] ++ optional value.graphical cfg.modules.nixos.graphical;
         }
-      else if class == "darwin" then
-        darwinSystem {
-          specialArgs = { inherit (config.flake) self; };
-          modules = [ cfg.modules.darwin.default ];
-        }
       else
         { }
     ) hosts;
@@ -48,5 +43,21 @@ in
 {
   imports = [ inputs.home-manager.flakeModules.home-manager ];
   flake.nixosConfigurations = mkConfigurations "nixos" hosts.nixos;
-  flake.darwinConfigurations = mkConfigurations "darwin" hosts.darwin;
+  flake.darwinConfigurations.venus = darwinSystem {
+    specialArgs = { inherit (config.flake) self; };
+    modules = [
+      (
+        { pkgs, self, ... }:
+        {
+          environment.systemPackages = [ pkgs.vim ];
+          services.tailscale.enable = true;
+          nix.settings.experimental-features = "nix-command flakes";
+          nix.enable = false;
+          system.configurationRevision = self.rev or self.dirtyRev or null;
+          system.stateVersion = 6;
+          nixpkgs.hostPlatform = "x86_64-darwin";
+        }
+      )
+    ];
+  };
 }
