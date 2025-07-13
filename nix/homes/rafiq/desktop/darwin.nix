@@ -5,7 +5,7 @@ in
 {
   flake.modules.darwin.graphical.homebrew = {
     enable = true;
-    primaryUser = cfg.admin.username;
+    user = cfg.admin.username;
     onActivation.cleanup = "uninstall";
     casks = [ "ghostty" ];
   };
