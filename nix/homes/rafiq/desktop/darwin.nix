@@ -1,10 +1,12 @@
+{ config, ... }:
+let
+  cfg = config.flake;
+in
 {
-  flake.modules.darwin.graphical.homebrew =
-    { config, ... }:
-    {
-      enable = true;
-      primaryUser = config.home.username;
-      onActivation.cleanup = "uninstall";
-      casks = [ "ghostty" ];
-    };
+  flake.modules.darwin.graphical.homebrew = {
+    enable = true;
+    primaryUser = cfg.admin.username;
+    onActivation.cleanup = "uninstall";
+    casks = [ "ghostty" ];
+  };
 }
