@@ -34,6 +34,7 @@ in
   flake.modules.darwin.default =
     { config, ... }:
     {
+      users.users = forAllUsers' (name: _: { home = "/Users/${name}"; });
       home-manager.users = forAllUsers' (
         name: _: {
           home.username = name;
