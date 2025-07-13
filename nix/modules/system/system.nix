@@ -7,11 +7,7 @@
       i18n.defaultLocale = "en_US.UTF-8";
       system.stateVersion = "25.11";
     };
-    homeManager.default =
-      { osConfig, ... }:
-      {
-        home.stateVersion = osConfig.system.stateVersion;
-      };
+    homeManager.default.home.stateVersion = "25.11";
     darwin.default =
       { self, ... }:
       {
