@@ -11,7 +11,8 @@ in
     type = listOf str;
     default = [ ];
   };
-  config.flake.modules.nixos.default = {
-    nixpkgs.config.allowUnfreePredicate = predicate;
+  config.flake.modules = {
+    nixos.default.nixpkgs.config.allowUnfreePredicate = predicate;
+    darwin.default.nixpkgs.config.allowUnfreePredicate = predicate;
   };
 }
