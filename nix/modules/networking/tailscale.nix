@@ -14,4 +14,7 @@ in
       persistDirs = [ "/var/lib/tailscale" ];
       sops.secrets."tailscale/client-secret".sopsFile = secrets + "/tailscale.yaml";
     };
+  flake.modules.darwin.default = {
+    services.tailscale.enable = true;
+  };
 }

@@ -41,16 +41,6 @@ let
           specialArgs = { inherit (config.flake) self; };
           modules = [
             cfg.modules.darwin.default
-            (
-              { pkgs, ... }:
-              {
-                environment.systemPackages = [ pkgs.vim ];
-                services.tailscale.enable = true;
-                nix.settings.experimental-features = "nix-command flakes";
-                nix.enable = false;
-                nixpkgs.hostPlatform = "x86_64-darwin";
-              }
-            )
           ];
         }
       else
