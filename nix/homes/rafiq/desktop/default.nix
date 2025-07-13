@@ -57,15 +57,11 @@
         vesktop.enable = true;
         thunderbird.enable = true;
         thunderbird.profiles.rafiq.isDefault = true;
+        # ghostty is broken on nix-darwin
+        ghostty.settings.confirm-close-surface = false;
         firefox = {
           enable = true;
           inherit profiles;
-        };
-        ghostty = {
-          enable = true;
-          settings = {
-            confirm-close-surface = false;
-          };
         };
       };
     };

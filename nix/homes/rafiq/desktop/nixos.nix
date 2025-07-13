@@ -144,6 +144,7 @@ in
       };
       programs = {
         fuzzel.enable = true;
+        ghostty.enable = true;
         waybar = {
           enable = true;
           settings = [
