@@ -86,6 +86,7 @@ in
           wl-clipboard-rs
           stremio
           tor-browser
+          vlc
         ];
         sessionVariables = {
           LAUNCHER = "fuzzel";
