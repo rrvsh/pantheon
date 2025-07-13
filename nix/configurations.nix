@@ -43,7 +43,7 @@ let
             cfg.modules.darwin.default
             inputs.home-manager.darwinModules.home-manager
             { home-manager = globalCfg name value; }
-          ];
+          ] ++ optional value.graphical cfg.modules.darwin.graphical;
         }
       else
         { }
