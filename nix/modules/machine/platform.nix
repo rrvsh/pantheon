@@ -11,5 +11,10 @@
       boot.kernelModules = [ "kvm-${platform}" ];
       nixpkgs.hostPlatform = "${arch}-linux";
     };
-  flake.modules.darwin.default.nixpkgs.hostPlatform = "x86_64-darwin";
+
+  flake.modules.darwin.default.nixpkgs = {
+    hostPlatform = "x86_64-darwin";
+    config.allowUnsupportedSystem = true;
+  };
+
 }
