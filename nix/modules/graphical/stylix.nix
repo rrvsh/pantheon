@@ -9,4 +9,12 @@
       stylix.enable = true;
       stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-dark-hard.yaml";
     };
+  flake.modules.darwin.default =
+    { pkgs, ... }:
+    {
+      imports = [ inputs.stylix.darwinModules.stylix ];
+      stylix.enable = true;
+      #TODO: move into manifest
+      stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-dark-hard.yaml";
+    };
 }

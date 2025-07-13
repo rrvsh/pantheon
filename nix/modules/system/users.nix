@@ -31,4 +31,14 @@ in
         }
       );
     };
+  flake.modules.darwin.default =
+    { config, ... }:
+    {
+      home-manager.users = forAllUsers' (
+        name: _: {
+          home.username = name;
+          home.homeDirectory = config.users.users.${name}.home;
+        }
+      );
+    };
 }
