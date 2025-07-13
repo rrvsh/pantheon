@@ -50,12 +50,12 @@ in
       };
     };
   flake.modules.homeManager.default =
-    { config, osConfig, ... }:
+    { config, pkgs, ... }:
     {
       imports = [ inputs.impermanence.homeManagerModules.impermanence ];
       options.persistDirs = mkOpts "directory" { };
       options.persistFiles = mkOpts "file" { };
-      config = mkIf (osConfig.nixpkgs.hostPlatform == "x86_64-linux") {
+      config = mkIf (pkgs.system == "x86_64-linux") {
         home.persistence."/persist${config.home.homeDirectory}" = {
           allowOther = true;
           directories = config.persistDirs;
