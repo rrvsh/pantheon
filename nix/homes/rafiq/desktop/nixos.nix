@@ -4,8 +4,6 @@ let
 in
 {
   allowedUnfreePackages = [
-    "stremio-shell"
-    "stremio-server"
     "steam"
     "steam-unwrapped"
   ];

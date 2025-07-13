@@ -1,5 +1,9 @@
 { lib, inputs, ... }:
 {
+  allowedUnfreePackages = [
+    "stremio-shell"
+    "stremio-server"
+  ];
   flake.modules.homeManager.rafiq =
     { pkgs, config, ... }:
     let
