@@ -146,6 +146,7 @@ in
         mako.settings.default-timeout = 10000;
       };
       programs = {
+        obs-studio.enable = true;
         fuzzel.enable = true;
         ghostty.enable = true;
         waybar = {

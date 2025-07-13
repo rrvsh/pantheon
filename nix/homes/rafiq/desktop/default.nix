@@ -50,7 +50,6 @@
         };
       };
       programs = {
-        obs-studio.enable = true;
         vesktop.enable = true;
         thunderbird.enable = true;
         thunderbird.profiles.rafiq.isDefault = true;
