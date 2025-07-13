@@ -1,9 +1,5 @@
 { lib, inputs, ... }:
 {
-  allowedUnfreePackages = [
-    "stremio-shell"
-    "stremio-server"
-  ];
   flake.modules.homeManager.rafiq =
     { pkgs, config, ... }:
     let
@@ -47,7 +43,6 @@
       home = {
         packages = with pkgs; [
           prismlauncher
-          stremio
           tor-browser
           vlc
         ];

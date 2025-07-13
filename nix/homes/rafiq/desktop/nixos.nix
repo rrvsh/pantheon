@@ -4,6 +4,8 @@ let
 in
 {
   allowedUnfreePackages = [
+    "stremio-shell"
+    "stremio-server"
     "steam"
     "steam-unwrapped"
   ];
@@ -82,6 +84,7 @@ in
       home = {
         packages = with pkgs; [
           wl-clipboard-rs
+          stremio
         ];
         sessionVariables = {
           LAUNCHER = "fuzzel";
