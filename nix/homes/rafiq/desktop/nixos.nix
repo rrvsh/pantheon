@@ -85,6 +85,7 @@ in
         packages = with pkgs; [
           wl-clipboard-rs
           stremio
+          tor-browser
         ];
         sessionVariables = {
           LAUNCHER = "fuzzel";
