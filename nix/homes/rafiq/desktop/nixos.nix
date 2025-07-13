@@ -87,6 +87,7 @@ in
           stremio
           tor-browser
           vlc
+          prismlauncher
         ];
         sessionVariables = {
           LAUNCHER = "fuzzel";

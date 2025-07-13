@@ -41,9 +41,6 @@
         };
       };
       home = {
-        packages = with pkgs; [
-          prismlauncher
-        ];
         sessionVariables = {
           BROWSER = "firefox";
           TERMINAL = "ghostty";
