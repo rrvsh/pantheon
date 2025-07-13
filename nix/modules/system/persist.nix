@@ -5,6 +5,7 @@
   ...
 }:
 let
+  inherit (lib.modules) mkIf;
   inherit (lib.options) mkOption;
   inherit (config.flake.lib.options) mkStrOption;
   inherit (lib.types)
@@ -49,15 +50,17 @@ in
       };
     };
   flake.modules.homeManager.default =
-    { config, ... }:
+    { config, osConfig, ... }:
     {
       imports = [ inputs.impermanence.homeManagerModules.impermanence ];
       options.persistDirs = mkOpts "directory" { };
       options.persistFiles = mkOpts "file" { };
-      config.home.persistence."/persist${config.home.homeDirectory}" = {
-        allowOther = true;
-        directories = config.persistDirs;
-        files = config.persistFiles;
+      config = mkIf (osConfig.nixpkgs.hostPlatform == "x86_64-linux") {
+        home.persistence."/persist${config.home.homeDirectory}" = {
+          allowOther = true;
+          directories = config.persistDirs;
+          files = config.persistFiles;
+        };
       };
     };
 }
