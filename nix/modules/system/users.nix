@@ -36,6 +36,7 @@ in
   flake.modules.darwin.default =
     { config, ... }:
     {
+      system.primaryUser = cfg.admin.username;
       users.knownUsers = attrNames cfg.manifest.users;
       users.users = forAllUsers' (
         name: _: {
