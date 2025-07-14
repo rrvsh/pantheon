@@ -45,6 +45,7 @@ in
         ];
       };
       programs = {
+        mise.enable = true;
         nvf.enable = true;
         nvf.settings.vim = {
           syntaxHighlighting = true;
