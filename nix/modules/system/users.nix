@@ -1,7 +1,9 @@
-{ config, ... }:
+{ config, lib, ... }:
 let
   cfg = config.flake;
   inherit (cfg.lib.modules) userListToAttrs forAllUsers';
+  inherit (lib.lists) findFirstIndex;
+  inherit (builtins) attrNames;
 in
 {
   flake.modules.nixos.default =
@@ -34,7 +36,13 @@ in
   flake.modules.darwin.default =
     { config, ... }:
     {
-      users.users = forAllUsers' (name: _: { home = "/Users/${name}"; });
+      users.knownUsers = attrNames cfg.manifest.users;
+      users.users = forAllUsers' (
+        name: _: {
+          home = "/Users/${name}";
+          uid = 501 + (findFirstIndex (x: x == name) null (attrNames cfg.manifest.users));
+        }
+      );
       home-manager.users = forAllUsers' (
         name: _: {
           home.username = name;
