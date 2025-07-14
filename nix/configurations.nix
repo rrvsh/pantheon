@@ -28,7 +28,10 @@ let
       name: value:
       if class == "nixos" then
         nixosSystem {
-          specialArgs.hostName = name;
+          specialArgs = {
+            inherit (config.flake) self;
+            hostName = name;
+          };
           modules = [
             cfg.modules.nixos.default
             inputs.home-manager.nixosModules.home-manager
@@ -38,11 +41,15 @@ let
         }
       else if class == "darwin" then
         darwinSystem {
-          specialArgs = { inherit (config.flake) self; };
+          specialArgs = {
+            inherit (config.flake) self;
+            hostName = name;
+          };
           modules = [
             cfg.modules.darwin.default
             inputs.home-manager.darwinModules.home-manager
             { home-manager = globalCfg name value; }
+            (value.extraCfg or { })
           ] ++ optional value.graphical cfg.modules.darwin.graphical;
         }
       else
