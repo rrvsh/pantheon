@@ -4,7 +4,8 @@
   enableTreesitter = true;
   bash.enable = true;
   clang.enable = true;
-  csharp.enable = true;
+  # broken on macos
+  # csharp.enable = true;
   css.enable = true;
   go.enable = true;
   html.enable = true;
