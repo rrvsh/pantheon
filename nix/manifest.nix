@@ -7,7 +7,10 @@
       shell = "fish";
       pubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILdsZyY3gu8IGB8MzMnLdh+ClDxQQ2RYG9rkeetIKq8n rafiq";
     };
-    hosts.darwin.venus.graphical = true;
+    hosts.darwin.venus = {
+      graphical = true;
+      machine.platform = "intel";
+    };
     hosts.nixos = {
       nemesis = {
         graphical = true;

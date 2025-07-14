@@ -12,9 +12,14 @@
       nixpkgs.hostPlatform = "${arch}-linux";
     };
 
-  flake.modules.darwin.default.nixpkgs = {
-    hostPlatform = "x86_64-darwin";
-    # config.allowUnsupportedSystem = true;
-  };
+  flake.modules.darwin.default =
+    { hostName, ... }:
+    let
+      inherit (config.flake.manifest.hosts.darwin.${hostName}.machine) platform;
+      arch = if platform == "intel" then "x86_64" else "aarch64";
+    in
+    {
+      nixpkgs.hostPlatform = "${arch}-darwin";
+    };
 
 }
