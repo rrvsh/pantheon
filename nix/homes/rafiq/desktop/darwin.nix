@@ -15,6 +15,7 @@ in
       "ghostty"
       "slack"
       "gitify"
+      "telegram"
     ];
   };
   flake.modules.homeManager.rafiq = {
