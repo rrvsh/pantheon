@@ -14,6 +14,7 @@ in
     casks = [
       "ghostty"
       "slack"
+      "gitify"
     ];
   };
   flake.modules.homeManager.rafiq = {
