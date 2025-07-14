@@ -21,5 +21,4 @@
     {
       nixpkgs.hostPlatform = "${arch}-darwin";
     };
-
 }
