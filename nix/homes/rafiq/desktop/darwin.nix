@@ -7,6 +7,13 @@ in
     enable = true;
     user = cfg.admin.username;
     onActivation.cleanup = "uninstall";
-    casks = [ "ghostty" ];
+    brews = [
+      "mise"
+      "docker"
+    ];
+    casks = [
+      "ghostty"
+      "slack"
+    ];
   };
 }
