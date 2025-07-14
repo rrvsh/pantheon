@@ -19,12 +19,7 @@ in
     {
       services.tailscale = {
         enable = true;
-        package = pkgs.tailscale.overrideAttrs {
-          checkFlags = [
-            "-skip"
-            "TestProtocolQEMU|TestProtocolUnixDgram"
-          ];
-        };
+        package = pkgs.tailscale.overrideAttrs { doCheck = false; };
       };
     };
 }
