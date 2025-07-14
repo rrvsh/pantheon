@@ -23,6 +23,7 @@ in
           value.enable = true;
         }) cfg.manifest.users;
         users.users = forAllUsers' (_: value: { shell = pkgs.${value.shell}; });
+        environment.shells = [ pkgs.fish ];
       };
     homeManager.default =
       { config, ... }:
