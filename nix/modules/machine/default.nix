@@ -5,7 +5,12 @@ let
 in
 {
   flake.modules.nixos.default =
-    { config, modulesPath, ... }:
+    {
+      config,
+      modulesPath,
+      pkgs,
+      ...
+    }:
     let
       cfg = config.machine;
     in
@@ -14,6 +19,7 @@ in
       options.machine = {
         bluetooth.enable = mkEnableOption "";
         usb.automount = mkEnableOption "";
+        usb.qmk.enable = mkEnableOption "";
       };
       config = mkMerge [
         (mkIf cfg.usb.automount {
@@ -27,6 +33,18 @@ in
               };
             }
           ];
+        })
+        (mkIf cfg.usb.qmk.enable {
+          hardware.keyboard.qmk.enable = true;
+          services.udev = {
+            packages = with pkgs; [
+              vial
+              qmk
+              qmk-udev-rules
+              qmk_hid
+            ];
+          };
+
         })
         (mkIf cfg.bluetooth.enable {
           persistDirs = [ "/var/lib/bluetooth" ];

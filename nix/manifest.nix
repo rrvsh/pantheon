@@ -33,10 +33,10 @@
             };
           };
           extraCfg = {
-            services.fwupd.enable = true; # FIXME: remove
             machine = {
               bluetooth.enable = true;
               usb.automount = true;
+              usb.qmk.enable = true;
               virtualisation = {
                 podman.enable = true;
                 podman.distrobox.enable = true;

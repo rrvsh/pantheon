@@ -13,39 +13,41 @@ let
   inherit (cfg.paths) secrets;
 in
 {
-  flake.modules.nixos.default =
-    { config, ... }:
-    {
-      imports = [ inputs.sops-nix.nixosModules.sops ];
-      config = {
-        sops = {
-          age.sshKeyPaths = [
-            "/persist${config.users.defaultUserHome}/${username}/.ssh/id_ed25519"
-          ];
-          secrets."keys/gemini".sopsFile = secrets + "/keys.yaml";
+  flake.modules = {
+    nixos.default =
+      { config, ... }:
+      {
+        imports = [ inputs.sops-nix.nixosModules.sops ];
+        config = {
+          sops = {
+            age.sshKeyPaths = [
+              "/persist${config.users.defaultUserHome}/${username}/.ssh/id_ed25519"
+            ];
+            secrets."keys/gemini".sopsFile = secrets + "/keys.yaml";
+          };
+          environment.shellInit = # sh
+            ''
+              export GEMINI_API_KEY=$(sudo cat ${config.sops.secrets."keys/gemini".path})
+            '';
         };
-        environment.shellInit = # sh
-          ''
-            export GEMINI_API_KEY=$(sudo cat ${config.sops.secrets."keys/gemini".path})
-          '';
       };
-    };
-  flake.modules.darwin.default =
-    { config, ... }:
-    {
-      imports = [ inputs.sops-nix.darwinModules.sops ];
-      config = {
-        sops = {
-          age.sshKeyPaths = [ "${config.users.users.${username}.home}/.ssh/id_ed25519" ];
-          secrets."keys/gemini".sopsFile = secrets + "/keys.yaml";
+    darwin.default =
+      { config, ... }:
+      {
+        imports = [ inputs.sops-nix.darwinModules.sops ];
+        config = {
+          sops = {
+            age.sshKeyPaths = [ "${config.users.users.${username}.home}/.ssh/id_ed25519" ];
+            secrets."keys/gemini".sopsFile = secrets + "/keys.yaml";
+          };
+          environment.shellInit = # sh
+            ''
+              export GEMINI_API_KEY=$(sudo cat ${config.sops.secrets."keys/gemini".path})
+            '';
         };
-        environment.shellInit = # sh
-          ''
-            export GEMINI_API_KEY=$(sudo cat ${config.sops.secrets."keys/gemini".path})
-          '';
       };
-    };
-  flake.modules.homeManager.default.persistDirs = [ ".config/sops/age" ];
+    homeManager.default.persistDirs = [ ".config/sops/age" ];
+  };
   perSystem =
     { pkgs, ... }:
     {
