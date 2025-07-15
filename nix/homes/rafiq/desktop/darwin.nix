@@ -18,6 +18,7 @@ in
       "telegram"
       "vial"
       "linear-linear"
+      "chatgpt"
     ];
   };
   flake.modules.homeManager.rafiq = {
