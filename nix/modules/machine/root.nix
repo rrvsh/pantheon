@@ -1,17 +1,12 @@
-{
-  config,
-  lib,
-  inputs,
-  ...
-}:
+{ lib, inputs, ... }:
 let
   inherit (lib.modules) mkMerge mkIf mkAfter;
 in
 {
   flake.modules.nixos.default =
-    { hostName, ... }:
+    { hostConfig, ... }:
     let
-      inherit (config.flake.manifest.hosts.nixos.${hostName}.machine) root;
+      inherit (hostConfig.machine) root;
     in
     {
       imports = [ inputs.disko.nixosModules.disko ];
@@ -85,7 +80,7 @@ in
           };
         }
         # Ephemeral by default - assumes btrfs
-        (mkIf (config.flake.manifest.hosts.nixos.${hostName}.machine.root.ephemeral or true) {
+        (mkIf root.ephemeral {
           boot.initrd.postDeviceCommands = mkAfter ''
             mkdir /btrfs_tmp
             mount /dev/root_vg/root /btrfs_tmp

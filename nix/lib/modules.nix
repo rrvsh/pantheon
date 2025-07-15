@@ -1,6 +1,5 @@
 { lib, config, ... }:
 let
-  cfg = config.flake;
   inherit (builtins) foldl' attrNames;
   inherit (lib.attrsets) mapAttrs;
 in
@@ -35,7 +34,7 @@ in
 
       :::
     */
-    userListToAttrs = f: foldl' (acc: elem: acc // (f elem)) { } (attrNames cfg.manifest.users);
+    userListToAttrs = f: foldl' (acc: elem: acc // (f elem)) { } (attrNames config.manifest.users);
     /**
       Return an attribute set for use with a option that needs to be used for all users.
 
@@ -65,7 +64,7 @@ in
 
       :::
     */
-    forAllUsers = attrset: mapAttrs (_: _: attrset) cfg.manifest.users;
+    forAllUsers = attrset: mapAttrs (_: _: attrset) config.manifest.users;
 
     /**
       Like forAllUsers, but passes in the name and value from the manifest.
@@ -96,6 +95,6 @@ in
 
       :::
     */
-    forAllUsers' = f: mapAttrs f cfg.manifest.users;
+    forAllUsers' = f: mapAttrs f config.manifest.users;
   };
 }

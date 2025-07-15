@@ -10,18 +10,15 @@ let
   inherit (lib.lists) optional;
   inherit (lib.attrsets) mapAttrs;
   inherit (cfg.lib.modules) forAllUsers';
+  inherit (config.manifest) hosts;
   cfg = config.flake;
-  globalCfg = name: hostConfig: {
+  globalCfg = hostName: hostConfig: {
     useGlobalPkgs = true;
     useUserPackages = true;
-    extraSpecialArgs = {
-      inherit hostConfig;
-      hostName = name;
-    };
+    extraSpecialArgs = { inherit hostName hostConfig; };
     sharedModules = [ cfg.modules.homeManager.default ];
     users = forAllUsers' (name: _: cfg.modules.homeManager.${name});
   };
-  hosts = cfg.manifest.hosts or { };
   mkConfigurations =
     class: hosts:
     mapAttrs (
@@ -31,6 +28,7 @@ let
           specialArgs = {
             inherit (config.flake) self;
             hostName = name;
+            hostConfig = value;
           };
           modules = [
             cfg.modules.nixos.default
@@ -44,6 +42,7 @@ let
           specialArgs = {
             inherit (config.flake) self;
             hostName = name;
+            hostConfig = value;
           };
           modules = [
             cfg.modules.darwin.default

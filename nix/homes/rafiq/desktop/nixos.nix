@@ -1,6 +1,6 @@
 { lib, config, ... }:
 let
-  cfg = config.flake;
+  inherit (config.manifest) admin;
 in
 {
   allowedUnfreePackages = [
@@ -13,7 +13,7 @@ in
     { config, pkgs, ... }:
     {
       fonts.packages = [ pkgs.font-awesome ];
-      services.getty.autologinUser = cfg.admin.username;
+      services.getty.autologinUser = admin.username;
       # Start Hyprland at boot only if not connecting through SSH
       environment.loginShellInit = # sh
         ''

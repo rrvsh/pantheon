@@ -1,5 +1,5 @@
 {
-  flake.manifest = {
+  manifest = {
     users.rafiq = {
       primary = true;
       name = "Mohammad Rafiq";

@@ -1,7 +1,3 @@
-{ config, ... }:
-let
-  cfg = config.flake;
-in
 {
   allowedUnfreePackages = [
     "nvidia-x11"
@@ -11,11 +7,11 @@ in
     {
       config,
       pkgs,
-      hostName,
+      hostConfig,
       ...
     }:
     let
-      gpu = cfg.manifest.hosts.nixos.${hostName}.machine.gpu or "";
+      inherit (hostConfig.machine) gpu;
     in
     if gpu == "nvidia" then
       {

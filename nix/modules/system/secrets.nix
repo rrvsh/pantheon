@@ -6,11 +6,11 @@
 }:
 let
   cfg = config.flake;
+  inherit (cfg.paths) secrets;
   inherit (builtins) readFile;
   inherit (lib.meta) getExe;
   inherit (lib.strings) trim;
-  inherit (cfg.admin) username pubkey;
-  inherit (cfg.paths) secrets;
+  inherit (config.manifest.admin) username pubkey;
 in
 {
   flake.modules = {

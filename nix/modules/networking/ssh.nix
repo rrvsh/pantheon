@@ -1,6 +1,7 @@
 { config, lib, ... }:
 let
   cfg = config.flake;
+  inherit (config.manifest) admin;
   inherit (lib.modules) mkMerge;
   inherit (cfg.lib.modules) forAllUsers';
 in
@@ -16,7 +17,7 @@ in
         "/etc/ssh/ssh_host_rsa_key.pub"
       ];
     }
-    { users.users.root.openssh.authorizedKeys.keys = [ cfg.admin.pubkey ]; }
+    { users.users.root.openssh.authorizedKeys.keys = [ admin.pubkey ]; }
   ];
   flake.modules.homeManager.default = {
     persistDirs = [ ".ssh" ];

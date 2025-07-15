@@ -24,8 +24,8 @@
     parts."Structure" = # markdown
       ''
         The system configurations are defined in [`flake.manifest`](nix/manifest.nix).
-        `flake.manifest.owner` provides the attributes for the administrator user, including username and pubkey.
-        `flake.manifest.hosts` provides the specifications for the system configurations that should be exposed by the flake as nixosConfigurations.
+        `manifest.owner` provides the attributes for the administrator user, including username and pubkey.
+        `manifest.hosts` provides the specifications for the system configurations that should be exposed by the flake as nixosConfigurations.
         `flake.modules.nixos.*` provide NixOS options and configurations.
         The attribute `flake.modules.nixos.default` provides options that will be applied to every system of that class.
         You can use it as seen [here](nix/modules/flake/home-manager.nix):

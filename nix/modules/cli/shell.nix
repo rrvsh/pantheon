@@ -1,6 +1,7 @@
 { config, lib, ... }:
 let
   cfg = config.flake;
+  inherit (config.manifest) users;
   inherit (cfg.lib.modules) forAllUsers';
   inherit (lib.attrsets) mapAttrs';
 in
@@ -12,7 +13,7 @@ in
         programs = mapAttrs' (name: value: {
           name = value.shell;
           value.enable = true;
-        }) cfg.manifest.users;
+        }) users;
         users.users = forAllUsers' (_: value: { shell = pkgs.${value.shell}; });
       };
     darwin.default =
@@ -21,14 +22,14 @@ in
         programs = mapAttrs' (name: value: {
           name = value.shell;
           value.enable = true;
-        }) cfg.manifest.users;
+        }) users;
         users.users = forAllUsers' (_: value: { shell = pkgs.${value.shell}; });
         environment.shells = [ pkgs.fish ];
       };
     homeManager.default =
       { config, ... }:
       {
-        programs.${cfg.manifest.users.${config.home.username}.shell}.enable = true;
+        programs.${users.${config.home.username}.shell}.enable = true;
         home.shell.enableShellIntegration = true;
       };
   };

@@ -4,7 +4,7 @@ let
   inherit (config.flake.lib.options) mkStrOption mkPathOption;
   inherit (config.flake.lib.services) mkRootDomain;
   inherit (config.flake.paths) secrets;
-  inherit (config.flake.admin) email;
+  inherit (config.manifest.admin) email;
   inherit (lib.types) listOf submodule attrs;
   inherit (lib.options) mkOption mkEnableOption;
   inherit (lib.modules) mkMerge mkIf;
