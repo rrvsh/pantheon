@@ -17,6 +17,7 @@ in
       "gitify"
       "telegram"
       "vial"
+      "linear-linear"
     ];
   };
   flake.modules.homeManager.rafiq = {
