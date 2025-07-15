@@ -337,6 +337,21 @@
         "type": "github"
       }
     },
+    "manifest": {
+      "locked": {
+        "lastModified": 1752588656,
+        "narHash": "sha256-clKPzQ43eDpukeiGHzXmd1hGb2s4N+MWXAzQ5u5+pHQ=",
+        "owner": "rrvsh",
+        "repo": "manifest",
+        "rev": "365902fba994f30469298dee0c98a5fc0f41ec38",
+        "type": "github"
+      },
+      "original": {
+        "owner": "rrvsh",
+        "repo": "manifest",
+        "type": "github"
+      }
+    },
     "nix-darwin": {
       "inputs": {
         "nixpkgs": [
@@ -488,6 +503,7 @@
         "impermanence": "impermanence",
         "import-tree": "import-tree",
         "make-shell": "make-shell",
+        "manifest": "manifest",
         "nix-darwin": "nix-darwin",
         "nix-index-database": "nix-index-database",
         "nixpkgs": "nixpkgs",

@@ -71,6 +71,8 @@
     files.url = "github:mightyiam/files";
     # text.nix lets us easily define markdown text to pass to files
     text.url = "github:rrvsh/text.nix";
+    # manifest lets us define all hosts in one file
+    manifest.url = "github:rrvsh/manifest";
     # make-shells.<name> creates devShells and checks
     make-shell = {
       url = "github:nicknovitski/make-shell";
