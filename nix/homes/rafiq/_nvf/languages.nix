@@ -27,6 +27,7 @@
   };
   rust.enable = true;
   rust.crates.enable = true;
+  tailwind.enable = true;
   ts.enable = true;
   ts.extensions.ts-error-translator.enable = true;
   typst.enable = true;
