@@ -12,6 +12,7 @@
       "vial"
       "linear-linear"
       "chatgpt"
+      "spotify"
     ];
   };
   flake.modules.homeManager.rafiq = {
