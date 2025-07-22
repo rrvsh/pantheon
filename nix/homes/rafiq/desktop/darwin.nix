@@ -7,7 +7,6 @@
     casks = [
       "ghostty"
       "slack"
-      "gitify"
       "telegram"
       "vial"
       "linear-linear"
