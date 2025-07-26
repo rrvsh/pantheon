@@ -12,6 +12,7 @@
       "linear-linear"
       "chatgpt"
       "spotify"
+      "steam"
     ];
   };
   flake.modules.homeManager.rafiq = {
