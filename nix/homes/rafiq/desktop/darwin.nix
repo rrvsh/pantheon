@@ -5,14 +5,14 @@
       "docker"
     ];
     casks = [
-      "ghostty"
-      "slack"
-      "telegram"
-      "vial"
-      "linear-linear"
       "chatgpt"
+      "ghostty"
+      "linear-linear"
+      "slack"
       "spotify"
       "steam"
+      "telegram"
+      "vial"
       "whatsapp"
     ];
   };
