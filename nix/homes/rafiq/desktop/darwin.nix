@@ -13,6 +13,7 @@
       "chatgpt"
       "spotify"
       "steam"
+      "whatsapp"
     ];
   };
   flake.modules.homeManager.rafiq = {
