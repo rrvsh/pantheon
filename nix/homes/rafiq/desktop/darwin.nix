@@ -8,6 +8,7 @@
       "chatgpt"
       "ghostty"
       "linear-linear"
+      "mixxx"
       "slack"
       "spotify"
       "steam"
