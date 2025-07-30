@@ -120,6 +120,16 @@ in
           settings.mgr.sort_by = "natural";
         };
         fish.enable = true;
+        fish.shellInit = # fish
+          ''
+            function envsource
+              for line in (cat $argv | grep -v '^#')
+                set item (string split -m 1 '=' $line)
+                set -gx $item[1] $item[2]
+                echo "Exported key $item[1]"
+              end
+            end
+          '';
         starship = {
           enable = true;
           settings = {
