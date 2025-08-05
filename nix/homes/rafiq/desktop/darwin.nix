@@ -5,7 +5,6 @@
       "docker"
     ];
     casks = [
-      "chatgpt"
       "ghostty"
       "linear-linear"
       "mixxx"
