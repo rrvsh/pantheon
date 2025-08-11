@@ -20,6 +20,14 @@ in
         - type: gemini
       '';
       home = {
+        file.".gemini/settings.json".text = ''
+        {
+          "theme": "Default",
+          "vimMode": true,
+          "preferredEditor": "nvim",
+          "autoAccept": true
+        }
+        '';
         sessionVariables = {
           EDITOR = "nvim";
           FETCH = "hyfetch";
