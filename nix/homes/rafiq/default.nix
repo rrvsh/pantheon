@@ -48,7 +48,7 @@ in
           aichat
           gemini-cli
           (import ./_scripts/edit.nix { inherit pkgs; })
-          (import ./_scripts/commit.nix { inherit pkgs; })
+          (import ./_scripts/commit.nix { inherit pkgs lib; })
           (import ./_scripts/note.nix { inherit pkgs; })
           (import ./_scripts/rebuild.nix { inherit pkgs; })
         ];
