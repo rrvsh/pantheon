@@ -18,6 +18,8 @@
     systems.url = "github:nix-systems/default";
     # nixos-unstable provides a binary cache for all packages.
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    # master for when i cant wait
+    nixpkgs-master.url = "github:nixos/nixpkgs";
     # My fork for random shit
     rrvsh-nixpkgs.url = "github:rrvsh/nixpkgs/librechat-module";
     # home-manager manages our user packages and dotfiles

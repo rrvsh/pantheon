@@ -425,6 +425,21 @@
         "type": "github"
       }
     },
+    "nixpkgs-master": {
+      "locked": {
+        "lastModified": 1754925623,
+        "narHash": "sha256-00mJBcdiQZCOv0gt+vfopulxaBkNXlYuVqDimnRgx/Q=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "14ca3f2d4a41cf5cc961e202400b887c47f47bb4",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "nur": {
       "inputs": {
         "flake-parts": [
@@ -521,6 +536,7 @@
         "nix-darwin": "nix-darwin",
         "nix-index-database": "nix-index-database",
         "nixpkgs": "nixpkgs",
+        "nixpkgs-master": "nixpkgs-master",
         "nur": "nur",
         "nvf": "nvf",
         "rrv-sh": "rrv-sh",

@@ -1,9 +1,15 @@
-{ lib, inputs, ... }:
+{
+  lib,
+  inputs,
+  moduleWithSystem,
+  ...
+}:
 let
   inherit (lib.strings) concatStrings;
 in
 {
-  flake.modules.homeManager.rafiq =
+  flake.modules.homeManager.rafiq = moduleWithSystem (
+    { inputs', ... }:
     { pkgs, ... }:
     {
       imports = [
@@ -47,7 +53,7 @@ in
       programs = {
         gemini-cli = {
           enable = true;
-          package = pkgs.gemini-cli.overrideAttrs { };
+          package = inputs'.nixpkgs-master.legacyPackages.gemini-cli;
           settings = {
             theme = "Default";
             vimMode = true;
@@ -162,5 +168,6 @@ in
           };
         };
       };
-    };
+    }
+  );
 }
