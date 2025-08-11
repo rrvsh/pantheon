@@ -46,7 +46,6 @@ in
           fastfetch
           ripgrep
           aichat
-          gemini-cli
           (import ./_scripts/edit.nix { inherit pkgs; })
           (import ./_scripts/commit.nix { inherit pkgs lib; })
           (import ./_scripts/note.nix { inherit pkgs; })
@@ -54,6 +53,7 @@ in
         ];
       };
       programs = {
+        gemini-cli.enable = true;
         mise.enable = true;
         nvf.enable = true;
         nvf.settings.vim = {
