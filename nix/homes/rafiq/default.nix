@@ -20,14 +20,6 @@ in
         - type: gemini
       '';
       home = {
-        file.".gemini/settings.json".text = ''
-        {
-          "theme": "Default",
-          "vimMode": true,
-          "preferredEditor": "nvim",
-          "autoAccept": true
-        }
-        '';
         sessionVariables = {
           EDITOR = "nvim";
           FETCH = "hyfetch";
@@ -53,7 +45,16 @@ in
         ];
       };
       programs = {
-        gemini-cli.enable = true;
+        gemini-cli = {
+          enable = true;
+          package = pkgs.gemini-cli.overrideAttrs { };
+          settings = {
+            theme = "Default";
+            vimMode = true;
+            preferredEditor = "nvim";
+            autoAccept = true;
+          };
+        };
         mise.enable = true;
         nvf.enable = true;
         nvf.settings.vim = {
