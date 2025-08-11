@@ -26,6 +26,7 @@ in
           FETCH = "hyfetch";
           FILE_BROWSER = "yazi";
           SHELL = "fish";
+          GEMINI_MODEL = "gemini-2.5-flash";
         };
         shellAliases = {
           fetch = "hyfetch";
@@ -50,9 +51,9 @@ in
           package = inputs'.nixpkgs-master.legacyPackages.gemini-cli;
           settings = {
             theme = "Default";
-            vimMode = true;
             preferredEditor = "nvim";
             autoAccept = true;
+            checkpointing.enabled = true;
           };
         };
         mise.enable = true;

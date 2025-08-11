@@ -24,7 +24,7 @@
     rrvsh-nixpkgs.url = "github:rrvsh/nixpkgs/librechat-module";
     # home-manager manages our user packages and dotfiles
     home-manager = {
-      url = "github:nix-community/home-manager";
+      url = "github:rrvsh/home-manager/module/gemini-cli";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     # nix darwin provides declarative mac configuration
