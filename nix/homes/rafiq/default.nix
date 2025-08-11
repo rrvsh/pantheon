@@ -20,11 +20,6 @@ in
         ".local/share/zoxide"
         "notebook"
       ];
-      xdg.configFile."aichat/config.yaml".text = ''
-        model: gemini:gemini-2.0-flash
-        clients:
-        - type: gemini
-      '';
       home = {
         sessionVariables = {
           EDITOR = "nvim";
@@ -38,12 +33,11 @@ in
           v = "$EDITOR";
           e = "edit";
           cd = "z"; # zoxide
-          ai = "aichat -r %shell% -e";
+          ai = "gemini -m gemini-2.5-flash-lite -p";
         };
         packages = with pkgs; [
           fastfetch
           ripgrep
-          aichat
           (import ./_scripts/edit.nix { inherit pkgs; })
           (import ./_scripts/commit.nix { inherit pkgs lib; })
           (import ./_scripts/note.nix { inherit pkgs; })
