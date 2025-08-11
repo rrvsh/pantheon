@@ -6,6 +6,7 @@
 }:
 let
   inherit (lib.strings) concatStrings;
+  inherit (lib.meta) getExe;
 in
 {
   flake.modules.homeManager.rafiq = moduleWithSystem (
@@ -125,6 +126,7 @@ in
         nix-index-database.comma.enable = true;
         fzf.enable = true;
         fzf.enableZshIntegration = true;
+        fzf.defaultCommand = "${getExe pkgs.fd} --type f --strip-cwd-prefix";
         yazi = {
           enable = true;
           shellWrapperName = "t";
