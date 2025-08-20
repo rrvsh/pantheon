@@ -143,6 +143,9 @@ in
               end
             end
           '';
+        nix-your-shell = {
+          enable = true;
+        };
         starship = {
           enable = true;
           settings = {
