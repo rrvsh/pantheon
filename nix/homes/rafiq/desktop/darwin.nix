@@ -5,6 +5,7 @@
       "docker"
     ];
     casks = [
+      "bambu-studio"
       "ghostty"
       "linear-linear"
       "mixxx"
