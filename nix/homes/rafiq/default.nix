@@ -33,6 +33,7 @@ in
           windows = "sudo systemctl reboot --boot-loader-entry=auto-windows";
           v = "$EDITOR";
           e = "edit";
+          re = "rg-edit";
           cd = "z"; # zoxide
           ai = "gemini -m gemini-2.5-flash-lite -p";
         };
@@ -40,6 +41,7 @@ in
           fastfetch
           ripgrep
           (import ./_scripts/edit.nix { inherit pkgs; })
+          (import ./_scripts/rg-edit.nix { inherit pkgs lib; })
           (import ./_scripts/commit.nix { inherit pkgs lib; })
           (import ./_scripts/note.nix { inherit pkgs; })
           (import ./_scripts/rebuild.nix { inherit pkgs; })
