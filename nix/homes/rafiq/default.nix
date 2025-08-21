@@ -38,6 +38,7 @@ in
           ai = "gemini -m gemini-2.5-flash-lite -p";
         };
         packages = with pkgs; [
+          koboldcpp
           fastfetch
           ripgrep
           (import ./_scripts/edit.nix { inherit pkgs; })
