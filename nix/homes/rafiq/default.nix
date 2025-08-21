@@ -70,6 +70,7 @@ in
           autopairs.nvim-autopairs.enable = true;
           autocomplete = import ./_nvf/autocomplete.nix { inherit lib; };
           binds = import ./_nvf/binds.nix;
+          keymaps = import ./_nvf/keymaps.nix;
           languages = import ./_nvf/languages.nix;
           lsp = import ./_nvf/lsp.nix;
           navigation = import ./_nvf/navigation.nix;
