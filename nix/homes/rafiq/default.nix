@@ -57,6 +57,9 @@ in
             preferredEditor = "nvim";
             autoAccept = true;
             checkpointing.enabled = true;
+            mcpServers.linear.url = "https://mcp.linear.app/sse";
+            mcpServers.nix.command = "nix";
+            mcpServers.nix.args = ["run" "github:utensils/mcp-nixos" "--"];
           };
         };
         mise.enable = true;
