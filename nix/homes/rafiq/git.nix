@@ -11,12 +11,20 @@
     programs.git = {
       enable = true;
       signing.signByDefault = true;
+      delta = {
+        enable = true;
+        options = {
+          hyperlinks = true;
+          hyperlinks-file-link-format = "$EDITOR +{line} {path}";
+        };
+      };
       extraConfig = {
-        init.defaultBranch = "prime";
-        push.autoSetupRemote = true;
-        pull.rebase = false;
         core.editor = "$EDITOR";
         gpg.format = "ssh";
+        init.defaultBranch = "prime";
+        merge.conflictStyle = "zdiff3";
+        pull.rebase = false;
+        push.autoSetupRemote = true;
       };
     };
   };
