@@ -20,13 +20,6 @@
     ];
   };
   flake.modules.homeManager.rafiq = {
-    home.file.".docker/config.json".text = ''
-      {
-        "cliPluginsExtraDirs": [
-         "$HOMEBREW_PREFIX/lib/docker/cli-plugins"
-        ]
-      }
-    '';
     # make sure brew is on the path for M1
     programs.zsh.initContent = ''
       if [[ $(uname -m) == 'arm64' ]]; then
