@@ -1,6 +1,7 @@
 { lib, config, ... }:
 let
   inherit (config.manifest) admin;
+  inherit (lib.modules) mkMerge mkIf;
 in
 {
   allowedUnfreePackages = [
@@ -63,10 +64,7 @@ in
       hostConfig,
       ...
     }:
-    let
-      inherit (lib.modules) mkMerge mkIf;
-    in
-    mkIf (config.graphical && pkgs.system == "x86_64-linux") {
+    mkIf (config.graphical && pkgs.stdenv.isLinux) {
       stylix.targets.waybar.addCss = false;
       persistDirs = [
         "docs"
