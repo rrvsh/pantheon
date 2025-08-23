@@ -37,5 +37,18 @@ in
           eval (/opt/homebrew/bin/brew shellenv)
         end
       '';
+      services.skhd = {
+        enable = true;
+        config = ''
+          cmd - return : bash -c "if osascript -e 'tell application \"System Events\" to exists (process \"ghostty\")' > /dev/null; \
+                         then osascript -e 'tell application \"ghostty\" to activate'; \
+                         else ghostty; \
+                         fi"
+          cmd - o : bash -c "if osascript -e 'tell application \"System Events\" to exists (process \"Firefox\")' > /dev/null; \
+                    then osascript -e 'tell application \"Firefox\" to activate'; \
+                    else open /Users/Rafiq/Applications/Home\ Manager\ Apps/Firefox.app; \
+                    fi"
+        '';
+      };
     };
 }
