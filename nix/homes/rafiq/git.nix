@@ -7,6 +7,7 @@
       gu = "git push";
       gy = "git pull";
       gdh = "git diff HEAD";
+      grhh = "git reset --hard HEAD";
     };
     programs.git = {
       enable = true;
