@@ -180,6 +180,12 @@ in
           };
         };
       };
+      services = {
+        syncthing = {
+          enable = true;
+          settings.folders."~/daily-notes".enable = true;
+        };
+      };
     }
   );
 }
