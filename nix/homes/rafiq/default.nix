@@ -20,6 +20,7 @@ in
       persistDirs = [
         ".local/share/zoxide"
         "notebook"
+        "daily-notes"
       ];
       home = {
         sessionVariables = {
@@ -36,6 +37,7 @@ in
           re = "rg-edit";
           cd = "z"; # zoxide
           ai = "gemini -m gemini-2.5-flash-lite -p";
+          daily = "mkdir -p ~/daily-notes && $EDITOR ~/daily-notes/$(date \"+%Y%m%d\").md";
         };
         packages = with pkgs; [
           koboldcpp
