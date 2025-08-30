@@ -94,6 +94,11 @@
                 domain = "git.rrv.sh";
                 openFirewall = true;
               };
+              firefly-iii = {
+                enable = true;
+                domain = "budget.bwfiq.com";
+                openFirewall = true;
+              };
               rrv-sh.enable = true;
               rrv-sh.domain = "rrv.sh";
             };
