@@ -38,6 +38,7 @@ in
           cd = "z"; # zoxide
           ai = "gemini -m gemini-2.5-flash-lite -p";
           daily = "mkdir -p ~/daily-notes && $EDITOR ~/daily-notes/$(date \"+%Y%m%d\").md";
+          shopping-list = "mkdir -p ~/daily-notes && $EDITOR ~/daily-notes/shopping-list.md";
         };
         packages = with pkgs; [
           koboldcpp
