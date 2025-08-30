@@ -45,7 +45,6 @@ in
           ripgrep
           (import ./_scripts/edit.nix { inherit pkgs; })
           (import ./_scripts/rg-edit.nix { inherit pkgs lib; })
-          (import ./_scripts/commit.nix { inherit pkgs lib; })
           (import ./_scripts/note.nix { inherit pkgs; })
           (import ./_scripts/rebuild.nix { inherit pkgs; })
         ];
@@ -62,7 +61,11 @@ in
             checkpointing.enabled = true;
             mcpServers.linear.url = "https://mcp.linear.app/sse";
             mcpServers.nix.command = "nix";
-            mcpServers.nix.args = ["run" "github:utensils/mcp-nixos" "--"];
+            mcpServers.nix.args = [
+              "run"
+              "github:utensils/mcp-nixos"
+              "--"
+            ];
           };
         };
         mise.enable = true;
