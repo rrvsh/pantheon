@@ -165,16 +165,14 @@ in
             add_newline = false;
             format = concatStrings [
               # First Line
-              ## Left Prompt
-              "$hostname$directory"
-              "$fill"
-              ## Right Prompt
-              "$all"
+              "$hostname$directory$git_branch$git_metrics"
+              "$fill\n"
               # Second Line
-              ## Left Prompt
-              "$character"
+              "$battery$character"
             ];
+            right_format = "$git_state$git_status";
             git_branch.format = "[$symbol$branch(:$remote_branch)]($style) ";
+            git_metrics.disabled = false;
             shlvl.disabled = false;
             username.disabled = true;
             fill.symbol = " ";
