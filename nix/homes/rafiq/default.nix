@@ -164,18 +164,37 @@ in
           settings = {
             add_newline = false;
             format = concatStrings [
-              # First Line
-              "$hostname$directory$git_branch$git_metrics"
-              "$fill\n"
-              # Second Line
+              # First Line Left
+              "$hostname$directory$git_branch$git_status$git_state"
+              # Fill First Line Space
+              "$fill"
+              # First Line Right
+              "$nix_shell"
+              "$time"
+              # Line Break
+              "\n"
+              # Second Line Left
               "$battery$character"
             ];
-            right_format = "$git_state$git_status";
+            # Second Line Right
+            right_format = "$git_metrics";
+            git_status.format = "[$all_status$ahead_behind]($style)";
+            git_metrics.format = "([-$deleted]($deleted_style) )([+$added]($added_style))";
             git_branch.format = "[$symbol$branch(:$remote_branch)]($style) ";
             git_metrics.disabled = false;
+            time = {
+              disabled = false;
+              format = "[$time]($style)";
+              time_format = "%R";
+            };
             shlvl.disabled = false;
             username.disabled = true;
             fill.symbol = " ";
+            python = {
+              symbol = "";
+              format = "[$symbol ]($style)";
+              style = "yellow";
+            };
           };
         };
       };
