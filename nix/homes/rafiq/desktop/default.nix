@@ -39,6 +39,13 @@
           firefox.colorTheme.enable = true;
           firefox.profileNames = syncedProfiles;
         };
+        fonts = {
+          monospace.package = pkgs.jetbrains-mono;
+          monospace.name = "JetBrainsMono Nerd Font";
+          serif = config.stylix.fonts.monospace;
+          sansSerif = config.stylix.fonts.monospace;
+          emoji = config.stylix.fonts.monospace;
+        };
       };
       home = {
         sessionVariables = {
