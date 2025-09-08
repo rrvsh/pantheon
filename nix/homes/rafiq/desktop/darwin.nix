@@ -15,6 +15,7 @@ in
       "ghostty"
       "linear-linear"
       "mixxx"
+      "moonlight"
       "slack"
       "spotify"
       "steam"
