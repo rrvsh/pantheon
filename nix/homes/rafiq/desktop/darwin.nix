@@ -16,6 +16,7 @@ in
       "linear-linear"
       "mixxx"
       "moonlight"
+      "obs"
       "slack"
       "spotify"
       "steam"
