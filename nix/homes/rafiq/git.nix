@@ -6,6 +6,7 @@
       gcam = "git commit -am";
       gu = "git push";
       gy = "git pull";
+      gd = "git diff";
       gdh = "git diff HEAD";
       grhh = "git reset --hard HEAD";
     };
