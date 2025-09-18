@@ -67,6 +67,10 @@ in
               "--"
             ];
           };
+          commands.sumup.prompt = "Run the command {{args}} and summarise the output.";
+          commands.sumup.description = "Run the command {{args}} and summarise the output.";
+          commands.analyse.prompt = "Run the command {{args}} and analyse the output.";
+          commands.analyse.description = "Run the command {{args}} and analyse the output.";
         };
         mise.enable = true;
         nvf.enable = true;
