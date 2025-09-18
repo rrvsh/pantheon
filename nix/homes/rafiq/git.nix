@@ -8,6 +8,7 @@
       gy = "git pull";
       gd = "git diff";
       gdh = "git diff HEAD";
+      gdm = "git diff main"; #FIXME: set to default branch name
       grhh = "git reset --hard HEAD";
     };
     programs.git = {
