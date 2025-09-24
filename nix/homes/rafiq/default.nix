@@ -204,7 +204,11 @@ in
       services = {
         syncthing = {
           enable = true;
-          settings.folders."~/daily-notes".enable = true;
+          settings = {
+            devices.perseus.id = "SLI6X6K-WOLZOPA-C2TV3QQ-JTMKRNI-SCTZO5U-EZWCIBG-LBPAD66-S6WVKAN";
+            devices.hephaestus.id = "FO3V3TO-NAY5G5Y-XU3MRW6-NXZFAHB-TRERHAG-V5NZCNK-5DORH3U-L3DZGQO";
+            folders."~/notes".enable = true;
+          };
         };
       };
     }

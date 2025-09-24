@@ -10,6 +10,7 @@
       gdh = "git diff HEAD";
       gdm = "git diff main"; #FIXME: set to default branch name
       grhh = "git reset --hard HEAD";
+      gush = "git add . && git stash && git checkout main && git pull && git checkout - && git rebase main && git push -f --no-verify";
     };
     programs.git = {
       enable = true;
