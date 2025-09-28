@@ -8,16 +8,10 @@
       pubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILdsZyY3gu8IGB8MzMnLdh+ClDxQQ2RYG9rkeetIKq8n rafiq";
     };
     hosts = {
-      darwin = {
-        venus = {
-          graphical = true;
-          machine.platform = "intel";
-        };
-        hephaestus = {
+        darwin.hephaestus = {
           graphical = true;
           machine.platform = "apple-silicon";
         };
-      };
       nixos = {
         nemesis = {
           graphical = true;
@@ -56,13 +50,6 @@
             root.drive = "/dev/disk/by-id/nvme-eui.002538d221b47b01";
           };
           extraCfg.server = {
-            ddns = {
-              enable = true;
-              domains = [
-                "aenyrathia.wiki"
-                "slayment.com"
-              ];
-            };
             web-servers = {
               enableSSL = true;
               nginx = {
