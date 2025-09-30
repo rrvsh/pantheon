@@ -15,6 +15,8 @@ let
   globalCfg = hostName: hostConfig: {
     useGlobalPkgs = true;
     useUserPackages = true;
+    verbose = true;
+    backupFileExtension = "backup";
     extraSpecialArgs = { inherit hostName hostConfig; };
     sharedModules = [ cfg.modules.homeManager.default ];
     users = forAllUsers' (name: _: cfg.modules.homeManager.${name});
