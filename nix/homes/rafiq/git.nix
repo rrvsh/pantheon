@@ -10,8 +10,8 @@
       gdh = "git diff HEAD";
       gdm = "git diff $(default-branch)";
       grhh = "git reset --hard HEAD";
-      gush = "git add . && git stash && git checkout $(default-branch) && git pull && git checkout - && git rebase $(default-branch) && git push -f --no-verify";
-      gus = "git add . && git stash && git checkout $(default-branch) && git pull && git checkout - && git rebase $(default-branch)";
+      gush = "git add . && git stash && git pull && git checkout $(default-branch) && git pull && git checkout - && git rebase $(default-branch) && git push -f --no-verify";
+      gus = "git add . && git stash && git pull && git checkout $(default-branch) && git pull && git checkout - && git rebase $(default-branch)";
       default-branch = "git rev-parse --abbrev-ref origin/HEAD | cut -d'/' -f2-";
     };
     programs.git = {
