@@ -8,9 +8,11 @@
       gy = "git pull";
       gd = "git diff";
       gdh = "git diff HEAD";
-      gdm = "git diff main"; #FIXME: set to default branch name
+      gdm = "git diff $(default-branch)";
       grhh = "git reset --hard HEAD";
-      gush = "git add . && git stash && git checkout main && git pull && git checkout - && git rebase main && git push -f --no-verify";
+      gush = "git add . && git stash && git checkout $(default-branch) && git pull && git checkout - && git rebase $(default-branch) && git push -f --no-verify";
+      gus = "git add . && git stash && git checkout $(default-branch) && git pull && git checkout - && git rebase $(default-branch)";
+      default-branch = "git rev-parse --abbrev-ref origin/HEAD | cut -d'/' -f2-";
     };
     programs.git = {
       enable = true;
