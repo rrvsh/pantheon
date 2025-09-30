@@ -79,7 +79,7 @@ in
           hideSearchHighlight = true;
           searchCase = "ignore";
           undoFile.enable = true;
-          telescope.enable = true;
+          telescope = import ./_nvf/telescope.nix;
           fzf-lua.enable = true;
           git.enable = true;
           autopairs.nvim-autopairs.enable = true;
