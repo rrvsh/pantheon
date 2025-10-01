@@ -13,6 +13,7 @@ in
     casks = [
       "bambu-studio"
       "ghostty"
+      "libreoffice"
       "linear-linear"
       "mixxx"
       "moonlight"
