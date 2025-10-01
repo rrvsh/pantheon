@@ -1,9 +1,7 @@
 { pkgs, ... }:
 pkgs.writeShellScriptBin "note" # bash
   ''
-    zk edit -i
-    pushd ~/notebook > /dev/null
-    git add .
-    commit -u
-    popd > /dev/null
+  offset="''${1:-0}"
+  mkdir -p ~/notes/daily
+  $EDITOR ~/notes/daily/$(date -v "$offset day" '+%Y%m%d').md
   ''

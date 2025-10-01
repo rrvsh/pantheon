@@ -37,7 +37,9 @@ in
           re = "rg-edit";
           cd = "z"; # zoxide
           ai = "gemini -m gemini-2.5-flash-lite -p";
-          daily = "mkdir -p ~/notes/daily && $EDITOR ~/notes/daily/$(date \"+%Y%m%d\").md";
+          daily = "note";
+          tomorrow = "note 1";
+          yesterday = "note -1";
         };
         packages = with pkgs; [
           koboldcpp
